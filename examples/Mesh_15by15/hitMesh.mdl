@@ -1,0 +1,714 @@
+@mesh_M param 1.0
+@mesh_K param 0.1
+@mesh_Z param 0.001
+
+@mesh_m0_0 ground 0. membrane 0.0 0.0
+@mesh_m0_1 mass mesh_M 0. 0. membrane 0.0 0.1
+@mesh_m0_2 mass mesh_M 0. 0. membrane 0.0 0.2
+@mesh_m0_3 mass mesh_M 0. 0. membrane 0.0 0.30000000000000004
+@mesh_m0_4 mass mesh_M 0. 0. membrane 0.0 0.4
+@mesh_m0_5 mass mesh_M 0. 0. membrane 0.0 0.5
+@mesh_m0_6 mass mesh_M 0. 0. membrane 0.0 0.6000000000000001
+@mesh_m0_7 mass mesh_M 0. 0. membrane 0.0 0.7000000000000001
+@mesh_m0_8 mass mesh_M 0. 0. membrane 0.0 0.8
+@mesh_m0_9 mass mesh_M 0. 0. membrane 0.0 0.9
+@mesh_m0_10 mass mesh_M 0. 0. membrane 0.0 1.0
+@mesh_m0_11 mass mesh_M 0. 0. membrane 0.0 1.1
+@mesh_m0_12 mass mesh_M 0. 0. membrane 0.0 1.2000000000000002
+@mesh_m0_13 mass mesh_M 0. 0. membrane 0.0 1.3
+@mesh_m0_14 ground 0. membrane 0.0 1.4000000000000001
+@mesh_m1_0 mass mesh_M 0. 0. membrane 0.1 0.0
+@mesh_m1_1 mass mesh_M 0. 0. membrane 0.1 0.1
+@mesh_m1_2 mass mesh_M 0. 0. membrane 0.1 0.2
+@mesh_m1_3 mass mesh_M 0. 0. membrane 0.1 0.30000000000000004
+@mesh_m1_4 mass mesh_M 0. 0. membrane 0.1 0.4
+@mesh_m1_5 mass mesh_M 0. 0. membrane 0.1 0.5
+@mesh_m1_6 mass mesh_M 0. 0. membrane 0.1 0.6000000000000001
+@mesh_m1_7 mass mesh_M 0. 0. membrane 0.1 0.7000000000000001
+@mesh_m1_8 mass mesh_M 0. 0. membrane 0.1 0.8
+@mesh_m1_9 mass mesh_M 0. 0. membrane 0.1 0.9
+@mesh_m1_10 mass mesh_M 0. 0. membrane 0.1 1.0
+@mesh_m1_11 mass mesh_M 0. 0. membrane 0.1 1.1
+@mesh_m1_12 mass mesh_M 0. 0. membrane 0.1 1.2000000000000002
+@mesh_m1_13 mass mesh_M 0. 0. membrane 0.1 1.3
+@mesh_m1_14 mass mesh_M 0. 0. membrane 0.1 1.4000000000000001
+@mesh_m2_0 mass mesh_M 0. 0. membrane 0.2 0.0
+@mesh_m2_1 mass mesh_M 0. 0. membrane 0.2 0.1
+@mesh_m2_2 mass mesh_M 0. 0. membrane 0.2 0.2
+@mesh_m2_3 mass mesh_M 0. 0. membrane 0.2 0.30000000000000004
+@mesh_m2_4 mass mesh_M 0. 0. membrane 0.2 0.4
+@mesh_m2_5 mass mesh_M 0. 0. membrane 0.2 0.5
+@mesh_m2_6 mass mesh_M 0. 0. membrane 0.2 0.6000000000000001
+@mesh_m2_7 mass mesh_M 0. 0. membrane 0.2 0.7000000000000001
+@mesh_m2_8 mass mesh_M 0. 0. membrane 0.2 0.8
+@mesh_m2_9 mass mesh_M 0. 0. membrane 0.2 0.9
+@mesh_m2_10 mass mesh_M 0. 0. membrane 0.2 1.0
+@mesh_m2_11 mass mesh_M 0. 0. membrane 0.2 1.1
+@mesh_m2_12 mass mesh_M 0. 0. membrane 0.2 1.2000000000000002
+@mesh_m2_13 mass mesh_M 0. 0. membrane 0.2 1.3
+@mesh_m2_14 mass mesh_M 0. 0. membrane 0.2 1.4000000000000001
+@mesh_m3_0 mass mesh_M 0. 0. membrane 0.30000000000000004 0.0
+@mesh_m3_1 mass mesh_M 0. 0. membrane 0.30000000000000004 0.1
+@mesh_m3_2 mass mesh_M 0. 0. membrane 0.30000000000000004 0.2
+@mesh_m3_3 mass mesh_M 0. 0. membrane 0.30000000000000004 0.30000000000000004
+@mesh_m3_4 mass mesh_M 0. 0. membrane 0.30000000000000004 0.4
+@mesh_m3_5 mass mesh_M 0. 0. membrane 0.30000000000000004 0.5
+@mesh_m3_6 mass mesh_M 0. 0. membrane 0.30000000000000004 0.6000000000000001
+@mesh_m3_7 mass mesh_M 0. 0. membrane 0.30000000000000004 0.7000000000000001
+@mesh_m3_8 mass mesh_M 0. 0. membrane 0.30000000000000004 0.8
+@mesh_m3_9 mass mesh_M 0. 0. membrane 0.30000000000000004 0.9
+@mesh_m3_10 mass mesh_M 0. 0. membrane 0.30000000000000004 1.0
+@mesh_m3_11 mass mesh_M 0. 0. membrane 0.30000000000000004 1.1
+@mesh_m3_12 mass mesh_M 0. 0. membrane 0.30000000000000004 1.2000000000000002
+@mesh_m3_13 mass mesh_M 0. 0. membrane 0.30000000000000004 1.3
+@mesh_m3_14 mass mesh_M 0. 0. membrane 0.30000000000000004 1.4000000000000001
+@mesh_m4_0 mass mesh_M 0. 0. membrane 0.4 0.0
+@mesh_m4_1 mass mesh_M 0. 0. membrane 0.4 0.1
+@mesh_m4_2 mass mesh_M 0. 0. membrane 0.4 0.2
+@mesh_m4_3 mass mesh_M 0. 0. membrane 0.4 0.30000000000000004
+@mesh_m4_4 mass mesh_M 0. 0. membrane 0.4 0.4
+@mesh_m4_5 mass mesh_M 0. 0. membrane 0.4 0.5
+@mesh_m4_6 mass mesh_M 0. 0. membrane 0.4 0.6000000000000001
+@mesh_m4_7 mass mesh_M 0. 0. membrane 0.4 0.7000000000000001
+@mesh_m4_8 mass mesh_M 0. 0. membrane 0.4 0.8
+@mesh_m4_9 mass 2 0. 0. membrane 0.4 0.9
+@mesh_m4_10 mass mesh_M 0. 0. membrane 0.4 1.0
+@mesh_m4_11 mass mesh_M 0. 0. membrane 0.4 1.1
+@mesh_m4_12 mass mesh_M 0. 0. membrane 0.4 1.2000000000000002
+@mesh_m4_13 mass mesh_M 0. 0. membrane 0.4 1.3
+@mesh_m4_14 mass mesh_M 0. 0. membrane 0.4 1.4000000000000001
+@mesh_m5_0 mass mesh_M 0. 0. membrane 0.5 0.0
+@mesh_m5_1 mass mesh_M 0. 0. membrane 0.5 0.1
+@mesh_m5_2 mass mesh_M 0. 0. membrane 0.5 0.2
+@mesh_m5_3 mass mesh_M 0. 0. membrane 0.5 0.30000000000000004
+@mesh_m5_4 mass mesh_M 0. 0. membrane 0.5 0.4
+@mesh_m5_5 mass mesh_M 0. 0. membrane 0.5 0.5
+@mesh_m5_6 mass mesh_M 0. 0. membrane 0.5 0.6000000000000001
+@mesh_m5_7 mass mesh_M 0. 0. membrane 0.5 0.7000000000000001
+@mesh_m5_8 mass mesh_M 0. 0. membrane 0.5 0.8
+@mesh_m5_9 mass mesh_M 0. 0. membrane 0.5 0.9
+@mesh_m5_10 mass mesh_M 0. 0. membrane 0.5 1.0
+@mesh_m5_11 mass 3 0. 0. membrane 0.5 1.1
+@mesh_m5_12 mass mesh_M 0. 0. membrane 0.5 1.2000000000000002
+@mesh_m5_13 mass mesh_M 0. 0. membrane 0.5 1.3
+@mesh_m5_14 mass mesh_M 0. 0. membrane 0.5 1.4000000000000001
+@mesh_m6_0 mass mesh_M 0. 0. membrane 0.6000000000000001 0.0
+@mesh_m6_1 mass mesh_M 0. 0. membrane 0.6000000000000001 0.1
+@mesh_m6_2 mass mesh_M 0. 0. membrane 0.6000000000000001 0.2
+@mesh_m6_3 mass mesh_M 0. 0. membrane 0.6000000000000001 0.30000000000000004
+@mesh_m6_4 mass mesh_M 0. 0. membrane 0.6000000000000001 0.4
+@mesh_m6_5 mass mesh_M 0. 0. membrane 0.6000000000000001 0.5
+@mesh_m6_6 mass mesh_M 0. 0. membrane 0.6000000000000001 0.6000000000000001
+@mesh_m6_7 mass mesh_M 0. 0. membrane 0.6000000000000001 0.7000000000000001
+@mesh_m6_8 mass mesh_M 0. 0. membrane 0.6000000000000001 0.8
+@mesh_m6_9 ground 0. membrane 0.6000000000000001 0.9
+@mesh_m6_10 mass mesh_M 0. 0. membrane 0.6000000000000001 1.0
+@mesh_m6_11 mass mesh_M 0. 0. membrane 0.6000000000000001 1.1
+@mesh_m6_12 mass mesh_M 0. 0. membrane 0.6000000000000001 1.2000000000000002
+@mesh_m6_13 mass mesh_M 0. 0. membrane 0.6000000000000001 1.3
+@mesh_m6_14 mass 50 0. 0. membrane 0.6000000000000001 1.4000000000000001
+@mesh_m7_0 mass mesh_M 0. 0. membrane 0.7000000000000001 0.0
+@mesh_m7_1 mass mesh_M 0. 0. membrane 0.7000000000000001 0.1
+@mesh_m7_2 mass mesh_M 0. 0. membrane 0.7000000000000001 0.2
+@mesh_m7_3 mass mesh_M 0. 0. membrane 0.7000000000000001 0.30000000000000004
+@mesh_m7_4 mass mesh_M 0. 0. membrane 0.7000000000000001 0.4
+@mesh_m7_5 mass mesh_M 0. 0. membrane 0.7000000000000001 0.5
+@mesh_m7_6 mass mesh_M 0. 0. membrane 0.7000000000000001 0.6000000000000001
+@mesh_m7_7 mass mesh_M 0. 0. membrane 0.7000000000000001 0.7000000000000001
+@mesh_m7_8 mass mesh_M 0. 0. membrane 0.7000000000000001 0.8
+@mesh_m7_9 mass mesh_M 0. 0. membrane 0.7000000000000001 0.9
+@mesh_m7_10 mass mesh_M 0. 0. membrane 0.7000000000000001 1.0
+@mesh_m7_11 mass mesh_M 0. 0. membrane 0.7000000000000001 1.1
+@mesh_m7_12 mass mesh_M 0. 0. membrane 0.7000000000000001 1.2000000000000002
+@mesh_m7_13 mass mesh_M 0. 0. membrane 0.7000000000000001 1.3
+@mesh_m7_14 mass mesh_M 0. 0. membrane 0.7000000000000001 1.4000000000000001
+@mesh_m8_0 mass mesh_M 0. 0. membrane 0.8 0.0
+@mesh_m8_1 mass mesh_M 0. 0. membrane 0.8 0.1
+@mesh_m8_2 mass mesh_M 0. 0. membrane 0.8 0.2
+@mesh_m8_3 mass mesh_M 0. 0. membrane 0.8 0.30000000000000004
+@mesh_m8_4 mass mesh_M 0. 0. membrane 0.8 0.4
+@mesh_m8_5 mass mesh_M 0. 0. membrane 0.8 0.5
+@mesh_m8_6 mass mesh_M 0. 0. membrane 0.8 0.6000000000000001
+@mesh_m8_7 mass mesh_M 0. 0. membrane 0.8 0.7000000000000001
+@mesh_m8_8 mass mesh_M 0. 0. membrane 0.8 0.8
+@mesh_m8_9 mass mesh_M 0. 0. membrane 0.8 0.9
+@mesh_m8_10 mass mesh_M 0. 0. membrane 0.8 1.0
+@mesh_m8_11 mass mesh_M 0. 0. membrane 0.8 1.1
+@mesh_m8_12 mass mesh_M 0. 0. membrane 0.8 1.2000000000000002
+@mesh_m8_13 mass mesh_M 0. 0. membrane 0.8 1.3
+@mesh_m8_14 mass mesh_M 0. 0. membrane 0.8 1.4000000000000001
+@mesh_m9_0 mass mesh_M 0. 0. membrane 0.9 0.0
+@mesh_m9_1 mass mesh_M 0. 0. membrane 0.9 0.1
+@mesh_m9_2 mass mesh_M 0. 0. membrane 0.9 0.2
+@mesh_m9_3 mass mesh_M 0. 0. membrane 0.9 0.30000000000000004
+@mesh_m9_4 mass mesh_M 0. 0. membrane 0.9 0.4
+@mesh_m9_5 mass 20 0. 0. membrane 0.9 0.5
+@mesh_m9_6 mass mesh_M 0. 0. membrane 0.9 0.6000000000000001
+@mesh_m9_7 mass mesh_M 0. 0. membrane 0.9 0.7000000000000001
+@mesh_m9_8 mass mesh_M 0. 0. membrane 0.9 0.8
+@mesh_m9_9 mass mesh_M 0. 0. membrane 0.9 0.9
+@mesh_m9_10 mass mesh_M 0. 0. membrane 0.9 1.0
+@mesh_m9_11 mass mesh_M 0. 0. membrane 0.9 1.1
+@mesh_m9_12 mass mesh_M 0. 0. membrane 0.9 1.2000000000000002
+@mesh_m9_13 mass mesh_M 0. 0. membrane 0.9 1.3
+@mesh_m9_14 mass mesh_M 0. 0. membrane 0.9 1.4000000000000001
+@mesh_m10_0 mass mesh_M 0. 0. membrane 1.0 0.0
+@mesh_m10_1 mass mesh_M 0. 0. membrane 1.0 0.1
+@mesh_m10_2 mass mesh_M 0. 0. membrane 1.0 0.2
+@mesh_m10_3 mass mesh_M 0. 0. membrane 1.0 0.30000000000000004
+@mesh_m10_4 mass mesh_M 0. 0. membrane 1.0 0.4
+@mesh_m10_5 mass mesh_M 0. 0. membrane 1.0 0.5
+@mesh_m10_6 mass mesh_M 0. 0. membrane 1.0 0.6000000000000001
+@mesh_m10_7 mass mesh_M 0. 0. membrane 1.0 0.7000000000000001
+@mesh_m10_8 mass mesh_M 0. 0. membrane 1.0 0.8
+@mesh_m10_9 mass mesh_M 0. 0. membrane 1.0 0.9
+@mesh_m10_10 mass mesh_M 0. 0. membrane 1.0 1.0
+@mesh_m10_11 mass mesh_M 0. 0. membrane 1.0 1.1
+@mesh_m10_12 mass mesh_M 0. 0. membrane 1.0 1.2000000000000002
+@mesh_m10_13 mass mesh_M 0. 0. membrane 1.0 1.3
+@mesh_m10_14 mass mesh_M 0. 0. membrane 1.0 1.4000000000000001
+@mesh_m11_0 mass mesh_M 0. 0. membrane 1.1 0.0
+@mesh_m11_1 mass mesh_M 0. 0. membrane 1.1 0.1
+@mesh_m11_2 mass mesh_M 0. 0. membrane 1.1 0.2
+@mesh_m11_3 mass mesh_M 0. 0. membrane 1.1 0.30000000000000004
+@mesh_m11_4 mass mesh_M 0. 0. membrane 1.1 0.4
+@mesh_m11_5 mass mesh_M 0. 0. membrane 1.1 0.5
+@mesh_m11_6 mass mesh_M 0. 0. membrane 1.1 0.6000000000000001
+@mesh_m11_7 mass mesh_M 0. 0. membrane 1.1 0.7000000000000001
+@mesh_m11_8 mass mesh_M 0. 0. membrane 1.1 0.8
+@mesh_m11_9 mass mesh_M 0. 0. membrane 1.1 0.9
+@mesh_m11_10 mass mesh_M 0. 0. membrane 1.1 1.0
+@mesh_m11_11 mass mesh_M 0. 0. membrane 1.1 1.1
+@mesh_m11_12 mass mesh_M 0. 0. membrane 1.1 1.2000000000000002
+@mesh_m11_13 mass mesh_M 0. 0. membrane 1.1 1.3
+@mesh_m11_14 mass mesh_M 0. 0. membrane 1.1 1.4000000000000001
+@mesh_m12_0 mass mesh_M 0. 0. membrane 1.2000000000000002 0.0
+@mesh_m12_1 mass mesh_M 0. 0. membrane 1.2000000000000002 0.1
+@mesh_m12_2 mass mesh_M 0. 0. membrane 1.2000000000000002 0.2
+@mesh_m12_3 mass mesh_M 0. 0. membrane 1.2000000000000002 0.30000000000000004
+@mesh_m12_4 mass 4 0. 0. membrane 1.2000000000000002 0.4
+@mesh_m12_5 mass mesh_M 0. 0. membrane 1.2000000000000002 0.5
+@mesh_m12_6 mass mesh_M 0. 0. membrane 1.2000000000000002 0.6000000000000001
+@mesh_m12_7 mass mesh_M 0. 0. membrane 1.2000000000000002 0.7000000000000001
+@mesh_m12_8 mass mesh_M 0. 0. membrane 1.2000000000000002 0.8
+@mesh_m12_9 mass mesh_M 0. 0. membrane 1.2000000000000002 0.9
+@mesh_m12_10 mass mesh_M 0. 0. membrane 1.2000000000000002 1.0
+@mesh_m12_11 mass mesh_M 0. 0. membrane 1.2000000000000002 1.1
+@mesh_m12_12 mass mesh_M 0. 0. membrane 1.2000000000000002 1.2000000000000002
+@mesh_m12_13 mass mesh_M 0. 0. membrane 1.2000000000000002 1.3
+@mesh_m12_14 mass mesh_M 0. 0. membrane 1.2000000000000002 1.4000000000000001
+@mesh_m13_0 mass mesh_M 0. 0. membrane 1.3 0.0
+@mesh_m13_1 mass mesh_M 0. 0. membrane 1.3 0.1
+@mesh_m13_2 mass mesh_M 0. 0. membrane 1.3 0.2
+@mesh_m13_3 mass 10 0. 0. membrane 1.3 0.30000000000000004
+@mesh_m13_4 mass mesh_M 0. 0. membrane 1.3 0.4
+@mesh_m13_5 mass mesh_M 0. 0. membrane 1.3 0.5
+@mesh_m13_6 mass mesh_M 0. 0. membrane 1.3 0.6000000000000001
+@mesh_m13_7 mass mesh_M 0. 0. membrane 1.3 0.7000000000000001
+@mesh_m13_8 mass mesh_M 0. 0. membrane 1.3 0.8
+@mesh_m13_9 mass mesh_M 0. 0. membrane 1.3 0.9
+@mesh_m13_10 mass mesh_M 0. 0. membrane 1.3 1.0
+@mesh_m13_11 mass mesh_M 0. 0. membrane 1.3 1.1
+@mesh_m13_12 mass mesh_M 0. 0. membrane 1.3 1.2000000000000002
+@mesh_m13_13 mass mesh_M 0. 0. membrane 1.3 1.3
+@mesh_m13_14 mass mesh_M 0. 0. membrane 1.3 1.4000000000000001
+@mesh_m14_0 ground 0. membrane 1.4000000000000001 0.0
+@mesh_m14_1 mass mesh_M 0. 0. membrane 1.4000000000000001 0.1
+@mesh_m14_2 mass mesh_M 0. 0. membrane 1.4000000000000001 0.2
+@mesh_m14_3 mass mesh_M 0. 0. membrane 1.4000000000000001 0.30000000000000004
+@mesh_m14_4 mass mesh_M 0. 0. membrane 1.4000000000000001 0.4
+@mesh_m14_5 mass mesh_M 0. 0. membrane 1.4000000000000001 0.5
+@mesh_m14_6 mass mesh_M 0. 0. membrane 1.4000000000000001 0.6000000000000001
+@mesh_m14_7 mass mesh_M 0. 0. membrane 1.4000000000000001 0.7000000000000001
+@mesh_m14_8 mass mesh_M 0. 0. membrane 1.4000000000000001 0.8
+@mesh_m14_9 mass mesh_M 0. 0. membrane 1.4000000000000001 0.9
+@mesh_m14_10 mass mesh_M 0. 0. membrane 1.4000000000000001 1.0
+@mesh_m14_11 mass mesh_M 0. 0. membrane 1.4000000000000001 1.1
+@mesh_m14_12 mass mesh_M 0. 0. membrane 1.4000000000000001 1.2000000000000002
+@mesh_m14_13 mass mesh_M 0. 0. membrane 1.4000000000000001 1.3
+@mesh_m14_14 ground 0. membrane 1.4000000000000001 1.4000000000000001
+
+@mesh_r0 spring @mesh_m0_0 @mesh_m0_1 mesh_K mesh_Z
+@mesh_r1 spring @mesh_m0_1 @mesh_m0_2 mesh_K mesh_Z
+@mesh_r2 spring @mesh_m0_2 @mesh_m0_3 mesh_K mesh_Z
+@mesh_r3 spring @mesh_m0_3 @mesh_m0_4 mesh_K mesh_Z
+@mesh_r4 spring @mesh_m0_4 @mesh_m0_5 mesh_K mesh_Z
+@mesh_r5 spring @mesh_m0_5 @mesh_m0_6 mesh_K mesh_Z
+@mesh_r6 spring @mesh_m0_6 @mesh_m0_7 mesh_K mesh_Z
+@mesh_r7 spring @mesh_m0_7 @mesh_m0_8 mesh_K mesh_Z
+@mesh_r8 spring @mesh_m0_8 @mesh_m0_9 mesh_K mesh_Z
+@mesh_r9 spring @mesh_m0_9 @mesh_m0_10 mesh_K mesh_Z
+@mesh_r10 spring @mesh_m0_10 @mesh_m0_11 mesh_K mesh_Z
+@mesh_r11 spring @mesh_m0_11 @mesh_m0_12 mesh_K mesh_Z
+@mesh_r12 spring @mesh_m0_12 @mesh_m0_13 mesh_K mesh_Z
+@mesh_r13 spring @mesh_m0_13 @mesh_m0_14 mesh_K mesh_Z
+@mesh_r14 spring @mesh_m1_0 @mesh_m1_1 mesh_K mesh_Z
+@mesh_r15 spring @mesh_m1_1 @mesh_m1_2 mesh_K mesh_Z
+@mesh_r16 spring @mesh_m1_2 @mesh_m1_3 mesh_K mesh_Z
+@mesh_r17 spring @mesh_m1_3 @mesh_m1_4 mesh_K mesh_Z
+@mesh_r18 spring @mesh_m1_4 @mesh_m1_5 mesh_K mesh_Z
+@mesh_r19 spring @mesh_m1_5 @mesh_m1_6 mesh_K mesh_Z
+@mesh_r20 spring @mesh_m1_6 @mesh_m1_7 mesh_K mesh_Z
+@mesh_r21 spring @mesh_m1_7 @mesh_m1_8 mesh_K mesh_Z
+@mesh_r22 spring @mesh_m1_8 @mesh_m1_9 mesh_K mesh_Z
+@mesh_r23 spring @mesh_m1_9 @mesh_m1_10 mesh_K mesh_Z
+@mesh_r24 spring @mesh_m1_10 @mesh_m1_11 mesh_K mesh_Z
+@mesh_r25 spring @mesh_m1_11 @mesh_m1_12 mesh_K mesh_Z
+@mesh_r26 spring @mesh_m1_12 @mesh_m1_13 mesh_K mesh_Z
+@mesh_r27 spring @mesh_m1_13 @mesh_m1_14 mesh_K mesh_Z
+@mesh_r28 spring @mesh_m2_0 @mesh_m2_1 mesh_K mesh_Z
+@mesh_r29 spring @mesh_m2_1 @mesh_m2_2 mesh_K mesh_Z
+@mesh_r30 spring @mesh_m2_2 @mesh_m2_3 mesh_K mesh_Z
+@mesh_r31 spring @mesh_m2_3 @mesh_m2_4 mesh_K mesh_Z
+@mesh_r32 spring @mesh_m2_4 @mesh_m2_5 mesh_K mesh_Z
+@mesh_r33 spring @mesh_m2_5 @mesh_m2_6 mesh_K mesh_Z
+@mesh_r34 spring @mesh_m2_6 @mesh_m2_7 mesh_K mesh_Z
+@mesh_r35 spring @mesh_m2_7 @mesh_m2_8 mesh_K mesh_Z
+@mesh_r36 spring @mesh_m2_8 @mesh_m2_9 mesh_K mesh_Z
+@mesh_r37 spring @mesh_m2_9 @mesh_m2_10 mesh_K mesh_Z
+@mesh_r38 spring @mesh_m2_10 @mesh_m2_11 mesh_K mesh_Z
+@mesh_r39 spring @mesh_m2_11 @mesh_m2_12 mesh_K mesh_Z
+@mesh_r40 spring @mesh_m2_12 @mesh_m2_13 mesh_K mesh_Z
+@mesh_r41 spring @mesh_m2_13 @mesh_m2_14 mesh_K mesh_Z
+@mesh_r42 spring @mesh_m3_0 @mesh_m3_1 mesh_K mesh_Z
+@mesh_r43 spring @mesh_m3_1 @mesh_m3_2 mesh_K mesh_Z
+@mesh_r44 spring @mesh_m3_2 @mesh_m3_3 mesh_K mesh_Z
+@mesh_r45 spring @mesh_m3_3 @mesh_m3_4 mesh_K mesh_Z
+@mesh_r46 spring @mesh_m3_4 @mesh_m3_5 mesh_K mesh_Z
+@mesh_r47 spring @mesh_m3_5 @mesh_m3_6 mesh_K mesh_Z
+@mesh_r48 spring @mesh_m3_6 @mesh_m3_7 0.01 mesh_Z
+@mesh_r49 spring @mesh_m3_7 @mesh_m3_8 0.01 mesh_Z
+@mesh_r50 spring @mesh_m3_8 @mesh_m3_9 mesh_K mesh_Z
+@mesh_r51 spring @mesh_m3_9 @mesh_m3_10 mesh_K mesh_Z
+@mesh_r52 spring @mesh_m3_10 @mesh_m3_11 mesh_K mesh_Z
+@mesh_r53 spring @mesh_m3_11 @mesh_m3_12 0.01 mesh_Z
+@mesh_r54 spring @mesh_m3_12 @mesh_m3_13 mesh_K mesh_Z
+@mesh_r55 spring @mesh_m3_13 @mesh_m3_14 mesh_K mesh_Z
+@mesh_r56 spring @mesh_m4_0 @mesh_m4_1 mesh_K mesh_Z
+@mesh_r57 spring @mesh_m4_1 @mesh_m4_2 mesh_K mesh_Z
+@mesh_r58 spring @mesh_m4_2 @mesh_m4_3 mesh_K mesh_Z
+@mesh_r59 spring @mesh_m4_3 @mesh_m4_4 mesh_K mesh_Z
+@mesh_r60 spring @mesh_m4_4 @mesh_m4_5 mesh_K mesh_Z
+@mesh_r61 spring @mesh_m4_5 @mesh_m4_6 mesh_K mesh_Z
+@mesh_r62 spring @mesh_m4_6 @mesh_m4_7 mesh_K mesh_Z
+@mesh_r63 spring @mesh_m4_7 @mesh_m4_8 mesh_K mesh_Z
+@mesh_r64 spring @mesh_m4_8 @mesh_m4_9 mesh_K mesh_Z
+@mesh_r65 spring @mesh_m4_9 @mesh_m4_10 mesh_K mesh_Z
+@mesh_r66 spring @mesh_m4_10 @mesh_m4_11 mesh_K mesh_Z
+@mesh_r67 spring @mesh_m4_11 @mesh_m4_12 mesh_K mesh_Z
+@mesh_r68 spring @mesh_m4_12 @mesh_m4_13 mesh_K mesh_Z
+@mesh_r69 spring @mesh_m4_13 @mesh_m4_14 mesh_K mesh_Z
+@mesh_r70 spring @mesh_m5_0 @mesh_m5_1 mesh_K mesh_Z
+@mesh_r71 spring @mesh_m5_1 @mesh_m5_2 mesh_K mesh_Z
+@mesh_r72 spring @mesh_m5_2 @mesh_m5_3 mesh_K mesh_Z
+@mesh_r73 spring @mesh_m5_3 @mesh_m5_4 mesh_K mesh_Z
+@mesh_r74 spring @mesh_m5_4 @mesh_m5_5 mesh_K mesh_Z
+@mesh_r75 spring @mesh_m5_5 @mesh_m5_6 mesh_K mesh_Z
+@mesh_r76 spring @mesh_m5_6 @mesh_m5_7 mesh_K mesh_Z
+@mesh_r77 spring @mesh_m5_7 @mesh_m5_8 mesh_K mesh_Z
+@mesh_r78 spring @mesh_m5_8 @mesh_m5_9 mesh_K mesh_Z
+@mesh_r79 spring @mesh_m5_9 @mesh_m5_10 mesh_K mesh_Z
+@mesh_r80 spring @mesh_m5_10 @mesh_m5_11 mesh_K mesh_Z
+@mesh_r81 spring @mesh_m5_11 @mesh_m5_12 mesh_K mesh_Z
+@mesh_r82 spring @mesh_m5_12 @mesh_m5_13 mesh_K mesh_Z
+@mesh_r83 spring @mesh_m5_13 @mesh_m5_14 mesh_K mesh_Z
+@mesh_r84 spring @mesh_m6_0 @mesh_m6_1 mesh_K mesh_Z
+@mesh_r85 spring @mesh_m6_1 @mesh_m6_2 mesh_K mesh_Z
+@mesh_r86 spring @mesh_m6_2 @mesh_m6_3 mesh_K mesh_Z
+@mesh_r87 spring @mesh_m6_3 @mesh_m6_4 mesh_K mesh_Z
+@mesh_r88 spring @mesh_m6_4 @mesh_m6_5 mesh_K mesh_Z
+@mesh_r89 spring @mesh_m6_5 @mesh_m6_6 mesh_K mesh_Z
+@mesh_r90 spring @mesh_m6_6 @mesh_m6_7 mesh_K mesh_Z
+@mesh_r91 spring @mesh_m6_7 @mesh_m6_8 mesh_K mesh_Z
+@mesh_r92 spring @mesh_m6_8 @mesh_m6_9 mesh_K mesh_Z
+@mesh_r93 spring @mesh_m6_9 @mesh_m6_10 mesh_K mesh_Z
+@mesh_r94 spring @mesh_m6_10 @mesh_m6_11 mesh_K mesh_Z
+@mesh_r95 spring @mesh_m6_11 @mesh_m6_12 mesh_K mesh_Z
+@mesh_r96 spring @mesh_m6_12 @mesh_m6_13 mesh_K mesh_Z
+@mesh_r97 spring @mesh_m6_13 @mesh_m6_14 mesh_K mesh_Z
+@mesh_r98 spring @mesh_m7_0 @mesh_m7_1 mesh_K mesh_Z
+@mesh_r99 spring @mesh_m7_1 @mesh_m7_2 mesh_K mesh_Z
+@mesh_r100 spring @mesh_m7_2 @mesh_m7_3 mesh_K mesh_Z
+@mesh_r101 spring @mesh_m7_3 @mesh_m7_4 mesh_K mesh_Z
+@mesh_r102 spring @mesh_m7_4 @mesh_m7_5 mesh_K mesh_Z
+@mesh_r103 spring @mesh_m7_5 @mesh_m7_6 mesh_K mesh_Z
+@mesh_r104 spring @mesh_m7_6 @mesh_m7_7 mesh_K mesh_Z
+@mesh_r105 spring @mesh_m7_7 @mesh_m7_8 mesh_K mesh_Z
+@mesh_r106 spring @mesh_m7_8 @mesh_m7_9 mesh_K mesh_Z
+@mesh_r107 spring @mesh_m7_9 @mesh_m7_10 mesh_K mesh_Z
+@mesh_r108 spring @mesh_m7_10 @mesh_m7_11 mesh_K mesh_Z
+@mesh_r109 spring @mesh_m7_11 @mesh_m7_12 mesh_K mesh_Z
+@mesh_r110 spring @mesh_m7_12 @mesh_m7_13 mesh_K mesh_Z
+@mesh_r111 spring @mesh_m7_13 @mesh_m7_14 mesh_K mesh_Z
+@mesh_r112 spring @mesh_m8_0 @mesh_m8_1 mesh_K mesh_Z
+@mesh_r113 spring @mesh_m8_1 @mesh_m8_2 mesh_K mesh_Z
+@mesh_r114 spring @mesh_m8_2 @mesh_m8_3 mesh_K mesh_Z
+@mesh_r115 spring @mesh_m8_3 @mesh_m8_4 mesh_K mesh_Z
+@mesh_r116 spring @mesh_m8_4 @mesh_m8_5 mesh_K mesh_Z
+@mesh_r117 spring @mesh_m8_5 @mesh_m8_6 mesh_K mesh_Z
+@mesh_r118 spring @mesh_m8_6 @mesh_m8_7 mesh_K mesh_Z
+@mesh_r119 spring @mesh_m8_7 @mesh_m8_8 mesh_K mesh_Z
+@mesh_r120 spring @mesh_m8_8 @mesh_m8_9 mesh_K mesh_Z
+@mesh_r121 spring @mesh_m8_9 @mesh_m8_10 mesh_K mesh_Z
+@mesh_r122 spring @mesh_m8_10 @mesh_m8_11 mesh_K mesh_Z
+@mesh_r123 spring @mesh_m8_11 @mesh_m8_12 mesh_K mesh_Z
+@mesh_r124 spring @mesh_m8_12 @mesh_m8_13 mesh_K mesh_Z
+@mesh_r125 spring @mesh_m8_13 @mesh_m8_14 mesh_K mesh_Z
+@mesh_r126 spring @mesh_m9_0 @mesh_m9_1 mesh_K mesh_Z
+@mesh_r127 spring @mesh_m9_1 @mesh_m9_2 mesh_K mesh_Z
+@mesh_r128 spring @mesh_m9_2 @mesh_m9_3 mesh_K mesh_Z
+@mesh_r129 spring @mesh_m9_3 @mesh_m9_4 mesh_K mesh_Z
+@mesh_r130 spring @mesh_m9_4 @mesh_m9_5 mesh_K mesh_Z
+@mesh_r131 spring @mesh_m9_5 @mesh_m9_6 mesh_K mesh_Z
+@mesh_r132 spring @mesh_m9_6 @mesh_m9_7 mesh_K mesh_Z
+@mesh_r133 spring @mesh_m9_7 @mesh_m9_8 mesh_K mesh_Z
+@mesh_r134 spring @mesh_m9_8 @mesh_m9_9 mesh_K mesh_Z
+@mesh_r135 spring @mesh_m9_9 @mesh_m9_10 mesh_K mesh_Z
+@mesh_r136 spring @mesh_m9_10 @mesh_m9_11 mesh_K mesh_Z
+@mesh_r137 spring @mesh_m9_11 @mesh_m9_12 mesh_K mesh_Z
+@mesh_r138 spring @mesh_m9_12 @mesh_m9_13 mesh_K mesh_Z
+@mesh_r139 spring @mesh_m9_13 @mesh_m9_14 mesh_K mesh_Z
+@mesh_r140 spring @mesh_m10_0 @mesh_m10_1 mesh_K mesh_Z
+@mesh_r141 spring @mesh_m10_1 @mesh_m10_2 mesh_K mesh_Z
+@mesh_r142 spring @mesh_m10_2 @mesh_m10_3 mesh_K mesh_Z
+@mesh_r143 spring @mesh_m10_3 @mesh_m10_4 mesh_K mesh_Z
+@mesh_r144 spring @mesh_m10_4 @mesh_m10_5 mesh_K mesh_Z
+@mesh_r145 spring @mesh_m10_5 @mesh_m10_6 mesh_K mesh_Z
+@mesh_r146 spring @mesh_m10_6 @mesh_m10_7 mesh_K mesh_Z
+@mesh_r147 spring @mesh_m10_7 @mesh_m10_8 mesh_K mesh_Z
+@mesh_r148 spring @mesh_m10_8 @mesh_m10_9 mesh_K mesh_Z
+@mesh_r149 spring @mesh_m10_9 @mesh_m10_10 mesh_K mesh_Z
+@mesh_r150 spring @mesh_m10_10 @mesh_m10_11 mesh_K mesh_Z
+@mesh_r151 spring @mesh_m10_11 @mesh_m10_12 mesh_K mesh_Z
+@mesh_r152 spring @mesh_m10_12 @mesh_m10_13 mesh_K mesh_Z
+@mesh_r153 spring @mesh_m10_13 @mesh_m10_14 mesh_K mesh_Z
+@mesh_r154 spring @mesh_m11_0 @mesh_m11_1 mesh_K mesh_Z
+@mesh_r155 spring @mesh_m11_1 @mesh_m11_2 mesh_K mesh_Z
+@mesh_r156 spring @mesh_m11_2 @mesh_m11_3 mesh_K mesh_Z
+@mesh_r157 spring @mesh_m11_3 @mesh_m11_4 mesh_K mesh_Z
+@mesh_r158 spring @mesh_m11_4 @mesh_m11_5 mesh_K mesh_Z
+@mesh_r159 spring @mesh_m11_5 @mesh_m11_6 mesh_K mesh_Z
+@mesh_r160 spring @mesh_m11_6 @mesh_m11_7 mesh_K mesh_Z
+@mesh_r161 spring @mesh_m11_7 @mesh_m11_8 mesh_K mesh_Z
+@mesh_r162 spring @mesh_m11_8 @mesh_m11_9 mesh_K mesh_Z
+@mesh_r163 spring @mesh_m11_9 @mesh_m11_10 mesh_K mesh_Z
+@mesh_r164 spring @mesh_m11_10 @mesh_m11_11 mesh_K mesh_Z
+@mesh_r165 spring @mesh_m11_11 @mesh_m11_12 mesh_K mesh_Z
+@mesh_r166 spring @mesh_m11_12 @mesh_m11_13 mesh_K mesh_Z
+@mesh_r167 spring @mesh_m11_13 @mesh_m11_14 mesh_K mesh_Z
+@mesh_r168 spring @mesh_m12_0 @mesh_m12_1 mesh_K mesh_Z
+@mesh_r169 spring @mesh_m12_1 @mesh_m12_2 mesh_K mesh_Z
+@mesh_r170 spring @mesh_m12_2 @mesh_m12_3 mesh_K mesh_Z
+@mesh_r171 spring @mesh_m12_3 @mesh_m12_4 mesh_K mesh_Z
+@mesh_r172 spring @mesh_m12_4 @mesh_m12_5 mesh_K mesh_Z
+@mesh_r173 spring @mesh_m12_5 @mesh_m12_6 mesh_K mesh_Z
+@mesh_r174 spring @mesh_m12_6 @mesh_m12_7 mesh_K mesh_Z
+@mesh_r175 spring @mesh_m12_7 @mesh_m12_8 mesh_K mesh_Z
+@mesh_r176 spring @mesh_m12_8 @mesh_m12_9 mesh_K mesh_Z
+@mesh_r177 spring @mesh_m12_9 @mesh_m12_10 mesh_K mesh_Z
+@mesh_r178 spring @mesh_m12_10 @mesh_m12_11 mesh_K mesh_Z
+@mesh_r179 spring @mesh_m12_11 @mesh_m12_12 mesh_K mesh_Z
+@mesh_r180 spring @mesh_m12_12 @mesh_m12_13 mesh_K mesh_Z
+@mesh_r181 spring @mesh_m12_13 @mesh_m12_14 mesh_K mesh_Z
+@mesh_r182 spring @mesh_m13_0 @mesh_m13_1 mesh_K mesh_Z
+@mesh_r183 spring @mesh_m13_1 @mesh_m13_2 mesh_K mesh_Z
+@mesh_r184 spring @mesh_m13_2 @mesh_m13_3 mesh_K mesh_Z
+@mesh_r185 spring @mesh_m13_3 @mesh_m13_4 mesh_K mesh_Z
+@mesh_r186 spring @mesh_m13_4 @mesh_m13_5 mesh_K mesh_Z
+@mesh_r187 spring @mesh_m13_5 @mesh_m13_6 mesh_K mesh_Z
+@mesh_r188 spring @mesh_m13_6 @mesh_m13_7 mesh_K mesh_Z
+@mesh_r189 spring @mesh_m13_7 @mesh_m13_8 mesh_K mesh_Z
+@mesh_r190 spring @mesh_m13_8 @mesh_m13_9 mesh_K mesh_Z
+@mesh_r191 spring @mesh_m13_9 @mesh_m13_10 mesh_K mesh_Z
+@mesh_r192 spring @mesh_m13_10 @mesh_m13_11 mesh_K mesh_Z
+@mesh_r193 spring @mesh_m13_11 @mesh_m13_12 mesh_K mesh_Z
+@mesh_r194 spring @mesh_m13_12 @mesh_m13_13 mesh_K mesh_Z
+@mesh_r195 spring @mesh_m13_13 @mesh_m13_14 mesh_K mesh_Z
+@mesh_r196 spring @mesh_m14_0 @mesh_m14_1 mesh_K mesh_Z
+@mesh_r197 spring @mesh_m14_1 @mesh_m14_2 mesh_K mesh_Z
+@mesh_r198 spring @mesh_m14_2 @mesh_m14_3 mesh_K mesh_Z
+@mesh_r199 spring @mesh_m14_3 @mesh_m14_4 mesh_K mesh_Z
+@mesh_r200 spring @mesh_m14_4 @mesh_m14_5 mesh_K mesh_Z
+@mesh_r201 spring @mesh_m14_5 @mesh_m14_6 mesh_K mesh_Z
+@mesh_r202 spring @mesh_m14_6 @mesh_m14_7 mesh_K mesh_Z
+@mesh_r203 spring @mesh_m14_7 @mesh_m14_8 mesh_K mesh_Z
+@mesh_r204 spring @mesh_m14_8 @mesh_m14_9 mesh_K mesh_Z
+@mesh_r205 spring @mesh_m14_9 @mesh_m14_10 mesh_K mesh_Z
+@mesh_r206 spring @mesh_m14_10 @mesh_m14_11 mesh_K mesh_Z
+@mesh_r207 spring @mesh_m14_11 @mesh_m14_12 mesh_K mesh_Z
+@mesh_r208 spring @mesh_m14_12 @mesh_m14_13 mesh_K mesh_Z
+@mesh_r209 spring @mesh_m14_13 @mesh_m14_14 mesh_K mesh_Z
+
+@mesh_r210 spring @mesh_m0_0 @mesh_m1_0 mesh_K mesh_Z
+@mesh_r211 spring @mesh_m0_1 @mesh_m1_1 mesh_K mesh_Z
+@mesh_r212 spring @mesh_m0_2 @mesh_m1_2 mesh_K mesh_Z
+@mesh_r213 spring @mesh_m0_3 @mesh_m1_3 mesh_K mesh_Z
+@mesh_r214 spring @mesh_m0_4 @mesh_m1_4 mesh_K mesh_Z
+@mesh_r215 spring @mesh_m0_5 @mesh_m1_5 mesh_K mesh_Z
+@mesh_r216 spring @mesh_m0_6 @mesh_m1_6 mesh_K mesh_Z
+@mesh_r217 spring @mesh_m0_7 @mesh_m1_7 mesh_K mesh_Z
+@mesh_r218 spring @mesh_m0_8 @mesh_m1_8 mesh_K mesh_Z
+@mesh_r219 spring @mesh_m0_9 @mesh_m1_9 mesh_K mesh_Z
+@mesh_r220 spring @mesh_m0_10 @mesh_m1_10 mesh_K mesh_Z
+@mesh_r221 spring @mesh_m0_11 @mesh_m1_11 mesh_K mesh_Z
+@mesh_r222 spring @mesh_m0_12 @mesh_m1_12 mesh_K mesh_Z
+@mesh_r223 spring @mesh_m0_13 @mesh_m1_13 mesh_K mesh_Z
+@mesh_r224 spring @mesh_m0_14 @mesh_m1_14 mesh_K mesh_Z
+@mesh_r225 spring @mesh_m1_0 @mesh_m2_0 mesh_K mesh_Z
+@mesh_r226 spring @mesh_m1_1 @mesh_m2_1 mesh_K mesh_Z
+@mesh_r227 spring @mesh_m1_2 @mesh_m2_2 mesh_K mesh_Z
+@mesh_r228 spring @mesh_m1_3 @mesh_m2_3 mesh_K mesh_Z
+@mesh_r229 spring @mesh_m1_4 @mesh_m2_4 mesh_K mesh_Z
+@mesh_r230 spring @mesh_m1_5 @mesh_m2_5 mesh_K mesh_Z
+@mesh_r231 spring @mesh_m1_6 @mesh_m2_6 mesh_K mesh_Z
+@mesh_r232 spring @mesh_m1_7 @mesh_m2_7 mesh_K mesh_Z
+@mesh_r233 spring @mesh_m1_8 @mesh_m2_8 mesh_K mesh_Z
+@mesh_r234 spring @mesh_m1_9 @mesh_m2_9 mesh_K mesh_Z
+@mesh_r235 spring @mesh_m1_10 @mesh_m2_10 mesh_K mesh_Z
+@mesh_r236 spring @mesh_m1_11 @mesh_m2_11 mesh_K mesh_Z
+@mesh_r237 spring @mesh_m1_12 @mesh_m2_12 mesh_K mesh_Z
+@mesh_r238 spring @mesh_m1_13 @mesh_m2_13 mesh_K mesh_Z
+@mesh_r239 spring @mesh_m1_14 @mesh_m2_14 mesh_K mesh_Z
+@mesh_r240 spring @mesh_m2_0 @mesh_m3_0 mesh_K mesh_Z
+@mesh_r241 spring @mesh_m2_1 @mesh_m3_1 mesh_K mesh_Z
+@mesh_r242 spring @mesh_m2_2 @mesh_m3_2 mesh_K mesh_Z
+@mesh_r243 spring @mesh_m2_3 @mesh_m3_3 mesh_K mesh_Z
+@mesh_r244 spring @mesh_m2_4 @mesh_m3_4 mesh_K mesh_Z
+@mesh_r245 spring @mesh_m2_5 @mesh_m3_5 mesh_K mesh_Z
+@mesh_r246 spring @mesh_m2_6 @mesh_m3_6 mesh_K mesh_Z
+@mesh_r247 spring @mesh_m2_7 @mesh_m3_7 mesh_K mesh_Z
+@mesh_r248 spring @mesh_m2_8 @mesh_m3_8 mesh_K mesh_Z
+@mesh_r249 spring @mesh_m2_9 @mesh_m3_9 mesh_K mesh_Z
+@mesh_r250 spring @mesh_m2_10 @mesh_m3_10 mesh_K mesh_Z
+@mesh_r251 spring @mesh_m2_11 @mesh_m3_11 mesh_K mesh_Z
+@mesh_r252 spring @mesh_m2_12 @mesh_m3_12 mesh_K mesh_Z
+@mesh_r253 spring @mesh_m2_13 @mesh_m3_13 mesh_K mesh_Z
+@mesh_r254 spring @mesh_m2_14 @mesh_m3_14 mesh_K mesh_Z
+@mesh_r255 spring @mesh_m3_0 @mesh_m4_0 mesh_K mesh_Z
+@mesh_r256 spring @mesh_m3_1 @mesh_m4_1 mesh_K mesh_Z
+@mesh_r257 spring @mesh_m3_2 @mesh_m4_2 mesh_K mesh_Z
+@mesh_r258 spring @mesh_m3_3 @mesh_m4_3 mesh_K mesh_Z
+@mesh_r259 spring @mesh_m3_4 @mesh_m4_4 mesh_K mesh_Z
+@mesh_r260 spring @mesh_m3_5 @mesh_m4_5 mesh_K mesh_Z
+@mesh_r261 spring @mesh_m3_6 @mesh_m4_6 mesh_K mesh_Z
+@mesh_r262 spring @mesh_m3_7 @mesh_m4_7 mesh_K mesh_Z
+@mesh_r263 spring @mesh_m3_8 @mesh_m4_8 mesh_K mesh_Z
+@mesh_r264 spring @mesh_m3_9 @mesh_m4_9 mesh_K mesh_Z
+@mesh_r265 spring @mesh_m3_10 @mesh_m4_10 mesh_K mesh_Z
+@mesh_r266 spring @mesh_m3_11 @mesh_m4_11 mesh_K mesh_Z
+@mesh_r267 spring @mesh_m3_12 @mesh_m4_12 mesh_K mesh_Z
+@mesh_r268 spring @mesh_m3_13 @mesh_m4_13 mesh_K mesh_Z
+@mesh_r269 spring @mesh_m3_14 @mesh_m4_14 mesh_K mesh_Z
+@mesh_r270 spring @mesh_m4_0 @mesh_m5_0 mesh_K mesh_Z
+@mesh_r271 spring @mesh_m4_1 @mesh_m5_1 mesh_K mesh_Z
+@mesh_r272 spring @mesh_m4_2 @mesh_m5_2 mesh_K mesh_Z
+@mesh_r273 spring @mesh_m4_3 @mesh_m5_3 mesh_K mesh_Z
+@mesh_r274 spring @mesh_m4_4 @mesh_m5_4 mesh_K mesh_Z
+@mesh_r275 spring @mesh_m4_5 @mesh_m5_5 mesh_K mesh_Z
+@mesh_r276 spring @mesh_m4_6 @mesh_m5_6 mesh_K mesh_Z
+@mesh_r277 spring @mesh_m4_7 @mesh_m5_7 mesh_K mesh_Z
+@mesh_r278 spring @mesh_m4_8 @mesh_m5_8 mesh_K mesh_Z
+@mesh_r279 spring @mesh_m4_9 @mesh_m5_9 mesh_K mesh_Z
+@mesh_r280 spring @mesh_m4_10 @mesh_m5_10 mesh_K mesh_Z
+@mesh_r281 spring @mesh_m4_11 @mesh_m5_11 mesh_K mesh_Z
+@mesh_r282 spring @mesh_m4_12 @mesh_m5_12 mesh_K mesh_Z
+@mesh_r283 spring @mesh_m4_13 @mesh_m5_13 mesh_K mesh_Z
+@mesh_r284 spring @mesh_m4_14 @mesh_m5_14 mesh_K mesh_Z
+@mesh_r285 spring @mesh_m5_0 @mesh_m6_0 mesh_K mesh_Z
+@mesh_r286 spring @mesh_m5_1 @mesh_m6_1 mesh_K mesh_Z
+@mesh_r287 spring @mesh_m5_2 @mesh_m6_2 mesh_K mesh_Z
+@mesh_r288 spring @mesh_m5_3 @mesh_m6_3 mesh_K mesh_Z
+@mesh_r289 spring @mesh_m5_4 @mesh_m6_4 mesh_K mesh_Z
+@mesh_r290 spring @mesh_m5_5 @mesh_m6_5 mesh_K mesh_Z
+@mesh_r291 spring @mesh_m5_6 @mesh_m6_6 mesh_K mesh_Z
+@mesh_r292 spring @mesh_m5_7 @mesh_m6_7 mesh_K mesh_Z
+@mesh_r293 spring @mesh_m5_8 @mesh_m6_8 mesh_K mesh_Z
+@mesh_r294 spring @mesh_m5_9 @mesh_m6_9 mesh_K mesh_Z
+@mesh_r295 spring @mesh_m5_10 @mesh_m6_10 mesh_K mesh_Z
+@mesh_r296 spring @mesh_m5_11 @mesh_m6_11 mesh_K mesh_Z
+@mesh_r297 spring @mesh_m5_12 @mesh_m6_12 mesh_K mesh_Z
+@mesh_r298 spring @mesh_m5_13 @mesh_m6_13 mesh_K mesh_Z
+@mesh_r299 spring @mesh_m5_14 @mesh_m6_14 mesh_K mesh_Z
+@mesh_r300 spring @mesh_m6_0 @mesh_m7_0 mesh_K mesh_Z
+@mesh_r301 spring @mesh_m6_1 @mesh_m7_1 mesh_K mesh_Z
+@mesh_r302 spring @mesh_m6_2 @mesh_m7_2 mesh_K mesh_Z
+@mesh_r303 spring @mesh_m6_3 @mesh_m7_3 mesh_K mesh_Z
+@mesh_r304 spring @mesh_m6_4 @mesh_m7_4 mesh_K mesh_Z
+@mesh_r305 spring @mesh_m6_5 @mesh_m7_5 mesh_K mesh_Z
+@mesh_r306 spring @mesh_m6_6 @mesh_m7_6 mesh_K mesh_Z
+@mesh_r307 spring @mesh_m6_7 @mesh_m7_7 mesh_K mesh_Z
+@mesh_r308 spring @mesh_m6_8 @mesh_m7_8 mesh_K mesh_Z
+@mesh_r309 spring @mesh_m6_9 @mesh_m7_9 mesh_K mesh_Z
+@mesh_r310 spring @mesh_m6_10 @mesh_m7_10 mesh_K mesh_Z
+@mesh_r311 spring @mesh_m6_11 @mesh_m7_11 mesh_K mesh_Z
+@mesh_r312 spring @mesh_m6_12 @mesh_m7_12 mesh_K mesh_Z
+@mesh_r313 spring @mesh_m6_13 @mesh_m7_13 mesh_K mesh_Z
+@mesh_r314 spring @mesh_m6_14 @mesh_m7_14 mesh_K mesh_Z
+@mesh_r315 spring @mesh_m7_0 @mesh_m8_0 mesh_K mesh_Z
+@mesh_r316 spring @mesh_m7_1 @mesh_m8_1 mesh_K mesh_Z
+@mesh_r317 spring @mesh_m7_2 @mesh_m8_2 mesh_K mesh_Z
+@mesh_r318 spring @mesh_m7_3 @mesh_m8_3 mesh_K mesh_Z
+@mesh_r319 spring @mesh_m7_4 @mesh_m8_4 mesh_K mesh_Z
+@mesh_r320 spring @mesh_m7_5 @mesh_m8_5 mesh_K mesh_Z
+@mesh_r321 spring @mesh_m7_6 @mesh_m8_6 mesh_K mesh_Z
+@mesh_r322 spring @mesh_m7_7 @mesh_m8_7 mesh_K mesh_Z
+@mesh_r323 spring @mesh_m7_8 @mesh_m8_8 mesh_K mesh_Z
+@mesh_r324 spring @mesh_m7_9 @mesh_m8_9 mesh_K mesh_Z
+@mesh_r325 spring @mesh_m7_10 @mesh_m8_10 mesh_K mesh_Z
+@mesh_r326 spring @mesh_m7_11 @mesh_m8_11 mesh_K mesh_Z
+@mesh_r327 spring @mesh_m7_12 @mesh_m8_12 mesh_K mesh_Z
+@mesh_r328 spring @mesh_m7_13 @mesh_m8_13 mesh_K mesh_Z
+@mesh_r329 spring @mesh_m7_14 @mesh_m8_14 mesh_K mesh_Z
+@mesh_r330 spring @mesh_m8_0 @mesh_m9_0 mesh_K mesh_Z
+@mesh_r331 spring @mesh_m8_1 @mesh_m9_1 mesh_K mesh_Z
+@mesh_r332 spring @mesh_m8_2 @mesh_m9_2 mesh_K mesh_Z
+@mesh_r333 spring @mesh_m8_3 @mesh_m9_3 mesh_K mesh_Z
+@mesh_r334 spring @mesh_m8_4 @mesh_m9_4 mesh_K mesh_Z
+@mesh_r335 spring @mesh_m8_5 @mesh_m9_5 mesh_K mesh_Z
+@mesh_r336 spring @mesh_m8_6 @mesh_m9_6 mesh_K mesh_Z
+@mesh_r337 spring @mesh_m8_7 @mesh_m9_7 mesh_K mesh_Z
+@mesh_r338 spring @mesh_m8_8 @mesh_m9_8 mesh_K mesh_Z
+@mesh_r339 spring @mesh_m8_9 @mesh_m9_9 mesh_K mesh_Z
+@mesh_r340 spring @mesh_m8_10 @mesh_m9_10 mesh_K mesh_Z
+@mesh_r341 spring @mesh_m8_11 @mesh_m9_11 mesh_K mesh_Z
+@mesh_r342 spring @mesh_m8_12 @mesh_m9_12 mesh_K mesh_Z
+@mesh_r343 spring @mesh_m8_13 @mesh_m9_13 mesh_K mesh_Z
+@mesh_r344 spring @mesh_m8_14 @mesh_m9_14 mesh_K mesh_Z
+@mesh_r345 spring @mesh_m9_0 @mesh_m10_0 mesh_K mesh_Z
+@mesh_r346 spring @mesh_m9_1 @mesh_m10_1 mesh_K mesh_Z
+@mesh_r347 spring @mesh_m9_2 @mesh_m10_2 mesh_K mesh_Z
+@mesh_r348 spring @mesh_m9_3 @mesh_m10_3 mesh_K mesh_Z
+@mesh_r349 spring @mesh_m9_4 @mesh_m10_4 mesh_K mesh_Z
+@mesh_r350 spring @mesh_m9_5 @mesh_m10_5 mesh_K mesh_Z
+@mesh_r351 spring @mesh_m9_6 @mesh_m10_6 mesh_K mesh_Z
+@mesh_r352 spring @mesh_m9_7 @mesh_m10_7 mesh_K mesh_Z
+@mesh_r353 spring @mesh_m9_8 @mesh_m10_8 mesh_K mesh_Z
+@mesh_r354 spring @mesh_m9_9 @mesh_m10_9 mesh_K mesh_Z
+@mesh_r355 spring @mesh_m9_10 @mesh_m10_10 mesh_K mesh_Z
+@mesh_r356 spring @mesh_m9_11 @mesh_m10_11 mesh_K mesh_Z
+@mesh_r357 spring @mesh_m9_12 @mesh_m10_12 mesh_K mesh_Z
+@mesh_r358 spring @mesh_m9_13 @mesh_m10_13 mesh_K mesh_Z
+@mesh_r359 spring @mesh_m9_14 @mesh_m10_14 mesh_K mesh_Z
+@mesh_r360 spring @mesh_m10_0 @mesh_m11_0 mesh_K mesh_Z
+@mesh_r361 spring @mesh_m10_1 @mesh_m11_1 mesh_K mesh_Z
+@mesh_r362 spring @mesh_m10_2 @mesh_m11_2 mesh_K mesh_Z
+@mesh_r363 spring @mesh_m10_3 @mesh_m11_3 mesh_K mesh_Z
+@mesh_r364 spring @mesh_m10_4 @mesh_m11_4 mesh_K mesh_Z
+@mesh_r365 spring @mesh_m10_5 @mesh_m11_5 mesh_K mesh_Z
+@mesh_r366 spring @mesh_m10_6 @mesh_m11_6 mesh_K mesh_Z
+@mesh_r367 spring @mesh_m10_7 @mesh_m11_7 mesh_K mesh_Z
+@mesh_r368 spring @mesh_m10_8 @mesh_m11_8 mesh_K mesh_Z
+@mesh_r369 spring @mesh_m10_9 @mesh_m11_9 mesh_K mesh_Z
+@mesh_r370 spring @mesh_m10_10 @mesh_m11_10 mesh_K mesh_Z
+@mesh_r371 spring @mesh_m10_11 @mesh_m11_11 mesh_K mesh_Z
+@mesh_r372 spring @mesh_m10_12 @mesh_m11_12 mesh_K mesh_Z
+@mesh_r373 spring @mesh_m10_13 @mesh_m11_13 mesh_K mesh_Z
+@mesh_r374 spring @mesh_m10_14 @mesh_m11_14 mesh_K mesh_Z
+@mesh_r375 spring @mesh_m11_0 @mesh_m12_0 mesh_K mesh_Z
+@mesh_r376 spring @mesh_m11_1 @mesh_m12_1 mesh_K mesh_Z
+@mesh_r377 spring @mesh_m11_2 @mesh_m12_2 mesh_K mesh_Z
+@mesh_r378 spring @mesh_m11_3 @mesh_m12_3 mesh_K mesh_Z
+@mesh_r379 spring @mesh_m11_4 @mesh_m12_4 mesh_K mesh_Z
+@mesh_r380 spring @mesh_m11_5 @mesh_m12_5 mesh_K mesh_Z
+@mesh_r381 spring @mesh_m11_6 @mesh_m12_6 mesh_K mesh_Z
+@mesh_r382 spring @mesh_m11_7 @mesh_m12_7 mesh_K mesh_Z
+@mesh_r383 spring @mesh_m11_8 @mesh_m12_8 mesh_K mesh_Z
+@mesh_r384 spring @mesh_m11_9 @mesh_m12_9 mesh_K mesh_Z
+@mesh_r385 spring @mesh_m11_10 @mesh_m12_10 mesh_K mesh_Z
+@mesh_r386 spring @mesh_m11_11 @mesh_m12_11 mesh_K mesh_Z
+@mesh_r387 spring @mesh_m11_12 @mesh_m12_12 mesh_K mesh_Z
+@mesh_r388 spring @mesh_m11_13 @mesh_m12_13 mesh_K mesh_Z
+@mesh_r389 spring @mesh_m11_14 @mesh_m12_14 mesh_K mesh_Z
+@mesh_r390 spring @mesh_m12_0 @mesh_m13_0 mesh_K mesh_Z
+@mesh_r391 spring @mesh_m12_1 @mesh_m13_1 mesh_K mesh_Z
+@mesh_r392 spring @mesh_m12_2 @mesh_m13_2 mesh_K mesh_Z
+@mesh_r393 spring @mesh_m12_3 @mesh_m13_3 mesh_K mesh_Z
+@mesh_r394 spring @mesh_m12_4 @mesh_m13_4 mesh_K mesh_Z
+@mesh_r395 spring @mesh_m12_5 @mesh_m13_5 mesh_K mesh_Z
+@mesh_r396 spring @mesh_m12_6 @mesh_m13_6 mesh_K mesh_Z
+@mesh_r397 spring @mesh_m12_7 @mesh_m13_7 mesh_K mesh_Z
+@mesh_r398 spring @mesh_m12_8 @mesh_m13_8 mesh_K mesh_Z
+@mesh_r399 spring @mesh_m12_9 @mesh_m13_9 mesh_K mesh_Z
+@mesh_r400 spring @mesh_m12_10 @mesh_m13_10 mesh_K mesh_Z
+@mesh_r401 spring @mesh_m12_11 @mesh_m13_11 mesh_K mesh_Z
+@mesh_r402 spring @mesh_m12_12 @mesh_m13_12 mesh_K mesh_Z
+@mesh_r403 spring @mesh_m12_13 @mesh_m13_13 mesh_K mesh_Z
+@mesh_r404 spring @mesh_m12_14 @mesh_m13_14 mesh_K mesh_Z
+@mesh_r405 spring @mesh_m13_0 @mesh_m14_0 mesh_K mesh_Z
+@mesh_r406 spring @mesh_m13_1 @mesh_m14_1 mesh_K mesh_Z
+@mesh_r407 spring @mesh_m13_2 @mesh_m14_2 mesh_K mesh_Z
+@mesh_r408 spring @mesh_m13_3 @mesh_m14_3 mesh_K mesh_Z
+@mesh_r409 spring @mesh_m13_4 @mesh_m14_4 mesh_K mesh_Z
+@mesh_r410 spring @mesh_m13_5 @mesh_m14_5 mesh_K mesh_Z
+@mesh_r411 spring @mesh_m13_6 @mesh_m14_6 mesh_K mesh_Z
+@mesh_r412 spring @mesh_m13_7 @mesh_m14_7 mesh_K mesh_Z
+@mesh_r413 spring @mesh_m13_8 @mesh_m14_8 mesh_K mesh_Z
+@mesh_r414 spring @mesh_m13_9 @mesh_m14_9 mesh_K mesh_Z
+@mesh_r415 spring @mesh_m13_10 @mesh_m14_10 mesh_K mesh_Z
+@mesh_r416 spring @mesh_m13_11 @mesh_m14_11 mesh_K mesh_Z
+@mesh_r417 spring @mesh_m13_12 @mesh_m14_12 mesh_K mesh_Z
+@mesh_r418 spring @mesh_m13_13 @mesh_m14_13 mesh_K mesh_Z
+@mesh_r419 spring @mesh_m13_14 @mesh_m14_14 mesh_K mesh_Z
+
+
+
+
+@pM param 5.
+@pK param 0.01
+@pZ param 0.001
+
+@catchK param 0.000001
+@catchZ param 0.06
+
+@oscK param 0.000001
+@oscZ param 0.
+
+@oscK2 param 0.0000011
+@oscZ2 param 0.
+
+@oscK3 param 0.0000012
+@oscZ3 param 0.
+
+@oscK4 param 0.0000007
+@oscZ4 param 0.
+
+@nZ param 0.0001
+
+
+@p1 mass pM 1. 1.
+@catch ground 1.
+
+@g1 osc 5. 0. nZ 1. 1.
+@g2 osc 5. 0. nZ 1. 1.
+@g3 osc 5. 0. nZ 1. 1.
+@g4 osc 5. 0. nZ 1. 1.
+
+@c1 contact @mesh_m2_2 @p1 pK pZ 0.
+@c2 contact @p1 @catch catchK catchZ 0.
+
+@os1 spring @g1 @catch oscK oscZ
+@c2 contact @mesh_m4_4 @g1 pK pZ 0.
+
+@os2 spring @g2 @catch oscK2 oscZ2
+@c3 contact @mesh_m6_8 @g2 pK pZ 0.
+
+@os3 spring @g3 @catch oscK3 oscZ3
+@c4 contact @mesh_m13_12 @g3 pK pZ 0.
+
+@os4 spring @g4 @catch oscK4 oscZ4
+@c5 contact @mesh_m0_6 @g4 pK pZ 0.
+
+
+@in1 frcInput @p1
+@in2 frcInput @g1
+@in3 frcInput @g2
+@in4 frcInput @g3
+@in5 frcInput @g4
+
+@out1 posOutput @mesh_m6_3
+@out2 posOutput @mesh_m4_1
+@out3 posOutput @p1
+@out4 posOutput @g1
+@out5 posOutput @g2
+@out6 posOutput @g3
+@out7 posOutput @g4

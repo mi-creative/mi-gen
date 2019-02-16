@@ -1,0 +1,412 @@
+@low_M param 1.0
+@low_K param 0.4
+@low_Z param 0.0008
+@low_Zosc param 0.00001
+
+@low_s0 ground 0.
+@low_mX osc low_M 0 low_Zosc 0. 0.
+@low_m0 osc low_M 0 low_Zosc 0. 0.
+@low_m1 osc low_M 0 low_Zosc 0. 0.
+@low_m2 osc low_M 0 low_Zosc 0. 0.
+@low_m3 osc low_M 0 low_Zosc 0. 0.
+@low_m4 osc low_M 0 low_Zosc 0. 0.
+@low_m5 osc low_M 0 low_Zosc 0. 0.
+@low_m6 osc low_M 0 low_Zosc 0. 0.
+@low_m7 osc low_M 0 low_Zosc 0. 0.
+@low_m8 osc low_M 0 low_Zosc 0. 0.
+@low_m9 osc low_M 0 low_Zosc 0. 0.
+@low_m10 osc low_M 0 low_Zosc 0. 0.
+@low_m11 osc low_M 0 low_Zosc 0. 0.
+@low_m12 osc low_M 0 low_Zosc 0. 0.
+@low_m13 osc low_M 0 low_Zosc 0. 0.
+@low_m14 osc low_M 0 low_Zosc 0. 0.
+@low_m15 osc low_M 0 low_Zosc 0. 0.
+@low_m16 osc low_M 0 low_Zosc 0. 0.
+@low_m17 osc low_M 0 low_Zosc 0. 0.
+@low_m18 osc low_M 0 low_Zosc 0. 0.
+@low_m19 osc low_M 0 low_Zosc 0. 0.
+@low_m20 osc low_M 0 low_Zosc 0. 0.
+@low_m21 osc low_M 0 low_Zosc 0. 0.
+@low_m22 osc low_M 0 low_Zosc 0. 0.
+@low_m23 osc low_M 0 low_Zosc 0. 0.
+@low_m24 osc low_M 0 low_Zosc 0. 0.
+@low_m25 osc low_M 0 low_Zosc 0. 0.
+@low_m26 osc low_M 0 low_Zosc 0. 0.
+@low_m27 osc low_M 0 low_Zosc 0. 0.
+@low_m28 osc low_M 0 low_Zosc 0. 0.
+@low_m29 osc low_M 0 low_Zosc 0. 0.
+@low_m30 osc low_M 0 low_Zosc 0. 0.
+@low_m31 osc low_M 0 low_Zosc 0. 0.
+@low_m32 osc low_M 0 low_Zosc 0. 0.
+@low_m33 osc low_M 0 low_Zosc 0. 0.
+@low_m34 osc low_M 0 low_Zosc 0. 0.
+@low_m35 osc low_M 0 low_Zosc 0. 0.
+@low_m36 osc low_M 0 low_Zosc 0. 0.
+@low_m37 osc low_M 0 low_Zosc 0. 0.
+@low_m38 osc low_M 0 low_Zosc 0. 0.
+@low_m39 osc low_M 0 low_Zosc 0. 0.
+@low_m40 osc low_M 0 low_Zosc 0. 0.
+@low_m41 osc low_M 0 low_Zosc 0. 0.
+@low_m42 osc low_M 0 low_Zosc 0. 0.
+@low_m43 osc low_M 0 low_Zosc 0. 0.
+@low_m44 osc low_M 0 low_Zosc 0. 0.
+@low_m45 osc low_M 0 low_Zosc 0. 0.
+@low_m46 osc low_M 0 low_Zosc 0. 0.
+@low_m47 osc low_M 0 low_Zosc 0. 0.
+@low_m48 osc low_M 0 low_Zosc 0. 0.
+@low_m49 osc low_M 0 low_Zosc 0. 0.
+@low_m50 osc low_M 0 low_Zosc 0. 0.
+@low_m51 osc low_M 0 low_Zosc 0. 0.
+@low_m52 osc low_M 0 low_Zosc 0. 0.
+@low_m53 osc low_M 0 low_Zosc 0. 0.
+@low_m54 osc low_M 0 low_Zosc 0. 0.
+@low_m55 osc low_M 0 low_Zosc 0. 0.
+@low_m56 osc low_M 0 low_Zosc 0. 0.
+@low_m57 osc low_M 0 low_Zosc 0. 0.
+@low_m58 osc low_M 0 low_Zosc 0. 0.
+@low_m59 osc low_M 0 low_Zosc 0. 0.
+@low_m60 osc low_M 0 low_Zosc 0. 0.
+@low_m61 osc low_M 0 low_Zosc 0. 0.
+@low_m62 osc low_M 0 low_Zosc 0. 0.
+@low_m63 osc low_M 0 low_Zosc 0. 0.
+@low_m64 osc low_M 0 low_Zosc 0. 0.
+@low_m65 osc low_M 0 low_Zosc 0. 0.
+@low_m66 osc low_M 0 low_Zosc 0. 0.
+@low_m67 osc low_M 0 low_Zosc 0. 0.
+@low_m68 osc low_M 0 low_Zosc 0. 0.
+@low_m69 osc low_M 0 low_Zosc 0. 0.
+@low_m70 osc low_M 0 low_Zosc 0. 0.
+@low_m71 osc low_M 0 low_Zosc 0. 0.
+@low_m72 osc low_M 0 low_Zosc 0. 0.
+@low_m73 osc low_M 0 low_Zosc 0. 0.
+@low_m74 osc low_M 0 low_Zosc 0. 0.
+@low_m75 osc low_M 0 low_Zosc 0. 0.
+@low_m76 osc low_M 0 low_Zosc 0. 0.
+@low_m77 osc low_M 0 low_Zosc 0. 0.
+@low_m78 osc low_M 0 low_Zosc 0. 0.
+@low_m79 osc low_M 0 low_Zosc 0. 0.
+@low_m80 osc low_M 0 low_Zosc 0. 0.
+@low_m81 osc low_M 0 low_Zosc 0. 0.
+@low_m82 osc low_M 0 low_Zosc 0. 0.
+@low_m83 osc low_M 0 low_Zosc 0. 0.
+@low_m84 osc low_M 0 low_Zosc 0. 0.
+@low_m85 osc low_M 0 low_Zosc 0. 0.
+@low_m86 osc low_M 0 low_Zosc 0. 0.
+@low_m87 osc low_M 0 low_Zosc 0. 0.
+@low_m88 osc low_M 0 low_Zosc 0. 0.
+@low_m89 osc low_M 0 low_Zosc 0. 0.
+@low_m90 osc low_M 0 low_Zosc 0. 0.
+@low_m91 osc low_M 0 low_Zosc 0. 0.
+@low_m92 osc low_M 0 low_Zosc 0. 0.
+@low_m93 osc low_M 0 low_Zosc 0. 0.
+@low_m94 osc low_M 0 low_Zosc 0. 0.
+@low_m95 osc low_M 0 low_Zosc 0. 0.
+@low_m96 osc low_M 0 low_Zosc 0. 0.
+@low_m97 osc low_M 0 low_Zosc 0. 0.
+@low_m98 osc low_M 0 low_Zosc 0. 0.
+@low_m99 osc low_M 0 low_Zosc 0. 0.
+@low_m100 osc low_M 0 low_Zosc 0. 0.
+@low_m101 osc low_M 0 low_Zosc 0. 0.
+@low_m102 osc low_M 0 low_Zosc 0. 0.
+@low_m103 osc low_M 0 low_Zosc 0. 0.
+@low_m104 osc low_M 0 low_Zosc 0. 0.
+@low_m105 osc low_M 0 low_Zosc 0. 0.
+@low_m106 osc low_M 0 low_Zosc 0. 0.
+@low_m107 osc low_M 0 low_Zosc 0. 0.
+@low_m108 osc low_M 0 low_Zosc 0. 0.
+@low_m109 osc low_M 0 low_Zosc 0. 0.
+@low_m110 osc low_M 0 low_Zosc 0. 0.
+@low_m111 osc low_M 0 low_Zosc 0. 0.
+@low_m112 osc low_M 0 low_Zosc 0. 0.
+@low_m113 osc low_M 0 low_Zosc 0. 0.
+@low_m114 osc low_M 0 low_Zosc 0. 0.
+@low_m115 osc low_M 0 low_Zosc 0. 0.
+@low_m116 osc low_M 0 low_Zosc 0. 0.
+@low_m117 osc low_M 0 low_Zosc 0. 0.
+@low_m118 osc low_M 0 low_Zosc 0. 0.
+@low_m119 osc low_M 0 low_Zosc 0. 0.
+@low_m120 osc low_M 0 low_Zosc 0. 0.
+@low_m121 osc low_M 0 low_Zosc 0. 0.
+@low_m122 osc low_M 0 low_Zosc 0. 0.
+@low_m123 osc low_M 0 low_Zosc 0. 0.
+@low_m124 osc low_M 0 low_Zosc 0. 0.
+@low_m125 osc low_M 0 low_Zosc 0. 0.
+@low_m126 osc low_M 0 low_Zosc 0. 0.
+@low_m127 osc low_M 0 low_Zosc 0. 0.
+@low_m128 osc low_M 0 low_Zosc 0. 0.
+@low_m129 osc low_M 0 low_Zosc 0. 0.
+@low_m130 osc low_M 0 low_Zosc 0. 0.
+@low_m131 osc low_M 0 low_Zosc 0. 0.
+@low_m132 osc low_M 0 low_Zosc 0. 0.
+@low_m133 osc low_M 0 low_Zosc 0. 0.
+@low_m134 osc low_M 0 low_Zosc 0. 0.
+@low_m135 osc low_M 0 low_Zosc 0. 0.
+@low_m136 osc low_M 0 low_Zosc 0. 0.
+@low_m137 osc low_M 0 low_Zosc 0. 0.
+@low_m138 osc low_M 0 low_Zosc 0. 0.
+@low_m139 osc low_M 0 low_Zosc 0. 0.
+@low_m140 osc low_M 0 low_Zosc 0. 0.
+@low_m141 osc low_M 0 low_Zosc 0. 0.
+@low_m142 osc low_M 0 low_Zosc 0. 0.
+@low_m143 osc low_M 0 low_Zosc 0. 0.
+@low_m144 osc low_M 0 low_Zosc 0. 0.
+@low_m145 osc low_M 0 low_Zosc 0. 0.
+@low_m146 osc low_M 0 low_Zosc 0. 0.
+@low_m147 osc low_M 0 low_Zosc 0. 0.
+@low_m148 osc low_M 0 low_Zosc 0. 0.
+@low_m149 osc low_M 0 low_Zosc 0. 0.
+@low_s1 ground 0.
+
+@low_r0 spring @low_s0 @low_mX low_K low_Z
+@low_rX spring @low_mX @low_m0 low_K low_Z
+@low_r1 spring @low_m0 @low_m1 low_K low_Z
+@low_r2 spring @low_m1 @low_m2 low_K low_Z
+@low_r3 spring @low_m2 @low_m3 low_K low_Z
+@low_r4 spring @low_m3 @low_m4 low_K low_Z
+@low_r5 spring @low_m4 @low_m5 low_K low_Z
+@low_r6 spring @low_m5 @low_m6 low_K low_Z
+@low_r7 spring @low_m6 @low_m7 low_K low_Z
+@low_r8 spring @low_m7 @low_m8 low_K low_Z
+@low_r9 spring @low_m8 @low_m9 low_K low_Z
+@low_r10 spring @low_m9 @low_m10 low_K low_Z
+@low_r11 spring @low_m10 @low_m11 low_K low_Z
+@low_r12 spring @low_m11 @low_m12 low_K low_Z
+@low_r13 spring @low_m12 @low_m13 low_K low_Z
+@low_r14 spring @low_m13 @low_m14 low_K low_Z
+@low_r15 spring @low_m14 @low_m15 low_K low_Z
+@low_r16 spring @low_m15 @low_m16 low_K low_Z
+@low_r17 spring @low_m16 @low_m17 low_K low_Z
+@low_r18 spring @low_m17 @low_m18 low_K low_Z
+@low_r19 spring @low_m18 @low_m19 low_K low_Z
+@low_r20 spring @low_m19 @low_m20 low_K low_Z
+@low_r21 spring @low_m20 @low_m21 low_K low_Z
+@low_r22 spring @low_m21 @low_m22 low_K low_Z
+@low_r23 spring @low_m22 @low_m23 low_K low_Z
+@low_r24 spring @low_m23 @low_m24 low_K low_Z
+@low_r25 spring @low_m24 @low_m25 low_K low_Z
+@low_r26 spring @low_m25 @low_m26 low_K low_Z
+@low_r27 spring @low_m26 @low_m27 low_K low_Z
+@low_r28 spring @low_m27 @low_m28 low_K low_Z
+@low_r29 spring @low_m28 @low_m29 low_K low_Z
+@low_r30 spring @low_m29 @low_m30 low_K low_Z
+@low_r31 spring @low_m30 @low_m31 low_K low_Z
+@low_r32 spring @low_m31 @low_m32 low_K low_Z
+@low_r33 spring @low_m32 @low_m33 low_K low_Z
+@low_r34 spring @low_m33 @low_m34 low_K low_Z
+@low_r35 spring @low_m34 @low_m35 low_K low_Z
+@low_r36 spring @low_m35 @low_m36 low_K low_Z
+@low_r37 spring @low_m36 @low_m37 low_K low_Z
+@low_r38 spring @low_m37 @low_m38 low_K low_Z
+@low_r39 spring @low_m38 @low_m39 low_K low_Z
+@low_r40 spring @low_m39 @low_m40 low_K low_Z
+@low_r41 spring @low_m40 @low_m41 low_K low_Z
+@low_r42 spring @low_m41 @low_m42 low_K low_Z
+@low_r43 spring @low_m42 @low_m43 low_K low_Z
+@low_r44 spring @low_m43 @low_m44 low_K low_Z
+@low_r45 spring @low_m44 @low_m45 low_K low_Z
+@low_r46 spring @low_m45 @low_m46 low_K low_Z
+@low_r47 spring @low_m46 @low_m47 low_K low_Z
+@low_r48 spring @low_m47 @low_m48 low_K low_Z
+@low_r49 spring @low_m48 @low_m49 low_K low_Z
+@low_r50 spring @low_m49 @low_m50 low_K low_Z
+@low_r51 spring @low_m50 @low_m51 low_K low_Z
+@low_r52 spring @low_m51 @low_m52 low_K low_Z
+@low_r53 spring @low_m52 @low_m53 low_K low_Z
+@low_r54 spring @low_m53 @low_m54 low_K low_Z
+@low_r55 spring @low_m54 @low_m55 low_K low_Z
+@low_r56 spring @low_m55 @low_m56 low_K low_Z
+@low_r57 spring @low_m56 @low_m57 low_K low_Z
+@low_r58 spring @low_m57 @low_m58 low_K low_Z
+@low_r59 spring @low_m58 @low_m59 low_K low_Z
+@low_r60 spring @low_m59 @low_m60 low_K low_Z
+@low_r61 spring @low_m60 @low_m61 low_K low_Z
+@low_r62 spring @low_m61 @low_m62 low_K low_Z
+@low_r63 spring @low_m62 @low_m63 low_K low_Z
+@low_r64 spring @low_m63 @low_m64 low_K low_Z
+@low_r65 spring @low_m64 @low_m65 low_K low_Z
+@low_r66 spring @low_m65 @low_m66 low_K low_Z
+@low_r67 spring @low_m66 @low_m67 low_K low_Z
+@low_r68 spring @low_m67 @low_m68 low_K low_Z
+@low_r69 spring @low_m68 @low_m69 low_K low_Z
+@low_r70 spring @low_m69 @low_m70 low_K low_Z
+@low_r71 spring @low_m70 @low_m71 low_K low_Z
+@low_r72 spring @low_m71 @low_m72 low_K low_Z
+@low_r73 spring @low_m72 @low_m73 low_K low_Z
+@low_r74 spring @low_m73 @low_m74 low_K low_Z
+@low_r75 spring @low_m74 @low_m75 low_K low_Z
+@low_r76 spring @low_m75 @low_m76 low_K low_Z
+@low_r77 spring @low_m76 @low_m77 low_K low_Z
+@low_r78 spring @low_m77 @low_m78 low_K low_Z
+@low_r79 spring @low_m78 @low_m79 low_K low_Z
+@low_r80 spring @low_m79 @low_m80 low_K low_Z
+@low_r81 spring @low_m80 @low_m81 low_K low_Z
+@low_r82 spring @low_m81 @low_m82 low_K low_Z
+@low_r83 spring @low_m82 @low_m83 low_K low_Z
+@low_r84 spring @low_m83 @low_m84 low_K low_Z
+@low_r85 spring @low_m84 @low_m85 low_K low_Z
+@low_r86 spring @low_m85 @low_m86 low_K low_Z
+@low_r87 spring @low_m86 @low_m87 low_K low_Z
+@low_r88 spring @low_m87 @low_m88 low_K low_Z
+@low_r89 spring @low_m88 @low_m89 low_K low_Z
+@low_r90 spring @low_m89 @low_m90 low_K low_Z
+@low_r91 spring @low_m90 @low_m91 low_K low_Z
+@low_r92 spring @low_m91 @low_m92 low_K low_Z
+@low_r93 spring @low_m92 @low_m93 low_K low_Z
+@low_r94 spring @low_m93 @low_m94 low_K low_Z
+@low_r95 spring @low_m94 @low_m95 low_K low_Z
+@low_r96 spring @low_m95 @low_m96 low_K low_Z
+@low_r97 spring @low_m96 @low_m97 low_K low_Z
+@low_r98 spring @low_m97 @low_m98 low_K low_Z
+@low_r99 spring @low_m98 @low_m99 low_K low_Z
+@low_r100 spring @low_m99 @low_m100 low_K low_Z
+@low_r101 spring @low_m100 @low_m101 low_K low_Z
+@low_r102 spring @low_m101 @low_m102 low_K low_Z
+@low_r103 spring @low_m102 @low_m103 low_K low_Z
+@low_r104 spring @low_m103 @low_m104 low_K low_Z
+@low_r105 spring @low_m104 @low_m105 low_K low_Z
+@low_r106 spring @low_m105 @low_m106 low_K low_Z
+@low_r107 spring @low_m106 @low_m107 low_K low_Z
+@low_r108 spring @low_m107 @low_m108 low_K low_Z
+@low_r109 spring @low_m108 @low_m109 low_K low_Z
+@low_r110 spring @low_m109 @low_m110 low_K low_Z
+@low_r111 spring @low_m110 @low_m111 low_K low_Z
+@low_r112 spring @low_m111 @low_m112 low_K low_Z
+@low_r113 spring @low_m112 @low_m113 low_K low_Z
+@low_r114 spring @low_m113 @low_m114 low_K low_Z
+@low_r115 spring @low_m114 @low_m115 low_K low_Z
+@low_r116 spring @low_m115 @low_m116 low_K low_Z
+@low_r117 spring @low_m116 @low_m117 low_K low_Z
+@low_r118 spring @low_m117 @low_m118 low_K low_Z
+@low_r119 spring @low_m118 @low_m119 low_K low_Z
+@low_r120 spring @low_m119 @low_m120 low_K low_Z
+@low_r121 spring @low_m120 @low_m121 low_K low_Z
+@low_r122 spring @low_m121 @low_m122 low_K low_Z
+@low_r123 spring @low_m122 @low_m123 low_K low_Z
+@low_r124 spring @low_m123 @low_m124 low_K low_Z
+@low_r125 spring @low_m124 @low_m125 low_K low_Z
+@low_r126 spring @low_m125 @low_m126 low_K low_Z
+@low_r127 spring @low_m126 @low_m127 low_K low_Z
+@low_r128 spring @low_m127 @low_m128 low_K low_Z
+@low_r129 spring @low_m128 @low_m129 low_K low_Z
+@low_r130 spring @low_m129 @low_m130 low_K low_Z
+@low_r131 spring @low_m130 @low_m131 low_K low_Z
+@low_r132 spring @low_m131 @low_m132 low_K low_Z
+@low_r133 spring @low_m132 @low_m133 low_K low_Z
+@low_r134 spring @low_m133 @low_m134 low_K low_Z
+@low_r135 spring @low_m134 @low_m135 low_K low_Z
+@low_r136 spring @low_m135 @low_m136 low_K low_Z
+@low_r137 spring @low_m136 @low_m137 low_K low_Z
+@low_r138 spring @low_m137 @low_m138 low_K low_Z
+@low_r139 spring @low_m138 @low_m139 low_K low_Z
+@low_r140 spring @low_m139 @low_m140 low_K low_Z
+@low_r141 spring @low_m140 @low_m141 low_K low_Z
+@low_r142 spring @low_m141 @low_m142 low_K low_Z
+@low_r143 spring @low_m142 @low_m143 low_K low_Z
+@low_r144 spring @low_m143 @low_m144 low_K low_Z
+@low_r145 spring @low_m144 @low_m145 low_K low_Z
+@low_r146 spring @low_m145 @low_m146 low_K low_Z
+@low_r147 spring @low_m146 @low_m147 low_K low_Z
+@low_r148 spring @low_m147 @low_m148 low_K low_Z
+@low_r149 spring @low_m148 @low_m149 low_K low_Z
+@low_r150 spring @low_m149 @low_s1 low_K low_Z
+
+
+
+
+@in1 frcInput @p1
+
+@in2 posInput 0.
+@in3 posInput 0.
+@in4 posInput 0.
+@in5 posInput 0.
+@in6 posInput 0.
+@in7 posInput 0.
+@in8 posInput 0.
+@in9 posInput 0.
+@in10 posInput 0.
+@in11 posInput 0.
+@in12 posInput 0.
+@in13 posInput 0.
+@in14 posInput 0.
+@in15 posInput 0.
+
+@fK param 0.2
+@fZ param 0.01
+
+
+@pM param 4.
+@pK param 0.1
+@pZ param 0.1
+
+@catchK param 0.000001
+@catchZ param 0.06
+
+@p1 mass pM 0.02 0.02
+@catch ground 1.
+
+@c1 contact @low_m135 @p1 pK pZ 0.
+@c2 contact @p1 @catch catchK catchZ 0.
+
+
+@det contact @in2 @low_m16 fK 0.00 0.
+@det contact @in2 @low_m15 fK fZ 0.
+@det contact @in2 @low_m14 0.0 fZ 0.
+@det contact @low_m13 @in3 fK fZ 0.
+@det contact @low_m12 @in3 fK fZ 0.
+@det contact @low_m5 @in3 0 fZ 0.
+@det contact @low_m8 @in3 0 fZ 0.
+
+
+@det contact @in4 @low_m30 fK 0.00 0.
+@det contact @in4 @low_m29 fK fZ 0.
+@det contact @in4 @low_m28 0.0 fZ 0.
+@det contact @low_m27 @in5 fK fZ 0.
+@det contact @low_m26 @in5 fK fZ 0.
+@det contact @low_m5 @in5 0 fZ 0.
+@det contact @low_m18 @in5 0 fZ 0.
+
+@det contact @in6 @low_m37 fK 0.00 0.
+@det contact @in6 @low_m36 fK fZ 0.
+@det contact @in6 @low_m35 0.0 fZ 0.
+@det contact @low_m34 @in7 fK fZ 0.
+@det contact @low_m33 @in7 fK fZ 0.
+@det contact @low_m15 @in7 0 fZ 0.
+@det contact @low_m28 @in7 0 fZ 0.
+
+@det contact @in8 @low_m50 fK 0.00 0.
+@det contact @in8 @low_m49 fK fZ 0.
+@det contact @in8 @low_m48 0.0 fZ 0.
+@det contact @low_m47 @in9 fK fZ 0.
+@det contact @low_m48 @in9 fK fZ 0.
+@det contact @low_m28 @in9 0 fZ 0.
+@det contact @low_m38 @in9 0 fZ 0.
+
+@det contact @in10 @low_m60 fK 0.00 0.
+@det contact @in10 @low_m59 fK fZ 0.
+@det contact @in10 @low_m58 0.0 fZ 0.
+@det contact @low_m57 @in11 fK fZ 0.
+@det contact @low_m56 @in11 fK fZ 0.
+@det contact @low_m25 @in11 0 fZ 0.
+@det contact @low_m48 @in11 0 fZ 0.
+
+@det contact @in12 @low_m70 fK 0.00 0.
+@det contact @in12 @low_m69 fK fZ 0.
+@det contact @in12 @low_m68 0.0 fZ 0.
+@det contact @low_m67 @in13 fK fZ 0.
+@det contact @low_m66 @in13 fK fZ 0.
+@det contact @low_m35 @in13 0 fZ 0.
+@det contact @low_m58 @in13 0 fZ 0.
+
+
+@det contact @in14 @low_m75 fK 0.00 0.
+@det contact @in14 @low_m74 fK fZ 0.
+@det contact @in14 @low_m73 0.0 fZ 0.
+@det contact @low_m72 @in15 fK fZ 0.
+@det contact @low_m71 @in15 fK fZ 0.
+@det contact @low_m35 @in15 0 fZ 0.
+@det contact @low_m58 @in15 0 fZ 0.
+
+
+@out1 posOutput @low_m133
+@out2 posOutput @low_m130
+

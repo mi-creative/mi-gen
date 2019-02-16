@@ -1,0 +1,118 @@
+{
+	"patcher" : 	{
+		"fileversion" : 1,
+		"appversion" : 		{
+			"major" : 7,
+			"minor" : 3,
+			"revision" : 5,
+			"architecture" : "x64",
+			"modernui" : 1
+		}
+,
+		"rect" : [ 787.0, 295.0, 700.0, 500.0 ],
+		"editing_bgcolor" : [ 0.9, 0.9, 0.9, 1.0 ],
+		"bglocked" : 0,
+		"openinpresentation" : 0,
+		"default_fontsize" : 12.0,
+		"default_fontface" : 0,
+		"default_fontname" : "Arial",
+		"gridonopen" : 1,
+		"gridsize" : [ 15.0, 15.0 ],
+		"gridsnaponopen" : 1,
+		"objectsnaponopen" : 1,
+		"statusbarvisible" : 2,
+		"toolbarvisible" : 1,
+		"lefttoolbarpinned" : 0,
+		"toptoolbarpinned" : 0,
+		"righttoolbarpinned" : 0,
+		"bottomtoolbarpinned" : 0,
+		"toolbars_unpinned_last_save" : 0,
+		"tallnewobj" : 0,
+		"boxanimatetime" : 200,
+		"enablehscroll" : 1,
+		"enablevscroll" : 1,
+		"devicewidth" : 0.0,
+		"description" : "",
+		"digest" : "",
+		"tags" : "",
+		"style" : "",
+		"subpatcher_template" : "",
+		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-1",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 378.0, 392.0, 37.0, 22.0 ],
+					"style" : "",
+					"text" : "out 3"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"code" : " require(\"migen-lib\");\r\n\r\nBuffer motionPerc;\r\nBuffer motionTri;\r\n\r\n\r\n\r\n\r\n// Model data structures\r\nData m(3);\r\nData tri_m9_0(3);\r\nData tri_m8_1(3);\r\nData tri_m8_0(3);\r\nData tri_m7_2(3);\r\nData tri_m7_1(3);\r\nData tri_m7_0(3);\r\nData tri_m6_3(3);\r\nData tri_m6_2(3);\r\nData tri_m6_1(3);\r\nData tri_m6_0(3);\r\nData tri_m5_4(3);\r\nData tri_m5_3(3);\r\nData tri_m5_2(3);\r\nData tri_m5_1(3);\r\nData tri_m5_0(3);\r\nData tri_m4_5(3);\r\nData tri_m4_4(3);\r\nData tri_m4_3(3);\r\nData tri_m4_2(3);\r\nData tri_m4_1(3);\r\nData tri_m4_0(3);\r\nData tri_m3_6(3);\r\nData tri_m3_5(3);\r\nData tri_m3_4(3);\r\nData tri_m3_3(3);\r\nData tri_m3_2(3);\r\nData tri_m3_1(3);\r\nData tri_m3_0(3);\r\nData tri_m2_7(3);\r\nData tri_m2_6(3);\r\nData tri_m2_5(3);\r\nData tri_m2_4(3);\r\nData tri_m2_3(3);\r\nData tri_m2_2(3);\r\nData tri_m2_1(3);\r\nData tri_m2_0(3);\r\nData tri_m1_8(3);\r\nData tri_m1_7(3);\r\nData tri_m1_6(3);\r\nData tri_m1_5(3);\r\nData tri_m1_4(3);\r\nData tri_m1_3(3);\r\nData tri_m1_2(3);\r\nData tri_m1_1(3);\r\nData tri_m1_0(3);\r\nData tri_m0_9(3);\r\nData tri_m0_8(3);\r\nData tri_m0_7(3);\r\nData tri_m0_6(3);\r\nData tri_m0_5(3);\r\nData tri_m0_4(3);\r\nData tri_m0_3(3);\r\nData tri_m0_2(3);\r\nData tri_m0_1(3);\r\nData tri_m0_0(3);\r\nData str_s1(3);\r\nData str_m9(3);\r\nData str_m8(3);\r\nData str_m7(3);\r\nData str_m6(3);\r\nData str_m5(3);\r\nData str_m4(3);\r\nData str_m3(3);\r\nData str_m2(3);\r\nData str_m1(3);\r\nData str_m0(3);\r\nData str_s0(3);\r\n\r\n// Control Rate Parameters\r\nParam dZ(0.0);\r\nParam tri_Z(0.0001);\r\nParam tri_K(0.3);\r\nParam tri_M(1.0);\r\nParam str_Z(0.0001);\r\nParam str_K(0.02);\r\nParam str_M(5.0);\r\n\r\nParam polyvoice(0);\r\n\r\nParam audiogain(4);\r\n\r\n\r\n\r\nParam display_motion(0);\r\n\r\n// Model initialisation flag\r\nHistory model_init(0);\r\nHistory render_cpt(0);\r\n\r\n// Audio Rate Parameters\r\n\r\n// Model init phase\r\n\r\nif(model_init == 0){\r\ninit_mat(m, 1., 1.);\r\ninit_mat(tri_m9_0, 0., 0.);\r\ninit_mat(tri_m8_1, 0., 0.);\r\ninit_mat(tri_m8_0, 0., 0.);\r\ninit_mat(tri_m7_2, 0., 0.);\r\ninit_mat(tri_m7_1, 0., 0.);\r\ninit_mat(tri_m7_0, 0., 0.);\r\ninit_mat(tri_m6_3, 0., 0.);\r\ninit_mat(tri_m6_2, 0., 0.);\r\ninit_mat(tri_m6_1, 0., 0.);\r\ninit_mat(tri_m6_0, 0., 0.);\r\ninit_mat(tri_m5_4, 0., 0.);\r\ninit_mat(tri_m5_3, 0., 0.);\r\ninit_mat(tri_m5_2, 0., 0.);\r\ninit_mat(tri_m5_1, 0., 0.);\r\ninit_mat(tri_m5_0, 0., 0.);\r\ninit_mat(tri_m4_5, 0., 0.);\r\ninit_mat(tri_m4_4, 0., 0.);\r\ninit_mat(tri_m4_3, 0., 0.);\r\ninit_mat(tri_m4_2, 0., 0.);\r\ninit_mat(tri_m4_1, 0., 0.);\r\ninit_mat(tri_m4_0, 0., 0.);\r\ninit_mat(tri_m3_6, 0., 0.);\r\ninit_mat(tri_m3_5, 0., 0.);\r\ninit_mat(tri_m3_4, 0., 0.);\r\ninit_mat(tri_m3_3, 0., 0.);\r\ninit_mat(tri_m3_2, 0., 0.);\r\ninit_mat(tri_m3_1, 0., 0.);\r\ninit_mat(tri_m3_0, 0., 0.);\r\ninit_mat(tri_m2_7, 0., 0.);\r\ninit_mat(tri_m2_6, 0., 0.);\r\ninit_mat(tri_m2_5, 0., 0.);\r\ninit_mat(tri_m2_4, 0., 0.);\r\ninit_mat(tri_m2_3, 0., 0.);\r\ninit_mat(tri_m2_2, 0., 0.);\r\ninit_mat(tri_m2_1, 0., 0.);\r\ninit_mat(tri_m2_0, 0., 0.);\r\ninit_mat(tri_m1_8, 0., 0.);\r\ninit_mat(tri_m1_7, 0., 0.);\r\ninit_mat(tri_m1_6, 0., 0.);\r\ninit_mat(tri_m1_5, 0., 0.);\r\ninit_mat(tri_m1_4, 0., 0.);\r\ninit_mat(tri_m1_3, 0., 0.);\r\ninit_mat(tri_m1_2, 0., 0.);\r\ninit_mat(tri_m1_1, 0., 0.);\r\ninit_mat(tri_m1_0, 0., 0.);\r\ninit_mat(tri_m0_9, 0., 0.);\r\ninit_mat(tri_m0_8, 0., 0.);\r\ninit_mat(tri_m0_7, 0., 0.);\r\ninit_mat(tri_m0_6, 0., 0.);\r\ninit_mat(tri_m0_5, 0., 0.);\r\ninit_mat(tri_m0_4, 0., 0.);\r\ninit_mat(tri_m0_3, 0., 0.);\r\ninit_mat(tri_m0_2, 0., 0.);\r\ninit_mat(tri_m0_1, 0., 0.);\r\ninit_mat(tri_m0_0, 0., 0.);\r\ninit_mat(str_s1, 0., 0.);\r\ninit_mat(str_m9, 0., 0.);\r\ninit_mat(str_m8, 0., 0.);\r\ninit_mat(str_m7, 0., 0.);\r\ninit_mat(str_m6, 0., 0.);\r\ninit_mat(str_m5, 0., 0.);\r\ninit_mat(str_m4, 0., 0.);\r\ninit_mat(str_m3, 0., 0.);\r\ninit_mat(str_m2, 0., 0.);\r\ninit_mat(str_m1, 0., 0.);\r\ninit_mat(str_m0, 0., 0.);\r\ninit_mat(str_s0, 0., 0.);\r\n\r\n// Raise init flag\r\nmodel_init = 1;\r\n}\r\n\r\n// Model computation\r\ncompute_mass(m, 5., gravity = 0.00000006);\r\ncompute_ground(tri_m9_0);\r\ncompute_mass(tri_m8_1, tri_M);\r\ncompute_mass(tri_m8_0, tri_M);\r\ncompute_mass(tri_m7_2, tri_M);\r\ncompute_mass(tri_m7_1, tri_M);\r\ncompute_mass(tri_m7_0, tri_M);\r\ncompute_mass(tri_m6_3, tri_M);\r\ncompute_mass(tri_m6_2, tri_M);\r\ncompute_mass(tri_m6_1, tri_M);\r\ncompute_mass(tri_m6_0, tri_M);\r\ncompute_mass(tri_m5_4, tri_M);\r\ncompute_mass(tri_m5_3, tri_M);\r\ncompute_mass(tri_m5_2, tri_M);\r\ncompute_mass(tri_m5_1, tri_M);\r\ncompute_mass(tri_m5_0, tri_M);\r\ncompute_mass(tri_m4_5, tri_M);\r\ncompute_mass(tri_m4_4, tri_M);\r\ncompute_mass(tri_m4_3, tri_M);\r\ncompute_mass(tri_m4_2, tri_M);\r\ncompute_mass(tri_m4_1, tri_M);\r\ncompute_mass(tri_m4_0, tri_M);\r\ncompute_mass(tri_m3_6, tri_M);\r\ncompute_mass(tri_m3_5, tri_M);\r\ncompute_mass(tri_m3_4, tri_M);\r\ncompute_mass(tri_m3_3, tri_M);\r\ncompute_mass(tri_m3_2, tri_M);\r\ncompute_mass(tri_m3_1, tri_M);\r\ncompute_mass(tri_m3_0, tri_M);\r\ncompute_mass(tri_m2_7, tri_M);\r\ncompute_mass(tri_m2_6, tri_M);\r\ncompute_mass(tri_m2_5, tri_M);\r\ncompute_mass(tri_m2_4, tri_M);\r\ncompute_mass(tri_m2_3, tri_M);\r\ncompute_mass(tri_m2_2, tri_M);\r\ncompute_mass(tri_m2_1, tri_M);\r\ncompute_mass(tri_m2_0, tri_M);\r\ncompute_ground(tri_m1_8);\r\ncompute_mass(tri_m1_7, tri_M);\r\ncompute_mass(tri_m1_6, tri_M);\r\ncompute_mass(tri_m1_5, tri_M);\r\ncompute_mass(tri_m1_4, tri_M);\r\ncompute_mass(tri_m1_3, tri_M);\r\ncompute_mass(tri_m1_2, tri_M);\r\ncompute_mass(tri_m1_1, tri_M);\r\ncompute_mass(tri_m1_0, tri_M);\r\ncompute_mass(tri_m0_9, tri_M);\r\ncompute_mass(tri_m0_8, tri_M);\r\ncompute_mass(tri_m0_7, tri_M);\r\ncompute_mass(tri_m0_6, tri_M);\r\ncompute_mass(tri_m0_5, tri_M);\r\ncompute_mass(tri_m0_4, tri_M);\r\ncompute_mass(tri_m0_3, tri_M);\r\ncompute_mass(tri_m0_2, tri_M);\r\ncompute_mass(tri_m0_1, tri_M);\r\ncompute_ground(tri_m0_0);\r\ncompute_ground(str_s1);\r\ncompute_mass(str_m9, str_M);\r\ncompute_mass(str_m8, str_M);\r\ncompute_mass(str_m7, str_M);\r\ncompute_mass(str_m6, str_M);\r\ncompute_mass(str_m5, str_M);\r\ncompute_mass(str_m4, str_M);\r\ncompute_mass(str_m3, str_M);\r\ncompute_mass(str_m2, str_M);\r\ncompute_mass(str_m1, str_M);\r\ncompute_mass(str_m0, str_M);\r\ncompute_ground(str_s0);\r\ncompute_contact(tri_m0_8, str_m7, 0.01,  dZ, 0);\r\ncompute_contact(tri_m7_2, str_m7, 0.04,  dZ, 0);\r\ncompute_contact(str_m9, m, 0.01, 0.01, 0.);\r\ncompute_spring_damper(tri_m8_1, tri_m9_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m7_2, tri_m8_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m7_1, tri_m8_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_3, tri_m7_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_2, tri_m7_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_1, tri_m7_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_4, tri_m6_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_3, tri_m6_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_2, tri_m6_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_1, tri_m6_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_5, tri_m5_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_4, tri_m5_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_3, tri_m5_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_2, tri_m5_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_1, tri_m5_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_6, tri_m4_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_5, tri_m4_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_4, tri_m4_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_3, tri_m4_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_2, tri_m4_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_1, tri_m4_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_7, tri_m3_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_6, tri_m3_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_5, tri_m3_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_4, tri_m3_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_3, tri_m3_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_2, tri_m3_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_1, tri_m3_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_8, tri_m2_7, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_7, tri_m2_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_6, tri_m2_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_5, tri_m2_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_4, tri_m2_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_3, tri_m2_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_2, tri_m2_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_1, tri_m2_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_9, tri_m1_8, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_8, tri_m1_7, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_7, tri_m1_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_6, tri_m1_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_5, tri_m1_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_4, tri_m1_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_3, tri_m1_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_2, tri_m1_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_1, tri_m1_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m8_0, tri_m9_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m7_1, tri_m8_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m7_0, tri_m8_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_2, tri_m7_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_1, tri_m7_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_0, tri_m7_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_3, tri_m6_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_2, tri_m6_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_1, tri_m6_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_0, tri_m6_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_4, tri_m5_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_3, tri_m5_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_2, tri_m5_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_1, tri_m5_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_0, tri_m5_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_5, tri_m4_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_4, tri_m4_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_3, tri_m4_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_2, tri_m4_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_1, tri_m4_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_0, tri_m4_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_6, tri_m3_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_5, tri_m3_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_4, tri_m3_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_3, tri_m3_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_2, tri_m3_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_1, tri_m3_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_0, tri_m3_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_7, tri_m2_7, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_6, tri_m2_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_5, tri_m2_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_4, tri_m2_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_3, tri_m2_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_2, tri_m2_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_1, tri_m2_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_0, tri_m2_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_8, tri_m1_8, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_7, tri_m1_7, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_6, tri_m1_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_5, tri_m1_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_4, tri_m1_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_3, tri_m1_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_2, tri_m1_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_1, tri_m1_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_0, tri_m1_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m8_0, tri_m8_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m7_1, tri_m7_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m7_0, tri_m7_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_2, tri_m6_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_1, tri_m6_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_0, tri_m6_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_3, tri_m5_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_2, tri_m5_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_1, tri_m5_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_0, tri_m5_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_4, tri_m4_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_3, tri_m4_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_2, tri_m4_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_1, tri_m4_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_0, tri_m4_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_5, tri_m3_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_4, tri_m3_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_3, tri_m3_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_2, tri_m3_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_1, tri_m3_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_0, tri_m3_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_6, tri_m2_7, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_5, tri_m2_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_4, tri_m2_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_3, tri_m2_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_2, tri_m2_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_1, tri_m2_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_0, tri_m2_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_7, tri_m1_8, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_6, tri_m1_7, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_5, tri_m1_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_4, tri_m1_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_3, tri_m1_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_2, tri_m1_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_1, tri_m1_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_0, tri_m1_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_8, tri_m0_9, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_7, tri_m0_8, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_6, tri_m0_7, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_5, tri_m0_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_4, tri_m0_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_3, tri_m0_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_2, tri_m0_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_1, tri_m0_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_0, tri_m0_1, tri_K, tri_Z);\r\ncompute_spring_damper(str_m9, str_s1, str_K, str_Z);\r\ncompute_spring_damper(str_m8, str_m9, str_K, str_Z);\r\ncompute_spring_damper(str_m7, str_m8, str_K, str_Z);\r\ncompute_spring_damper(str_m6, str_m7, str_K, str_Z);\r\ncompute_spring_damper(str_m5, str_m6, str_K, str_Z);\r\ncompute_spring_damper(str_m4, str_m5, str_K, str_Z);\r\ncompute_spring_damper(str_m3, str_m4, str_K, str_Z);\r\ncompute_spring_damper(str_m2, str_m3, str_K, str_Z);\r\ncompute_spring_damper(str_m1, str_m2, str_K, str_Z);\r\ncompute_spring_damper(str_m0, str_m1, str_K, str_Z);\r\ncompute_spring_damper(str_s0, str_m0, str_K, str_Z);\r\n\r\n// Output routing\r\nout2 =  get_pos(m) * audiogain;\r\nout3 =  get_pos(str_m9) * audiogain;\r\nout1 =  get_pos(tri_m3_3) * audiogain;\r\n\r\n// Motion data routing to Max/MSP buffer objects\r\n\r\nif (render_cpt == 0){\r\n\tmotionPerc.poke(get_pos(m), floor(polyvoice), 0);\r\n\tmotionTri.poke(get_pos(tri_m4_2), floor(polyvoice), 0);\r\n}\r\nrender_cpt = (render_cpt + 1) % 200;\r\n ",
+					"fontface" : 0,
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : " phyMdlBox ",
+					"maxclass" : "codebox",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 20.0, 50.0, 450.0, 300.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : " outbox_1 ",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 70.0, 420.0, 36.0, 22.0 ],
+					"style" : "",
+					"text" : "out 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : " outbox_2 ",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 120.0, 420.0, 36.0, 22.0 ],
+					"style" : "",
+					"text" : "out 2"
+				}
+
+			}
+ ],
+		"lines" : [ 			{
+				"patchline" : 				{
+					"destination" : [ " outbox_1 ", 0 ],
+					"source" : [ " phyMdlBox ", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ " outbox_2 ", 0 ],
+					"source" : [ " phyMdlBox ", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"source" : [ " phyMdlBox ", 2 ]
+				}
+
+			}
+ ],
+		"autosave" : 0
+	}
+
+}

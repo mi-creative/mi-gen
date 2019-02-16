@@ -1,0 +1,29 @@
+# Define global parameter attributes
+@m_K param 0.1
+@m_Z param 0.001
+
+@grav param 0.00000002
+
+# Create material points
+@m_s0 ground 0.
+@m_m0 mass 1. 0. 0.
+@m_m1 mass 1. 0. 0.
+@m_m2 mass 1. 0. 0.
+
+# Create and connect interaction modules
+@m_r0 spring @m_s0 @m_m0 m_K m_Z
+@m_r1 spring @m_m0 @m_m1 m_K m_Z
+@m_r2 spring @m_m1 @m_m2 m_K m_Z
+@m_r2 spring @m_m2 @m_m0 m_K m_Z
+
+@p massG 2. 0.00000002 1. 1. 
+
+# Inputs and outputs
+@out1 posOutput @m_m2
+
+@out2 posOutput @p
+@out3 posOutput @m_m1
+
+# Add plucking interaction
+@det contact @m_m1 @p  0.01 0.01 0. 
+

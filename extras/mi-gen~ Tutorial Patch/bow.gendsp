@@ -1,0 +1,118 @@
+{
+	"patcher" : 	{
+		"fileversion" : 1,
+		"appversion" : 		{
+			"major" : 7,
+			"minor" : 3,
+			"revision" : 5,
+			"architecture" : "x64",
+			"modernui" : 1
+		}
+,
+		"rect" : [ 920.0, 243.0, 574.0, 450.0 ],
+		"editing_bgcolor" : [ 0.9, 0.9, 0.9, 1.0 ],
+		"bglocked" : 0,
+		"openinpresentation" : 0,
+		"default_fontsize" : 12.0,
+		"default_fontface" : 0,
+		"default_fontname" : "Arial",
+		"gridonopen" : 1,
+		"gridsize" : [ 15.0, 15.0 ],
+		"gridsnaponopen" : 1,
+		"objectsnaponopen" : 1,
+		"statusbarvisible" : 2,
+		"toolbarvisible" : 1,
+		"lefttoolbarpinned" : 0,
+		"toptoolbarpinned" : 0,
+		"righttoolbarpinned" : 0,
+		"bottomtoolbarpinned" : 0,
+		"toolbars_unpinned_last_save" : 0,
+		"tallnewobj" : 0,
+		"boxanimatetime" : 200,
+		"enablehscroll" : 1,
+		"enablevscroll" : 1,
+		"devicewidth" : 0.0,
+		"description" : "",
+		"digest" : "",
+		"tags" : "",
+		"style" : "",
+		"subpatcher_template" : "",
+		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-2",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 451.0, 366.0, 37.0, 22.0 ],
+					"style" : "",
+					"text" : "out 3"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-1",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 235.5, 366.0, 37.0, 22.0 ],
+					"style" : "",
+					"text" : "out 2"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"code" : " require(\"migen-lib\");\r\n\r\n// Model data structures\r\nData gnd(3);\r\nData m1(3);\r\nData m2(3);\r\n\r\n// Control Rate Parameters\r\nParam Z(0.00003);\r\nParam K(0.000005);\r\nParam M(1.);\r\n\r\nParam nlZ(0.2);\r\nParam nlScale(0.006);\r\n\r\n// Model initialisation flag\r\nHistory model_init(0);\r\n\r\n// Model init phase\r\n\r\nif(model_init == 0){\r\ninit_mat(gnd, 0., 0.);\r\ninit_mat(m1, 0., 0.);\r\ninit_mat(m2, 250., 250.005);\r\n\r\n// Raise init flag\r\nmodel_init = 1;\r\n}\r\n\r\n// Model computation\r\ncompute_ground(gnd);\r\ncompute_mass(m1, M);\r\ncompute_mass(m2, 15000000);\r\n\r\ncompute_spring_damper(m1, gnd, K, Z);\r\n\r\ncompute_damper(m2, gnd, 20.);\r\n\r\nf = compute_nlBow(m1, m2, nlZ, nlScale);\r\n\r\n// Output routing\r\nout1 = get_pos(m1);\r\nout2 = get_pos(m2);\r\nout3 = f;\r\n",
+					"fontface" : 0,
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : " phyMdlBox ",
+					"maxclass" : "codebox",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 20.0, 50.0, 450.0, 300.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : " outbox_1 ",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 20.0, 366.0, 36.0, 22.0 ],
+					"style" : "",
+					"text" : "out 1"
+				}
+
+			}
+ ],
+		"lines" : [ 			{
+				"patchline" : 				{
+					"destination" : [ " outbox_1 ", 0 ],
+					"source" : [ " phyMdlBox ", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"source" : [ " phyMdlBox ", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-2", 0 ],
+					"source" : [ " phyMdlBox ", 2 ]
+				}
+
+			}
+ ],
+		"autosave" : 0
+	}
+
+}

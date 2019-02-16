@@ -1,0 +1,24 @@
+{
+    "author" : "James Leonard",
+    "description" : "Mass-interaction physical modelling in gen~",
+    "homepatcher" : "00 - MI_Tutorial.maxpat",
+    "max_version_min" : "7.1", "max_version_max" : "none",
+    "name" : "mi-gen",
+    "os" : {
+        "macintosh" : {
+            "platform" : [ "ia32", "x64" ],
+            "min_version" : "none"
+        },
+        "windows" : {
+            "platform" : [ "ia32", "x64" ],
+            "min_version" : "none"
+        }
+    },
+    "package_extra" : {
+        "reverse_domain" : "",
+        "copyright" : "see Licence"
+    },
+    "tags" : [ ],
+    "version" : "1.0.0",
+    "website" : "http://mi-creative.eu"
+}

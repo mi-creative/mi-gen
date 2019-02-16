@@ -1,0 +1,138 @@
+{
+	"patcher" : 	{
+		"fileversion" : 1,
+		"appversion" : 		{
+			"major" : 7,
+			"minor" : 3,
+			"revision" : 5,
+			"architecture" : "x64",
+			"modernui" : 1
+		}
+,
+		"rect" : [ 67.0, 109.0, 838.0, 500.0 ],
+		"editing_bgcolor" : [ 0.9, 0.9, 0.9, 1.0 ],
+		"bglocked" : 0,
+		"openinpresentation" : 0,
+		"default_fontsize" : 12.0,
+		"default_fontface" : 0,
+		"default_fontname" : "Arial",
+		"gridonopen" : 1,
+		"gridsize" : [ 15.0, 15.0 ],
+		"gridsnaponopen" : 1,
+		"objectsnaponopen" : 1,
+		"statusbarvisible" : 2,
+		"toolbarvisible" : 1,
+		"lefttoolbarpinned" : 0,
+		"toptoolbarpinned" : 0,
+		"righttoolbarpinned" : 0,
+		"bottomtoolbarpinned" : 0,
+		"toolbars_unpinned_last_save" : 0,
+		"tallnewobj" : 0,
+		"boxanimatetime" : 200,
+		"enablehscroll" : 1,
+		"enablevscroll" : 1,
+		"devicewidth" : 0.0,
+		"description" : "",
+		"digest" : "",
+		"tags" : "",
+		"style" : "",
+		"subpatcher_template" : "",
+		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-2",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 20.0, 18.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : "in 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"code" : " require(\"migen-lib\");\r\n\r\nBuffer motionPerc;\r\nBuffer motionTri;\r\n\r\n\r\n// Model data structures\r\nData p(3);\r\nData m_m2(3);\r\nData m_m1(3);\r\nData m_m0(3);\r\nData m_s0(3);\r\n\r\n// Control Rate Parameters\r\nParam grav(0.00000002);\r\nParam m_Z(0.001);\r\nParam m_K(0.1);\r\n\r\nParam polyvoice(0);\r\n\r\nParam display_motion(0);\r\n\r\n// Model initialisation flag\r\nHistory model_init(0);\r\nHistory render_cpt(0);\r\n\r\n// Audio Rate Parameters\r\n\r\n// Model init phase\r\n\r\nif(model_init == 0){\r\ninit_mat(p, 1., 1.);\r\ninit_mat(m_m2, 0., 0.);\r\ninit_mat(m_m1, 0., 0.);\r\ninit_mat(m_m0, 0., 0.);\r\ninit_mat(m_s0, 0., 0.);\r\n\r\n// Raise init flag\r\nmodel_init = 1;\r\n}\r\n\r\n\r\n// Model computation\r\ncompute_mass(p, 2., gravity = 0.00000002 + in1);\r\ncompute_mass(m_m2, 1.);\r\ncompute_mass(m_m1, 1.);\r\ncompute_mass(m_m0, 1.);\r\ncompute_ground(m_s0);\r\ncompute_contact(m_m1, p, 0.01, 0.01, 0.);\r\n\r\ncompute_contact(m_m2, m_m0, m_K, m_Z*10, 0);\r\ncompute_contact(m_m1, m_m2, m_K, m_Z*10, 0);\r\ncompute_contact(m_m0, m_m1, m_K, m_Z*10, 0);\r\n\r\ncompute_spring_damper_nl2(m_s0, m_m0, m_K, 100., m_Z);\r\n\r\n\r\n// Output routing\r\nout3 =  get_pos(m_m1);\r\nout2 =  get_pos(p);\r\nout1 =  get_pos(m_m2);\r\n\r\n// Motion data routing to Max/MSP buffer objects\r\n\r\nif (render_cpt == 0){\r\n\tmotionPerc.poke(get_pos(p), floor(polyvoice), 0);\r\n\tmotionTri.poke(get_pos(m_m1), floor(polyvoice), 0);\r\n}\r\nrender_cpt = (render_cpt + 1) % 200;\r\n\r\n ",
+					"fontface" : 0,
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : " phyMdlBox ",
+					"maxclass" : "codebox",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 20.0, 50.0, 450.0, 300.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : " outbox_1 ",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 70.0, 420.0, 36.0, 22.0 ],
+					"style" : "",
+					"text" : "out 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : " outbox_2 ",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 120.0, 420.0, 36.0, 22.0 ],
+					"style" : "",
+					"text" : "out 2"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : " outbox_3 ",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 170.0, 420.0, 36.0, 22.0 ],
+					"style" : "",
+					"text" : "out 3"
+				}
+
+			}
+ ],
+		"lines" : [ 			{
+				"patchline" : 				{
+					"destination" : [ " outbox_1 ", 0 ],
+					"source" : [ " phyMdlBox ", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ " outbox_2 ", 0 ],
+					"source" : [ " phyMdlBox ", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ " outbox_3 ", 0 ],
+					"source" : [ " phyMdlBox ", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 0 ],
+					"source" : [ "obj-2", 0 ]
+				}
+
+			}
+ ],
+		"autosave" : 0
+	}
+
+}

@@ -1,0 +1,358 @@
+/* 1D Mass-Interaction Physics Library for gen~ codebox 
+ * Defines basic material and link behaviours for simulation of vibratory deformations 
+ *
+ * Author: James Leonard
+ * james.leonard [at] gipsa-lab.fr 
+ *
+ *
+ * Types:
+
+	Material elements:
+		mass
+		osc
+		ground
+		
+	Link Elements:
+		spring
+		damper
+		spring_damper
+		contact
+		nlPick
+		nlBow
+		spring_damper_nl2
+		spring_damper_nl3
+	
+	Other:
+		Input / output elements
+ *
+ */
+
+
+/* utility functions */
+
+
+/* get the current position of a material element */
+
+get_pos(m_data){
+	return peek(m_data, 0);
+}
+
+/* get the previous (delayed) position of a material element */
+
+get_dly_pos(m_data){
+	return peek(m_data, 1);
+}
+
+/* get the value currently stored in the force buffer of a material element */
+
+get_frc(m_data){
+	return peek(m_data, 2);
+}
+
+
+/* Initialise state of any type of mass element */
+
+init_mat(m_data, X0, XR0){
+	poke(m_data, X0, 0);
+	poke(m_data, XR0, 1);
+	return 0;
+}
+
+
+
+/* 1D Punctual mass algorithm */
+
+compute_mass(m_data, M, gravity = 0) {
+	
+	tmp = 2 * peek(m_data, 0) 
+		- peek(m_data,1)
+		+ (peek(m_data,2) - gravity) /M;
+	poke(m_data, peek(m_data, 0) , 1);
+	poke(m_data,tmp, 0);
+	poke(m_data, 0, 2);
+
+	return tmp;
+}
+
+
+/* 1D Integrated mass-spring-damper-ground oscillaor algorithm */
+
+compute_osc(m_data, M, K, Z, grav = 0) {
+	invM = 1/M;
+	
+	tmp = (2 - (K+Z)*invM) * peek(m_data, 0) 
+		+ (Z * invM - 1) * peek(m_data,1)
+		+ (peek(m_data,2) + grav) * invM;
+	poke(m_data, peek(m_data, 0) , 1);
+	poke(m_data,tmp, 0);
+	poke(m_data, 0, 2);
+
+	return tmp;
+}
+
+/* 1D Fixed point (does nothing except reset force buffer */
+
+compute_ground(m_data) {
+	poke(m_data, 0, 2);
+	return peek(m_data, 0);
+}
+
+
+/* 1D Spring Interaction algorithm */
+
+compute_spring(m1_data, m2_data, K){
+	
+	x1 = peek(m1_data, 0);
+	x2 = peek(m2_data, 0);
+	
+	
+	f = K * (x1 - x2);
+	
+	poke(m1_data, peek(m1_data,2) - f, 2);
+	poke(m2_data, peek(m2_data,2) + f, 2);
+	
+	return f;
+}
+
+/* 1D Damper Interaction algorithm */
+
+compute_damper(m1_data, m2_data, Z){
+	
+	x1 = peek(m1_data, 0);
+	x1r = peek(m1_data, 1);
+	x2 = peek(m2_data, 0);
+	x2r = peek(m2_data, 1);
+	
+	
+	f = Z * ((x1-x1r) - (x2-x2r)) ;
+	
+	poke(m1_data, peek(m1_data,2) - f, 2);
+	poke(m2_data, peek(m2_data,2) + f, 2);
+	
+	return f;
+}
+
+
+
+/* 1D Spring-Damper Interaction algorithm */
+
+compute_spring_damper(m1_data, m2_data, K, Z){
+	
+	x1 = peek(m1_data, 0);
+	x1r = peek(m1_data, 1);
+	x2 = peek(m2_data, 0);
+	x2r = peek(m2_data, 1);
+	
+	
+	f = K * (x1 - x2) + 
+		Z * ((x1-x1r) - (x2-x2r)) ;
+	
+	poke(m1_data, peek(m1_data,2) - f, 2);
+	poke(m2_data, peek(m2_data,2) + f, 2);
+	
+	return f;
+}
+
+
+
+/* 1D contact (conditional Spring-Damper) Interaction algorithm */
+
+compute_contact(m1_data, m2_data, K, Z, thresh){
+	
+	x1 = peek(m1_data, 0);
+	x1r = peek(m1_data, 1);
+	x2 = peek(m2_data, 0);
+	x2r = peek(m2_data, 1);
+	
+	
+	f = K * (x1 - x2) + 
+		Z * ((x1-x1r) - (x2-x2r)) ;
+	
+	if ((x1-x2) > thresh){
+		poke(m1_data, peek(m1_data,2) - f, 2);
+		poke(m2_data, peek(m2_data,2) + f, 2);
+	}
+	
+	return f;
+}
+
+/* 1D non-linear picking Interaction algorithm */
+/* piecewise linear function */
+
+compute_nlPluck(m1_data, m2_data, nlK, nlscale, Z){
+
+	x1 = peek(m1_data, 0);
+	x2 = peek(m2_data, 0);
+
+	
+	f = 0.;
+	deltaP = (x1 - x2);
+	
+	// Sharpness factor: determines the slope at the tipping point (around zero)
+	sharpness = 10;
+	
+	// the tipping point of the piecewise function, depending on the sharpness
+	tip_dist = nlscale / sharpness;
+	
+	// Calculate stiffness for 0 < abs(deltaP) < tip_dst : Kp = nlK * (nlscale / tip_dist)
+	// (nlK is the repulsive stiffness for tip_dst < abs(deltaP) < nlscale) 
+
+	Kp = nlK / sharpness;
+	
+	
+	// now calculate the force resulting from the piecewise linear function
+	if(abs(deltaP) < (tip_dist))  {
+		f = Kp * deltaP ;
+	}
+	else if(abs(deltaP) < nlscale)  {
+		if(deltaP > 0) 
+			{f = tip_dist * Kp - nlK * deltaP ;}
+		else
+			{ f = - tip_dist * Kp - nlK * deltaP ;}
+	}
+	else f = 0.;
+	
+	poke(m1_data, peek(m1_data,2) - f, 2);
+	poke(m2_data, peek(m2_data,2) + f, 2);
+	
+	return f;
+
+}
+
+
+
+
+
+
+/* 1D non-linear bowing Interaction algorithm */
+/* Note: fixed slope parameters for now, could be modified in future */
+
+
+compute_nlBow(m1_data, m2_data, nlZ, nlscale){
+	
+	x1 = peek(m1_data, 0);
+	x1r = peek(m1_data, 1);
+	x2 = peek(m2_data, 0);
+	x2r = peek(m2_data, 1);
+	
+	f = 0.;
+	vel = ((x1-x1r) - (x2-x2r));
+	
+	// Sharpness factor: determines the slope at the tipping point (around zero)
+	sharpness = 3;
+	
+	// the tipping point of the piecewise function, depending on the sharpness
+	tip_vel = nlscale / sharpness;
+	
+	// Calculate damping for 0 < abs(vel) < tip_vel : Zp = nlZ * (nlscale / tip_vel)
+	//Zp = nlZ / sharpness;
+	dampZ = nlZ ;
+	slipZ = nlZ  * 0.25;
+	
+	
+	// now calculate the force resulting from the piecewise linear function
+	
+	if(abs(vel) < (tip_vel))  {
+		f = dampZ * vel ;
+	}
+	else if(abs(vel) < nlscale)  {
+		if(vel > 0) 
+			f = tip_vel * dampZ - slipZ * vel ;
+		else
+			f = - tip_vel * dampZ - slipZ * vel ;
+	}
+	else f = 0.;
+	
+		
+	poke(m1_data, peek(m1_data,2) - f, 2);
+	poke(m2_data, peek(m2_data,2) + f, 2);
+	
+	return f;
+
+}
+
+
+/* old implementation (seems a little off on coefficients but works OK)
+
+compute_nlBow(m1_data, m2_data, nlZ, nlscale){
+	
+	x1 = peek(m1_data, 0);
+	x1r = peek(m1_data, 1);
+	x2 = peek(m2_data, 0);
+	x2r = peek(m2_data, 1);
+	
+	f = 0.;
+	speed = ((x1-x1r) - (x2-x2r));
+	tip = nlscale * 0.33333333;
+	
+	if(abs(speed) < (nlscale / 3.))  {
+		f = nlZ * speed ;
+	}
+	else if(abs(speed) < nlscale)  {
+		if(speed > 0) 
+			{f = (nlscale / 3.) * nlZ + (-nlZ/4.) * speed ;}
+		else
+			{ f =  - (nlscale / 3.) * nlZ + (-nlZ/4.) * speed ;}
+	}
+	else f = 0.;
+	
+	poke(m1_data, peek(m1_data,2) - f, 2);
+	poke(m2_data, peek(m2_data,2) + f, 2);
+	
+	return f;
+
+}*/
+
+
+
+/* 1D non linear (cubic) Spring-Damper Interaction algorithm */
+
+compute_spring_damper_nl3(m1_data, m2_data, K, Q, Z){
+	
+	x1 = peek(m1_data, 0);
+	x1r = peek(m1_data, 1);
+	x2 = peek(m2_data, 0);
+	x2r = peek(m2_data, 1);
+	
+	dist = (x1 - x2);
+	f = K * dist + Q * (dist*dist*dist) + Z * ((x1-x1r) - (x2-x2r)) ;
+	
+	poke(m1_data, peek(m1_data,2) - f, 2);
+	poke(m2_data, peek(m2_data,2) + f, 2);
+	
+	return f;
+}
+
+/* 1D non linear (quadratic) Spring-Damper Interaction algorithm */
+
+compute_spring_damper_nl2(m1_data, m2_data, K, Q, Z){
+	
+	x1 = peek(m1_data, 0);
+	x1r = peek(m1_data, 1);
+	x2 = peek(m2_data, 0);
+	x2r = peek(m2_data, 1);
+	
+	dist = (x1 - x2);
+	f = K * dist + Q * sign(dist) * (dist*dist) + Z * ((x1-x1r) - (x2-x2r)) ;
+	
+	poke(m1_data, peek(m1_data,2) - f, 2);
+	poke(m2_data, peek(m2_data,2) + f, 2);
+	
+	return f;
+}
+
+/* set the position of a module from an external value */
+
+update_input_pos(m_data, inPos){
+	poke(m_data, peek(m_data, 0), 1);	
+	poke(m_data, inPos, 0);
+	return inPos;
+}
+
+/* apply force to a module from an external value */
+
+apply_input_force(m_data, inFrc){
+	
+	poke(m_data, peek(m_data,2) + inFrc, 2);
+	return inFrc;
+}
