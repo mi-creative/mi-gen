@@ -16,6 +16,7 @@ Once you've placed the package in Max's package folder and launched Max, head ov
 
 ![](misc/tutorial.png)
 
+
 ## Running the examples
 
 The examples are in the "examples" subfolder. There are several, demonstrating various virtual instruments and interactions (plucked and bowed strings, meshes, polyphonic instruments, etc.). They are always composed of a patch file, a gendsp file containing the model, and generally a .mdl file, corresponding to a model description.
@@ -33,6 +34,8 @@ MIMS is a model scripting tool, built in Python, that can be used to create larg
 
 It can be found on github at the following address:  [MIMS](https://github.com/mi-creative/MIMS)
 
+
+![](misc/MIMS.png)
 
 ## Documentation
 
