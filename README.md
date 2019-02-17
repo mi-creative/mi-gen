@@ -19,7 +19,7 @@ Once you've placed the package in Max's package folder and launched Max, head ov
 
 ## Running the examples
 
-The examples are in the "examples" subfolder. There are several, demonstrating various virtual instruments and interactions (plucked and bowed strings, meshes, polyphonic instruments, etc.). They are always composed of a patch file, a gendsp file containing the model, and generally a .mdl file, corresponding to a model description.
+The examples located are in the "examples" subfolder. There are several, demonstrating various virtual instruments and interactions (plucked and bowed strings, meshes, polyphonic instruments, etc.). They are always composed of a patch file, a gendsp file containing the model, and generally a .mdl file, corresponding to a model description.
 
 Each patch deals with parameters, real-time control and visualisation in its own way, we encourage you to browse through them to see what's possible.
 
