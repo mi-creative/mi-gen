@@ -21,12 +21,63 @@ Once you've placed the package in Max's package folder and launched Max, head ov
 
 The examples are in the "examples" subfolder. There are several, demonstrating various virtual instruments and interactions (plucked and bowed strings, meshes, polyphonic instruments, etc.). They are always composed of a patch file, a gendsp file containing the model, and generally a .mdl file, corresponding to a model description.
 
+Each patch deals with parameters, real-time control and visualisation in its own way, we encourage you to browse through them to see what's possible.
+
+
 ![](misc/stringpatch.png)
 
-Each patch deals with parameters, real-time control and visualisation in its own way, we encourage you to browse through them to see what's possible.
+*Above: a mass-interaction string model and associated Max patch (***FrettedString*** example)*
 
 ![](misc/mesh.png)
 
+*Above: a mass-interaction rectangular mesh (from the ***Mesh_15by15*** example), rendered using NURBS in Jitter*
+
+## How to write mass-interaction models in gen~
+
+Models are created in *codebox* objects (allowing textual coding within the gen~ system) using the ***migen-lib.genexpr*** library, that defines the various physical elements, as well as functions for input/output, etc.
+
+The code for a very basic mass-interaction model implemented with mi-gen~ is shown below:
+
+```C
+
+require("migen-lib");
+
+// Model data structures
+Data m_in2(3);
+Data gnd(3);
+Data m1(3);
+
+// Control Rate Parameters
+Param Z(0.0001);
+Param K(0.01);
+Param M(1.);
+
+History model_init(0);
+// Model init phase
+if(model_init == 0){
+    init_mat(m_in2, 1, 1);
+    init_mat(gnd, 0, 0);
+    init_mat(m1, 0, 0);
+    model_init = 1;
+}
+
+// Model computation
+update_input_pos(m_in2, in2);
+compute_ground(gnd);
+compute_mass(m1, M);
+compute_contact(m1, m_in2, 0.1, 0, 0);
+apply_input_force(m1, in1);
+compute_spring_damper(m1, gnd, K, Z);
+
+out1 =  get_pos(m1);
+
+```
+
+The above model creates a harmonic oscillator (a mass connected to a fixed point by a dampened spring) that can be subjected to force impulses via the first inlet of the *codebox* object and can be struck using a contact interaction (with stiffness, damping and threshold distance parameters) by another mass, whose position is controlled by the second inlet.
+
+Each material element in the model (mass, fixed point, etc.) is a represented by a 3-value *Data* array, containing the element's current position, previous position, and sum of forces applied to it by interactions.
+
+The *model_init* flag allows to initialise the model state (initial positions and previous positions - thus resulting initial velocity) during the first step of computation.
 
 ## The MIMS Model Scripter
 
