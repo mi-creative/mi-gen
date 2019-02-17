@@ -107,16 +107,16 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-4",
-					"linecount" : 13,
+					"linecount" : 12,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 410.0, 28.0, 157.0, 186.0 ],
+					"patching_rect" : [ 410.0, 28.0, 157.0, 172.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 6,
 					"presentation_rect" : [ 1.375, 208.0, 393.0, 89.0 ],
 					"style" : "",
-					"text" : "The NL2 visco-elastic spring applies an elastic force that conains a term proportional to the square of the distance between masses.\nIt is a spring that becomes harder with elongation: [Fletcher]\n\nThe pitch of oscillators built this way depends on the amplitude of excitation."
+					"text" : "The NL2 visco-elastic spring applies an elastic force that conains a term proportional to the square of the distance between masses.\nIt is a spring that becomes harder with elongation.\n\nThe pitch of oscillators built this way depends on the amplitude of excitation."
 				}
 
 			}
@@ -723,7 +723,7 @@
 					"pic" : "MI_MAT_Base_Plan.png",
 					"presentation" : 1,
 					"presentation_rect" : [ 83.25, 13.0, 52.5, 172.0 ],
-					"yoffset" : 49.919581
+					"yoffset" : 50.0
 				}
 
 			}
@@ -1348,29 +1348,29 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "MI_MAT_Ground_Plan.png",
-				"bootpath" : "~/CloudStation/Dev/MaxMSP/migen-formatting/Tutorial",
+				"bootpath" : "~/devel/mi-gen/extras/mi-gen~ Tutorial Patch",
 				"patcherrelativepath" : ".",
 				"type" : "PNG ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "MI_MAT_Base_Plan.png",
-				"bootpath" : "~/CloudStation/Dev/MaxMSP/migen-formatting/Tutorial",
+				"bootpath" : "~/devel/mi-gen/extras/mi-gen~ Tutorial Patch",
 				"patcherrelativepath" : ".",
 				"type" : "PNG ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "springNL2.gendsp",
-				"bootpath" : "~/CloudStation/Dev/MaxMSP/migen-formatting/Tutorial",
+				"bootpath" : "~/devel/mi-gen/extras/mi-gen~ Tutorial Patch",
 				"patcherrelativepath" : ".",
 				"type" : "gDSP",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "migen-lib.genexpr",
-				"bootpath" : "~/Documents/Max 7/Library",
-				"patcherrelativepath" : "../../../../../Documents/Max 7/Library",
+				"bootpath" : "~/Documents/Max 7/Packages/mi-gen-master/code",
+				"patcherrelativepath" : "../../../../Documents/Max 7/Packages/mi-gen-master/code",
 				"type" : "GenX",
 				"implicit" : 1
 			}
@@ -1397,10 +1397,6 @@
 , 			{
 				"name" : "classic",
 				"default" : 				{
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"patchlinecolor" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"accentcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
-					"fontsize" : [ 9.0 ],
 					"bgfillcolor" : 					{
 						"type" : "color",
 						"color1" : [ 0.83978, 0.839941, 0.839753, 1.0 ],
@@ -1410,8 +1406,12 @@
 						"proportion" : 0.39
 					}
 ,
+					"fontsize" : [ 9.0 ],
 					"fontname" : [ "Geneva" ],
 					"bgcolor" : [ 0.83978, 0.839941, 0.839753, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"patchlinecolor" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"accentcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
 					"color" : [ 0.498039, 0.498039, 0.498039, 1.0 ]
 				}
 ,
@@ -1467,8 +1467,8 @@
 				"name" : "classicKslider",
 				"default" : 				{
 					"selectioncolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
-					"elementcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
 					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"elementcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
 ,
@@ -1497,8 +1497,8 @@
 , 			{
 				"name" : "classicMeter~",
 				"default" : 				{
-					"elementcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
-					"bgcolor" : [ 0.380392, 0.380392, 0.380392, 1.0 ]
+					"bgcolor" : [ 0.380392, 0.380392, 0.380392, 1.0 ],
+					"elementcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -1507,8 +1507,8 @@
 , 			{
 				"name" : "classicNodes",
 				"default" : 				{
-					"elementcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
 					"fontsize" : [ 9.0 ],
+					"elementcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
 					"color" : [ 0.839216, 0.839216, 0.839216, 1.0 ]
 				}
 ,
@@ -1613,8 +1613,8 @@
 , 			{
 				"name" : "lightbutton",
 				"default" : 				{
-					"elementcolor" : [ 0.654902, 0.572549, 0.376471, 1.0 ],
-					"bgcolor" : [ 0.309495, 0.299387, 0.299789, 1.0 ]
+					"bgcolor" : [ 0.309495, 0.299387, 0.299789, 1.0 ],
+					"elementcolor" : [ 0.654902, 0.572549, 0.376471, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -1650,8 +1650,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-					"fontsize" : [ 12.059008 ]
+					"fontsize" : [ 12.059008 ],
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -1660,8 +1660,8 @@
 , 			{
 				"name" : "purple",
 				"default" : 				{
-					"textcolor_inverse" : [ 0.701961, 0.415686, 0.886275, 1.0 ],
-					"bgcolor" : [ 0.304029, 0.250694, 0.285628, 1.0 ]
+					"bgcolor" : [ 0.304029, 0.250694, 0.285628, 1.0 ],
+					"textcolor_inverse" : [ 0.701961, 0.415686, 0.886275, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -1698,8 +1698,8 @@
 , 			{
 				"name" : "tastefultoggle",
 				"default" : 				{
-					"elementcolor" : [ 0.654902, 0.572549, 0.376471, 1.0 ],
 					"bgcolor" : [ 0.287863, 0.333333, 0.329398, 1.0 ],
+					"elementcolor" : [ 0.654902, 0.572549, 0.376471, 1.0 ],
 					"color" : [ 0.941176, 0.690196, 0.196078, 1.0 ]
 				}
 ,
