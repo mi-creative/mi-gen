@@ -1,0 +1,169 @@
+@str_M param 1.0
+@str_K param 0.1
+@str_Z param 0.01
+@str_K2 param 0.1
+
+@nlK param 0.1                                    
+@nlscale param 0.005
+
+@str_s0 ground 0.
+@str_m0 mass str_M 0. 0.
+@str_m1 mass str_M 0. 0.
+@str_m2 mass str_M 0. 0.
+@str_m3 mass str_M 0. 0.
+@str_m4 mass str_M 0. 0.
+@str_m5 mass str_M 0. 0.
+@str_m6 mass str_M 0. 0.
+@str_m7 mass str_M 0. 0.
+@str_m8 mass str_M 0. 0.
+@str_m9 mass str_M 0. 0.
+@str_m10 mass str_M 0. 0.
+@str_m11 mass str_M 0. 0.
+@str_m12 mass str_M 0. 0.
+@str_m13 mass str_M 0. 0.
+@str_m14 mass str_M 0. 0.
+@str_m15 mass str_M 0. 0.
+@str_m16 mass str_M 0. 0.
+@str_m17 mass str_M 0. 0.
+@str_m18 mass str_M 0. 0.
+@str_m19 mass str_M 0. 0.
+@str_m20 mass str_M 0. 0.
+@str_m21 mass str_M 0. 0.
+@str_m22 mass str_M 0. 0.
+@str_m23 mass str_M 0. 0.
+@str_m24 mass str_M 0. 0.
+@str_m25 mass str_M 0. 0.
+@str_m26 mass str_M 0. 0.
+@str_m27 mass str_M 0. 0.
+@str_m28 mass str_M 0. 0.
+@str_m29 mass str_M 0. 0.
+@str_m30 mass str_M 0. 0.
+@str_m31 mass str_M 0. 0.
+@str_m32 mass str_M 0. 0.
+@str_m33 mass str_M 0. 0.
+@str_m34 mass str_M 0. 0.
+@str_m35 mass str_M 0. 0.
+@str_m36 mass str_M 0. 0.
+@str_m37 mass str_M 0. 0.
+@str_m38 mass str_M 0. 0.
+@str_m39 mass str_M 0. 0.
+@str_m40 mass str_M 0. 0.
+@str_m41 mass str_M 0. 0.
+@str_m42 mass str_M 0. 0.
+@str_m43 mass str_M 0. 0.
+@str_m44 mass str_M 0. 0.
+@str_m45 mass str_M 0. 0.
+@str_m46 mass str_M 0. 0.
+@str_m47 mass str_M 0. 0.
+@str_m48 mass str_M 0. 0.
+@str_m49 mass str_M 0. 0.
+@str_s1 ground 0.
+
+@str_r1 spring @str_s0 @str_m1 str_K str_Z
+@str_rs1 spring @str_s0 @str_m2 str_K2
+@str_r2 spring @str_m1 @str_m2 str_K str_Z
+@str_rs2 spring @str_m1 @str_m3 str_K2
+@str_r3 spring @str_m2 @str_m3 str_K str_Z
+@str_rs3 spring @str_m2 @str_m4 str_K2
+@str_r4 spring @str_m3 @str_m4 str_K str_Z
+@str_rs4 spring @str_m3 @str_m5 str_K2
+@str_r5 spring @str_m4 @str_m5 str_K str_Z
+@str_rs5 spring @str_m4 @str_m6 str_K2
+@str_r6 spring @str_m5 @str_m6 str_K str_Z
+@str_rs6 spring @str_m5 @str_m7 str_K2
+@str_r7 spring @str_m6 @str_m7 str_K str_Z
+@str_rs7 spring @str_m6 @str_m8 str_K2
+@str_r8 spring @str_m7 @str_m8 str_K str_Z
+@str_rs8 spring @str_m7 @str_m9 str_K2
+@str_r9 spring @str_m8 @str_m9 str_K str_Z
+@str_rs9 spring @str_m8 @str_m10 str_K2
+@str_r10 spring @str_m9 @str_m10 str_K str_Z
+@str_rs10 spring @str_m9 @str_m11 str_K2
+@str_r11 spring @str_m10 @str_m11 str_K str_Z
+@str_rs11 spring @str_m10 @str_m12 str_K2
+@str_r12 spring @str_m11 @str_m12 str_K str_Z
+@str_rs12 spring @str_m11 @str_m13 str_K2
+@str_r13 spring @str_m12 @str_m13 str_K str_Z
+@str_rs13 spring @str_m12 @str_m14 str_K2
+@str_r14 spring @str_m13 @str_m14 str_K str_Z
+@str_rs14 spring @str_m13 @str_m15 str_K2
+@str_r15 spring @str_m14 @str_m15 str_K str_Z
+@str_rs15 spring @str_m14 @str_m16 str_K2
+@str_r16 spring @str_m15 @str_m16 str_K str_Z
+@str_rs16 spring @str_m15 @str_m17 str_K2
+@str_r17 spring @str_m16 @str_m17 str_K str_Z
+@str_rs17 spring @str_m16 @str_m18 str_K2
+@str_r18 spring @str_m17 @str_m18 str_K str_Z
+@str_rs18 spring @str_m17 @str_m19 str_K2
+@str_r19 spring @str_m18 @str_m19 str_K str_Z
+@str_rs19 spring @str_m18 @str_m20 str_K2
+@str_r20 spring @str_m19 @str_m20 str_K str_Z
+@str_rs20 spring @str_m19 @str_m21 str_K2
+@str_r21 spring @str_m20 @str_m21 str_K str_Z
+@str_rs21 spring @str_m20 @str_m22 str_K2
+@str_r22 spring @str_m21 @str_m22 str_K str_Z
+@str_rs22 spring @str_m21 @str_m23 str_K2
+@str_r23 spring @str_m22 @str_m23 str_K str_Z
+@str_rs23 spring @str_m22 @str_m24 str_K2
+@str_r24 spring @str_m23 @str_m24 str_K str_Z
+@str_rs24 spring @str_m23 @str_m25 str_K2
+@str_r25 spring @str_m24 @str_m25 str_K str_Z
+@str_rs25 spring @str_m24 @str_m26 str_K2
+@str_r26 spring @str_m25 @str_m26 str_K str_Z
+@str_rs26 spring @str_m25 @str_m27 str_K2
+@str_r27 spring @str_m26 @str_m27 str_K str_Z
+@str_rs27 spring @str_m26 @str_m28 str_K2
+@str_r28 spring @str_m27 @str_m28 str_K str_Z
+@str_rs28 spring @str_m27 @str_m29 str_K2
+@str_r29 spring @str_m28 @str_m29 str_K str_Z
+@str_rs29 spring @str_m28 @str_m30 str_K2
+@str_r30 spring @str_m29 @str_m30 str_K str_Z
+@str_rs30 spring @str_m29 @str_m31 str_K2
+@str_r31 spring @str_m30 @str_m31 str_K str_Z
+@str_rs31 spring @str_m30 @str_m32 str_K2
+@str_r32 spring @str_m31 @str_m32 str_K str_Z
+@str_rs32 spring @str_m31 @str_m33 str_K2
+@str_r33 spring @str_m32 @str_m33 str_K str_Z
+@str_rs33 spring @str_m32 @str_m34 str_K2
+@str_r34 spring @str_m33 @str_m34 str_K str_Z
+@str_rs34 spring @str_m33 @str_m35 str_K2
+@str_r35 spring @str_m34 @str_m35 str_K str_Z
+@str_rs35 spring @str_m34 @str_m36 str_K2
+@str_r36 spring @str_m35 @str_m36 str_K str_Z
+@str_rs36 spring @str_m35 @str_m37 str_K2
+@str_r37 spring @str_m36 @str_m37 str_K str_Z
+@str_rs37 spring @str_m36 @str_m38 str_K2
+@str_r38 spring @str_m37 @str_m38 str_K str_Z
+@str_rs38 spring @str_m37 @str_m39 str_K2
+@str_r39 spring @str_m38 @str_m39 str_K str_Z
+@str_rs39 spring @str_m38 @str_m40 str_K2
+@str_r40 spring @str_m39 @str_m40 str_K str_Z
+@str_rs40 spring @str_m39 @str_m41 str_K2
+@str_r41 spring @str_m40 @str_m41 str_K str_Z
+@str_rs41 spring @str_m40 @str_m42 str_K2
+@str_r42 spring @str_m41 @str_m42 str_K str_Z
+@str_rs42 spring @str_m41 @str_m43 str_K2
+@str_r43 spring @str_m42 @str_m43 str_K str_Z
+@str_rs43 spring @str_m42 @str_m44 str_K2
+@str_r44 spring @str_m43 @str_m44 str_K str_Z
+@str_rs44 spring @str_m43 @str_m45 str_K2
+@str_r45 spring @str_m44 @str_m45 str_K str_Z
+@str_rs45 spring @str_m44 @str_m46 str_K2
+@str_r46 spring @str_m45 @str_m46 str_K str_Z
+@str_rs46 spring @str_m45 @str_m47 str_K2
+@str_r47 spring @str_m46 @str_m47 str_K str_Z
+@str_rs47 spring @str_m46 @str_m48 str_K2
+@str_r48 spring @str_m47 @str_m48 str_K str_Z
+@str_rs48 spring @str_m47 @str_m49 str_K2
+@str_r49 spring @str_m48 @str_m49 str_K str_Z
+@str_rs49 spring @str_m48 @str_s1 str_K2
+@str_r50 spring @str_m49 @str_s1 str_K str_Z
+@str_rs50 spring @str_m49 @str_s1 str_K2
+
+
+@in1 posInput 0.
+
+@nlp0 nlPluck @in1 @str_m10 nlK nlscale  
+
+@out1 posOutput @str_m40
+@out2 posOutput @str_m45

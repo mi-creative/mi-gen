@@ -1,0 +1,102 @@
+{
+	"patcher" : 	{
+		"fileversion" : 1,
+		"appversion" : 		{
+			"major" : 7,
+			"minor" : 3,
+			"revision" : 1,
+			"architecture" : "x64",
+			"modernui" : 1
+		}
+,
+		"rect" : [ 67.0, 109.0, 700.0, 500.0 ],
+		"editing_bgcolor" : [ 0.9, 0.9, 0.9, 1.0 ],
+		"bglocked" : 0,
+		"openinpresentation" : 0,
+		"default_fontsize" : 12.0,
+		"default_fontface" : 0,
+		"default_fontname" : "Arial",
+		"gridonopen" : 1,
+		"gridsize" : [ 15.0, 15.0 ],
+		"gridsnaponopen" : 1,
+		"objectsnaponopen" : 1,
+		"statusbarvisible" : 2,
+		"toolbarvisible" : 1,
+		"lefttoolbarpinned" : 0,
+		"toptoolbarpinned" : 0,
+		"righttoolbarpinned" : 0,
+		"bottomtoolbarpinned" : 0,
+		"toolbars_unpinned_last_save" : 0,
+		"tallnewobj" : 0,
+		"boxanimatetime" : 200,
+		"enablehscroll" : 1,
+		"enablevscroll" : 1,
+		"devicewidth" : 0.0,
+		"description" : "",
+		"digest" : "",
+		"tags" : "",
+		"style" : "",
+		"subpatcher_template" : "",
+                
+ "boxes" : [ { "box" : 				{
+					"code" : " require(\"migen-lib\");\r\nBuffer motion;\r\n\r\n// Model data structures\r\nData m_in1(3);\r\nData str_s1(3);\r\nData str_m49(3);\r\nData str_m48(3);\r\nData str_m47(3);\r\nData str_m46(3);\r\nData str_m45(3);\r\nData str_m44(3);\r\nData str_m43(3);\r\nData str_m42(3);\r\nData str_m41(3);\r\nData str_m40(3);\r\nData str_m39(3);\r\nData str_m38(3);\r\nData str_m37(3);\r\nData str_m36(3);\r\nData str_m35(3);\r\nData str_m34(3);\r\nData str_m33(3);\r\nData str_m32(3);\r\nData str_m31(3);\r\nData str_m30(3);\r\nData str_m29(3);\r\nData str_m28(3);\r\nData str_m27(3);\r\nData str_m26(3);\r\nData str_m25(3);\r\nData str_m24(3);\r\nData str_m23(3);\r\nData str_m22(3);\r\nData str_m21(3);\r\nData str_m20(3);\r\nData str_m19(3);\r\nData str_m18(3);\r\nData str_m17(3);\r\nData str_m16(3);\r\nData str_m15(3);\r\nData str_m14(3);\r\nData str_m13(3);\r\nData str_m12(3);\r\nData str_m11(3);\r\nData str_m10(3);\r\nData str_m9(3);\r\nData str_m8(3);\r\nData str_m7(3);\r\nData str_m6(3);\r\nData str_m5(3);\r\nData str_m4(3);\r\nData str_m3(3);\r\nData str_m2(3);\r\nData str_m1(3);\r\nData str_m0(3);\r\nData str_s0(3);\r\n\r\n// Control Rate Parameters\r\nParam nlscale(0.005);\r\nParam nlK(0.1);\r\nParam str_K2(0.1);\r\nParam str_Z(0.01);\r\nParam str_K(0.1);\r\nParam str_M(1.0);\r\n\r\nParam display_motion(0);\r\n\r\n// Model initialisation flag\r\nHistory model_init(0);\r\nHistory render_cpt(0);\r\n\r\n// Audio Rate Parameters\r\n\r\n// Model init phase\r\n\r\nif(model_init == 0){\r\ninit_mat(m_in1, 0., 0.);\r\ninit_mat(str_s1, 0., 0.);\r\ninit_mat(str_m49, 0., 0.);\r\ninit_mat(str_m48, 0., 0.);\r\ninit_mat(str_m47, 0., 0.);\r\ninit_mat(str_m46, 0., 0.);\r\ninit_mat(str_m45, 0., 0.);\r\ninit_mat(str_m44, 0., 0.);\r\ninit_mat(str_m43, 0., 0.);\r\ninit_mat(str_m42, 0., 0.);\r\ninit_mat(str_m41, 0., 0.);\r\ninit_mat(str_m40, 0., 0.);\r\ninit_mat(str_m39, 0., 0.);\r\ninit_mat(str_m38, 0., 0.);\r\ninit_mat(str_m37, 0., 0.);\r\ninit_mat(str_m36, 0., 0.);\r\ninit_mat(str_m35, 0., 0.);\r\ninit_mat(str_m34, 0., 0.);\r\ninit_mat(str_m33, 0., 0.);\r\ninit_mat(str_m32, 0., 0.);\r\ninit_mat(str_m31, 0., 0.);\r\ninit_mat(str_m30, 0., 0.);\r\ninit_mat(str_m29, 0., 0.);\r\ninit_mat(str_m28, 0., 0.);\r\ninit_mat(str_m27, 0., 0.);\r\ninit_mat(str_m26, 0., 0.);\r\ninit_mat(str_m25, 0., 0.);\r\ninit_mat(str_m24, 0., 0.);\r\ninit_mat(str_m23, 0., 0.);\r\ninit_mat(str_m22, 0., 0.);\r\ninit_mat(str_m21, 0., 0.);\r\ninit_mat(str_m20, 0., 0.);\r\ninit_mat(str_m19, 0., 0.);\r\ninit_mat(str_m18, 0., 0.);\r\ninit_mat(str_m17, 0., 0.);\r\ninit_mat(str_m16, 0., 0.);\r\ninit_mat(str_m15, 0., 0.);\r\ninit_mat(str_m14, 0., 0.);\r\ninit_mat(str_m13, 0., 0.);\r\ninit_mat(str_m12, 0., 0.);\r\ninit_mat(str_m11, 0., 0.);\r\ninit_mat(str_m10, 0., 0.);\r\ninit_mat(str_m9, 0., 0.);\r\ninit_mat(str_m8, 0., 0.);\r\ninit_mat(str_m7, 0., 0.);\r\ninit_mat(str_m6, 0., 0.);\r\ninit_mat(str_m5, 0., 0.);\r\ninit_mat(str_m4, 0., 0.);\r\ninit_mat(str_m3, 0., 0.);\r\ninit_mat(str_m2, 0., 0.);\r\ninit_mat(str_m1, 0., 0.);\r\ninit_mat(str_m0, 0., 0.);\r\ninit_mat(str_s0, 0., 0.);\r\n\r\n// Raise init flag\r\nmodel_init = 1;\r\n}\r\n\r\n// Model computation\r\nupdate_input_pos(m_in1, in1);\r\ncompute_ground(str_s1);\r\ncompute_mass(str_m49, str_M);\r\ncompute_mass(str_m48, str_M);\r\ncompute_mass(str_m47, str_M);\r\ncompute_mass(str_m46, str_M);\r\ncompute_mass(str_m45, str_M);\r\ncompute_mass(str_m44, str_M);\r\ncompute_mass(str_m43, str_M);\r\ncompute_mass(str_m42, str_M);\r\ncompute_mass(str_m41, str_M);\r\ncompute_mass(str_m40, str_M);\r\ncompute_mass(str_m39, str_M);\r\ncompute_mass(str_m38, str_M);\r\ncompute_mass(str_m37, str_M);\r\ncompute_mass(str_m36, str_M);\r\ncompute_mass(str_m35, str_M);\r\ncompute_mass(str_m34, str_M);\r\ncompute_mass(str_m33, str_M);\r\ncompute_mass(str_m32, str_M);\r\ncompute_mass(str_m31, str_M);\r\ncompute_mass(str_m30, str_M);\r\ncompute_mass(str_m29, str_M);\r\ncompute_mass(str_m28, str_M);\r\ncompute_mass(str_m27, str_M);\r\ncompute_mass(str_m26, str_M);\r\ncompute_mass(str_m25, str_M);\r\ncompute_mass(str_m24, str_M);\r\ncompute_mass(str_m23, str_M);\r\ncompute_mass(str_m22, str_M);\r\ncompute_mass(str_m21, str_M);\r\ncompute_mass(str_m20, str_M);\r\ncompute_mass(str_m19, str_M);\r\ncompute_mass(str_m18, str_M);\r\ncompute_mass(str_m17, str_M);\r\ncompute_mass(str_m16, str_M);\r\ncompute_mass(str_m15, str_M);\r\ncompute_mass(str_m14, str_M);\r\ncompute_mass(str_m13, str_M);\r\ncompute_mass(str_m12, str_M);\r\ncompute_mass(str_m11, str_M);\r\ncompute_mass(str_m10, str_M);\r\ncompute_mass(str_m9, str_M);\r\ncompute_mass(str_m8, str_M);\r\ncompute_mass(str_m7, str_M);\r\ncompute_mass(str_m6, str_M);\r\ncompute_mass(str_m5, str_M);\r\ncompute_mass(str_m4, str_M);\r\ncompute_mass(str_m3, str_M);\r\ncompute_mass(str_m2, str_M);\r\ncompute_mass(str_m1, str_M);\r\ncompute_mass(str_m0, str_M);\r\ncompute_ground(str_s0);\r\ncompute_nlPluck(m_in1, str_m10, nlK, nlscale);\r\ncompute_spring(str_m49, str_s1, str_K2);\r\ncompute_spring_damper(str_m49, str_s1, str_K, str_Z);\r\ncompute_spring(str_m48, str_s1, str_K2);\r\ncompute_spring_damper(str_m48, str_m49, str_K, str_Z);\r\ncompute_spring(str_m47, str_m49, str_K2);\r\ncompute_spring_damper(str_m47, str_m48, str_K, str_Z);\r\ncompute_spring(str_m46, str_m48, str_K2);\r\ncompute_spring_damper(str_m46, str_m47, str_K, str_Z);\r\ncompute_spring(str_m45, str_m47, str_K2);\r\ncompute_spring_damper(str_m45, str_m46, str_K, str_Z);\r\ncompute_spring(str_m44, str_m46, str_K2);\r\ncompute_spring_damper(str_m44, str_m45, str_K, str_Z);\r\ncompute_spring(str_m43, str_m45, str_K2);\r\ncompute_spring_damper(str_m43, str_m44, str_K, str_Z);\r\ncompute_spring(str_m42, str_m44, str_K2);\r\ncompute_spring_damper(str_m42, str_m43, str_K, str_Z);\r\ncompute_spring(str_m41, str_m43, str_K2);\r\ncompute_spring_damper(str_m41, str_m42, str_K, str_Z);\r\ncompute_spring(str_m40, str_m42, str_K2);\r\ncompute_spring_damper(str_m40, str_m41, str_K, str_Z);\r\ncompute_spring(str_m39, str_m41, str_K2);\r\ncompute_spring_damper(str_m39, str_m40, str_K, str_Z);\r\ncompute_spring(str_m38, str_m40, str_K2);\r\ncompute_spring_damper(str_m38, str_m39, str_K, str_Z);\r\ncompute_spring(str_m37, str_m39, str_K2);\r\ncompute_spring_damper(str_m37, str_m38, str_K, str_Z);\r\ncompute_spring(str_m36, str_m38, str_K2);\r\ncompute_spring_damper(str_m36, str_m37, str_K, str_Z);\r\ncompute_spring(str_m35, str_m37, str_K2);\r\ncompute_spring_damper(str_m35, str_m36, str_K, str_Z);\r\ncompute_spring(str_m34, str_m36, str_K2);\r\ncompute_spring_damper(str_m34, str_m35, str_K, str_Z);\r\ncompute_spring(str_m33, str_m35, str_K2);\r\ncompute_spring_damper(str_m33, str_m34, str_K, str_Z);\r\ncompute_spring(str_m32, str_m34, str_K2);\r\ncompute_spring_damper(str_m32, str_m33, str_K, str_Z);\r\ncompute_spring(str_m31, str_m33, str_K2);\r\ncompute_spring_damper(str_m31, str_m32, str_K, str_Z);\r\ncompute_spring(str_m30, str_m32, str_K2);\r\ncompute_spring_damper(str_m30, str_m31, str_K, str_Z);\r\ncompute_spring(str_m29, str_m31, str_K2);\r\ncompute_spring_damper(str_m29, str_m30, str_K, str_Z);\r\ncompute_spring(str_m28, str_m30, str_K2);\r\ncompute_spring_damper(str_m28, str_m29, str_K, str_Z);\r\ncompute_spring(str_m27, str_m29, str_K2);\r\ncompute_spring_damper(str_m27, str_m28, str_K, str_Z);\r\ncompute_spring(str_m26, str_m28, str_K2);\r\ncompute_spring_damper(str_m26, str_m27, str_K, str_Z);\r\ncompute_spring(str_m25, str_m27, str_K2);\r\ncompute_spring_damper(str_m25, str_m26, str_K, str_Z);\r\ncompute_spring(str_m24, str_m26, str_K2);\r\ncompute_spring_damper(str_m24, str_m25, str_K, str_Z);\r\ncompute_spring(str_m23, str_m25, str_K2);\r\ncompute_spring_damper(str_m23, str_m24, str_K, str_Z);\r\ncompute_spring(str_m22, str_m24, str_K2);\r\ncompute_spring_damper(str_m22, str_m23, str_K, str_Z);\r\ncompute_spring(str_m21, str_m23, str_K2);\r\ncompute_spring_damper(str_m21, str_m22, str_K, str_Z);\r\ncompute_spring(str_m20, str_m22, str_K2);\r\ncompute_spring_damper(str_m20, str_m21, str_K, str_Z);\r\ncompute_spring(str_m19, str_m21, str_K2);\r\ncompute_spring_damper(str_m19, str_m20, str_K, str_Z);\r\ncompute_spring(str_m18, str_m20, str_K2);\r\ncompute_spring_damper(str_m18, str_m19, str_K, str_Z);\r\ncompute_spring(str_m17, str_m19, str_K2);\r\ncompute_spring_damper(str_m17, str_m18, str_K, str_Z);\r\ncompute_spring(str_m16, str_m18, str_K2);\r\ncompute_spring_damper(str_m16, str_m17, str_K, str_Z);\r\ncompute_spring(str_m15, str_m17, str_K2);\r\ncompute_spring_damper(str_m15, str_m16, str_K, str_Z);\r\ncompute_spring(str_m14, str_m16, str_K2);\r\ncompute_spring_damper(str_m14, str_m15, str_K, str_Z);\r\ncompute_spring(str_m13, str_m15, str_K2);\r\ncompute_spring_damper(str_m13, str_m14, str_K, str_Z);\r\ncompute_spring(str_m12, str_m14, str_K2);\r\ncompute_spring_damper(str_m12, str_m13, str_K, str_Z);\r\ncompute_spring(str_m11, str_m13, str_K2);\r\ncompute_spring_damper(str_m11, str_m12, str_K, str_Z);\r\ncompute_spring(str_m10, str_m12, str_K2);\r\ncompute_spring_damper(str_m10, str_m11, str_K, str_Z);\r\ncompute_spring(str_m9, str_m11, str_K2);\r\ncompute_spring_damper(str_m9, str_m10, str_K, str_Z);\r\ncompute_spring(str_m8, str_m10, str_K2);\r\ncompute_spring_damper(str_m8, str_m9, str_K, str_Z);\r\ncompute_spring(str_m7, str_m9, str_K2);\r\ncompute_spring_damper(str_m7, str_m8, str_K, str_Z);\r\ncompute_spring(str_m6, str_m8, str_K2);\r\ncompute_spring_damper(str_m6, str_m7, str_K, str_Z);\r\ncompute_spring(str_m5, str_m7, str_K2);\r\ncompute_spring_damper(str_m5, str_m6, str_K, str_Z);\r\ncompute_spring(str_m4, str_m6, str_K2);\r\ncompute_spring_damper(str_m4, str_m5, str_K, str_Z);\r\ncompute_spring(str_m3, str_m5, str_K2);\r\ncompute_spring_damper(str_m3, str_m4, str_K, str_Z);\r\ncompute_spring(str_m2, str_m4, str_K2);\r\ncompute_spring_damper(str_m2, str_m3, str_K, str_Z);\r\ncompute_spring(str_m1, str_m3, str_K2);\r\ncompute_spring_damper(str_m1, str_m2, str_K, str_Z);\r\ncompute_spring(str_s0, str_m2, str_K2);\r\ncompute_spring_damper(str_s0, str_m1, str_K, str_Z);\r\n\r\n// Output routing\r\nout2 =  get_pos(str_m45);\r\nout1 =  get_pos(str_m40);\r\n\r\n// Motion data routing to Max/MSP buffer objects\r\nif (display_motion){\r\nif (render_cpt == 0){\r\nmotion.poke(get_pos(m_in1), 52, 0);\r\nmotion.poke(get_pos(str_s1), 51, 0);\r\nmotion.poke(get_pos(str_m49), 50, 0);\r\nmotion.poke(get_pos(str_m48), 49, 0);\r\nmotion.poke(get_pos(str_m47), 48, 0);\r\nmotion.poke(get_pos(str_m46), 47, 0);\r\nmotion.poke(get_pos(str_m45), 46, 0);\r\nmotion.poke(get_pos(str_m44), 45, 0);\r\nmotion.poke(get_pos(str_m43), 44, 0);\r\nmotion.poke(get_pos(str_m42), 43, 0);\r\nmotion.poke(get_pos(str_m41), 42, 0);\r\nmotion.poke(get_pos(str_m40), 41, 0);\r\nmotion.poke(get_pos(str_m39), 40, 0);\r\nmotion.poke(get_pos(str_m38), 39, 0);\r\nmotion.poke(get_pos(str_m37), 38, 0);\r\nmotion.poke(get_pos(str_m36), 37, 0);\r\nmotion.poke(get_pos(str_m35), 36, 0);\r\nmotion.poke(get_pos(str_m34), 35, 0);\r\nmotion.poke(get_pos(str_m33), 34, 0);\r\nmotion.poke(get_pos(str_m32), 33, 0);\r\nmotion.poke(get_pos(str_m31), 32, 0);\r\nmotion.poke(get_pos(str_m30), 31, 0);\r\nmotion.poke(get_pos(str_m29), 30, 0);\r\nmotion.poke(get_pos(str_m28), 29, 0);\r\nmotion.poke(get_pos(str_m27), 28, 0);\r\nmotion.poke(get_pos(str_m26), 27, 0);\r\nmotion.poke(get_pos(str_m25), 26, 0);\r\nmotion.poke(get_pos(str_m24), 25, 0);\r\nmotion.poke(get_pos(str_m23), 24, 0);\r\nmotion.poke(get_pos(str_m22), 23, 0);\r\nmotion.poke(get_pos(str_m21), 22, 0);\r\nmotion.poke(get_pos(str_m20), 21, 0);\r\nmotion.poke(get_pos(str_m19), 20, 0);\r\nmotion.poke(get_pos(str_m18), 19, 0);\r\nmotion.poke(get_pos(str_m17), 18, 0);\r\nmotion.poke(get_pos(str_m16), 17, 0);\r\nmotion.poke(get_pos(str_m15), 16, 0);\r\nmotion.poke(get_pos(str_m14), 15, 0);\r\nmotion.poke(get_pos(str_m13), 14, 0);\r\nmotion.poke(get_pos(str_m12), 13, 0);\r\nmotion.poke(get_pos(str_m11), 12, 0);\r\nmotion.poke(get_pos(str_m10), 11, 0);\r\nmotion.poke(get_pos(str_m9), 10, 0);\r\nmotion.poke(get_pos(str_m8), 9, 0);\r\nmotion.poke(get_pos(str_m7), 8, 0);\r\nmotion.poke(get_pos(str_m6), 7, 0);\r\nmotion.poke(get_pos(str_m5), 6, 0);\r\nmotion.poke(get_pos(str_m4), 5, 0);\r\nmotion.poke(get_pos(str_m3), 4, 0);\r\nmotion.poke(get_pos(str_m2), 3, 0);\r\nmotion.poke(get_pos(str_m1), 2, 0);\r\nmotion.poke(get_pos(str_m0), 1, 0);\r\nmotion.poke(get_pos(str_s0), 0, 0);\r\n}\r\nrender_cpt = (render_cpt + 1) % 200;}\r\n ",
+					"fontface" : 0,
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : " phyMdlBox ",
+					"maxclass" : "codebox",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 20.0, 50.0, 450.0, 300.0 ],
+					"style" : ""
+				} }, { "box" : 				{
+					"id" : " inbox_1 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 70.0, 20.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 1 "
+				} }, { "box" : 				{
+					"id" : " outbox_1 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 70.0, 420.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 1 "
+				} }, { "box" : 				{
+					"id" : " outbox_2 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 120.0, 420.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 2 "
+				} }],
+ "lines" : [   {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_1 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_1 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_2 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 1 ]
+				}
+			}] } } 
