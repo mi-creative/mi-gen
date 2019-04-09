@@ -189,7 +189,7 @@ compute_nlPluck(m1_data, m2_data, nlK, nlscale, Z){
 	deltaP = (x1 - x2);
 	
 	// Sharpness factor: determines the slope at the tipping point (around zero)
-	sharpness = 10;
+	sharpness = 10.;
 	
 	// the tipping point of the piecewise function, depending on the sharpness
 	tip_dist = nlscale / sharpness;
@@ -197,18 +197,18 @@ compute_nlPluck(m1_data, m2_data, nlK, nlscale, Z){
 	// Calculate stiffness for 0 < abs(deltaP) < tip_dst : Kp = nlK * (nlscale / tip_dist)
 	// (nlK is the repulsive stiffness for tip_dst < abs(deltaP) < nlscale) 
 
-	Kp = nlK / sharpness;
+	Kp = nlK * sharpness;
 	
 	
 	// now calculate the force resulting from the piecewise linear function
 	if(abs(deltaP) < (tip_dist))  {
-		f = Kp * deltaP ;
+		f = -(Kp-nlK) * deltaP ;
 	}
 	else if(abs(deltaP) < nlscale)  {
 		if(deltaP > 0) 
-			{f = tip_dist * Kp - nlK * deltaP ;}
+			{f = - tip_dist * Kp + nlK * deltaP ;}
 		else
-			{ f = - tip_dist * Kp - nlK * deltaP ;}
+			{ f =  tip_dist * Kp + nlK * deltaP ;}
 	}
 	else f = 0.;
 	
