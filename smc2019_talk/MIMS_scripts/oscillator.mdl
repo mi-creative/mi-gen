@@ -1,0 +1,10 @@
+
+@m1 mass 1. 0. 0.
+
+@g ground 0.
+
+@spr springDamper @m1 @g 0.0001 0.0001
+
+@in1 frcInput @m1
+
+@out1 posOutput @m1

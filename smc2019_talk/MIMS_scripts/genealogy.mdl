@@ -1,0 +1,47 @@
+
+
+
+@raul ground 0.
+@cord mass 10.0 0. 0.
+@gen mass 50.0 0. 0.
+@mim mass 20.0 0. 0.
+@tao mass 5.0 0. 0.
+@cym mass 5.0 0. 0.
+@hsp mass 1.0 0. 0.
+@sam mass 10.0 0. 0.
+@migen mass 10. 0. 0.
+@miphys mass 10. 0. 0.
+@mifaust mass 10. 0. 0.
+@pmpd mass 7 0. 0.
+
+@sZ param 0.001
+@sK param 0.00000001
+
+
+@str_r0 spring @raul @cord sK sZ
+@str_r1 spring @cord @gen sK sZ
+@str_r2 spring @cord @mim sK sZ
+@str_r3 spring @cord @tao sK sZ
+@str_r4 spring @cord @cym sK sZ
+@str_r5 spring @cord @hsp sK sZ
+@str_r6 spring @hsp @sam sK sZ
+@str_r7 spring @cord @migen sK sZ
+@str_r8 spring @cord @miphys sK sZ
+@str_r9 spring @cord @mifaust sK sZ
+@str_r10 spring @cord @pmpd sK sZ
+
+
+@in1 frcInput @cord
+
+@out1 posOutput @raul
+@out2 posOutput @cord
+@out3 posOutput @gen
+@out4 posOutput @mim
+@out5 posOutput @tao
+@out6 posOutput @cym
+@out7 posOutput @hsp
+@out8 posOutput @sam
+@out9 posOutput @migen
+@out10 posOutput @miphys
+@out11 posOutput @mifaust
+@out12 posOutput @pmpd

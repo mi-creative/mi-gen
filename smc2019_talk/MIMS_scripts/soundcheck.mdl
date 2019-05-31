@@ -1,0 +1,8 @@
+@p massG 1. 0.001 1. 1.
+
+@c osc 1. 0.01 0.01 0. 0.
+
+@det contact @p @c 0.1 0.01 0.
+
+@out1 posOutput @c
+@out2 posOutput @p

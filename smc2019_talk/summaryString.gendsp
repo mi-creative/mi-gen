@@ -1,0 +1,150 @@
+{
+	"patcher" : 	{
+		"fileversion" : 1,
+		"appversion" : 		{
+			"major" : 7,
+			"minor" : 3,
+			"revision" : 1,
+			"architecture" : "x64",
+			"modernui" : 1
+		}
+,
+		"rect" : [ 67.0, 109.0, 700.0, 500.0 ],
+		"editing_bgcolor" : [ 0.9, 0.9, 0.9, 1.0 ],
+		"bglocked" : 0,
+		"openinpresentation" : 0,
+		"default_fontsize" : 12.0,
+		"default_fontface" : 0,
+		"default_fontname" : "Arial",
+		"gridonopen" : 1,
+		"gridsize" : [ 15.0, 15.0 ],
+		"gridsnaponopen" : 1,
+		"objectsnaponopen" : 1,
+		"statusbarvisible" : 2,
+		"toolbarvisible" : 1,
+		"lefttoolbarpinned" : 0,
+		"toptoolbarpinned" : 0,
+		"righttoolbarpinned" : 0,
+		"bottomtoolbarpinned" : 0,
+		"toolbars_unpinned_last_save" : 0,
+		"tallnewobj" : 0,
+		"boxanimatetime" : 200,
+		"enablehscroll" : 1,
+		"enablevscroll" : 1,
+		"devicewidth" : 0.0,
+		"description" : "",
+		"digest" : "",
+		"tags" : "",
+		"style" : "",
+		"subpatcher_template" : "",
+                
+ "boxes" : [ { "box" : 				{
+					"code" : " require(\"migen-lib\");\r\nBuffer motion;\r\n\r\n// Model data structures\r\nData str_m5(3);\r\nData str_m4(3);\r\nData str_m3(3);\r\nData str_m2(3);\r\nData str_m1(3);\r\nData str_m0(3);\r\nData str_s0(3);\r\n\r\n// Control Rate Parameters\r\nParam sK(0.00000001);\r\nParam sZ(0.001);\r\n\r\nParam display_motion(0);\r\n\r\n// Model initialisation flag\r\nHistory model_init(0);\r\nHistory render_cpt(0);\r\n\r\n// Audio Rate Parameters\r\n\r\n// Model init phase\r\n\r\nif(model_init == 0){\r\ninit_mat(str_m5, 0., 0.);\r\ninit_mat(str_m4, 0., 0.);\r\ninit_mat(str_m3, 0., 0.);\r\ninit_mat(str_m2, 0., 0.);\r\ninit_mat(str_m1, 0., 0.);\r\ninit_mat(str_m0, 0., 0.);\r\ninit_mat(str_s0, 0., 0.);\r\n\r\n// Raise init flag\r\nmodel_init = 1;\r\n}\r\n\r\n// Model computation\r\ncompute_mass(str_m5, 1.0);\r\ncompute_mass(str_m4, 1.0);\r\ncompute_mass(str_m3, 1.0);\r\ncompute_mass(str_m2, 1.0);\r\ncompute_mass(str_m1, 1.0);\r\ncompute_mass(str_m0, 1.0);\r\ncompute_ground(str_s0);\r\napply_input_force(str_m5, in1);\r\ncompute_spring_damper(str_m4, str_m5, sK, sZ);\r\ncompute_spring_damper(str_m3, str_m4, sK, sZ);\r\ncompute_spring_damper(str_m2, str_m3, sK, sZ);\r\ncompute_spring_damper(str_m1, str_m2, sK, sZ);\r\ncompute_spring_damper(str_m0, str_m1, sK, sZ);\r\ncompute_spring_damper(str_s0, str_m0, sK, sZ);\r\n\r\n// Output routing\r\nout5 =  get_pos(str_m4);\r\nout4 =  get_pos(str_m3);\r\nout3 =  get_pos(str_m2);\r\nout2 =  get_pos(str_m1);\r\nout1 =  get_pos(str_m0);\r\n\r\n// Motion data routing to Max/MSP buffer objects\r\nif (display_motion){\r\nif (render_cpt == 0){\r\nmotion.poke(get_pos(str_m5), 6, 0);\r\nmotion.poke(get_pos(str_m4), 5, 0);\r\nmotion.poke(get_pos(str_m3), 4, 0);\r\nmotion.poke(get_pos(str_m2), 3, 0);\r\nmotion.poke(get_pos(str_m1), 2, 0);\r\nmotion.poke(get_pos(str_m0), 1, 0);\r\nmotion.poke(get_pos(str_s0), 0, 0);\r\n}\r\nrender_cpt = (render_cpt + 1) % 200;}\r\n ",
+					"fontface" : 0,
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : " phyMdlBox ",
+					"maxclass" : "codebox",
+					"numinlets" : 1,
+					"numoutlets" : 5,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 20.0, 50.0, 450.0, 300.0 ],
+					"style" : ""
+				} }, { "box" : 				{
+					"id" : " inbox_1 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 70.0, 20.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 1 "
+				} }, { "box" : 				{
+					"id" : " outbox_1 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 70.0, 420.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 1 "
+				} }, { "box" : 				{
+					"id" : " outbox_2 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 120.0, 420.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 2 "
+				} }, { "box" : 				{
+					"id" : " outbox_3 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 170.0, 420.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 3 "
+				} }, { "box" : 				{
+					"id" : " outbox_4 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 220.0, 420.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 4 "
+				} }, { "box" : 				{
+					"id" : " outbox_5 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 270.0, 420.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 5 "
+				} }],
+ "lines" : [   {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_1 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_1 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_2 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 1 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_3 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 2 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_4 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 3 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_5 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 4 ]
+				}
+			}] } } 

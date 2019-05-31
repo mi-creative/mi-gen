@@ -1,0 +1,27 @@
+
+@str_s0 ground 0.
+@str_m0 mass 1.0 0. 0.
+@str_m1 mass 1.0 0. 0.
+@str_m2 mass 1.0 0. 0.
+@str_m3 mass 1.0 0. 0.
+@str_m4 mass 1.0 0. 0.
+@str_m5 mass 1.0 0. 0.
+
+@sZ param 0.001
+@sK param 0.00000001
+
+
+@str_r0 spring @str_s0 @str_m0 sK sZ
+@str_r1 spring @str_m0 @str_m1 sK sZ
+@str_r2 spring @str_m1 @str_m2 sK sZ
+@str_r3 spring @str_m2 @str_m3 sK sZ
+@str_r4 spring @str_m3 @str_m4 sK sZ
+@str_r5 spring @str_m4 @str_m5 sK sZ
+
+@in1 frcInput @str_m5
+
+@out1 posOutput @str_m0
+@out2 posOutput @str_m1
+@out3 posOutput @str_m2
+@out4 posOutput @str_m3
+@out5 posOutput @str_m4
