@@ -1,0 +1,16 @@
+
+## The basic "haptic" plucked oscillator model
+
+@K param 0.01
+@Z param 0.001
+
+@in1 posInput 0.
+@m mass 1 0 0
+@g ground 0.
+
+@pl nlPluck @m @in1 0.001 0.005
+@sp springDamper @m @g K Z
+
+@out1 frcOutput @in1
+@out2 posOutput @m
+

@@ -346,6 +346,7 @@ compute_spring_damper_nl2(m1_data, m2_data, K, Q, Z){
 update_input_pos(m_data, inPos){
 	poke(m_data, peek(m_data, 0), 1);	
 	poke(m_data, inPos, 0);
+	poke(m_data, 0, 2);
 	return inPos;
 }
 

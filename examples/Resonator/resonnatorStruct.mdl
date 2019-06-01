@@ -1,0 +1,180 @@
+# Resonnating physical structure
+
+@stiff_M param 1.0
+@stiff_K param 0.1
+@stiff_Z param 0.00005
+@stiff_K2 param 0.05
+@stiff_Zosc param 0.00001
+
+@endM param 10
+@endK param 0.1
+@endZ param 0.01
+
+@in1 posInput 0.
+@stiff_m0 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m1 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m2 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m3 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m4 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m5 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m6 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m7 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m8 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m9 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m10 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m11 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m12 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m13 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m14 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m15 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m16 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m17 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m18 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m19 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m20 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m21 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m22 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m23 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m24 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m25 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m26 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m27 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m28 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m29 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m30 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m31 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m32 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m33 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m34 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m35 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m36 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m37 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m38 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m39 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m40 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m41 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m42 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m43 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m44 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m45 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m46 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m47 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m48 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_m49 osc stiff_M 0 stiff_Zosc 0. 0.
+@stiff_s1 osc endM endK endZ 0. 0.
+
+@stiff_r1 spring @in1 @stiff_m1 stiff_K stiff_Z
+@stiff_rs1 spring @in1 @stiff_m2 stiff_K2
+@stiff_r2 spring @stiff_m1 @stiff_m2 stiff_K stiff_Z
+@stiff_rs2 spring @stiff_m1 @stiff_m3 stiff_K2
+@stiff_r3 spring @stiff_m2 @stiff_m3 stiff_K stiff_Z
+@stiff_rs3 spring @stiff_m2 @stiff_m4 stiff_K2
+@stiff_r4 spring @stiff_m3 @stiff_m4 stiff_K stiff_Z
+@stiff_rs4 spring @stiff_m3 @stiff_m5 stiff_K2
+@stiff_r5 spring @stiff_m4 @stiff_m5 stiff_K stiff_Z
+@stiff_rs5 spring @stiff_m4 @stiff_m6 stiff_K2
+@stiff_r6 spring @stiff_m5 @stiff_m6 stiff_K stiff_Z
+@stiff_rs6 spring @stiff_m5 @stiff_m7 stiff_K2
+@stiff_r7 spring @stiff_m6 @stiff_m7 stiff_K stiff_Z
+@stiff_rs7 spring @stiff_m6 @stiff_m8 stiff_K2
+@stiff_r8 spring @stiff_m7 @stiff_m8 stiff_K stiff_Z
+@stiff_rs8 spring @stiff_m7 @stiff_m9 stiff_K2
+@stiff_r9 spring @stiff_m8 @stiff_m9 stiff_K stiff_Z
+@stiff_rs9 spring @stiff_m8 @stiff_m10 stiff_K2
+@stiff_r10 spring @stiff_m9 @stiff_m10 stiff_K stiff_Z
+@stiff_rs10 spring @stiff_m9 @stiff_m11 stiff_K2
+@stiff_r11 spring @stiff_m10 @stiff_m11 stiff_K stiff_Z
+@stiff_rs11 spring @stiff_m10 @stiff_m12 stiff_K2
+@stiff_r12 spring @stiff_m11 @stiff_m12 stiff_K stiff_Z
+@stiff_rs12 spring @stiff_m11 @stiff_m13 stiff_K2
+@stiff_r13 spring @stiff_m12 @stiff_m13 stiff_K stiff_Z
+@stiff_rs13 spring @stiff_m12 @stiff_m14 stiff_K2
+@stiff_r14 spring @stiff_m13 @stiff_m14 stiff_K stiff_Z
+@stiff_rs14 spring @stiff_m13 @stiff_m15 stiff_K2
+@stiff_r15 spring @stiff_m14 @stiff_m15 stiff_K stiff_Z
+@stiff_rs15 spring @stiff_m14 @stiff_m16 stiff_K2
+@stiff_r16 spring @stiff_m15 @stiff_m16 stiff_K stiff_Z
+@stiff_rs16 spring @stiff_m15 @stiff_m17 stiff_K2
+@stiff_r17 spring @stiff_m16 @stiff_m17 stiff_K stiff_Z
+@stiff_rs17 spring @stiff_m16 @stiff_m18 stiff_K2
+@stiff_r18 spring @stiff_m17 @stiff_m18 stiff_K stiff_Z
+@stiff_rs18 spring @stiff_m17 @stiff_m19 stiff_K2
+@stiff_r19 spring @stiff_m18 @stiff_m19 stiff_K stiff_Z
+@stiff_rs19 spring @stiff_m18 @stiff_m20 stiff_K2
+@stiff_r20 spring @stiff_m19 @stiff_m20 stiff_K stiff_Z
+@stiff_rs20 spring @stiff_m19 @stiff_m21 stiff_K2
+@stiff_r21 spring @stiff_m20 @stiff_m21 stiff_K stiff_Z
+@stiff_rs21 spring @stiff_m20 @stiff_m22 stiff_K2
+@stiff_r22 spring @stiff_m21 @stiff_m22 stiff_K stiff_Z
+@stiff_rs22 spring @stiff_m21 @stiff_m23 stiff_K2
+@stiff_r23 spring @stiff_m22 @stiff_m23 stiff_K stiff_Z
+@stiff_rs23 spring @stiff_m22 @stiff_m24 stiff_K2
+@stiff_r24 spring @stiff_m23 @stiff_m24 stiff_K stiff_Z
+@stiff_rs24 spring @stiff_m23 @stiff_m25 stiff_K2
+@stiff_r25 spring @stiff_m24 @stiff_m25 stiff_K stiff_Z
+@stiff_rs25 spring @stiff_m24 @stiff_m26 stiff_K2
+@stiff_r26 spring @stiff_m25 @stiff_m26 stiff_K stiff_Z
+@stiff_rs26 spring @stiff_m25 @stiff_m27 stiff_K2
+@stiff_r27 spring @stiff_m26 @stiff_m27 stiff_K stiff_Z
+@stiff_rs27 spring @stiff_m26 @stiff_m28 stiff_K2
+@stiff_r28 spring @stiff_m27 @stiff_m28 stiff_K stiff_Z
+@stiff_rs28 spring @stiff_m27 @stiff_m29 stiff_K2
+@stiff_r29 spring @stiff_m28 @stiff_m29 stiff_K stiff_Z
+@stiff_rs29 spring @stiff_m28 @stiff_m30 stiff_K2
+@stiff_r30 spring @stiff_m29 @stiff_m30 stiff_K stiff_Z
+@stiff_rs30 spring @stiff_m29 @stiff_m31 stiff_K2
+@stiff_r31 spring @stiff_m30 @stiff_m31 stiff_K stiff_Z
+@stiff_rs31 spring @stiff_m30 @stiff_m32 stiff_K2
+@stiff_r32 spring @stiff_m31 @stiff_m32 stiff_K stiff_Z
+@stiff_rs32 spring @stiff_m31 @stiff_m33 stiff_K2
+@stiff_r33 spring @stiff_m32 @stiff_m33 stiff_K stiff_Z
+@stiff_rs33 spring @stiff_m32 @stiff_m34 stiff_K2
+@stiff_r34 spring @stiff_m33 @stiff_m34 stiff_K stiff_Z
+@stiff_rs34 spring @stiff_m33 @stiff_m35 stiff_K2
+@stiff_r35 spring @stiff_m34 @stiff_m35 stiff_K stiff_Z
+@stiff_rs35 spring @stiff_m34 @stiff_m36 stiff_K2
+@stiff_r36 spring @stiff_m35 @stiff_m36 stiff_K stiff_Z
+@stiff_rs36 spring @stiff_m35 @stiff_m37 stiff_K2
+@stiff_r37 spring @stiff_m36 @stiff_m37 stiff_K stiff_Z
+@stiff_rs37 spring @stiff_m36 @stiff_m38 stiff_K2
+@stiff_r38 spring @stiff_m37 @stiff_m38 stiff_K stiff_Z
+@stiff_rs38 spring @stiff_m37 @stiff_m39 stiff_K2
+@stiff_r39 spring @stiff_m38 @stiff_m39 stiff_K stiff_Z
+@stiff_rs39 spring @stiff_m38 @stiff_m40 stiff_K2
+@stiff_r40 spring @stiff_m39 @stiff_m40 stiff_K stiff_Z
+@stiff_rs40 spring @stiff_m39 @stiff_m41 stiff_K2
+@stiff_r41 spring @stiff_m40 @stiff_m41 stiff_K stiff_Z
+@stiff_rs41 spring @stiff_m40 @stiff_m42 stiff_K2
+@stiff_r42 spring @stiff_m41 @stiff_m42 stiff_K stiff_Z
+@stiff_rs42 spring @stiff_m41 @stiff_m43 stiff_K2
+@stiff_r43 spring @stiff_m42 @stiff_m43 stiff_K stiff_Z
+@stiff_rs43 spring @stiff_m42 @stiff_m44 stiff_K2
+@stiff_r44 spring @stiff_m43 @stiff_m44 stiff_K stiff_Z
+@stiff_rs44 spring @stiff_m43 @stiff_m45 stiff_K2
+@stiff_r45 spring @stiff_m44 @stiff_m45 stiff_K stiff_Z
+@stiff_rs45 spring @stiff_m44 @stiff_m46 stiff_K2
+@stiff_r46 spring @stiff_m45 @stiff_m46 stiff_K stiff_Z
+@stiff_rs46 spring @stiff_m45 @stiff_m47 stiff_K2
+@stiff_r47 spring @stiff_m46 @stiff_m47 stiff_K stiff_Z
+@stiff_rs47 spring @stiff_m46 @stiff_m48 stiff_K2
+@stiff_r48 spring @stiff_m47 @stiff_m48 stiff_K stiff_Z
+@stiff_rs48 spring @stiff_m47 @stiff_m49 stiff_K2
+@stiff_r49 spring @stiff_m48 @stiff_m49 stiff_K stiff_Z
+@stiff_rs49 spring @stiff_m48 @stiff_s1 stiff_K2
+@stiff_r50 spring @stiff_m49 @stiff_s1 stiff_K stiff_Z
+@stiff_rs50 spring @stiff_m49 @stiff_s1 stiff_K2
+
+
+# listening points
+@out1 posOutput @stiff_m48
+@out2 posOutput @stiff_m38
+
+# adding a non-linear component to the resonator
+
+@nlK param 0.1
+
+@g ground 0.
+@nl nlSpring2 @g @stiff_m20 0. nlK 0. 
+
+
+
