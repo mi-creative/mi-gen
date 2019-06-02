@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 341.0, 213.0, 943.0, 711.0 ],
+		"rect" : [ 353.0, 108.0, 1143.0, 865.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -38,6 +38,60 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-40",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "float" ],
+					"patching_rect" : [ 421.67395, 219.304367, 35.0, 22.0 ],
+					"style" : "",
+					"text" : "* 10."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-37",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 29.565218, 121.608704, 129.0, 22.0 ],
+					"style" : "",
+					"text" : "receive~ FireFaderFrc"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-33",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 29.565218, 204.226089, 120.0, 22.0 ],
+					"style" : "",
+					"text" : "send~ FireFaderPos"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.94233, 0.0, 0.060032, 1.0 ],
+					"fontname" : "Arial",
+					"fontsize" : 24.0,
+					"id" : "obj-29",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "signal", "signal" ],
+					"patching_rect" : [ 29.565218, 156.669556, 131.0, 36.0 ],
+					"style" : "",
+					"text" : "FireFader~"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-27",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -56,9 +110,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 478.834778, 235.165237, 49.0, 22.0 ],
+					"patching_rect" : [ 478.834778, 235.165237, 42.0, 22.0 ],
 					"style" : "",
-					"text" : "*~ 100."
+					"text" : "*~ 10."
 				}
 
 			}
@@ -130,7 +184,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 16.365225, 18.365219, 244.0, 20.0 ],
+					"patching_rect" : [ 15.530442, 29.217394, 244.0, 20.0 ],
 					"style" : "",
 					"text" : "How to make the patch work:"
 				}
@@ -142,7 +196,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 16.365225, 74.547836, 258.121735, 20.0 ],
+					"patching_rect" : [ 15.530442, 85.400009, 258.121735, 20.0 ],
 					"style" : "",
 					"text" : "plug FireFaderFrc into FireFader force Input"
 				}
@@ -154,7 +208,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 16.365225, 46.539139, 273.165222, 20.0 ],
+					"patching_rect" : [ 15.530442, 57.391315, 273.165222, 20.0 ],
 					"style" : "",
 					"text" : "send FireFader position output to FireFaderPos"
 				}
@@ -305,18 +359,6 @@
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-20",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 97.669571, 513.226074, 120.0, 22.0 ],
-					"style" : "",
-					"text" : "send~ FireFaderPos"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-19",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -345,23 +387,6 @@
 					"fontface" : 0,
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
-					"id" : "obj-17",
-					"maxclass" : "number~",
-					"mode" : 2,
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "signal", "float" ],
-					"patching_rect" : [ 38.400002, 513.226074, 56.0, 22.0 ],
-					"sig" : 0.0,
-					"style" : ""
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontface" : 0,
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
 					"id" : "obj-16",
 					"maxclass" : "number~",
 					"mode" : 2,
@@ -370,71 +395,6 @@
 					"outlettype" : [ "signal", "float" ],
 					"patching_rect" : [ 381.573914, 251.026093, 56.0, 22.0 ],
 					"sig" : 0.0,
-					"style" : ""
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-15",
-					"linecount" : 3,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 66.782623, 243.617401, 137.756531, 48.0 ],
-					"style" : "",
-					"text" : "Fake haptic position input (delete once the FireFader is connected)"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-13",
-					"maxclass" : "newobj",
-					"numinlets" : 6,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 38.400002, 400.556519, 123.0, 22.0 ],
-					"style" : "",
-					"text" : "scale 0. 127. -0.1 0.1"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-12",
-					"maxclass" : "newobj",
-					"numinlets" : 3,
-					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 38.400002, 469.843506, 89.0, 22.0 ],
-					"style" : "",
-					"text" : "slide~ 500 500"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-11",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 38.400002, 438.121765, 33.0, 22.0 ],
-					"style" : "",
-					"text" : "sig~"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-8",
-					"maxclass" : "slider",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 38.400002, 243.617401, 20.0, 140.0 ],
 					"style" : ""
 				}
 
@@ -538,36 +498,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-12", 0 ],
-					"source" : [ "obj-11", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-17", 0 ],
-					"order" : 1,
-					"source" : [ "obj-12", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-20", 0 ],
-					"order" : 0,
-					"source" : [ "obj-12", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-11", 0 ],
-					"source" : [ "obj-13", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"source" : [ "obj-19", 0 ]
 				}
@@ -641,7 +571,14 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-4", 1 ],
+					"destination" : [ "obj-33", 0 ],
+					"source" : [ "obj-29", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-40", 0 ],
 					"source" : [ "obj-3", 1 ]
 				}
 
@@ -671,6 +608,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-29", 0 ],
+					"source" : [ "obj-37", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-16", 0 ],
 					"order" : 0,
 					"source" : [ "obj-4", 0 ]
@@ -687,22 +631,22 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-9", 0 ],
-					"source" : [ "obj-7", 0 ]
+					"destination" : [ "obj-4", 1 ],
+					"source" : [ "obj-40", 0 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-13", 0 ],
-					"source" : [ "obj-8", 0 ]
+					"destination" : [ "obj-9", 0 ],
+					"source" : [ "obj-7", 0 ]
 				}
 
 			}
  ],
 		"dependency_cache" : [ 			{
 				"name" : "hapticOscPluck.gendsp",
-				"bootpath" : "~/devel/mi-gen/examples/FireFader_Haptics/HapticPluckedOsc",
+				"bootpath" : "~/devel/mi-gen/examples/Haptics/HapticPluckedOsc",
 				"patcherrelativepath" : ".",
 				"type" : "gDSP",
 				"implicit" : 1
@@ -712,6 +656,13 @@
 				"bootpath" : "~/Documents/Max 7/Packages/mi-gen-master/code",
 				"patcherrelativepath" : "../../../../../Documents/Max 7/Packages/mi-gen-master/code",
 				"type" : "GenX",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "FireFader~.maxpat",
+				"bootpath" : "~/Documents/Max 7/Library/Open-Source-Haptics-For-Artists-master/Open-Source-Haptics-For-Artists-master/Max/palette",
+				"patcherrelativepath" : "../../../../../Documents/Max 7/Library/Open-Source-Haptics-For-Artists-master/Open-Source-Haptics-For-Artists-master/Max/palette",
+				"type" : "JSON",
 				"implicit" : 1
 			}
  ],
