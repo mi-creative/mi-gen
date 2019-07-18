@@ -1,0 +1,43 @@
+
+# stiffness parameters
+@K1 param 0.1
+@K2 param 0.1
+@K3 param 0.1
+@K4 param 0.1
+@K5 param 0.1
+@K6 param 0.1
+@K7 param 0.1
+@K8 param 0.1
+
+@Z param 0.0004
+
+# A series of simple oscillators
+@m1 osc 1. K1 Z 0. 0.
+@m2 osc 1. K2 Z 0. 0.
+@m3 osc 1. K3 Z 0. 0.
+@m4 osc 1. K4 Z 0. 0.
+@m5 osc 1. K5 Z 0. 0.
+@m6 osc 1. K6 Z 0. 0.
+@m7 osc 1. K7 Z 0. 0.
+@m8 osc 1. K8 Z 0. 0.
+
+# Force inputs for all the oscillators
+@in1 frcInput @m1
+@in2 frcInput @m2
+@in3 frcInput @m3
+@in4 frcInput @m4
+@in5 frcInput @m5
+@in6 frcInput @m6
+@in7 frcInput @m7
+@in8 frcInput @m8
+
+# Position outputs from all the oscillators
+@out1 posOutput @m1
+@out2 posOutput @m2
+@out3 posOutput @m3
+@out4 posOutput @m4
+@out5 posOutput @m5
+@out6 posOutput @m6
+@out7 posOutput @m7
+@out8 posOutput @m8
+
