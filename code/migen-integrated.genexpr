@@ -1,0 +1,279 @@
+/**********************************/
+/* Integrated Physical Structures */
+/*								  */
+/*   James Leonard - GIPSA-Lab    */
+/*  james.leonard[at]gipsa-lab.fr */
+/*   Universite Grenoble-Alpes    */
+/**********************************/
+
+
+/**************************/
+/* Initialisation methods */
+/**************************/
+
+init_multiple_masses(m_data, X0, XR0){
+	
+	var_data_dim = dim(m_data);
+	var_data_chans = channels(m_data);
+	
+	for(i=0; i< var_data_chans; i+=1){
+		poke(m_data, X0, 0, i);
+		poke(m_data, XR0, 1, i);
+	}
+	return var_data_dim, var_data_chans;
+}
+
+
+set_pos_at(m_data, i, val, val2){
+	poke(m_data, val,  0, i);
+	poke(m_data, val2,  1, i);
+	return 0;
+}
+
+
+get_pos_at(m_data, i){
+	return peek(m_data, 0, i);
+}
+
+
+/*listen_at(mult_data, lPos){
+	m1, m2, alpha = get_two_mass_ponderation(mult_data, lPos);
+	return (1-alpha)*get_pos_at(mult_data, m1) + alpha*get_pos_at(mult_data, m2); 
+}*/
+
+
+
+/**********************************/
+/* Integrated Physical structures */
+/**********************************/
+
+
+/* Integrated formulation of a mass-interaction string */
+
+compute_string(m_data, M, K, Z){
+
+	var_data_chans = channels(m_data);
+	for(i=0; i< var_data_chans; i+=1){
+		if ((i==0) || (i == var_data_chans-1))
+			poke(m_data, 0, 2, i);
+		else {
+			var_tmp = 2 * peek(m_data, 0, i) 
+				- peek(m_data,1, i)
+				+ (peek(m_data,2, i)) / M;
+			poke(m_data, peek(m_data, 0, i) , 1, i);
+			poke(m_data,var_tmp, 0, i);
+			poke(m_data, 0, 2, i);
+			}
+	}
+	
+	for(i=0; i< var_data_chans-1; i+=1) {
+		var_x1 = peek(m_data, 0, i);
+		var_x1r = peek(m_data, 1, i);
+		var_x2 = peek(m_data, 0, i+1);
+		var_x2r = peek(m_data, 1, i+1);
+	
+		var_f = K * (var_x1 - var_x2) + 
+			Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;
+	
+		poke(m_data, peek(m_data,2, i) - var_f, 2, i);
+		poke(m_data, peek(m_data,2, i+1) + var_f, 2, i+1);
+
+	}
+	return 0;
+}
+
+
+
+/* Integrated formulation of a mass-interaction stiff string */
+
+compute_stiff_string(m_data, M, K, Ks, Z){
+
+	var_data_chans = channels(m_data);
+	for(i=0; i< var_data_chans; i+=1){
+		if ((i==0) || (i == var_data_chans-1))
+			poke(m_data, 0, 2, i);
+		else {
+			var_tmp = 2 * peek(m_data, 0, i) 
+				- peek(m_data,1, i)
+				+ (peek(m_data,2, i)) / M;
+			poke(m_data, peek(m_data, 0, i) , 1, i);
+			poke(m_data,var_tmp, 0, i);
+			poke(m_data, 0, 2, i);
+			}
+	}
+	
+	// regular springs between adjacent masses
+	
+	for(i=0; i< var_data_chans-1; i+=1) {
+		var_x1 = peek(m_data, 0, i);
+		var_x1r = peek(m_data, 1, i);
+		var_x2 = peek(m_data, 0, i+1);
+		var_x2r = peek(m_data, 1, i+1);
+	
+		var_f = K * (var_x1 - var_x2) + 
+			Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;
+	
+		poke(m_data, peek(m_data,2, i) - var_f, 2, i);
+		poke(m_data, peek(m_data,2, i+1) + var_f, 2, i+1);
+		}
+		
+	// Extended stencil for stiff term
+		
+	for(i=0; i< var_data_chans-2; i+=1) {
+		var_x1 = peek(m_data, 0, i);
+		var_x1r = peek(m_data, 1, i);
+		var_x2 = peek(m_data, 0, i+2);
+		var_x2r = peek(m_data, 1, i+2);
+	
+		var_f = Ks * (var_x1 - var_x2) ;
+	
+		poke(m_data, peek(m_data,2, i) - var_f, 2, i);
+		poke(m_data, peek(m_data,2, i+2) + var_f, 2, i+2);
+
+	}
+	
+	var_x1 = peek(m_data, 0, var_data_chans-2);
+	var_x1r = peek(m_data, 1, var_data_chans-2);
+	var_x2 = peek(m_data, 0, var_data_chans-1);
+	var_x2r = peek(m_data, 1, var_data_chans-1);
+	
+	var_f = Ks * (var_x1 - var_x2) ;
+	
+	poke(m_data, peek(m_data,2, var_data_chans-2) - var_f, 2, var_data_chans-2);
+	poke(m_data, peek(m_data,2, var_data_chans-1) + var_f, 2, var_data_chans-1);
+	
+	return 0;
+}
+
+
+
+/* Integrated formulation of a mass-interaction chain (not grounded to any fixed points) */
+
+compute_chain(m_data, M, K, Z){
+
+	var_data_chans = channels(m_data);
+	for(i=0; i< var_data_chans; i+=1){
+		var_tmp = 2 * peek(m_data, 0, i) 
+			- peek(m_data,1, i)
+			+ (peek(m_data,2, i)) / M;
+		poke(m_data, peek(m_data, 0, i) , 1, i);
+		poke(m_data,var_tmp, 0, i);
+		poke(m_data, 0, 2, i);
+			
+	}
+	
+	for(i=0; i< var_data_chans-1; i+=1) {
+		var_x1 = peek(m_data, 0, i);
+		var_x1r = peek(m_data, 1, i);
+		var_x2 = peek(m_data, 0, i+1);
+		var_x2r = peek(m_data, 1, i+1);
+	
+		var_f = K * (var_x1 - var_x2) + 
+			Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;
+	
+		poke(m_data, peek(m_data,2, i) - var_f, 2, i);
+		poke(m_data, peek(m_data,2, i+1) + var_f, 2, i+1);
+
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+/* Integrated formulation of a rectangular mesh */
+
+
+compute_closed_mesh(m_data, length, width, M, K, Z){
+	return compute_mesh(m_data, length, width, M, K, Z, 2);
+}
+
+compute_corner_mesh(m_data, length, width, M, K, Z){
+	return compute_mesh(m_data, length, width, M, K, Z, 1);
+}
+
+compute_open_mesh(m_data, length, width, M, K, Z){
+	return compute_mesh(m_data, length, width, M, K, Z, 0);
+}
+
+
+compute_mesh(m_data, length, width, M, K, Z, edges){
+
+	var_data_chans = channels(m_data);
+	
+	// Find the resting position of the edge (if the mesh is corner or close type)
+	var_edge_pos = 0;
+	if(edges > 0){
+		var_edge_pos = peek(m_data, 0, 0);		
+	}
+
+	
+	// Calculate all of the masses
+	
+	for(i=0; i< length; i+=1){
+		for(j=0; j < width; j+=1){
+			
+			var_tmp = 2 * peek(m_data, 0, (i*width+j)) 
+				- peek(m_data,1, (i*width+j))
+				+ (peek(m_data,2, (i*width+j))) / M;
+			poke(m_data, peek(m_data, 0, (i*width+j)) , 1, (i*width+j));
+			poke(m_data,var_tmp, 0, (i*width+j));
+			poke(m_data, 0, 2, (i*width+j));
+		
+			// Set fixed points for edge conditions !
+			if(edges == 1){
+				if((i == 0) || (i == length-1))
+					if((j==0) || (j == width-1)){
+						poke(m_data,var_edge_pos, 0, (i*width+j));
+						poke(m_data,var_edge_pos, 1, (i*width+j));
+						poke(m_data, 0, 2, (i*width+j));
+					}
+			}
+			else if(edges == 2){
+				if((i == 0) || (i == length-1) || (j==0) || (j == width-1)){
+					poke(m_data,var_edge_pos, 0, (i*width+j));
+					poke(m_data,var_edge_pos, 1, (i*width+j));
+					poke(m_data, 0, 2, (i*width+j));
+				}
+			}	
+		}
+	}
+	
+	// Calculate the interactions along one axis
+	for (i = 0; i < length; i+=1) {
+		for (j = 0; j < width-1; j+=1) {
+			var_x1 = peek(m_data, 0, (i*width+j));
+			var_x1r = peek(m_data, 1, (i*width+j));
+			var_x2 = peek(m_data, 0, (i*width+j+1));
+			var_x2r = peek(m_data, 1, (i*width+j+1));
+	
+			var_f = K * (var_x1 - var_x2) + 
+				Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;
+				
+			poke(m_data, peek(m_data,2, (i*width+j)) - var_f, 2, (i*width+j));
+			poke(m_data, peek(m_data,2, (i*width+j+1)) + var_f, 2, (i*width+j+1));
+		}
+	}
+
+	// Calculate the interactions along the second axis 
+	for (i = 0; i < length-1; i+=1) {
+		for (j = 0; j < width; j+=1) {
+			var_x1 = peek(m_data, 0, (i*width+j));
+			var_x1r = peek(m_data, 1, (i*width+j));
+			var_x2 = peek(m_data, 0, ((i+1)*width+j));
+			var_x2r = peek(m_data, 1, ((i+1)*width+j));
+	
+			var_f = K * (var_x1 - var_x2) + 
+				Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;
+				
+			poke(m_data, peek(m_data,2, (i*width+j)) - var_f, 2, (i*width+j));
+			poke(m_data, peek(m_data,2, ((i+1)*width+j)) + var_f, 2, ((i+1)*width+j));
+		}
+	}	
+	
+		
+	return 0;
+}

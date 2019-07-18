@@ -1,0 +1,158 @@
+/**********************************/
+/* 			Proxy system 		  */
+/*								  */
+/*   James Leonard - GIPSA-Lab    */
+/*  james.leonard[at]gipsa-lab.fr */
+/*   Universite Grenoble-Alpes    */
+/**********************************/
+
+
+/* Proxies for string topologies, with linear interpolation between two material points */
+
+set_proxy_pos_string(proxy_data, mult_data, val){
+	
+	// Write previous step proxy position to the delayed position
+	poke(proxy_data, peek(proxy_data, 0) , 1);
+		
+	var_m1, var_m2, var_alpha = get_string_linear_ponderation(mult_data, val);
+		
+	// Linearly interpolated position of the proxy module between two adjacent masses
+	poke(proxy_data, (1-var_alpha)* peek(mult_data, 0, var_m1) + var_alpha * peek(mult_data, 0, var_m2), 0);
+	
+	return 0;	
+}
+
+
+
+apply_proxy_frc_string(proxy_data, mult_data, val){
+	
+	// Get the force from proxy module and apply it to masses
+	var_m1, var_m2, var_alpha = get_string_linear_ponderation(mult_data, val);
+		
+	// Linearly interpolated force applied between two adjacent masses
+	poke(mult_data, peek(mult_data,2, var_m1) + peek(proxy_data,2) * (1-var_alpha) , 2, var_m1);
+	poke(mult_data, peek(mult_data,2, var_m2) + peek(proxy_data,2) * (var_alpha), 2, var_m2);
+	
+	// reset the proxy force buffer
+	poke(proxy_data,0, 2);
+	
+	return 0;
+}
+
+
+
+get_string_linear_ponderation(mult_data, val){
+	
+	data_chans = channels(mult_data);
+
+	point = val * data_chans;
+	
+	var_m1 = floor(point);
+	var_m2 = var_m1 + 1;
+		
+	var_alpha = point - var_m1;	
+		
+	if(var_m2 >= data_chans){
+		var_m1 = data_chans-1;
+		var_m2 = data_chans-1;
+		var_alpha = 1;
+	}
+			
+		
+	return var_m1, var_m2, var_alpha;	
+}
+
+
+/* Proxies for rectangular mesh topologies, with linear interpolation between four material points */
+
+set_proxy_pos_mesh(proxy_data, mult_data, length, width, valL, valW){
+	
+	// Write previous step proxy position to the delayed position
+	poke(proxy_data, peek(proxy_data, 0) , 1);
+	
+	
+	// Calculate new proxy position according to position, type, etc.
+	var_m1, var_c1, var_m2, var_c2, var_m3, var_c3, var_m4, var_c4 = get_mesh_linear_ponderation(mult_data, length, width, valL, valW);
+		
+	
+	// Linearly interpolated position of the proxy module between four adjacent masses
+	var_pos = var_c1 * peek(mult_data, 0, var_m1) 
+		+ var_c2 * peek(mult_data, 0, var_m2) 
+		+ var_c3 * peek(mult_data, 0, var_m3) 
+		+ var_c4 * peek(mult_data, 0, var_m4);
+
+	poke(proxy_data, var_pos, 0);
+	
+	return var_pos;
+}
+
+
+
+apply_proxy_frc_mesh(proxy_data, mult_data, length, width, valL, valW){
+	
+	var_m1, var_c1, var_m2, var_c2, var_m3, var_c3, var_m4, var_c4 = get_mesh_linear_ponderation(mult_data, length, width, valL, valW);
+
+		
+	// Linearly interpolated force applied between the four adjacent masses
+	poke(mult_data, peek(mult_data,2, var_m1) + peek(proxy_data,2) * var_c1, 2, var_m1);
+	poke(mult_data, peek(mult_data,2, var_m2) + peek(proxy_data,2) * var_c2, 2, var_m2);
+	poke(mult_data, peek(mult_data,2, var_m3) + peek(proxy_data,2) * var_c3, 2, var_m3);
+	poke(mult_data, peek(mult_data,2, var_m4) + peek(proxy_data,2) * var_c4, 2, var_m4);
+	
+	// reset the proxy force buffer
+	poke(proxy_data,0, 2);
+	
+	return 0;
+}
+
+
+
+get_mesh_linear_ponderation(mult_data, length, width, valL, valW){
+	
+	//data_chans = channels(mult_data);
+	
+	var_pX = valL * length;
+	var_pY = valW * width;
+	
+
+	// Calculate the surrounding i and j indexes
+	var_i1 = floor(var_pX);
+	var_i2 = var_i1 + 1;
+	
+	var_j1 = floor(var_pY);
+	var_j2 = var_j1 + 1;
+
+	var_ai = var_pX - var_i1;
+	var_aj = var_pY - var_j1;
+
+	
+	if(var_i2 >= length){
+		var_ai = 0;
+		var_i1 = length-1;
+		var_i2 = length-1;
+
+		}
+	if (var_j2 >= width){
+		var_aj = 0;
+		var_j1 = width-1;
+		var_j2 = width-1;
+		}
+			
+	
+	// Calculate where we are relative to the closest square of i and j 
+	var_ai = var_pX - var_i1;
+	var_aj = var_pY - var_j1;
+	
+	// Linear interpolation in this 2D space
+	var_a_i1 = (1-var_ai)*(1-var_aj);
+	var_a_i2 = var_ai*(1-var_aj);
+	var_a_j1 = (1-var_ai)*var_aj;
+	var_a_j2 = var_ai*var_aj;
+	
+	//return var_i1*width+var_j1, var_a_i1, var_i2*width+var_j1, var_a_i2, var_i1*width+var_j2, var_a_j1 var_i2*width+var_j2, var_a_j2;
+	return var_i1*width+var_j1, var_a_i1, var_i2*width+var_j1, var_a_i2, var_i1*width+var_j2, var_a_j1, var_i2*width+var_j2, var_a_j2;
+	
+}
+
+
+

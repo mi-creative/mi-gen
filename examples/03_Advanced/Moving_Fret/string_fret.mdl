@@ -1,0 +1,30 @@
+@slide audioParam @in2
+
+@s stiffString 120 1. 0.6 0.2 0.001 0.
+@g ground -0.2
+@m mass 100000 0. 0.
+
+@in1 posInput 0.
+@in3 posInput 0.
+
+@fK param 0.7
+@fZ param 0.05
+
+@spm springDamper @in3 @m 10000 10000
+
+@det contact @s @m 0.02 fZ 0. slide-0.2
+@det contact @s @m 0.02 fZ 0. slide-0.1
+
+@det contact @s @m 0.2 fZ 0. slide-0.04
+@det contact @s @m 0.2 fZ 0. slide-0.03
+
+@det contact @s @m fK 0. 0. slide
+@det contact @s @m fK 0. 0. slide-0.01
+
+@det contact @g @s fK 0 0. slide
+@det contact @g @s fK 0 0. slide-0.01
+
+@pl nlPluck @in1 @s 0.5 0.05 0.9
+
+@out1 posOutput @s 0.96
+@out2 posOutput @s 0.98

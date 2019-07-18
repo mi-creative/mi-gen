@@ -1,0 +1,50 @@
+# PROXY example: mobile interactions with a macro string 
+# created by James Leonard 
+ 
+# Note: generating code from this model requires the experimental branch of MIMS 
+# (which includes proxy modules) 
+
+# Parameters for the model
+@eX param 0.9
+@eY param 0.8
+
+@contactStiffness param 0.1
+
+# Mesh parameters
+@meshK param 0.2
+@meshZ param 0.001
+
+# Audio-rate parameter for interpolating listening point
+@lX audioParam @in3
+@lY audioParam @in4
+
+# Audio-rate parameter for interpolating listening point
+@cX audioParam @in5
+@cY audioParam @in6
+
+
+#The String
+@mesh closedMesh 30 35 1. meshK meshZ 0.
+
+@pM param 4.
+@pK param 0.1
+@pZ param 0.1
+
+@catchK param 0.000001
+@catchZ param 0.06
+
+@p1 mass pM 0.02 0.02
+@catch ground 1.
+
+@c1 contact @mesh @p1 pK pZ 0. eX:eY
+@c2 contact @p1 @catch catchK catchZ 0.
+
+# Inputs: force input and vertical position of string contact
+@in1 frcInput @p1
+@in2 posInput 0.
+
+# The mobile contact interaction
+@cont contact @mesh @in2 contactStiffness 0.001 0. cX:cY 
+
+# Mobile position output, depending on the listening point
+@out1 posOutput @mesh lX:lY

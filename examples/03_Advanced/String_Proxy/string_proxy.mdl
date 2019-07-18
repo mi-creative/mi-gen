@@ -1,0 +1,36 @@
+# PROXY example: mobile interactions with a macro string 
+# created by James Leonard 
+ 
+# Note: generating code from this model requires the experimental branch of MIMS 
+# (which includes proxy modules) 
+
+# Parameters for the model
+@excitationPoint param 0.9
+@pluckStiffness param 0.5
+@contactStiffness param 0.1
+@contactPoint param 0.
+
+# String parameters
+@stringK param 0.6
+@stringK2 param 0.2
+@stringZ param 0.001
+
+# Audio-rate parameter for interpolating listening point
+@listeningPoint audioParam @in3
+
+#The String
+@s stiffString 120 1. stringK stringK2 stringZ 0.
+
+
+# Position inputs: pluck and vertical position of string contact
+@in1 posInput 0.
+@in2 posInput 0.
+
+# The mobile contact interaction
+@cont contact @s @in2 contactStiffness 0.001 0. contactPoint 
+
+# The mobile plucking interaction
+@pl nlPluck @in1 @s pluckStiffness 0.05 excitationPoint
+
+# Mobile position output, depending on the listening point
+@out1 posOutput @s listeningPoint

@@ -1,0 +1,14 @@
+# MACRO OBJECT EXAMPLES: String
+# created by James Leonard
+
+# Note: generating code from this model requires the experimental branch of MIMS 
+# (which includes proxy modules)
+
+# Macro string object (number of masses, mass, stiffness, damping, init position)
+@s string 50 1. 0.6 0.01 0.
+
+# force input, with additionnal parameter defining application point on string (between 0 and 1)
+@in1 frcInput @s 0.3
+
+# position output, with additionnal parameter defining listening point on string (between 0 and 1)
+@out1 posOutput @s 0.95

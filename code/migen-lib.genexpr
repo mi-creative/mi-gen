@@ -64,14 +64,14 @@ init_mat(m_data, X0, XR0){
 
 compute_mass(m_data, M, gravity = 0) {
 	
-	tmp = 2 * peek(m_data, 0) 
+	var_tmp = 2 * peek(m_data, 0) 
 		- peek(m_data,1)
-		+ (peek(m_data,2) - gravity) /M;
+		+ (peek(m_data,2) - gravity) / M;
 	poke(m_data, peek(m_data, 0) , 1);
-	poke(m_data,tmp, 0);
+	poke(m_data,var_tmp, 0);
 	poke(m_data, 0, 2);
 
-	return tmp;
+	return var_tmp;
 }
 
 
@@ -80,14 +80,14 @@ compute_mass(m_data, M, gravity = 0) {
 compute_osc(m_data, M, K, Z, grav = 0) {
 	invM = 1/M;
 	
-	tmp = (2 - (K+Z)*invM) * peek(m_data, 0) 
+	var_tmp = (2 - (K+Z)*invM) * peek(m_data, 0) 
 		+ (Z * invM - 1) * peek(m_data,1)
 		+ (peek(m_data,2) + grav) * invM;
 	poke(m_data, peek(m_data, 0) , 1);
-	poke(m_data,tmp, 0);
+	poke(m_data,var_tmp, 0);
 	poke(m_data, 0, 2);
 
-	return tmp;
+	return var_tmp;
 }
 
 /* 1D Fixed point (does nothing except reset force buffer */
@@ -102,34 +102,34 @@ compute_ground(m_data) {
 
 compute_spring(m1_data, m2_data, K){
 	
-	x1 = peek(m1_data, 0);
-	x2 = peek(m2_data, 0);
+	var_x1 = peek(m1_data, 0);
+	var_x2 = peek(m2_data, 0);
 	
 	
-	f = K * (x1 - x2);
+	var_f = K * (var_x1 - var_x2);
 	
-	poke(m1_data, peek(m1_data,2) - f, 2);
-	poke(m2_data, peek(m2_data,2) + f, 2);
+	poke(m1_data, peek(m1_data,2) - var_f, 2);
+	poke(m2_data, peek(m2_data,2) + var_f, 2);
 	
-	return f;
+	return var_f;
 }
 
 /* 1D Damper Interaction algorithm */
 
 compute_damper(m1_data, m2_data, Z){
 	
-	x1 = peek(m1_data, 0);
-	x1r = peek(m1_data, 1);
-	x2 = peek(m2_data, 0);
-	x2r = peek(m2_data, 1);
+	var_x1 = peek(m1_data, 0);
+	var_x1r = peek(m1_data, 1);
+	var_x2 = peek(m2_data, 0);
+	var_x2r = peek(m2_data, 1);
 	
 	
-	f = Z * ((x1-x1r) - (x2-x2r)) ;
+	var_f = Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;
 	
-	poke(m1_data, peek(m1_data,2) - f, 2);
-	poke(m2_data, peek(m2_data,2) + f, 2);
+	poke(m1_data, peek(m1_data,2) - var_f, 2);
+	poke(m2_data, peek(m2_data,2) + var_f, 2);
 	
-	return f;
+	return var_f;
 }
 
 
@@ -138,19 +138,19 @@ compute_damper(m1_data, m2_data, Z){
 
 compute_spring_damper(m1_data, m2_data, K, Z){
 	
-	x1 = peek(m1_data, 0);
-	x1r = peek(m1_data, 1);
-	x2 = peek(m2_data, 0);
-	x2r = peek(m2_data, 1);
+	var_x1 = peek(m1_data, 0);
+	var_x1r = peek(m1_data, 1);
+	var_x2 = peek(m2_data, 0);
+	var_x2r = peek(m2_data, 1);
 	
 	
-	f = K * (x1 - x2) + 
-		Z * ((x1-x1r) - (x2-x2r)) ;
+	var_f = K * (var_x1 - var_x2) + 
+		Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;
 	
-	poke(m1_data, peek(m1_data,2) - f, 2);
-	poke(m2_data, peek(m2_data,2) + f, 2);
+	poke(m1_data, peek(m1_data,2) - var_f, 2);
+	poke(m2_data, peek(m2_data,2) + var_f, 2);
 	
-	return f;
+	return var_f;
 }
 
 
@@ -159,21 +159,21 @@ compute_spring_damper(m1_data, m2_data, K, Z){
 
 compute_contact(m1_data, m2_data, K, Z, thresh){
 	
-	x1 = peek(m1_data, 0);
-	x1r = peek(m1_data, 1);
-	x2 = peek(m2_data, 0);
-	x2r = peek(m2_data, 1);
+	var_x1 = peek(m1_data, 0);
+	var_x1r = peek(m1_data, 1);
+	var_x2 = peek(m2_data, 0);
+	var_x2r = peek(m2_data, 1);
 	
 	
-	f = K * (x1 - x2) + 
-		Z * ((x1-x1r) - (x2-x2r)) ;
+	var_f = K * (var_x1 - var_x2) + 
+		Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;
 	
-	if ((x1-x2) > thresh){
-		poke(m1_data, peek(m1_data,2) - f, 2);
-		poke(m2_data, peek(m2_data,2) + f, 2);
+	if ((var_x1-var_x2) > thresh){
+		poke(m1_data, peek(m1_data,2) - var_f, 2);
+		poke(m2_data, peek(m2_data,2) + var_f, 2);
 	}
 	
-	return f;
+	return var_f;
 }
 
 /* 1D non-linear picking Interaction algorithm */
@@ -181,12 +181,12 @@ compute_contact(m1_data, m2_data, K, Z, thresh){
 
 compute_nlPluck(m1_data, m2_data, nlK, nlscale, Z){
 
-	x1 = peek(m1_data, 0);
-	x2 = peek(m2_data, 0);
+	var_x1 = peek(m1_data, 0);
+	var_x2 = peek(m2_data, 0);
 
 	
-	f = 0.;
-	deltaP = (x1 - x2);
+	var_f = 0.;
+	deltaP = (var_x1 - var_x2);
 	
 	// Sharpness factor: determines the slope at the tipping point (around zero)
 	sharpness = 10.;
@@ -202,20 +202,20 @@ compute_nlPluck(m1_data, m2_data, nlK, nlscale, Z){
 	
 	// now calculate the force resulting from the piecewise linear function
 	if(abs(deltaP) < (tip_dist))  {
-		f = -(Kp-nlK) * deltaP ;
+		var_f = -(Kp-nlK) * deltaP ;
 	}
 	else if(abs(deltaP) < nlscale)  {
 		if(deltaP > 0) 
-			{f = - tip_dist * Kp + nlK * deltaP ;}
+			{var_f = - tip_dist * Kp + nlK * deltaP ;}
 		else
-			{ f =  tip_dist * Kp + nlK * deltaP ;}
+			{ var_f =  tip_dist * Kp + nlK * deltaP ;}
 	}
-	else f = 0.;
+	else var_f = 0.;
 	
-	poke(m1_data, peek(m1_data,2) - f, 2);
-	poke(m2_data, peek(m2_data,2) + f, 2);
+	poke(m1_data, peek(m1_data,2) - var_f, 2);
+	poke(m2_data, peek(m2_data,2) + var_f, 2);
 	
-	return f;
+	return var_f;
 
 }
 
@@ -230,13 +230,13 @@ compute_nlPluck(m1_data, m2_data, nlK, nlscale, Z){
 
 compute_nlBow(m1_data, m2_data, nlZ, nlscale){
 	
-	x1 = peek(m1_data, 0);
-	x1r = peek(m1_data, 1);
-	x2 = peek(m2_data, 0);
-	x2r = peek(m2_data, 1);
+	var_x1 = peek(m1_data, 0);
+	var_x1r = peek(m1_data, 1);
+	var_x2 = peek(m2_data, 0);
+	var_x2r = peek(m2_data, 1);
 	
-	f = 0.;
-	vel = ((x1-x1r) - (x2-x2r));
+	var_f = 0.;
+	vel = ((var_x1-var_x1r) - (var_x2-var_x2r));
 	
 	// Sharpness factor: determines the slope at the tipping point (around zero)
 	sharpness = 3;
@@ -253,21 +253,21 @@ compute_nlBow(m1_data, m2_data, nlZ, nlscale){
 	// now calculate the force resulting from the piecewise linear function
 	
 	if(abs(vel) < (tip_vel))  {
-		f = dampZ * vel ;
+		var_f = dampZ * vel ;
 	}
 	else if(abs(vel) < nlscale)  {
 		if(vel > 0) 
-			f = tip_vel * dampZ - slipZ * vel ;
+			var_f = tip_vel * dampZ - slipZ * vel ;
 		else
-			f = - tip_vel * dampZ - slipZ * vel ;
+			var_f = - tip_vel * dampZ - slipZ * vel ;
 	}
-	else f = 0.;
+	else var_f = 0.;
 	
 		
-	poke(m1_data, peek(m1_data,2) - f, 2);
-	poke(m2_data, peek(m2_data,2) + f, 2);
+	poke(m1_data, peek(m1_data,2) - var_f, 2);
+	poke(m2_data, peek(m2_data,2) + var_f, 2);
 	
-	return f;
+	return var_f;
 
 }
 
@@ -276,30 +276,30 @@ compute_nlBow(m1_data, m2_data, nlZ, nlscale){
 
 compute_nlBow(m1_data, m2_data, nlZ, nlscale){
 	
-	x1 = peek(m1_data, 0);
-	x1r = peek(m1_data, 1);
-	x2 = peek(m2_data, 0);
-	x2r = peek(m2_data, 1);
+	var_x1 = peek(m1_data, 0);
+	var_x1r = peek(m1_data, 1);
+	var_x2 = peek(m2_data, 0);
+	var_x2r = peek(m2_data, 1);
 	
-	f = 0.;
-	speed = ((x1-x1r) - (x2-x2r));
-	tip = nlscale * 0.33333333;
+	var_f = 0.;
+	var_speed = ((var_x1-var_x1r) - (var_x2-var_x2r));
+	var_tip = nlscale * 0.33333333;
 	
-	if(abs(speed) < (nlscale / 3.))  {
-		f = nlZ * speed ;
+	if(abs(var_speed) < (nlscale / 3.))  {
+		var_f = nlZ * var_speed ;
 	}
-	else if(abs(speed) < nlscale)  {
-		if(speed > 0) 
-			{f = (nlscale / 3.) * nlZ + (-nlZ/4.) * speed ;}
+	else if(abs(var_speed) < nlscale)  {
+		if(var_speed > 0) 
+			{var_f = (nlscale / 3.) * nlZ + (-nlZ/4.) * var_speed ;}
 		else
-			{ f =  - (nlscale / 3.) * nlZ + (-nlZ/4.) * speed ;}
+			{ var_f =  - (nlscale / 3.) * nlZ + (-nlZ/4.) * var_speed ;}
 	}
-	else f = 0.;
+	else var_f = 0.;
 	
-	poke(m1_data, peek(m1_data,2) - f, 2);
-	poke(m2_data, peek(m2_data,2) + f, 2);
+	poke(m1_data, peek(m1_data,2) - var_f, 2);
+	poke(m2_data, peek(m2_data,2) + var_f, 2);
 	
-	return f;
+	return var_f;
 
 }*/
 
@@ -309,36 +309,36 @@ compute_nlBow(m1_data, m2_data, nlZ, nlscale){
 
 compute_spring_damper_nl3(m1_data, m2_data, K, Q, Z){
 	
-	x1 = peek(m1_data, 0);
-	x1r = peek(m1_data, 1);
-	x2 = peek(m2_data, 0);
-	x2r = peek(m2_data, 1);
+	var_x1 = peek(m1_data, 0);
+	var_x1r = peek(m1_data, 1);
+	var_x2 = peek(m2_data, 0);
+	var_x2r = peek(m2_data, 1);
 	
-	dist = (x1 - x2);
-	f = K * dist + Q * (dist*dist*dist) + Z * ((x1-x1r) - (x2-x2r)) ;
+	var_dist = (var_x1 - var_x2);
+	var_f = K * var_dist + Q * (var_dist*var_dist*var_dist) + Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;
 	
-	poke(m1_data, peek(m1_data,2) - f, 2);
-	poke(m2_data, peek(m2_data,2) + f, 2);
+	poke(m1_data, peek(m1_data,2) - var_f, 2);
+	poke(m2_data, peek(m2_data,2) + var_f, 2);
 	
-	return f;
+	return var_f;
 }
 
 /* 1D non linear (quadratic) Spring-Damper Interaction algorithm */
 
 compute_spring_damper_nl2(m1_data, m2_data, K, Q, Z){
 	
-	x1 = peek(m1_data, 0);
-	x1r = peek(m1_data, 1);
-	x2 = peek(m2_data, 0);
-	x2r = peek(m2_data, 1);
+	var_x1 = peek(m1_data, 0);
+	var_x1r = peek(m1_data, 1);
+	var_x2 = peek(m2_data, 0);
+	var_x2r = peek(m2_data, 1);
 	
-	dist = (x1 - x2);
-	f = K * dist + Q * sign(dist) * (dist*dist) + Z * ((x1-x1r) - (x2-x2r)) ;
+	var_dist = (var_x1 - var_x2);
+	var_f = K * var_dist + Q * sign(var_dist) * (var_dist*var_dist) + Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;
 	
-	poke(m1_data, peek(m1_data,2) - f, 2);
-	poke(m2_data, peek(m2_data,2) + f, 2);
+	poke(m1_data, peek(m1_data,2) - var_f, 2);
+	poke(m2_data, peek(m2_data,2) + var_f, 2);
 	
-	return f;
+	return var_f;
 }
 
 /* set the position of a module from an external value */

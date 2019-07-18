@@ -1,0 +1,14 @@
+# MACRO OBJECT EXAMPLES: Closed Mesh
+# created by James Leonard
+
+# Note: generating code from this model requires the experimental branch of MIMS 
+# (which includes proxy modules)
+
+# Macro closed mesh object (length & width, mass, stiffness, damping, init position)
+@s closedMesh 10 5 1. 0.3 0.0001 0.
+
+# force input, with additionnal parameter defining application point on mesh (X:Y, between 0 and 1)
+@in1 frcInput @s 0.3:0.5
+
+# position output, with additionnal parameter defining listening point on mesh (X:Y, between 0 and 1)
+@out1 posOutput @s 0.7:0.5
