@@ -1,0 +1,342 @@
+{
+	"patcher" : 	{
+		"fileversion" : 1,
+		"appversion" : 		{
+			"major" : 7,
+			"minor" : 3,
+			"revision" : 1,
+			"architecture" : "x64",
+			"modernui" : 1
+		}
+,
+		"rect" : [ 67.0, 109.0, 700.0, 500.0 ],
+		"editing_bgcolor" : [ 0.9, 0.9, 0.9, 1.0 ],
+		"bglocked" : 0,
+		"openinpresentation" : 0,
+		"default_fontsize" : 12.0,
+		"default_fontface" : 0,
+		"default_fontname" : "Arial",
+		"gridonopen" : 1,
+		"gridsize" : [ 15.0, 15.0 ],
+		"gridsnaponopen" : 1,
+		"objectsnaponopen" : 1,
+		"statusbarvisible" : 2,
+		"toolbarvisible" : 1,
+		"lefttoolbarpinned" : 0,
+		"toptoolbarpinned" : 0,
+		"righttoolbarpinned" : 0,
+		"bottomtoolbarpinned" : 0,
+		"toolbars_unpinned_last_save" : 0,
+		"tallnewobj" : 0,
+		"boxanimatetime" : 200,
+		"enablehscroll" : 1,
+		"enablevscroll" : 1,
+		"devicewidth" : 0.0,
+		"description" : "",
+		"digest" : "",
+		"tags" : "",
+		"style" : "",
+		"subpatcher_template" : "",
+                
+ "boxes" : [ { "box" : 				{
+					"code" : " require(\"migen-lib\");\r\nrequire(\"migen-integrated\");\r\nrequire(\"migen-proxies\");\r\nBuffer motion;\r\n\r\n// Model data structures\r\nData proxy_23(3);\r\nData proxy_22(3);\r\nData proxy_21(3);\r\nData proxy_20(3);\r\nData proxy_19(3);\r\nData proxy_18(3);\r\nData proxy_17(3);\r\nData proxy_16(3);\r\nData proxy_15(3);\r\nData proxy_14(3);\r\nData proxy_13(3);\r\nData proxy_12(3);\r\nData proxy_11(3);\r\nData proxy_10(3);\r\nData proxy_9(3);\r\nData proxy_8(3);\r\nData proxy_7(3);\r\nData proxy_6(3);\r\nData proxy_5(3);\r\nData proxy_4(3);\r\nData proxy_3(3);\r\nData proxy_2(3);\r\nData proxy_1(3);\r\nData proxy_0(3);\r\nData m(3);\r\nData m8(3, 110);\r\nData m7(3, 110);\r\nData m6(3, 110);\r\nData m5(3, 110);\r\nData m4(3, 110);\r\nData m3(3, 110);\r\nData m2(3, 110);\r\nData m1(3, 110);\r\n\r\n// Control Rate Parameters\r\nParam sZ(0.003);\r\nParam nlK(0.03);\r\nParam sK(0.003);\r\nParam eY(0.3);\r\nParam eX(0.4);\r\nParam Z(0.01);\r\nParam K8(0.1);\r\nParam K7(0.1);\r\nParam K6(0.1);\r\nParam K5(0.1);\r\nParam K4(0.1);\r\nParam K3(0.1);\r\nParam K2(0.1);\r\nParam K1(0.1);\r\n\r\nParam display_motion(0);\r\n\r\n// Model initialisation flag\r\nHistory model_init(0);\r\nHistory render_cpt(0);\r\n\r\n// Audio Rate Parameters\r\nlY = in10;\r\nlX = in9;\r\n\r\n// Model init phase\r\n\r\nif(model_init == 0){\r\ninit_mat(proxy_23, 0, 0);\r\ninit_mat(proxy_22, 0, 0);\r\ninit_mat(proxy_21, 0, 0);\r\ninit_mat(proxy_20, 0, 0);\r\ninit_mat(proxy_19, 0, 0);\r\ninit_mat(proxy_18, 0, 0);\r\ninit_mat(proxy_17, 0, 0);\r\ninit_mat(proxy_16, 0, 0);\r\ninit_mat(proxy_15, 0, 0);\r\ninit_mat(proxy_14, 0, 0);\r\ninit_mat(proxy_13, 0, 0);\r\ninit_mat(proxy_12, 0, 0);\r\ninit_mat(proxy_11, 0, 0);\r\ninit_mat(proxy_10, 0, 0);\r\ninit_mat(proxy_9, 0, 0);\r\ninit_mat(proxy_8, 0, 0);\r\ninit_mat(proxy_7, 0, 0);\r\ninit_mat(proxy_6, 0, 0);\r\ninit_mat(proxy_5, 0, 0);\r\ninit_mat(proxy_4, 0, 0);\r\ninit_mat(proxy_3, 0, 0);\r\ninit_mat(proxy_2, 0, 0);\r\ninit_mat(proxy_1, 0, 0);\r\ninit_mat(proxy_0, 0, 0);\r\ninit_mat(m, 0., 0.);\r\ninit_multiple_masses(m8, 0, 0);\r\ninit_multiple_masses(m7, 0, 0);\r\ninit_multiple_masses(m6, 0, 0);\r\ninit_multiple_masses(m5, 0, 0);\r\ninit_multiple_masses(m4, 0, 0);\r\ninit_multiple_masses(m3, 0, 0);\r\ninit_multiple_masses(m2, 0, 0);\r\ninit_multiple_masses(m1, 0, 0);\r\n\r\n// Raise init flag\r\nmodel_init = 1;\r\n}\r\n\r\n// Model computation\r\ncompute_mass(m, 10.);\r\ncompute_corner_mesh(m8, 22, 5, 1., K8, Z);\r\ncompute_corner_mesh(m7, 22, 5, 1., K7, Z);\r\ncompute_corner_mesh(m6, 22, 5, 1., K6, Z);\r\ncompute_corner_mesh(m5, 22, 5, 1., K5, Z);\r\ncompute_corner_mesh(m4, 22, 5, 1., K4, Z);\r\ncompute_corner_mesh(m3, 22, 5, 1., K3, Z);\r\ncompute_corner_mesh(m2, 22, 5, 1., K2, Z);\r\ncompute_corner_mesh(m1, 22, 5, 1., K1, Z);\r\nset_proxy_pos_mesh(proxy_23, m8, 22, 5, lX, lY);\r\nset_proxy_pos_mesh(proxy_22, m7, 22, 5, lX, lY);\r\nset_proxy_pos_mesh(proxy_21, m6, 22, 5, lX, lY);\r\nset_proxy_pos_mesh(proxy_20, m5, 22, 5, lX, lY);\r\nset_proxy_pos_mesh(proxy_19, m4, 22, 5, lX, lY);\r\nset_proxy_pos_mesh(proxy_18, m3, 22, 5, lX, lY);\r\nset_proxy_pos_mesh(proxy_17, m2, 22, 5, lX, lY);\r\nset_proxy_pos_mesh(proxy_16, m1, 22, 5, lX, lY);\r\nset_proxy_pos_mesh(proxy_15, m8, 22, 5, eX, eY);\r\nset_proxy_pos_mesh(proxy_14, m7, 22, 5, eX, eY);\r\nset_proxy_pos_mesh(proxy_13, m6, 22, 5, eX, eY);\r\nset_proxy_pos_mesh(proxy_12, m5, 22, 5, eX, eY);\r\nset_proxy_pos_mesh(proxy_11, m4, 22, 5, eX, eY);\r\nset_proxy_pos_mesh(proxy_10, m3, 22, 5, eX, eY);\r\nset_proxy_pos_mesh(proxy_9, m2, 22, 5, eX, eY);\r\nset_proxy_pos_mesh(proxy_8, m1, 22, 5, eX, eY);\r\nset_proxy_pos_mesh(proxy_7, m8, 22, 5, 0.5, 0.5);\r\nset_proxy_pos_mesh(proxy_6, m7, 22, 5, 0.5, 0.5);\r\nset_proxy_pos_mesh(proxy_5, m6, 22, 5, 0.5, 0.5);\r\nset_proxy_pos_mesh(proxy_4, m5, 22, 5, 0.5, 0.5);\r\nset_proxy_pos_mesh(proxy_3, m4, 22, 5, 0.5, 0.5);\r\nset_proxy_pos_mesh(proxy_2, m3, 22, 5, 0.5, 0.5);\r\nset_proxy_pos_mesh(proxy_1, m2, 22, 5, 0.5, 0.5);\r\nset_proxy_pos_mesh(proxy_0, m1, 22, 5, 0.5, 0.5);\r\napply_input_force(proxy_15, in8);\r\napply_input_force(proxy_14, in7);\r\napply_input_force(proxy_13, in6);\r\napply_input_force(proxy_12, in5);\r\napply_input_force(proxy_11, in4);\r\napply_input_force(proxy_10, in3);\r\napply_input_force(proxy_9, in2);\r\napply_input_force(proxy_8, in1);\r\ncompute_spring_damper_nl2(proxy_7, m, sK, nlK, sZ);\r\ncompute_spring_damper_nl2(proxy_6, m, sK, nlK, sZ);\r\ncompute_spring_damper_nl2(proxy_5, m, sK, nlK, sZ);\r\ncompute_spring_damper_nl2(proxy_4, m, sK, nlK, sZ);\r\ncompute_spring_damper_nl2(proxy_3, m, sK, nlK, sZ);\r\ncompute_spring_damper_nl2(proxy_2, m, sK, nlK, sZ);\r\ncompute_spring_damper_nl2(proxy_1, m, sK, nlK, sZ);\r\ncompute_spring_damper_nl2(proxy_0, m, sK, nlK, sZ);\r\napply_proxy_frc_mesh(proxy_23, m8, 22, 5, lX, lY);\r\napply_proxy_frc_mesh(proxy_22, m7, 22, 5, lX, lY);\r\napply_proxy_frc_mesh(proxy_21, m6, 22, 5, lX, lY);\r\napply_proxy_frc_mesh(proxy_20, m5, 22, 5, lX, lY);\r\napply_proxy_frc_mesh(proxy_19, m4, 22, 5, lX, lY);\r\napply_proxy_frc_mesh(proxy_18, m3, 22, 5, lX, lY);\r\napply_proxy_frc_mesh(proxy_17, m2, 22, 5, lX, lY);\r\napply_proxy_frc_mesh(proxy_16, m1, 22, 5, lX, lY);\r\napply_proxy_frc_mesh(proxy_15, m8, 22, 5, eX, eY);\r\napply_proxy_frc_mesh(proxy_14, m7, 22, 5, eX, eY);\r\napply_proxy_frc_mesh(proxy_13, m6, 22, 5, eX, eY);\r\napply_proxy_frc_mesh(proxy_12, m5, 22, 5, eX, eY);\r\napply_proxy_frc_mesh(proxy_11, m4, 22, 5, eX, eY);\r\napply_proxy_frc_mesh(proxy_10, m3, 22, 5, eX, eY);\r\napply_proxy_frc_mesh(proxy_9, m2, 22, 5, eX, eY);\r\napply_proxy_frc_mesh(proxy_8, m1, 22, 5, eX, eY);\r\napply_proxy_frc_mesh(proxy_7, m8, 22, 5, 0.5, 0.5);\r\napply_proxy_frc_mesh(proxy_6, m7, 22, 5, 0.5, 0.5);\r\napply_proxy_frc_mesh(proxy_5, m6, 22, 5, 0.5, 0.5);\r\napply_proxy_frc_mesh(proxy_4, m5, 22, 5, 0.5, 0.5);\r\napply_proxy_frc_mesh(proxy_3, m4, 22, 5, 0.5, 0.5);\r\napply_proxy_frc_mesh(proxy_2, m3, 22, 5, 0.5, 0.5);\r\napply_proxy_frc_mesh(proxy_1, m2, 22, 5, 0.5, 0.5);\r\napply_proxy_frc_mesh(proxy_0, m1, 22, 5, 0.5, 0.5);\r\n\r\n// Output routing\r\nout8 =  get_pos(proxy_23);\r\nout7 =  get_pos(proxy_22);\r\nout6 =  get_pos(proxy_21);\r\nout5 =  get_pos(proxy_20);\r\nout4 =  get_pos(proxy_19);\r\nout3 =  get_pos(proxy_18);\r\nout2 =  get_pos(proxy_17);\r\nout1 =  get_pos(proxy_16);\r\n\r\n// Motion data routing to Max/MSP buffer objects\r\nif (display_motion){\r\nif (render_cpt == 0){\r\nmotion.poke(get_pos(m), 880, 0);\r\nfor(i = 0; i < channels(m8); i+=1){motion.poke(get_pos_at(m8, i), 770+i , 0);}\r\nfor(i = 0; i < channels(m7); i+=1){motion.poke(get_pos_at(m7, i), 660+i , 0);}\r\nfor(i = 0; i < channels(m6); i+=1){motion.poke(get_pos_at(m6, i), 550+i , 0);}\r\nfor(i = 0; i < channels(m5); i+=1){motion.poke(get_pos_at(m5, i), 440+i , 0);}\r\nfor(i = 0; i < channels(m4); i+=1){motion.poke(get_pos_at(m4, i), 330+i , 0);}\r\nfor(i = 0; i < channels(m3); i+=1){motion.poke(get_pos_at(m3, i), 220+i , 0);}\r\nfor(i = 0; i < channels(m2); i+=1){motion.poke(get_pos_at(m2, i), 110+i , 0);}\r\nfor(i = 0; i < channels(m1); i+=1){motion.poke(get_pos_at(m1, i), 0+i , 0);}\r\n}\r\nrender_cpt = (render_cpt + 1) % 200;}\r\n ",
+					"fontface" : 0,
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : " phyMdlBox ",
+					"maxclass" : "codebox",
+					"numinlets" : 10,
+					"numoutlets" : 8,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 20.0, 50.0, 450.0, 300.0 ],
+					"style" : ""
+				} }, { "box" : 				{
+					"id" : " inbox_1 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 70.0, 20.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 1 "
+				} }, { "box" : 				{
+					"id" : " inbox_2 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 120.0, 20.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 2 "
+				} }, { "box" : 				{
+					"id" : " inbox_3 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 170.0, 20.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 3 "
+				} }, { "box" : 				{
+					"id" : " inbox_4 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 220.0, 20.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 4 "
+				} }, { "box" : 				{
+					"id" : " inbox_5 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 270.0, 20.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 5 "
+				} }, { "box" : 				{
+					"id" : " inbox_6 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 320.0, 20.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 6 "
+				} }, { "box" : 				{
+					"id" : " inbox_7 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 370.0, 20.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 7 "
+				} }, { "box" : 				{
+					"id" : " inbox_8 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 420.0, 20.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 8 "
+				} }, { "box" : 				{
+					"id" : " inbox_9 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 470.0, 20.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 9 "
+				} }, { "box" : 				{
+					"id" : " inbox_10 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 520.0, 20.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 10 "
+				} }, { "box" : 				{
+					"id" : " outbox_1 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 70.0, 420.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 1 "
+				} }, { "box" : 				{
+					"id" : " outbox_2 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 120.0, 420.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 2 "
+				} }, { "box" : 				{
+					"id" : " outbox_3 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 170.0, 420.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 3 "
+				} }, { "box" : 				{
+					"id" : " outbox_4 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 220.0, 420.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 4 "
+				} }, { "box" : 				{
+					"id" : " outbox_5 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 270.0, 420.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 5 "
+				} }, { "box" : 				{
+					"id" : " outbox_6 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 320.0, 420.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 6 "
+				} }, { "box" : 				{
+					"id" : " outbox_7 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 370.0, 420.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 7 "
+				} }, { "box" : 				{
+					"id" : " outbox_8 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 420.0, 420.0, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 8 "
+				} }],
+ "lines" : [   {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_1 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 1 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_2 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 2 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_3 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 3 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_4 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 4 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_5 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 5 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_6 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 6 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_7 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 7 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_8 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 8 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_9 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 9 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_10 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_1 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_2 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 1 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_3 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 2 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_4 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 3 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_5 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 4 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_6 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 5 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_7 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 6 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_8 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 7 ]
+				}
+			}] } } 

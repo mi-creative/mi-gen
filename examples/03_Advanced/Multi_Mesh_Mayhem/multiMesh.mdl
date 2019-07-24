@@ -1,0 +1,50 @@
+# Derived from the OSCILLATORS model
+
+# stiffness parameters
+@K1 param 0.1
+@K2 param 0.1
+@K3 param 0.1
+@K4 param 0.1
+@K5 param 0.1
+@K6 param 0.1
+@K7 param 0.1
+@K8 param 0.1
+
+@Z param 0.0004
+
+@eX param 0.4
+@eY param 0.3
+
+@lX audioParam @in9
+@lY audioParam @in10
+
+# A series of meshes
+@m1 cornerMesh 20 5 1. K1 Z 0
+@m2 cornerMesh 20 5 1. K2 Z 0
+@m3 cornerMesh 20 5 1. K3 Z 0
+@m4 cornerMesh 20 5 1. K4 Z 0
+@m5 cornerMesh 20 5 1. K5 Z 0
+@m6 cornerMesh 20 5 1. K6 Z 0
+@m7 cornerMesh 20 5 1. K7 Z 0
+@m8 cornerMesh 20 5 1. K8 Z 0
+
+# Force inputs for all the oscillators
+@in1 frcInput @m1 eX:eY
+@in2 frcInput @m2 eX:eY
+@in3 frcInput @m3 eX:eY
+@in4 frcInput @m4 eX:eY
+@in5 frcInput @m5 eX:eY
+@in6 frcInput @m6 eX:eY
+@in7 frcInput @m7 eX:eY
+@in8 frcInput @m8 eX:eY
+
+# Position outputs from all the oscillators
+@out1 posOutput @m1 lX:lY
+@out2 posOutput @m2 lX:lY
+@out3 posOutput @m3 lX:lY
+@out4 posOutput @m4 lX:lY
+@out5 posOutput @m5 lX:lY
+@out6 posOutput @m6 lX:lY
+@out7 posOutput @m7 lX:lY
+@out8 posOutput @m8 lX:lY
+
