@@ -165,7 +165,7 @@ compute_contact(m1_data, m2_data, K, Z, thresh){
 	var_x2r = peek(m2_data, 1);
 	
 	
-	var_f = K * (var_x1 - var_x2) + 
+	var_f = K * (var_x1 - thresh - var_x2) + 
 		Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;
 	
 	if ((var_x1-var_x2) > thresh){
