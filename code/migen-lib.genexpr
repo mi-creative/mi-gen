@@ -77,12 +77,12 @@ compute_mass(m_data, M, gravity = 0) {
 
 /* 1D Integrated mass-spring-damper-ground oscillaor algorithm */
 
-compute_osc(m_data, M, K, Z, grav = 0) {
+compute_osc(m_data, M, K, Z, gravity = 0) {
 	invM = 1/M;
 	
 	var_tmp = (2 - (K+Z)*invM) * peek(m_data, 0) 
 		+ (Z * invM - 1) * peek(m_data,1)
-		+ (peek(m_data,2) + grav) * invM;
+		+ (peek(m_data,2) + gravity) * invM;
 	poke(m_data, peek(m_data, 0) , 1);
 	poke(m_data,var_tmp, 0);
 	poke(m_data, 0, 2);
@@ -176,14 +176,71 @@ compute_contact(m1_data, m2_data, K, Z, thresh){
 	return var_f;
 }
 
+
+
+
+
+
+
+compute_contact_nl3_clipped(m1_data, m2_data, s, c, k, Z, thresh = 0){
+	
+	var_x1 = peek(m1_data, 0);
+	var_x1r = peek(m1_data, 1);
+	var_x2 = peek(m2_data, 0);
+	var_x2r = peek(m2_data, 1);
+	
+	if(k < s){
+		k = s;
+		c = 0;
+	}
+	
+	var_dx = var_x1 - var_x2 + thresh;
+	var_f = 0;
+	absdx = abs(var_dx);
+	
+	if(var_dx  > -thresh){
+		// if the cubic term is null, only the linear component
+		if(c == 0)
+			var_f = s * var_dx;
+		// if the linear part is equal to bounding K, return linear part.
+		else if(s >= k)
+			var_f = k * var_dx;
+		
+		else{
+			// Calculate the tipping point.
+			b = sqrt((k-s)/c);
+			// Either calculate cubic and linear force, or bounded linear force
+			if (absdx <= b)
+				var_f = var_dx * (s + c *var_dx*var_dx);				
+			else 
+				var_f = k * var_dx;
+		}	
+		var_f += Z * ((var_x1-var_x1r) - (var_x2-var_x2r));
+	}
+	
+	
+	poke(m1_data, peek(m1_data,2) - var_f, 2);
+	poke(m2_data, peek(m2_data,2) + var_f, 2);
+	
+	return var_f;
+}
+
+
+
+
+
+
+
+
 /* 1D non-linear picking Interaction algorithm */
 /* piecewise linear function */
 
-compute_nlPluck(m1_data, m2_data, nlK, nlscale, Z){
+compute_nlPluck(m1_data, m2_data, nlK, nlscale, Z = 0){
 
 	var_x1 = peek(m1_data, 0);
 	var_x2 = peek(m2_data, 0);
-
+	var_x1r = peek(m1_data, 1);
+	var_x2r = peek(m2_data, 1);
 	
 	var_f = 0.;
 	deltaP = (var_x1 - var_x2);
@@ -204,11 +261,12 @@ compute_nlPluck(m1_data, m2_data, nlK, nlscale, Z){
 	if(abs(deltaP) < (tip_dist))  {
 		var_f = -(Kp-nlK) * deltaP ;
 	}
+	
 	else if(abs(deltaP) < nlscale)  {
 		if(deltaP > 0) 
-			{var_f = - tip_dist * Kp + nlK * deltaP ;}
+			{var_f = - tip_dist * Kp + nlK * deltaP + Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;}
 		else
-			{ var_f =  tip_dist * Kp + nlK * deltaP ;}
+			{ var_f =  tip_dist * Kp + nlK * deltaP + Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;}
 	}
 	else var_f = 0.;
 	
@@ -221,14 +279,57 @@ compute_nlPluck(m1_data, m2_data, nlK, nlscale, Z){
 
 
 
-
-
-
 /* 1D non-linear bowing Interaction algorithm */
-/* Note: fixed slope parameters for now, could be modified in future */
+/* piecewise linear function */
+
+compute_nlBow(m1_data, m2_data, nlZ, nlscale, smooth = 0){
+
+	var_x1 = peek(m1_data, 0);
+	var_x2 = peek(m2_data, 0);
+	var_x1r = peek(m1_data, 1);
+	var_x2r = peek(m2_data, 1);
+	
+	var_f = 0.;
+	vel = ((var_x1-var_x1r) - (var_x2-var_x2r));
+	
+	if(smooth >= 1){
+		var_f = 0.63*nlZ*vel*exp(-4 * pow(vel/nlscale, 2) + 1/2);
+	}
+	else {
+		// Sharpness factor: determines the slope at the tipping point (around zero)
+		sharpness = 3.;
+	
+		// the tipping point of the piecewise function, depending on the sharpness
+		tip_vel = nlscale / sharpness;
+		Zend = nlZ / sharpness;
+	
+		// now calculate the force resulting from the piecewise linear function
+		if(abs(vel) < (tip_vel)) {
+			var_f = (nlZ - Zend) * vel ;
+		}
+		else if(abs(vel) < nlscale)  {
+			if(vel > 0) 
+				var_f =  tip_vel * nlZ - Zend * vel ;
+			else
+				var_f = -tip_vel * nlZ - Zend * vel ;
+		}
+		else var_f = 0.;
+	}
+	
+	
+	poke(m1_data, peek(m1_data,2) - var_f, 2);
+	poke(m2_data, peek(m2_data,2) + var_f, 2);
+	
+	return var_f;
+
+}
 
 
-compute_nlBow(m1_data, m2_data, nlZ, nlscale){
+
+
+/* Older implementation, coefficients seem a little buggy... */
+
+compute_nlBow_OLD(m1_data, m2_data, nlZ, nlscale){
 	
 	var_x1 = peek(m1_data, 0);
 	var_x1r = peek(m1_data, 1);
@@ -274,7 +375,7 @@ compute_nlBow(m1_data, m2_data, nlZ, nlscale){
 
 /* old implementation (seems a little off on coefficients but works OK)
 
-compute_nlBow(m1_data, m2_data, nlZ, nlscale){
+compute_nlBow_OLDER(m1_data, m2_data, nlZ, nlscale){
 	
 	var_x1 = peek(m1_data, 0);
 	var_x1r = peek(m1_data, 1);
@@ -340,6 +441,58 @@ compute_spring_damper_nl2(m1_data, m2_data, K, Q, Z){
 	
 	return var_f;
 }
+
+
+
+
+
+compute_spring_damper_nl3_clipped(m1_data, m2_data, s, c, k, Z){
+	
+	var_x1 = peek(m1_data, 0);
+	var_x1r = peek(m1_data, 1);
+	var_x2 = peek(m2_data, 0);
+	var_x2r = peek(m2_data, 1);
+	
+	var_dx = var_x1 - var_x2;
+	var_f = 0;
+	absdx = abs(var_dx);
+	moreZ = 0;
+	
+	// if the cubic term is nulll, only the linear component
+	if(c == 0)
+		var_f = s * var_dx;
+	// if the linear part is equal to bounding K, return linear part.
+	else if(s >= k)
+		var_f = k * var_dx;
+	else{
+		// Calculate the tipping point.
+		b = sqrt((k-s)/c);
+		
+		if (absdx <= b){
+			// Cubic& Linear dynamic behaviour
+			var_f = var_dx * (s + c *var_dx*var_dx);	
+		}
+		else {
+			// Bounded linear section
+			// HACK ! add some damping so that oscillators don't get stuck !
+			var_f = (k * var_dx);
+			moreZ = 0.3 * k;
+		}
+
+	}	
+	
+	var_f += (Z + moreZ) * ((var_x1-var_x1r) - (var_x2-var_x2r));
+
+	
+	poke(m1_data, peek(m1_data,2) - var_f, 2);
+	poke(m2_data, peek(m2_data,2) + var_f, 2);
+	
+	return var_f;
+}
+
+
+
+
 
 /* set the position of a module from an external value */
 
