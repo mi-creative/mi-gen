@@ -50,16 +50,20 @@ get_pos_at(m_data, i){
 
 /* Integrated formulation of a mass-interaction string */
 
-compute_string(m_data, M, K, Z){
+compute_string(m_data, len, M, K, Z, Zo = 0){
 
+	invM = 1/M;
+	A = 2 - Zo*invM;
+	B = Zo * invM - 1;
 	var_data_chans = channels(m_data);
+	
 	for(i=0; i< var_data_chans; i+=1){
 		if ((i==0) || (i == var_data_chans-1))
 			poke(m_data, 0, 2, i);
 		else {
-			var_tmp = 2 * peek(m_data, 0, i) 
-				- peek(m_data,1, i)
-				+ (peek(m_data,2, i)) / M;
+			var_tmp = A * peek(m_data, 0, i) 
+					+ B * peek(m_data,1, i)
+					+ (peek(m_data,2, i)) * invM;
 			poke(m_data, peek(m_data, 0, i) , 1, i);
 			poke(m_data,var_tmp, 0, i);
 			poke(m_data, 0, 2, i);
@@ -86,16 +90,20 @@ compute_string(m_data, M, K, Z){
 
 /* Integrated formulation of a mass-interaction stiff string */
 
-compute_stiff_string(m_data, M, K, Ks, Z){
-
+compute_stiff_string(m_data, len, M, K, Ks, Z, Zo = 0){
+	
+	invM = 1/M;
+	A = 2 - Zo*invM;
+	B = Zo * invM - 1;
 	var_data_chans = channels(m_data);
+	
 	for(i=0; i< var_data_chans; i+=1){
 		if ((i==0) || (i == var_data_chans-1))
 			poke(m_data, 0, 2, i);
 		else {
-			var_tmp = 2 * peek(m_data, 0, i) 
-				- peek(m_data,1, i)
-				+ (peek(m_data,2, i)) / M;
+			var_tmp = A * peek(m_data, 0, i) 
+					+ B * peek(m_data,1, i)
+					+ (peek(m_data,2, i)) * invM;
 			poke(m_data, peek(m_data, 0, i) , 1, i);
 			poke(m_data,var_tmp, 0, i);
 			poke(m_data, 0, 2, i);
@@ -149,13 +157,17 @@ compute_stiff_string(m_data, M, K, Ks, Z){
 
 /* Integrated formulation of a mass-interaction chain (not grounded to any fixed points) */
 
-compute_chain(m_data, M, K, Z){
+compute_chain(m_data, len, M, K, Z, Zo = 0){
 
+	invM = 1/M;
+	A = 2 - Zo*invM;
+	B = Zo * invM - 1;
 	var_data_chans = channels(m_data);
+
 	for(i=0; i< var_data_chans; i+=1){
-		var_tmp = 2 * peek(m_data, 0, i) 
-			- peek(m_data,1, i)
-			+ (peek(m_data,2, i)) / M;
+		var_tmp = A * peek(m_data, 0, i) 
+				+ B * peek(m_data,1, i)
+				+ (peek(m_data,2, i)) * invM;
 		poke(m_data, peek(m_data, 0, i) , 1, i);
 		poke(m_data,var_tmp, 0, i);
 		poke(m_data, 0, 2, i);
@@ -187,21 +199,24 @@ compute_chain(m_data, M, K, Z){
 /* Integrated formulation of a rectangular mesh */
 
 
-compute_closed_mesh(m_data, length, width, M, K, Z){
-	return compute_mesh(m_data, length, width, M, K, Z, 2);
+compute_closed_mesh(m_data, length, width, M, K, Z, Zo = 0){
+	return compute_mesh(m_data, length, width, M, K, Z, 2, Zo);
 }
 
-compute_corner_mesh(m_data, length, width, M, K, Z){
-	return compute_mesh(m_data, length, width, M, K, Z, 1);
+compute_corner_mesh(m_data, length, width, M, K, Z, Zo = 0){
+	return compute_mesh(m_data, length, width, M, K, Z, 1, Zo);
 }
 
-compute_open_mesh(m_data, length, width, M, K, Z){
-	return compute_mesh(m_data, length, width, M, K, Z, 0);
+compute_open_mesh(m_data, length, width, M, K, Z, Zo = 0){
+	return compute_mesh(m_data, length, width, M, K, Z, 0, Zo);
 }
 
 
-compute_mesh(m_data, length, width, M, K, Z, edges){
+compute_mesh(m_data, length, width, M, K, Z, edges, Zo = 0){
 
+	invM = 1/M;
+	A = 2 - Zo*invM;
+	B = Zo * invM - 1;
 	var_data_chans = channels(m_data);
 	
 	// Find the resting position of the edge (if the mesh is corner or close type)
@@ -215,28 +230,32 @@ compute_mesh(m_data, length, width, M, K, Z, edges){
 	
 	for(i=0; i< length; i+=1){
 		for(j=0; j < width; j+=1){
-			
+			idx = i*width+j;
+			var_tmp = A * peek(m_data, 0, idx) 
+					+ B * peek(m_data,1, idx)
+					+ (peek(m_data,2, idx)) * invM;
+			/*
 			var_tmp = 2 * peek(m_data, 0, (i*width+j)) 
 				- peek(m_data,1, (i*width+j))
-				+ (peek(m_data,2, (i*width+j))) / M;
-			poke(m_data, peek(m_data, 0, (i*width+j)) , 1, (i*width+j));
-			poke(m_data,var_tmp, 0, (i*width+j));
-			poke(m_data, 0, 2, (i*width+j));
+				+ (peek(m_data,2, (i*width+j))) / M; */
+			poke(m_data, peek(m_data, 0, idx) , 1, idx);
+			poke(m_data,var_tmp, 0, idx);
+			poke(m_data, 0, 2, idx);
 		
 			// Set fixed points for edge conditions !
 			if(edges == 1){
 				if((i == 0) || (i == length-1))
 					if((j==0) || (j == width-1)){
-						poke(m_data,var_edge_pos, 0, (i*width+j));
-						poke(m_data,var_edge_pos, 1, (i*width+j));
-						poke(m_data, 0, 2, (i*width+j));
+						poke(m_data,var_edge_pos, 0, idx);
+						poke(m_data,var_edge_pos, 1, idx);
+						poke(m_data, 0, 2, idx);
 					}
 			}
 			else if(edges == 2){
 				if((i == 0) || (i == length-1) || (j==0) || (j == width-1)){
-					poke(m_data,var_edge_pos, 0, (i*width+j));
-					poke(m_data,var_edge_pos, 1, (i*width+j));
-					poke(m_data, 0, 2, (i*width+j));
+					poke(m_data,var_edge_pos, 0, idx);
+					poke(m_data,var_edge_pos, 1, idx);
+					poke(m_data, 0, 2, idx);
 				}
 			}	
 		}
@@ -245,32 +264,36 @@ compute_mesh(m_data, length, width, M, K, Z, edges){
 	// Calculate the interactions along one axis
 	for (i = 0; i < length; i+=1) {
 		for (j = 0; j < width-1; j+=1) {
-			var_x1 = peek(m_data, 0, (i*width+j));
-			var_x1r = peek(m_data, 1, (i*width+j));
-			var_x2 = peek(m_data, 0, (i*width+j+1));
-			var_x2r = peek(m_data, 1, (i*width+j+1));
+			idx = i*width+j;
+			idx2 = i*width+j+1;
+			var_x1 = peek(m_data, 0, idx);
+			var_x1r = peek(m_data, 1, idx);
+			var_x2 = peek(m_data, 0, idx2);
+			var_x2r = peek(m_data, 1, idx2);
 	
 			var_f = K * (var_x1 - var_x2) + 
 				Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;
 				
-			poke(m_data, peek(m_data,2, (i*width+j)) - var_f, 2, (i*width+j));
-			poke(m_data, peek(m_data,2, (i*width+j+1)) + var_f, 2, (i*width+j+1));
+			poke(m_data, peek(m_data,2, idx) - var_f, 2, idx);
+			poke(m_data, peek(m_data,2, idx2) + var_f, 2, idx2);
 		}
 	}
 
 	// Calculate the interactions along the second axis 
 	for (i = 0; i < length-1; i+=1) {
 		for (j = 0; j < width; j+=1) {
-			var_x1 = peek(m_data, 0, (i*width+j));
-			var_x1r = peek(m_data, 1, (i*width+j));
-			var_x2 = peek(m_data, 0, ((i+1)*width+j));
-			var_x2r = peek(m_data, 1, ((i+1)*width+j));
+			idx = i*width+j;
+			idx2 = (i+1)*width+j;
+			var_x1 = peek(m_data, 0, idx);
+			var_x1r = peek(m_data, 1, idx);
+			var_x2 = peek(m_data, 0, idx2);
+			var_x2r = peek(m_data, 1, idx2);
 	
 			var_f = K * (var_x1 - var_x2) + 
 				Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;
 				
-			poke(m_data, peek(m_data,2, (i*width+j)) - var_f, 2, (i*width+j));
-			poke(m_data, peek(m_data,2, ((i+1)*width+j)) + var_f, 2, ((i+1)*width+j));
+			poke(m_data, peek(m_data,2, idx) - var_f, 2, idx);
+			poke(m_data, peek(m_data,2, idx2) + var_f, 2, idx2);
 		}
 	}	
 	

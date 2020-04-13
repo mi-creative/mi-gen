@@ -280,7 +280,8 @@ compute_nlPluck(m1_data, m2_data, nlK, nlscale, Z = 0){
 
 
 /* 1D non-linear bowing Interaction algorithm */
-/* piecewise linear function */
+/* either piecewise linear function (smooth = 0) */
+/* or algebraic expression (smooth = 1) */
 
 compute_nlBow(m1_data, m2_data, nlZ, nlscale, smooth = 0){
 
@@ -489,6 +490,16 @@ compute_spring_damper_nl3_clipped(m1_data, m2_data, s, c, k, Z){
 	
 	return var_f;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

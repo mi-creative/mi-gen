@@ -26,11 +26,11 @@ const genModDict = {
     "posInput" : { func :"update_input_pos", nbArgs:0, optArgs : 0},
     "frcInput" : { func :"apply_input_force", nbArgs:0, optArgs : 0},
     "string" : { func :"compute_string", nbArgs:4, optArgs : ["Zo"]},
-    "chain" : { func :"compute_chain", nbArgs:4, optArgs : 0},
-    "stiffString" : { func :"compute_stiff_string", nbArgs:5, optArgs : 0},
-    "mesh" : { func :"compute_open_mesh", nbArgs:5, optArgs : 0},
-    "closedMesh" : { func :"compute_closed_mesh", nbArgs:5, optArgs : 0},
-    "cornerMesh" : { func :"compute_corner_mesh", nbArgs:5, optArgs : 0}
+    "chain" : { func :"compute_chain", nbArgs:4, optArgs : ["Zo"]},
+    "stiffString" : { func :"compute_stiff_string", nbArgs:5, optArgs : ["Zo"]},
+    "mesh" : { func :"compute_open_mesh", nbArgs:5, optArgs : ["Zo"]},
+    "closedMesh" : { func :"compute_closed_mesh", nbArgs:5, optArgs : ["Zo"]},
+    "cornerMesh" : { func :"compute_corner_mesh", nbArgs:5, optArgs : ["Zo"]}
 };
 
 
