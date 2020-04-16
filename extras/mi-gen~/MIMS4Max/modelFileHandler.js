@@ -30,7 +30,7 @@ maxAPI.addHandlers({
 
         console.log(fileContent);
 
-        fs.truncate(filePath, 0, function(){console.log('done')})
+        //fs.truncate(filePath, 0, function(){console.log('done')})
 
         fs.writeFileSync(filePath, fileContent, (err)=> {
             if (err) console.log(err);

@@ -65,10 +65,11 @@ function generateDspObj(name, codeboxCode, nbIn, nbOut) {
         //console.log("test");
         //console.log(outFileString);
 
+        /*
         fs.truncate(name, 0, function () {
             console.log('done')
         });
-
+        */
 
 
         fs.writeFileSync(name, outFileString, (err)=> {

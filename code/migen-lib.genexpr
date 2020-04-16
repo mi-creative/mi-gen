@@ -157,7 +157,7 @@ compute_spring_damper(m1_data, m2_data, K, Z){
 
 /* 1D contact (conditional Spring-Damper) Interaction algorithm */
 
-compute_contact(m1_data, m2_data, K, Z, thresh){
+compute_contact(m1_data, m2_data, K, Z, thresh = 0){
 	
 	var_x1 = peek(m1_data, 0);
 	var_x1r = peek(m1_data, 1);

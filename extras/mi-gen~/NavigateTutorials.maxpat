@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 95.0, 127.0, 676.0, 492.0 ],
+		"rect" : [ 439.0, 220.0, 676.0, 492.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -120,7 +120,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 919.0, 880.0, 186.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 19.948716104030609, 173.0, 186.0, 24.0 ],
+					"presentation_rect" : [ 46.948716104030609, 173.0, 186.0, 24.0 ],
 					"text" : "Description:",
 					"textcolor" : [ 0.996078431372549, 0.996078431372549, 0.996078431372549, 1.0 ]
 				}
@@ -131,15 +131,15 @@
 					"fontname" : "Lato",
 					"fontsize" : 13.0,
 					"id" : "obj-72",
-					"linecount" : 11,
+					"linecount" : 9,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 126.0, 420.376072108745575, 294.0, 178.0 ],
+					"patching_rect" : [ 126.0, 420.376072108745575, 296.0, 147.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 11,
-					"presentation_rect" : [ 20.0, 195.162394106388092, 300.948716104030609, 178.0 ],
-					"text" : "A progessive introduction to mass-interaction physics, based around the harmonic oscillator. You will learn:\n\n- how the scripting language works\n- how models can produce vibratory motion\n- how to control physical parameters (with control or audio-rate signals)\n- how to add various physical interactions\n- how to characterise the numerical stability of a harmonic oscillator.",
+					"presentation_linecount" : 8,
+					"presentation_rect" : [ 47.0, 195.162394106388092, 300.948716104030609, 131.0 ],
+					"text" : "A gradual introduction to building larger and more complex models and control strategies. You'll learn:\n\n- how to visualise motion data\n- how to use integrated structures (strings, meshes, etc.)\n- how to dynamically move interaction points.\n- how to use dyanmic voicing with poly~",
 					"textcolor" : [ 0.996078431372549, 0.996078431372549, 0.996078431372549, 1.0 ]
 				}
 
@@ -374,7 +374,7 @@
 					"patching_rect" : [ 118.0, 1747.0, 192.0, 114.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 4,
-					"presentation_rect" : [ 20.0, 78.0, 300.948716104030609, 78.0 ],
+					"presentation_rect" : [ 47.0, 78.0, 304.0, 78.0 ],
 					"text" : "Use this tool to navigate inside the mi-gen~ tutorial material.\nClick on a tutorial in the list to open it within Max/MSP !",
 					"textcolor" : [ 0.996078431372549, 0.996078431372549, 0.996078431372549, 1.0 ]
 				}
@@ -391,7 +391,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 88.0, 1717.0, 322.0, 38.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 84.0, 21.0, 230.0, 38.0 ],
+					"presentation_rect" : [ 111.0, 21.0, 230.0, 38.0 ],
 					"text" : "mi-gen~ tutorials",
 					"textcolor" : [ 0.996078431372549, 0.996078431372549, 0.996078431372549, 1.0 ]
 				}
@@ -411,7 +411,7 @@
 					"patching_rect" : [ 173.0, 1815.0, 100.0, 79.0 ],
 					"pic" : "",
 					"presentation" : 1,
-					"presentation_rect" : [ 20.0, 21.0, 54.0, 42.660000000000004 ]
+					"presentation_rect" : [ 47.0, 21.0, 54.0, 42.660000000000004 ]
 				}
 
 			}
@@ -426,7 +426,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 904.0, 865.0, 186.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 341.948716104030609, 78.0, 186.0, 24.0 ],
+					"presentation_rect" : [ 368.948716104030609, 78.0, 186.0, 24.0 ],
 					"text" : "Open a tutorial patch :",
 					"textcolor" : [ 0.996078431372549, 0.996078431372549, 0.996078431372549, 1.0 ]
 				}
@@ -444,7 +444,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 889.0, 850.0, 145.0, 42.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 341.948716104030609, 13.0, 197.0, 24.0 ],
+					"presentation_rect" : [ 368.948716104030609, 13.0, 197.0, 24.0 ],
 					"text" : "Navitate the tutorial series :",
 					"textcolor" : [ 0.996078431372549, 0.996078431372549, 0.996078431372549, 1.0 ]
 				}
@@ -510,8 +510,8 @@
 					"patching_rect" : [ 532.897432208061218, 865.0, 274.0, 59.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 2,
-					"presentation_rect" : [ 20.0, 428.412394106388092, 625.982905030250549, 33.0 ],
-					"text" : "Opening : C:/Users/leonarja/devel/mi-gen/examples/Oscillator_Tutorial_Series/2_AudioParamControl/2_AudioParamControl.maxpat"
+					"presentation_rect" : [ 47.0, 428.412394106388092, 625.982905030250549, 33.0 ],
+					"text" : "Opening : C:/Users/leonarja/devel/mi-gen/examples/Modelling_Tutorial_Series/0_IntegratedStructures/0_IntegratedStructures.maxpat"
 				}
 
 			}
@@ -827,16 +827,16 @@
 					"fontname" : "Lato",
 					"fontsize" : 14.0,
 					"id" : "obj-4",
-					"items" : [ "0_BasicOscillator", ",", "1_ParamControl", ",", "2_AudioParamControl", ",", "3_HammerTime", ",", "4_Gravity", ",", "5_PluckedOscillator", ",", "6_BowedOscillator", ",", "7_NonLinearOscillator", ",", "8_NumericalStability" ],
+					"items" : [ "0_VisualisingMotion", ",", "10_MultipleInstances", ",", "11_ComposedExpressions", ",", "1_TwoMassChain", ",", "2_ShortString", ",", "3_IntegratedString", ",", "4_ConnectingThings", ",", "5_RoutingMotionData", ",", "6_MovingExcitationPoint", ",", "7_MultipleCoupledObjects", ",", "8_MotionFormatting", ",", "9_SignalDrivenConnections" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 508.948716104030609, 363.162394106388092, 153.0, 25.0 ],
-					"prefix" : "C:/Users/leonarja/devel/mi-gen/examples/Oscillator_Tutorial_Series/",
+					"prefix" : "C:/Users/leonarja/devel/mi-gen/examples/Building_Tutorial_Series/",
 					"presentation" : 1,
-					"presentation_rect" : [ 452.982905030250549, 392.162394106388092, 193.0, 25.0 ],
+					"presentation_rect" : [ 479.982905030250549, 392.162394106388092, 193.0, 25.0 ],
 					"types" : "fold"
 				}
 
@@ -1140,7 +1140,7 @@
 					"patching_rect" : [ 441.897432208061218, 285.162394106388092, 153.0, 28.0 ],
 					"prefix" : "C:/Users/leonarja/devel/mi-gen/examples/",
 					"presentation" : 1,
-					"presentation_rect" : [ 341.948716104030609, 39.0, 304.03418892621994, 28.0 ],
+					"presentation_rect" : [ 368.948716104030609, 39.0, 304.03418892621994, 28.0 ],
 					"types" : "fold"
 				}
 
@@ -1191,7 +1191,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 361.698716104030609, 623.376072108745575, 137.0, 91.0 ],
-					"text" : "C:/Users/leonarja/devel/mi-gen/examples/Oscillator_Tutorial_Series/2_AudioParamControl/2_AudioParamControl.maxpat"
+					"text" : "C:/Users/leonarja/devel/mi-gen/examples/Modelling_Tutorial_Series/0_IntegratedStructures/0_IntegratedStructures.maxpat"
 				}
 
 			}
@@ -1259,7 +1259,7 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"bgcolor" : [ 0.090196078431373, 0.086274509803922, 0.086274509803922, 1.0 ],
 					"bordercolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"cols" : 1,
 					"colwidth" : 400,
@@ -1277,9 +1277,9 @@
 					"outlettype" : [ "list", "", "", "" ],
 					"patching_rect" : [ 868.0, 505.0, 300.03418892621994, 235.726495683193207 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 341.948716104030609, 103.435898423194885, 304.03418892621994, 286.726495683193207 ],
+					"presentation_rect" : [ 368.948716104030609, 103.435898423194885, 304.03418892621994, 286.726495683193207 ],
 					"rowheight" : 28,
-					"rows" : 9,
+					"rows" : 12,
 					"sccolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"textcolor" : [ 0.364705882352941, 0.305882352941176, 0.305882352941176, 1.0 ]
 				}
@@ -1443,7 +1443,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 957.0, 1929.0, 128.0, 128.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 20.0, 424.662394106388092, 625.982905030250549, 44.5 ],
+					"presentation_rect" : [ 47.0, 428.662394106388092, 625.982905030250549, 44.5 ],
 					"proportion" : 0.5,
 					"rounded" : 10
 				}
@@ -1452,7 +1452,7 @@
 , 			{
 				"box" : 				{
 					"angle" : 270.0,
-					"bgcolor" : [ 0.294117647058824, 0.294117647058824, 0.294117647058824, 1.0 ],
+					"bgcolor" : [ 0.227450980392157, 0.235294117647059, 0.235294117647059, 1.0 ],
 					"border" : 2,
 					"bordercolor" : [ 0.717647058823529, 0.713725490196078, 0.713725490196078, 1.0 ],
 					"id" : "obj-68",
@@ -1462,7 +1462,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 174.0, 1809.0, 128.0, 128.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -15.551283895969391, -29.0, 720.551283895969391, 526.0 ],
+					"presentation_rect" : [ 11.448716104030609, -29.0, 720.551283895969391, 526.0 ],
 					"proportion" : 0.5,
 					"rounded" : 20
 				}
