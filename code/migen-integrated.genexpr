@@ -111,7 +111,6 @@ compute_stiff_string(m_data, len, M, K, Ks, Z, Zo = 0){
 	}
 	
 	// regular springs between adjacent masses
-	
 	for(i=0; i< var_data_chans-1; i+=1) {
 		var_x1 = peek(m_data, 0, i);
 		var_x1r = peek(m_data, 1, i);
@@ -125,31 +124,23 @@ compute_stiff_string(m_data, len, M, K, Ks, Z, Zo = 0){
 		poke(m_data, peek(m_data,2, i+1) + var_f, 2, i+1);
 		}
 		
-	// Extended stencil for stiff term
+	// Extended stencil for stiff term	
+	for(i=-1; i <= var_data_chans-1; i+=1) {
 		
-	for(i=0; i< var_data_chans-2; i+=1) {
-		var_x1 = peek(m_data, 0, i);
-		var_x1r = peek(m_data, 1, i);
-		var_x2 = peek(m_data, 0, i+2);
-		var_x2r = peek(m_data, 1, i+2);
+		idx = clip(i, 0, var_data_chans-1);
+		idx2 = clip(i+2, 0, var_data_chans-1);
+		
+		var_x1 = peek(m_data, 0, idx);
+		var_x1r = peek(m_data, 1, idx);
+		var_x2 = peek(m_data, 0, idx2);
+		var_x2r = peek(m_data, 1, idx2);
 	
 		var_f = Ks * (var_x1 - var_x2) ;
 	
-		poke(m_data, peek(m_data,2, i) - var_f, 2, i);
-		poke(m_data, peek(m_data,2, i+2) + var_f, 2, i+2);
+		poke(m_data, peek(m_data,2, i) - var_f, 2, idx);
+		poke(m_data, peek(m_data,2, idx2) + var_f, 2, idx2);
 
 	}
-	
-	var_x1 = peek(m_data, 0, var_data_chans-2);
-	var_x1r = peek(m_data, 1, var_data_chans-2);
-	var_x2 = peek(m_data, 0, var_data_chans-1);
-	var_x2r = peek(m_data, 1, var_data_chans-1);
-	
-	var_f = Ks * (var_x1 - var_x2) ;
-	
-	poke(m_data, peek(m_data,2, var_data_chans-2) - var_f, 2, var_data_chans-2);
-	poke(m_data, peek(m_data,2, var_data_chans-1) + var_f, 2, var_data_chans-1);
-	
 	return 0;
 }
 

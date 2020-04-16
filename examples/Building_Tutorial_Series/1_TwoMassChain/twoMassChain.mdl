@@ -1,0 +1,23 @@
+# MIMS script file
+# Script author: James Leonard
+
+@K1 param 0.1
+@Z1 param 0.0003
+@K2 param 0.1
+@Z2 param 0.0003
+
+@g ground 0.
+@m1 mass 1. 0. 0.
+@m2 mass 1. 0. 0.
+
+@s1 springDamper @g @m1 K1 Z1
+@s2 springDamper @m1 @m2 K2 Z2
+
+# Add force input to the model
+@in1 frcInput @m2
+
+# Add position output from the oscillator
+@out1 posOutput @m2
+
+
+# end of MIMS script

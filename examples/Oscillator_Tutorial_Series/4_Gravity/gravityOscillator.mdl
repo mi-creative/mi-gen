@@ -1,0 +1,18 @@
+# MIMS script file
+# Script author: James Leonard
+
+@grav param 0.001
+
+# Integrated harmonic oscillator 
+@o osc 1. 0.04 0.0003 0. 0.
+
+# Hammer mass falling down with gravity
+@p mass 1 grav 3. 0.
+
+@c contact @o @p 0.1 0.05
+
+# Add position output from the oscillator
+@out1 posOutput @o
+@out2 posOutput @p
+
+# end of MIMS script

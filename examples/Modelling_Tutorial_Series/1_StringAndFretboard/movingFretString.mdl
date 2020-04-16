@@ -1,0 +1,40 @@
+
+# Moving Fret on a String
+# Author: James Leonard
+
+@s stiffString 120 1. 0.6 0.2 0.001 0. 0.
+@g ground -0.2
+@m mass 100000 0. 0.
+
+# First input is pick, second is fret finger height
+@in1 posInput 0.
+@in3 posInput 0.
+
+# Audio-rate parameter for fret position
+@slide audioParam @in2
+
+@fK param 0.7
+@fZ param 0.05
+
+# The mass that will press down on the string
+@spm springDamper @in3 @m 10000 10000
+
+# Finger on string contacts
+@fs1 contact [@s slide] @m fK 0. 
+@fs2 contact [@s slide-0.01] @m fK 0.
+
+# String on fretboard contacts
+@sb1 contact @g [@s slide] fK 0 
+@sb2 contact @g [@s slide-0.01] fK 0.
+
+# Damping contacts behind finger
+@d1 contact [@s slide-0.04] @m 0.2 fZ 
+@d2 contact [@s slide-0.03] @m 0.2 fZ
+@d3 contact [@s slide-0.1] @m 0.02 fZ
+@d4 contact [@s slide-0.2] @m 0.02 fZ
+
+@pl nlPluck @in1 [@s 0.9] 1.5 0.05
+
+@out1 posOutput [@s 0.96]
+@out2 posOutput [@s 0.98]
+

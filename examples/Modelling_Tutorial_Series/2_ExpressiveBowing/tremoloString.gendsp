@@ -1,0 +1,150 @@
+{
+	"patcher" : 	{
+		"fileversion" : 1,
+		"appversion" : 		{
+			"major" : 7,
+			"minor" : 3,
+			"revision" : 1,
+			"architecture" : "x64",
+			"modernui" : 1
+		}
+,
+		"rect" : [ 67.0, 109.0, 700.0, 500.0 ],
+		"editing_bgcolor" : [ 0.9, 0.9, 0.9, 1.0 ],
+		"bglocked" : 0,
+		"openinpresentation" : 0,
+		"default_fontsize" : 12.0,
+		"default_fontface" : 0,
+		"default_fontname" : "Arial",
+		"gridonopen" : 1,
+		"gridsize" : [ 15.0, 15.0 ],
+		"gridsnaponopen" : 1,
+		"objectsnaponopen" : 1,
+		"statusbarvisible" : 2,
+		"toolbarvisible" : 1,
+		"lefttoolbarpinned" : 0,
+		"toptoolbarpinned" : 0,
+		"righttoolbarpinned" : 0,
+		"bottomtoolbarpinned" : 0,
+		"toolbars_unpinned_last_save" : 0,
+		"tallnewobj" : 0,
+		"boxanimatetime" : 200,
+		"enablehscroll" : 1,
+		"enablevscroll" : 1,
+		"devicewidth" : 0.0,
+		"description" : "",
+		"digest" : "",
+		"tags" : "",
+		"style" : "",
+		"subpatcher_template" : "",
+                
+ "boxes" : [ { "box" : 				{
+					"code" : " require(\"migen-lib\");\r\nrequire(\"migen-integrated\");\r\nrequire(\"migen-proxies\");\r\n\r\nBuffer motion;\r\nBuffer string;\r\n\r\n// Data structure code\r\n\r\nData s(3, 120);\r\nData proxy_0(3);\r\nData proxy_1(3);\r\nData proxy_2(3);\r\nData p_in1(3);\r\nData proxy_3(3);\r\nData proxy_4(3);\r\n\r\nParam type(0);\r\nParam display_motion(1);\r\n\r\n//Model initialisation flag\r\nHistory model_init(0);\r\nHistory render_cpt(0);\r\n\r\n\r\n//Initialisation code\r\nif(model_init == 0){\r\ninit_multiple_masses(s, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(proxy_0, 0, 0);\r\ninit_mat(proxy_1, 0, 0);\r\ninit_mat(proxy_2, 0, 0);\r\ninit_mat(p_in1, 0, 0);\r\ninit_mat(proxy_3, 0, 0);\r\ninit_mat(proxy_4, 0, 0);\r\nmodel_init = 1;\r\n}\r\n\r\n// Model Computation\r\n\r\n// Patch input routing\r\nupdate_input_pos(p_in1, in1);\r\nbowPos = in2;\r\nbowPres = in3;\r\n\r\n// Compute new positions of mass-type elements\r\ncompute_stiff_string(s, 120, 1., 0.7, 0.2, 0.0009, Zo = 0.00016);\r\n\r\n// Compute virtual proxy positions from connected masses\r\nset_proxy_pos_string(proxy_0, s, bowPos);\r\nset_proxy_pos_string(proxy_1, s, bowPos-0.03);\r\nset_proxy_pos_string(proxy_2, s, bowPos-0.06);\r\nset_proxy_pos_string(proxy_3, s, 0.96);\r\nset_proxy_pos_string(proxy_4, s, 0.98);\r\n\r\n// Compute interaction forces\r\ncompute_nlBow(proxy_0, p_in1, 0.1*bowPres, 0.002+0.004*bowPres, smooth = type);\r\ncompute_nlBow(proxy_1, p_in1, 0.1*bowPres, 0.002+0.004*bowPres, smooth = type);\r\ncompute_nlBow(proxy_2, p_in1, 0.1*bowPres, 0.002+0.004*bowPres, smooth = type);\r\n\r\n// Apply proxy forces to connected material points\r\napply_proxy_frc_string(proxy_0, s, bowPos);\r\napply_proxy_frc_string(proxy_1, s, bowPos-0.03);\r\napply_proxy_frc_string(proxy_2, s, bowPos-0.06);\r\napply_proxy_frc_string(proxy_3, s, 0.96);\r\napply_proxy_frc_string(proxy_4, s, 0.98);\r\n\r\n// Patch output routing\r\nout1 = get_pos(proxy_3);\r\nout2 = get_pos(proxy_4);\r\nout3 = 121;\r\n\r\n// Motion data routing to Max/MSP buffer objects\r\nif (display_motion){\r\nif (render_cpt == 0){\r\nfor(i = 0; i < channels(s); i+=1){\r\nmotion.poke(get_pos_at(s, i), 0 + i, 0);\r\n}\r\nmotion.poke(get_pos(p_in1), 120, 0);\r\nfor(i = 0; i < channels(s); i+=1){\r\nstring.poke(get_pos_at(s, i), 0 + i, 0);\r\n}\r\n}\r\nrender_cpt = (render_cpt + 1) % 200;\r\n}\r\n ",
+					"fontface" : 0,
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : " phyMdlBox ",
+					"maxclass" : "codebox",
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 20, 70, 550.0, 300.0 ],
+					"style" : ""
+				} }, { "box" : 				{
+					"id" : " inbox_1 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 70, 20, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 1 "
+				} }, { "box" : 				{
+					"id" : " inbox_2 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 140, 20, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 2 "
+				} }, { "box" : 				{
+					"id" : " inbox_3 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 210, 20, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 3 "
+				} }, { "box" : 				{
+					"id" : " outbox_1 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 50, 420, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 1 "
+				} }, { "box" : 				{
+					"id" : " outbox_2 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 100, 420, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 2 "
+				} }, { "box" : 				{
+					"id" : " outbox_3 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 150, 420, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 3 "
+				} }],
+ "lines" : [   {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_1 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 1 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_2 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 2 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_3 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_1 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_2 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 1 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_3 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 2 ]
+				}
+			}] } } 

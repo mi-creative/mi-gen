@@ -1,0 +1,27 @@
+# MIMS script file
+# Script author: James Leonard
+
+# Contact interaction parameters
+@Klin param 0.
+@Knl param 0.0003
+@Kbound param 0.5
+@Z param 0.
+
+# Force Input
+@in1 frcInput @m
+
+# The hammer
+@g ground 3.
+@m mass 1. 3. 0.
+@sp springDamper @g @m 0.001 0.08
+
+# The string
+@s string 60 1. 0.6 0.00035 0.00005 0. 0.
+
+# The nonlinear contact interaction
+@c nlContact [@s 0.3] @m Klin Knl Kbound Z
+
+@out1 posOutput [@s 0.1]
+@out2 posOutput @m
+
+# end of MIMS script

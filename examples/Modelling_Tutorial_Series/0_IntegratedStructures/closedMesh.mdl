@@ -1,0 +1,15 @@
+# MACRO OBJECT EXAMPLES: Mesh
+# created by James Leonard
+
+# Macro mesh object (length & width, 
+# mass, stiffness, damping, init position)
+@s closedMesh 10 5 1. 0.2 0.0001 0. 0.
+
+# force input, with additionnal parameters defining 
+# application point on mesh (X:Y, between 0 and 1)
+@in1 frcInput [@s 0.3 0.5]
+
+# position output, with additionnal parameters defining
+# listening point on mesh (X:Y, between 0 and 1)
+@out1 posOutput [@s 0.75 0.5]
+

@@ -1,0 +1,18 @@
+# MIMS script file
+# Script author: James Leonard
+
+@M audioParam @in2
+@K audioParam @in3
+@Z audioParam @in4
+
+# Integrated harmonic oscillator 
+# with param-controlled M, K and Z
+@o osc M K Z 0. 0.
+
+# Add force input to the model
+@in1 frcInput @o
+
+# Add position output from the oscillator
+@out1 posOutput @o
+
+# end of MIMS script

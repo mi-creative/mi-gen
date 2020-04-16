@@ -51,6 +51,7 @@ maxAPI.addHandlers({
                 maxAPI.outlet("error", e);
             }
 
+            /*
             try{
                 let jsonName = args[0].toString().split('.')[0].concat(".json");
                 maxAPI.post(jsonName);
@@ -66,6 +67,8 @@ maxAPI.addHandlers({
                 maxAPI.outlet("state", "Errors detected during accompanying json file generation.");
                 maxAPI.outlet("error", e);
             }
+            */
+
 
         }
         else
@@ -127,8 +130,8 @@ function parseMIMSFile(text){
  */
 function parseCommand(text){
 
-    if(!/^@/.test(text)){
-        if(/^~begin/.test(text)){
+    if(!/^\s*@/.test(text)){
+        if(/^\s*~begin/.test(text)){
            let s = text.split(/\s/)[1];
            if(s == null)
                throw "Invalid buffer begin command";
@@ -139,7 +142,7 @@ function parseCommand(text){
                 }
            }
         }
-        else if(/^~end/.test(text)){
+        else if(/^\s*~end/.test(text)){
             let s = text.split(/\s/)[1];
             if(s == null)
                 throw "Invalid buffer end command";

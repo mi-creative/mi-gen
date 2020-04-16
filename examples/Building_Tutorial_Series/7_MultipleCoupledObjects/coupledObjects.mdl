@@ -1,0 +1,22 @@
+# MIMS script file
+# Script author: James Leonard
+
+@strK param 0.4
+@m1K param 0.6
+@m2K param 0.6
+
+@excPos param 0.3
+
+@me1 cornerMesh 8 8 2. m1K 0.0008 0.00005  0. 0.
+@s chain 30 1. strK 0.0003 0. 0.
+@me2 cornerMesh 8 8 2. m2K 0.0003 0.00005  0. 0.
+
+@sp1 springDamper [@s 0] [@me1 0.3 0.3] strK 0.0001
+@sp2 springDamper [@s 1] [@me2 0.4 0.5] strK 0.0001
+
+@in1 frcInput [@s excPos]
+
+@out1 posOutput [@me1 0.7 0.7]
+@out2 posOutput [@me2 0.2 0.2]
+
+# end of MIMS script

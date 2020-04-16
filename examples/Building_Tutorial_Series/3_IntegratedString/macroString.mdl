@@ -1,0 +1,18 @@
+# MIMS script file
+# Script author: James Leonard
+
+@stiffness param 0.5
+@damping param 0.0003
+
+@s string 10 1. stiffness damping 0. 0.
+
+# Add force input, placed at 
+# 710th of the string length
+@in1 frcInput [@s 0.7]
+
+# Add a position output at
+# 2/10th of the string length
+@out1 posOutput [@s 0.2]
+
+
+# end of MIMS script

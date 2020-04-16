@@ -1,0 +1,20 @@
+# MACRO OBJECT EXAMPLES: Mesh
+# created by James Leonard
+
+# Macro mesh object (length & width, 
+# mass, stiffness, damping, init position)
+@s mesh 10 5 1. 0.2 0.01 0. 0.
+
+# Add a weak attachement to a fixed point 
+# so the mesh doesn't float away
+@g ground 0.
+@sp springDamper [@s 1 0] @g 0.1 0.01
+
+# force input, with additionnal parameters defining 
+# application point on mesh (X:Y, between 0 and 1)
+@in1 frcInput [@s 0.3 0.5]
+
+# position output, with additionnal parameters defining
+# listening point on mesh (X:Y, between 0 and 1)
+@out1 posOutput [@s 0.95 0.5]
+

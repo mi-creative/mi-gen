@@ -254,19 +254,21 @@ compute_nlPluck(m1_data, m2_data, nlK, nlscale, Z = 0){
 	// Calculate stiffness for 0 < abs(deltaP) < tip_dst : Kp = nlK * (nlscale / tip_dist)
 	// (nlK is the repulsive stiffness for tip_dst < abs(deltaP) < nlscale) 
 
-	Kp = nlK * sharpness;
+	//Kp = nlK * sharpness;
+	Kend = nlK / sharpness;
 	
 	
 	// now calculate the force resulting from the piecewise linear function
 	if(abs(deltaP) < (tip_dist))  {
-		var_f = -(Kp-nlK) * deltaP ;
+		//var_f = -(Kp-nlK) * deltaP ;
+		var_f = -(nlK-Kend) * deltaP ;
 	}
 	
 	else if(abs(deltaP) < nlscale)  {
 		if(deltaP > 0) 
-			{var_f = - tip_dist * Kp + nlK * deltaP + Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;}
+			{var_f = - tip_dist * nlK + Kend * deltaP + Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;}
 		else
-			{ var_f =  tip_dist * Kp + nlK * deltaP + Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;}
+			{ var_f =  tip_dist * nlK + Kend * deltaP + Z * ((var_x1-var_x1r) - (var_x2-var_x2r)) ;}
 	}
 	else var_f = 0.;
 	

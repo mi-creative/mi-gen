@@ -1,0 +1,21 @@
+
+# Moving Fret on a String
+# Author: James Leonard
+
+@bowPos audioParam @in2
+@bowPres audioParam @in3
+@type param 0
+
+@in1 posInput 0.
+
+~begin string
+@s stiffString 120 1. 0.7 0.2 0.0009 0.00016 0. 0.
+~end string
+
+@b nlBow [@s bowPos] @in1 0.1*bowPres [0.002+0.004*bowPres] type
+@b2 nlBow [@s bowPos-0.03] @in1 0.1*bowPres [0.002+0.004*bowPres] type
+@b3 nlBow [@s bowPos-0.06] @in1 0.1*bowPres [0.002+0.004*bowPres] type
+
+@out1 posOutput [@s 0.96]
+@out2 posOutput [@s 0.98]
+

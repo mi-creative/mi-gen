@@ -2,15 +2,15 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 7,
-			"minor" : 3,
+			"major" : 8,
+			"minor" : 1,
 			"revision" : 1,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
+		"classnamespace" : "dsp.gen",
 		"rect" : [ 67.0, 109.0, 700.0, 500.0 ],
-		"editing_bgcolor" : [ 0.9, 0.9, 0.9, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -37,306 +37,362 @@
 		"tags" : "",
 		"style" : "",
 		"subpatcher_template" : "",
-                
- "boxes" : [ { "box" : 				{
-					"code" : " require(\"migen-lib\");\r\nrequire(\"migen-integrated\");\r\nrequire(\"migen-proxies\");\r\nBuffer motion;\r\n\r\n// Model data structures\r\nData proxy_15(3);\r\nData proxy_14(3);\r\nData proxy_13(3);\r\nData proxy_12(3);\r\nData proxy_11(3);\r\nData proxy_10(3);\r\nData proxy_9(3);\r\nData proxy_8(3);\r\nData proxy_7(3);\r\nData proxy_6(3);\r\nData proxy_5(3);\r\nData proxy_4(3);\r\nData proxy_3(3);\r\nData proxy_2(3);\r\nData proxy_1(3);\r\nData proxy_0(3);\r\nData g(3);\r\nData s4(3, 50);\r\nData s3(3, 50);\r\nData s2(3, 50);\r\nData s1(3, 50);\r\nData g(3);\r\n\r\n// Control Rate Parameters\r\nParam c4g_Z(0.001);\r\nParam c4g_K(0.6);\r\nParam c34_Z(0.001);\r\nParam c34_K(0.6);\r\nParam c23_Z(0.001);\r\nParam c23_K(0.6);\r\nParam c12_Z(0.001);\r\nParam c12_K(0.6);\r\nParam c1g_Z(0.001);\r\nParam c1g_K(0.6);\r\nParam s4_Z(0.001);\r\nParam s4_K(0.6);\r\nParam s3_Z(0.001);\r\nParam s3_K(0.6);\r\nParam s2_Z(0.001);\r\nParam s2_K(0.6);\r\nParam s1_Z(0.001);\r\nParam s1_K(0.6);\r\nParam e4(0.9);\r\nParam e3(0.9);\r\nParam e2(0.9);\r\nParam e1(0.9);\r\n\r\nParam display_motion(0);\r\n\r\n// Model initialisation flag\r\nHistory model_init(0);\r\nHistory render_cpt(0);\r\n\r\n// Audio Rate Parameters\r\nl4 = in14;\r\nl3 = in13;\r\nl2 = in12;\r\nl1 = in11;\r\nc4_p1 = in10;\r\nc3_p2 = in9;\r\nc3_p1 = in8;\r\nc2_p2 = in7;\r\nc2_p1 = in6;\r\nc1_p2 = in5;\r\n\r\n// Model init phase\r\n\r\nif(model_init == 0){\r\ninit_mat(proxy_15, 0, 0);\r\ninit_mat(proxy_14, 0, 0);\r\ninit_mat(proxy_13, 0, 0);\r\ninit_mat(proxy_12, 0, 0);\r\ninit_mat(proxy_11, 0, 0);\r\ninit_mat(proxy_10, 0, 0);\r\ninit_mat(proxy_9, 0, 0);\r\ninit_mat(proxy_8, 0, 0);\r\ninit_mat(proxy_7, 0, 0);\r\ninit_mat(proxy_6, 0, 0);\r\ninit_mat(proxy_5, 0, 0);\r\ninit_mat(proxy_4, 0, 0);\r\ninit_mat(proxy_3, 0, 0);\r\ninit_mat(proxy_2, 0, 0);\r\ninit_mat(proxy_1, 0, 0);\r\ninit_mat(proxy_0, 0, 0);\r\ninit_mat(g, 0., 0.);\r\ninit_multiple_masses(s4, 0., 0.);\r\ninit_multiple_masses(s3, 0., 0.);\r\ninit_multiple_masses(s2, 0., 0.);\r\ninit_multiple_masses(s1, 0., 0.);\r\ninit_mat(g, 0., 0.);\r\n\r\n// Raise init flag\r\nmodel_init = 1;\r\n}\r\n\r\n// Model computation\r\ncompute_ground(g);\r\ncompute_chain(s4, 1., s4_K, s4_Z);\r\ncompute_chain(s3, 1., s3_K, s3_Z);\r\ncompute_chain(s2, 1., s2_K, s2_Z);\r\ncompute_chain(s1, 1., s1_K, s1_Z);\r\ncompute_ground(g);\r\nset_proxy_pos_string(proxy_15, s4, l4);\r\nset_proxy_pos_string(proxy_14, s3, l3);\r\nset_proxy_pos_string(proxy_13, s2, l2);\r\nset_proxy_pos_string(proxy_12, s1, l1);\r\nset_proxy_pos_string(proxy_11, s4, e4);\r\nset_proxy_pos_string(proxy_10, s3, e3);\r\nset_proxy_pos_string(proxy_9, s2, e2);\r\nset_proxy_pos_string(proxy_8, s1, e1);\r\nset_proxy_pos_string(proxy_7, s4, 1.);\r\nset_proxy_pos_string(proxy_6, s4, c4_p1);\r\nset_proxy_pos_string(proxy_5, s3, c3_p2);\r\nset_proxy_pos_string(proxy_4, s3, c3_p1);\r\nset_proxy_pos_string(proxy_3, s2, c2_p2);\r\nset_proxy_pos_string(proxy_2, s2, c2_p1);\r\nset_proxy_pos_string(proxy_1, s1, c1_p2);\r\nset_proxy_pos_string(proxy_0, s1, 0.);\r\napply_input_force(proxy_11, in4);\r\napply_input_force(proxy_10, in3);\r\napply_input_force(proxy_9, in2);\r\napply_input_force(proxy_8, in1);\r\ncompute_spring_damper(proxy_7, g, c4g_K, c4g_Z);\r\ncompute_spring_damper(proxy_5, proxy_6, c34_K, c34_Z);\r\ncompute_spring_damper(proxy_3, proxy_4, c23_K, c23_Z);\r\ncompute_spring_damper(proxy_1, proxy_2, c12_K, c12_Z);\r\ncompute_spring_damper(g, proxy_0, c1g_K, c1g_Z);\r\napply_proxy_frc_string(proxy_15, s4, l4);\r\napply_proxy_frc_string(proxy_14, s3, l3);\r\napply_proxy_frc_string(proxy_13, s2, l2);\r\napply_proxy_frc_string(proxy_12, s1, l1);\r\napply_proxy_frc_string(proxy_11, s4, e4);\r\napply_proxy_frc_string(proxy_10, s3, e3);\r\napply_proxy_frc_string(proxy_9, s2, e2);\r\napply_proxy_frc_string(proxy_8, s1, e1);\r\napply_proxy_frc_string(proxy_7, s4, 1.);\r\napply_proxy_frc_string(proxy_6, s4, c4_p1);\r\napply_proxy_frc_string(proxy_5, s3, c3_p2);\r\napply_proxy_frc_string(proxy_4, s3, c3_p1);\r\napply_proxy_frc_string(proxy_3, s2, c2_p2);\r\napply_proxy_frc_string(proxy_2, s2, c2_p1);\r\napply_proxy_frc_string(proxy_1, s1, c1_p2);\r\napply_proxy_frc_string(proxy_0, s1, 0.);\r\n\r\n// Output routing\r\nout4 =  get_pos(proxy_15);\r\nout3 =  get_pos(proxy_14);\r\nout2 =  get_pos(proxy_13);\r\nout1 =  get_pos(proxy_12);\r\n\r\n// Motion data routing to Max/MSP buffer objects\r\nif (display_motion){\r\nif (render_cpt == 0){\r\nmotion.poke(get_pos(g), 201, 0);\r\nfor(i = 0; i < channels(s4); i+=1){motion.poke(get_pos_at(s4, i), 151+i , 0);}\r\nfor(i = 0; i < channels(s3); i+=1){motion.poke(get_pos_at(s3, i), 101+i , 0);}\r\nfor(i = 0; i < channels(s2); i+=1){motion.poke(get_pos_at(s2, i), 51+i , 0);}\r\nfor(i = 0; i < channels(s1); i+=1){motion.poke(get_pos_at(s1, i), 1+i , 0);}\r\nmotion.poke(get_pos(g), 0, 0);\r\n}\r\nrender_cpt = (render_cpt + 1) % 200;}\r\n ",
+		"boxes" : [ 			{
+				"box" : 				{
+					"code" : " require(\"migen-lib\");\r\nrequire(\"migen-integrated\");\r\nrequire(\"migen-proxies\");\r\nBuffer motion;\r\n\r\n// Model data structures\r\nData proxy_15(3);\r\nData proxy_14(3);\r\nData proxy_13(3);\r\nData proxy_12(3);\r\nData proxy_11(3);\r\nData proxy_10(3);\r\nData proxy_9(3);\r\nData proxy_8(3);\r\nData proxy_7(3);\r\nData proxy_6(3);\r\nData proxy_5(3);\r\nData proxy_4(3);\r\nData proxy_3(3);\r\nData proxy_2(3);\r\nData proxy_1(3);\r\nData proxy_0(3);\r\nData g(3);\r\nData s4(3, 50);\r\nData s3(3, 50);\r\nData s2(3, 50);\r\nData s1(3, 50);\r\nData g(3);\r\n\r\n// Control Rate Parameters\r\nParam c4g_Z(0.001);\r\nParam c4g_K(0.6);\r\nParam c34_Z(0.001);\r\nParam c34_K(0.6);\r\nParam c23_Z(0.001);\r\nParam c23_K(0.6);\r\nParam c12_Z(0.001);\r\nParam c12_K(0.6);\r\nParam c1g_Z(0.001);\r\nParam c1g_K(0.6);\r\nParam s4_Z(0.001);\r\nParam s4_K(0.6);\r\nParam s3_Z(0.001);\r\nParam s3_K(0.6);\r\nParam s2_Z(0.001);\r\nParam s2_K(0.6);\r\nParam s1_Z(0.001);\r\nParam s1_K(0.6);\r\nParam e4(0.9);\r\nParam e3(0.9);\r\nParam e2(0.9);\r\nParam e1(0.9);\r\n\r\nParam display_motion(0);\r\n\r\n// Model initialisation flag\r\nHistory model_init(0);\r\nHistory render_cpt(0);\r\n\r\n// Audio Rate Parameters\r\nl4 = in14;\r\nl3 = in13;\r\nl2 = in12;\r\nl1 = in11;\r\nc4_p1 = in10;\r\nc3_p2 = in9;\r\nc3_p1 = in8;\r\nc2_p2 = in7;\r\nc2_p1 = in6;\r\nc1_p2 = in5;\r\n\r\n// Model init phase\r\n\r\nif(model_init == 0){\r\ninit_mat(proxy_15, 0, 0);\r\ninit_mat(proxy_14, 0, 0);\r\ninit_mat(proxy_13, 0, 0);\r\ninit_mat(proxy_12, 0, 0);\r\ninit_mat(proxy_11, 0, 0);\r\ninit_mat(proxy_10, 0, 0);\r\ninit_mat(proxy_9, 0, 0);\r\ninit_mat(proxy_8, 0, 0);\r\ninit_mat(proxy_7, 0, 0);\r\ninit_mat(proxy_6, 0, 0);\r\ninit_mat(proxy_5, 0, 0);\r\ninit_mat(proxy_4, 0, 0);\r\ninit_mat(proxy_3, 0, 0);\r\ninit_mat(proxy_2, 0, 0);\r\ninit_mat(proxy_1, 0, 0);\r\ninit_mat(proxy_0, 0, 0);\r\ninit_mat(g, 0., 0.);\r\ninit_multiple_masses(s4, 0., 0.);\r\ninit_multiple_masses(s3, 0., 0.);\r\ninit_multiple_masses(s2, 0., 0.);\r\ninit_multiple_masses(s1, 0., 0.);\r\ninit_mat(g, 0., 0.);\r\n\r\n// Raise init flag\r\nmodel_init = 1;\r\n}\r\n\r\n// Model computation\r\ncompute_ground(g);\r\ncompute_chain(s4, 50, 1., s4_K, s4_Z);\r\ncompute_chain(s3, 50, 1., s3_K, s3_Z);\r\ncompute_chain(s2, 50, 1., s2_K, s2_Z);\r\ncompute_chain(s1, 50, 1., s1_K, s1_Z);\r\ncompute_ground(g);\r\nset_proxy_pos_string(proxy_15, s4, l4);\r\nset_proxy_pos_string(proxy_14, s3, l3);\r\nset_proxy_pos_string(proxy_13, s2, l2);\r\nset_proxy_pos_string(proxy_12, s1, l1);\r\nset_proxy_pos_string(proxy_11, s4, e4);\r\nset_proxy_pos_string(proxy_10, s3, e3);\r\nset_proxy_pos_string(proxy_9, s2, e2);\r\nset_proxy_pos_string(proxy_8, s1, e1);\r\nset_proxy_pos_string(proxy_7, s4, 1.);\r\nset_proxy_pos_string(proxy_6, s4, c4_p1);\r\nset_proxy_pos_string(proxy_5, s3, c3_p2);\r\nset_proxy_pos_string(proxy_4, s3, c3_p1);\r\nset_proxy_pos_string(proxy_3, s2, c2_p2);\r\nset_proxy_pos_string(proxy_2, s2, c2_p1);\r\nset_proxy_pos_string(proxy_1, s1, c1_p2);\r\nset_proxy_pos_string(proxy_0, s1, 0.);\r\napply_input_force(proxy_11, in4);\r\napply_input_force(proxy_10, in3);\r\napply_input_force(proxy_9, in2);\r\napply_input_force(proxy_8, in1);\r\ncompute_spring_damper(proxy_7, g, c4g_K, c4g_Z);\r\ncompute_spring_damper(proxy_5, proxy_6, c34_K, c34_Z);\r\ncompute_spring_damper(proxy_3, proxy_4, c23_K, c23_Z);\r\ncompute_spring_damper(proxy_1, proxy_2, c12_K, c12_Z);\r\ncompute_spring_damper(g, proxy_0, c1g_K, c1g_Z);\r\napply_proxy_frc_string(proxy_15, s4, l4);\r\napply_proxy_frc_string(proxy_14, s3, l3);\r\napply_proxy_frc_string(proxy_13, s2, l2);\r\napply_proxy_frc_string(proxy_12, s1, l1);\r\napply_proxy_frc_string(proxy_11, s4, e4);\r\napply_proxy_frc_string(proxy_10, s3, e3);\r\napply_proxy_frc_string(proxy_9, s2, e2);\r\napply_proxy_frc_string(proxy_8, s1, e1);\r\napply_proxy_frc_string(proxy_7, s4, 1.);\r\napply_proxy_frc_string(proxy_6, s4, c4_p1);\r\napply_proxy_frc_string(proxy_5, s3, c3_p2);\r\napply_proxy_frc_string(proxy_4, s3, c3_p1);\r\napply_proxy_frc_string(proxy_3, s2, c2_p2);\r\napply_proxy_frc_string(proxy_2, s2, c2_p1);\r\napply_proxy_frc_string(proxy_1, s1, c1_p2);\r\napply_proxy_frc_string(proxy_0, s1, 0.);\r\n\r\n// Output routing\r\nout4 =  get_pos(proxy_15);\r\nout3 =  get_pos(proxy_14);\r\nout2 =  get_pos(proxy_13);\r\nout1 =  get_pos(proxy_12);\r\n\r\n// Motion data routing to Max/MSP buffer objects\r\nif (display_motion){\r\nif (render_cpt == 0){\r\nmotion.poke(get_pos(g), 201, 0);\r\nfor(i = 0; i < channels(s4); i+=1){motion.poke(get_pos_at(s4, i), 151+i , 0);}\r\nfor(i = 0; i < channels(s3); i+=1){motion.poke(get_pos_at(s3, i), 101+i , 0);}\r\nfor(i = 0; i < channels(s2); i+=1){motion.poke(get_pos_at(s2, i), 51+i , 0);}\r\nfor(i = 0; i < channels(s1); i+=1){motion.poke(get_pos_at(s1, i), 1+i , 0);}\r\nmotion.poke(get_pos(g), 0, 0);\r\n}\r\nrender_cpt = (render_cpt + 1) % 200;}\r\n ",
 					"fontface" : 0,
-					"fontname" : "Arial",
+					"fontname" : "Lucida Console",
 					"fontsize" : 12.0,
 					"id" : " phyMdlBox ",
 					"maxclass" : "codebox",
 					"numinlets" : 14,
 					"numoutlets" : 4,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 20.0, 50.0, 450.0, 300.0 ],
-					"style" : ""
-				} }, { "box" : 				{
+					"outlettype" : [ "", "", "", "" ],
+					"patching_rect" : [ 20.0, 50.0, 450.0, 300.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " inbox_1 ",
 					"maxclass" : "newobj",
-					"numinlets" :  0,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 70.0, 20.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " in 1 "
-				} }, { "box" : 				{
+					"text" : "in 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " inbox_2 ",
 					"maxclass" : "newobj",
-					"numinlets" :  0,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 120.0, 20.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " in 2 "
-				} }, { "box" : 				{
+					"text" : "in 2"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " inbox_3 ",
 					"maxclass" : "newobj",
-					"numinlets" :  0,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 170.0, 20.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " in 3 "
-				} }, { "box" : 				{
+					"text" : "in 3"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " inbox_4 ",
 					"maxclass" : "newobj",
-					"numinlets" :  0,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 220.0, 20.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " in 4 "
-				} }, { "box" : 				{
+					"text" : "in 4"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " inbox_5 ",
 					"maxclass" : "newobj",
-					"numinlets" :  0,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 270.0, 20.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " in 5 "
-				} }, { "box" : 				{
+					"text" : "in 5"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " inbox_6 ",
 					"maxclass" : "newobj",
-					"numinlets" :  0,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 320.0, 20.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " in 6 "
-				} }, { "box" : 				{
+					"text" : "in 6"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " inbox_7 ",
 					"maxclass" : "newobj",
-					"numinlets" :  0,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 370.0, 20.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " in 7 "
-				} }, { "box" : 				{
+					"text" : "in 7"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " inbox_8 ",
 					"maxclass" : "newobj",
-					"numinlets" :  0,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 420.0, 20.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " in 8 "
-				} }, { "box" : 				{
+					"text" : "in 8"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " inbox_9 ",
 					"maxclass" : "newobj",
-					"numinlets" :  0,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 470.0, 20.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " in 9 "
-				} }, { "box" : 				{
+					"text" : "in 9"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " inbox_10 ",
 					"maxclass" : "newobj",
-					"numinlets" :  0,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 520.0, 20.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " in 10 "
-				} }, { "box" : 				{
+					"patching_rect" : [ 520.0, 20.0, 35.0, 22.0 ],
+					"text" : "in 10"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " inbox_11 ",
 					"maxclass" : "newobj",
-					"numinlets" :  0,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 570.0, 20.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " in 11 "
-				} }, { "box" : 				{
+					"patching_rect" : [ 570.0, 20.0, 34.0, 22.0 ],
+					"text" : "in 11"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " inbox_12 ",
 					"maxclass" : "newobj",
-					"numinlets" :  0,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 620.0, 20.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " in 12 "
-				} }, { "box" : 				{
+					"patching_rect" : [ 620.0, 20.0, 35.0, 22.0 ],
+					"text" : "in 12"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " inbox_13 ",
 					"maxclass" : "newobj",
-					"numinlets" :  0,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 670.0, 20.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " in 13 "
-				} }, { "box" : 				{
+					"patching_rect" : [ 670.0, 20.0, 35.0, 22.0 ],
+					"text" : "in 13"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " inbox_14 ",
 					"maxclass" : "newobj",
-					"numinlets" :  0,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 720.0, 20.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " in 14 "
-				} }, { "box" : 				{
+					"patching_rect" : [ 720.0, 20.0, 35.0, 22.0 ],
+					"text" : "in 14"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " outbox_1 ",
 					"maxclass" : "newobj",
-					"numinlets" :  1,
+					"numinlets" : 1,
 					"numoutlets" : 0,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 70.0, 420.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " out 1 "
-				} }, { "box" : 				{
+					"patching_rect" : [ 70.0, 420.0, 35.0, 22.0 ],
+					"text" : "out 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " outbox_2 ",
 					"maxclass" : "newobj",
-					"numinlets" :  1,
+					"numinlets" : 1,
 					"numoutlets" : 0,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 120.0, 420.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " out 2 "
-				} }, { "box" : 				{
+					"patching_rect" : [ 120.0, 420.0, 35.0, 22.0 ],
+					"text" : "out 2"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " outbox_3 ",
 					"maxclass" : "newobj",
-					"numinlets" :  1,
+					"numinlets" : 1,
 					"numoutlets" : 0,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 170.0, 420.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " out 3 "
-				} }, { "box" : 				{
+					"patching_rect" : [ 170.0, 420.0, 35.0, 22.0 ],
+					"text" : "out 3"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : " outbox_4 ",
 					"maxclass" : "newobj",
-					"numinlets" :  1,
+					"numinlets" : 1,
 					"numoutlets" : 0,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 220.0, 420.0, 30.0, 22.0 ],
-					"style" : "",
-					"text" : " out 4 "
-				} }],
- "lines" : [   {
+					"patching_rect" : [ 220.0, 420.0, 35.0, 22.0 ],
+					"text" : "out 4"
+				}
+
+			}
+ ],
+		"lines" : [ 			{
 				"patchline" : 				{
 					"destination" : [ " phyMdlBox ", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
 					"source" : [ " inbox_1 ", 0 ]
 				}
-			},  {
-				"patchline" : 				{
-					"destination" : [ " phyMdlBox ", 1 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ " inbox_2 ", 0 ]
-				}
-			},  {
-				"patchline" : 				{
-					"destination" : [ " phyMdlBox ", 2 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ " inbox_3 ", 0 ]
-				}
-			},  {
-				"patchline" : 				{
-					"destination" : [ " phyMdlBox ", 3 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ " inbox_4 ", 0 ]
-				}
-			},  {
-				"patchline" : 				{
-					"destination" : [ " phyMdlBox ", 4 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ " inbox_5 ", 0 ]
-				}
-			},  {
-				"patchline" : 				{
-					"destination" : [ " phyMdlBox ", 5 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ " inbox_6 ", 0 ]
-				}
-			},  {
-				"patchline" : 				{
-					"destination" : [ " phyMdlBox ", 6 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ " inbox_7 ", 0 ]
-				}
-			},  {
-				"patchline" : 				{
-					"destination" : [ " phyMdlBox ", 7 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ " inbox_8 ", 0 ]
-				}
-			},  {
-				"patchline" : 				{
-					"destination" : [ " phyMdlBox ", 8 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ " inbox_9 ", 0 ]
-				}
-			},  {
+
+			}
+, 			{
 				"patchline" : 				{
 					"destination" : [ " phyMdlBox ", 9 ],
-					"disabled" : 0,
-					"hidden" : 0,
 					"source" : [ " inbox_10 ", 0 ]
 				}
-			},  {
+
+			}
+, 			{
 				"patchline" : 				{
 					"destination" : [ " phyMdlBox ", 10 ],
-					"disabled" : 0,
-					"hidden" : 0,
 					"source" : [ " inbox_11 ", 0 ]
 				}
-			},  {
+
+			}
+, 			{
 				"patchline" : 				{
 					"destination" : [ " phyMdlBox ", 11 ],
-					"disabled" : 0,
-					"hidden" : 0,
 					"source" : [ " inbox_12 ", 0 ]
 				}
-			},  {
+
+			}
+, 			{
 				"patchline" : 				{
 					"destination" : [ " phyMdlBox ", 12 ],
-					"disabled" : 0,
-					"hidden" : 0,
 					"source" : [ " inbox_13 ", 0 ]
 				}
-			},  {
+
+			}
+, 			{
 				"patchline" : 				{
 					"destination" : [ " phyMdlBox ", 13 ],
-					"disabled" : 0,
-					"hidden" : 0,
 					"source" : [ " inbox_14 ", 0 ]
 				}
-			},  {
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 1 ],
+					"source" : [ " inbox_2 ", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 2 ],
+					"source" : [ " inbox_3 ", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 3 ],
+					"source" : [ " inbox_4 ", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 4 ],
+					"source" : [ " inbox_5 ", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 5 ],
+					"source" : [ " inbox_6 ", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 6 ],
+					"source" : [ " inbox_7 ", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 7 ],
+					"source" : [ " inbox_8 ", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 8 ],
+					"source" : [ " inbox_9 ", 0 ]
+				}
+
+			}
+, 			{
 				"patchline" : 				{
 					"destination" : [ " outbox_1 ", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
 					"source" : [ " phyMdlBox ", 0 ]
 				}
-			},  {
+
+			}
+, 			{
 				"patchline" : 				{
 					"destination" : [ " outbox_2 ", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
 					"source" : [ " phyMdlBox ", 1 ]
 				}
-			},  {
+
+			}
+, 			{
 				"patchline" : 				{
 					"destination" : [ " outbox_3 ", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
 					"source" : [ " phyMdlBox ", 2 ]
 				}
-			},  {
+
+			}
+, 			{
 				"patchline" : 				{
 					"destination" : [ " outbox_4 ", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
 					"source" : [ " phyMdlBox ", 3 ]
 				}
-			}] } } 
+
+			}
+ ],
+		"editing_bgcolor" : [ 0.9, 0.9, 0.9, 1.0 ]
+	}
+
+}

@@ -21,7 +21,7 @@ const genModDict = {
     "nlSpring2" : { func :"compute_spring_damper_nl2", nbArgs:3, optArgs : 0},
     "nlSpring3" : { func :"compute_spring_damper_nl3", nbArgs:3, optArgs : 0},
     "nlSpringDamper" : { func :"compute_spring_damper_nl3_clipped", nbArgs:4, optArgs : 0},
-    "nlBow" : { func :"compute_nlBow", nbArgs:2, optArgs : 0},
+    "nlBow" : { func :"compute_nlBow", nbArgs:2, optArgs : ["smooth"]},
     "nlPluck" : { func :"compute_nlPluck", nbArgs:2, optArgs : ["Z"]},
     "posInput" : { func :"update_input_pos", nbArgs:0, optArgs : 0},
     "frcInput" : { func :"apply_input_force", nbArgs:0, optArgs : 0},

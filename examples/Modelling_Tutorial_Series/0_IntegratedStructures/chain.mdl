@@ -1,0 +1,20 @@
+ # MACRO OBJECT EXAMPLES: Chain 
+# created by James Leonard 
+ 
+# Macro string object (number of masses, mass,
+# stiffness, damping, init position) 
+@s chain 50 1. 0.6 0.01 0. 0. 
+ 
+# Add a weak attachement to a fixed point so 
+# the chain doesn't float away 
+@g ground 0. 
+@sp springDamper [@s 0.3] @g 0.01 0.01 
+ 
+# force input, with additionnal parameter defining 
+# application point on string (between 0 and 1) 
+@in1 frcInput [@s 0.3] 
+ 
+# position output, with additionnal parameter 
+# defining listening point on string (between 0 and 1) 
+@out1 posOutput [@s 0.95]
+

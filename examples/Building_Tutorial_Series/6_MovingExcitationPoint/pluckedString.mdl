@@ -1,0 +1,20 @@
+# MIMS script file
+# Script author: James Leonard
+
+@stiffness param 0.5
+@damping param 0.0003
+
+@excPos param 0.3
+@listPos param 0.9
+
+@s string 40 1. stiffness damping 0. 0.
+@in1 posInput 0.
+
+# Set a plucking interaction located at excPos
+@pl nlPluck [@s excPos] @in1 0.5000 0.1000 0.0010
+
+#Listen to the string at location listPos
+@out1 posOutput [@s listPos]
+
+
+# end of MIMS script

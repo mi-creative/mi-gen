@@ -1,0 +1,17 @@
+# MIMS script file
+# Script author: James Leonard
+
+@K param 0.1
+@Z param 0.0003
+
+# Integrated harmonic oscillator 
+# with param-controlled K and Z
+@o osc 1. K Z 0. 0.
+
+# Add force input to the model
+@in1 frcInput @o
+
+# Add position output from the oscillator
+@out1 posOutput @o
+
+# end of MIMS script
