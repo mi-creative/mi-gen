@@ -32,10 +32,17 @@ maxAPI.addHandlers({
 
         fs.truncate(filePath, 0, function(){console.log('done')})
 
+        fs.writeFileSync(filePath, fileContent, (err)=> {
+            if (err) console.log(err);
+            console.log("Successfully Written to File.");
+        });
+
+        /*
         fs.writeFile(filePath, fileContent, (err)=> {
             if (err) console.log(err);
             console.log("Successfully Written to File.");
         });
+         */
     }
 });
 

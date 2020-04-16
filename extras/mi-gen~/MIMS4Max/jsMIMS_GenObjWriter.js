@@ -69,10 +69,21 @@ function generateDspObj(name, codeboxCode, nbIn, nbOut) {
             console.log('done')
         });
 
+
+
+        fs.writeFileSync(name, outFileString, (err)=> {
+            if (err) console.log(err);
+            console.log("Successfully Written to File.");
+        });
+
+
+        /*
         fs.writeFile(name, outFileString, (err) => {
             if (err) console.log(err);
             console.log("Successfully Written to File.");
         });
+
+         */
     } catch(e){
         throw "gendsp File Writer error: "+ e;
     }
