@@ -1,0 +1,64 @@
+
+
+@couplingA audioParam @in2
+@couplingB audioParam @in3
+
+@K param 0.1
+@nlK param 0.
+
+@listenerA param 0.9
+@listenerB param 0.9
+
+@exciter param 0.4
+@bowPos param 0.3
+
+@Ks1 param 0.6
+@Ks2 param 0.6
+@Zs1 param 0.001
+@Zs2 param 0.001
+
+@stiff param 0.3
+
+~begin string1
+@st stiffString 140 1. Ks1 stiff Zs1 0. 0.
+~end string1
+
+~begin string2
+@st2 stiffString 142 1. Ks2 stiff Zs2 0. 0.
+~end string2
+
+@s nlSpring3 [@st couplingA] [@st2 couplingB] K nlK 0.0001
+
+@out1 posOutput [@st listenerA]
+@out2 posOutput [@st2 listenerB]
+
+@pM param 4.
+@pK param 0.1
+@pZ param 0.1
+
+@catchK param 0.000001
+@catchZ param 0.06
+
+@p1 mass pM 0.02 0.02
+@catch ground 1.
+
+@c1 contact [@st exciter] @p1 pK pZ 0.
+@c2 contact @p1 @catch catchK catchZ 0.
+
+@in1 frcInput @p1
+@in4 posInput 0.
+
+@nlZ param 0.01
+@nlscale param 0.00005
+
+@bow nlBow @in4 [@st bowPos] nlZ nlscale
+
+@damp param 0.0
+
+@dm1 damper @catch [@st 0.21] damp
+@dm2 damper @catch [@st 0.3] damp
+@dm3 damper @catch [@st 0.43] damp
+@dm4 damper @catch [@st2 0.22] damp
+@dm5 damper @catch [@st2 0.31] damp
+@dm6 damper @catch [@st2 0.42] damp
+

@@ -1,0 +1,54 @@
+
+
+# String Parameters
+@K param 0.6
+@Z param 0.001
+@Zo param 0.00005
+
+# The strings
+@ch1 chain 120 1. K Z Zo 0. 0.
+@ch2 chain 240 1. K Z Zo 0. 0.
+@ch3 chain 80 1. K Z Zo 0. 0.
+@ch4 chain 160 1. K Z Zo 0. 0.
+
+# Two meshes for the edges
+@m1 cornerMesh 10 10 1. 0.1 0.001 0. 0.
+@m2 cornerMesh 10 10 1. 0.1 0.001 0. 0.
+
+@K3 param 10
+
+# Connections between springs and end
+@sp1 nlSpringDamper [@ch1 0] [@m1 0.2 0.2] 0.2 K3 0.4 0.01
+@sp2 nlSpringDamper [@ch2 0] [@m1 0.8 0.2] 0.2 K3 0.4 0.01
+@sp3 nlSpringDamper [@ch3 0] [@m1 0.8 0.2] 0.2 K3 0.4 0.01
+@sp4 nlSpringDamper [@ch4 0] [@m1 0.2 0.8] 0.2 K3 0.4 0.01
+
+@sp5 nlSpringDamper [@ch1 1] [@m2 0.2 0.2] 0.2 K3 0.4 0.01
+@sp6 nlSpringDamper [@ch2 1] [@m2 0.8 0.2] 0.2 K3 0.4 0.01
+@sp7 nlSpringDamper [@ch3 1] [@m2 0.8 0.2] 0.2 K3 0.4 0.01
+@sp8 nlSpringDamper [@ch4 1] [@m2 0.2 0.8] 0.2 K3 0.4 0.01
+
+# Bowing positions on the strings
+@e1 param 0.2
+@e2 param 0.2
+@e3 param 0.2
+@e4 param 0.2
+
+@in1 posInput 0.
+@in2 posInput 0.
+@in3 posInput 0.
+@in4 posInput 0.
+
+@nlZ param 0.01
+@nlscale param 0.00005
+
+@bow1 nlBow @in1 [@ch1 e1] nlZ nlscale
+@bow2 nlBow @in2 [@ch2 e2] nlZ nlscale
+@bow3 nlBow @in3 [@ch3 e3] nlZ nlscale
+@bow4 nlBow @in4 [@ch4 e4] nlZ nlscale
+
+@out1 posOutput [@ch1 0.08]
+@out2 posOutput [@ch2 0.08]
+@out3 posOutput [@ch3 0.08]
+@out4 posOutput [@ch4 0.08]
+

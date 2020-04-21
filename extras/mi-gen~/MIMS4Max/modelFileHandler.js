@@ -1,12 +1,22 @@
 var fs = require('fs');
 const maxAPI = require("max-api");
+const path = require("path");
 
 
 maxAPI.addHandlers({
     loadFile: (...args) => {
         maxAPI.post("Loading file: ", args[0]);
+
+        // Do this on Mac to conform to a standard absolute path starting from the root /
+        if(/^Macintosh/.test(args[0]))
+            args[0] = args[0].replace("Macintosh HD:", "");
+
+
         fs.readFile(args[0], function(err, buf) {
-            if (err) console.log(err);
+            if (err) {
+                console.log(err);
+                maxAPI.post(err);
+            }
             console.log(buf.toString());
             console.log(buf.toString().length);
 
@@ -20,6 +30,12 @@ maxAPI.addHandlers({
         maxAPI.post("Saving to file file: ", args[0]);
 
         var filePath = args[0];
+
+        // Do this on Mac to conform to a standard absolute path starting from the root /
+        if(/^Macintosh/.test(filePath))
+            filePath = filePath.replace("Macintosh HD:", "");
+
+
         var fileContent = args[1].toString();
 
         console.log(fileContent);
@@ -33,7 +49,10 @@ maxAPI.addHandlers({
         //fs.truncate(filePath, 0, function(){console.log('done')})
 
         fs.writeFileSync(filePath, fileContent, (err)=> {
-            if (err) console.log(err);
+            if (err)  {
+                console.log(err);
+                maxAPI.post(err);
+            }
             console.log("Successfully Written to File.");
         });
 

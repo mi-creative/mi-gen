@@ -203,7 +203,7 @@ compute_open_mesh(m_data, length, width, M, K, Z, Zo = 0){
 }
 
 
-compute_mesh(m_data, length, width, M, K, Z, edges, Zo = 0){
+compute_mesh(m_data, length, width, M, K, Z, edges, Zo){
 
 	invM = 1/M;
 	A = 2 - Zo*invM;

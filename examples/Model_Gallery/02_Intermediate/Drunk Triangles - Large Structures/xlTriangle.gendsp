@@ -1,0 +1,133 @@
+{
+	"patcher" : 	{
+		"fileversion" : 1,
+		"appversion" : 		{
+			"major" : 8,
+			"minor" : 1,
+			"revision" : 1,
+			"architecture" : "x64",
+			"modernui" : 1
+		}
+,
+		"classnamespace" : "dsp.gen",
+		"rect" : [ 410.0, 190.0, 700.0, 500.0 ],
+		"bglocked" : 0,
+		"openinpresentation" : 0,
+		"default_fontsize" : 12.0,
+		"default_fontface" : 0,
+		"default_fontname" : "Arial",
+		"gridonopen" : 1,
+		"gridsize" : [ 15.0, 15.0 ],
+		"gridsnaponopen" : 1,
+		"objectsnaponopen" : 1,
+		"statusbarvisible" : 2,
+		"toolbarvisible" : 1,
+		"lefttoolbarpinned" : 0,
+		"toptoolbarpinned" : 0,
+		"righttoolbarpinned" : 0,
+		"bottomtoolbarpinned" : 0,
+		"toolbars_unpinned_last_save" : 0,
+		"tallnewobj" : 0,
+		"boxanimatetime" : 200,
+		"enablehscroll" : 1,
+		"enablevscroll" : 1,
+		"devicewidth" : 0.0,
+		"description" : "",
+		"digest" : "",
+		"tags" : "",
+		"style" : "",
+		"subpatcher_template" : "",
+		"boxes" : [ 			{
+				"box" : 				{
+					"code" : " require(\"migen-lib\");\r\n\r\nBuffer motion;\r\n\r\n// Data structure code\r\n\r\nData str_s0(3);\r\nData str_m0(3);\r\nData str_m1(3);\r\nData str_m2(3);\r\nData str_m3(3);\r\nData str_m4(3);\r\nData str_m5(3);\r\nData str_m6(3);\r\nData str_m7(3);\r\nData str_m8(3);\r\nData str_m9(3);\r\nData str_s1(3);\r\nData tri_m0_0(3);\r\nData tri_m0_1(3);\r\nData tri_m0_2(3);\r\nData tri_m0_3(3);\r\nData tri_m0_4(3);\r\nData tri_m0_5(3);\r\nData tri_m0_6(3);\r\nData tri_m0_7(3);\r\nData tri_m0_8(3);\r\nData tri_m0_9(3);\r\nData tri_m1_0(3);\r\nData tri_m1_1(3);\r\nData tri_m1_2(3);\r\nData tri_m1_3(3);\r\nData tri_m1_4(3);\r\nData tri_m1_5(3);\r\nData tri_m1_6(3);\r\nData tri_m1_7(3);\r\nData tri_m1_8(3);\r\nData tri_m2_0(3);\r\nData tri_m2_1(3);\r\nData tri_m2_2(3);\r\nData tri_m2_3(3);\r\nData tri_m2_4(3);\r\nData tri_m2_5(3);\r\nData tri_m2_6(3);\r\nData tri_m2_7(3);\r\nData tri_m3_0(3);\r\nData tri_m3_1(3);\r\nData tri_m3_2(3);\r\nData tri_m3_3(3);\r\nData tri_m3_4(3);\r\nData tri_m3_5(3);\r\nData tri_m3_6(3);\r\nData tri_m4_0(3);\r\nData tri_m4_1(3);\r\nData tri_m4_2(3);\r\nData tri_m4_3(3);\r\nData tri_m4_4(3);\r\nData tri_m4_5(3);\r\nData tri_m5_0(3);\r\nData tri_m5_1(3);\r\nData tri_m5_2(3);\r\nData tri_m5_3(3);\r\nData tri_m5_4(3);\r\nData tri_m6_0(3);\r\nData tri_m6_1(3);\r\nData tri_m6_2(3);\r\nData tri_m6_3(3);\r\nData tri_m7_0(3);\r\nData tri_m7_1(3);\r\nData tri_m7_2(3);\r\nData tri_m8_0(3);\r\nData tri_m8_1(3);\r\nData tri_m9_0(3);\r\nData m(3);\r\n\r\nParam str_M(5);\r\nParam str_K(0.02);\r\nParam str_Z(0.0001);\r\nParam tri_M(1.0);\r\nParam tri_K(0.3);\r\nParam tri_Z(0.0001);\r\nParam dZ(0.00001);\r\nParam display_motion(1);\r\n\r\n//Model initialisation flag\r\nHistory model_init(0);\r\nHistory render_cpt(0);\r\n\r\n\r\n//Initialisation code\r\nif(model_init == 0){\r\ninit_mat(str_s0, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(str_m0, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(str_m1, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(str_m2, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(str_m3, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(str_m4, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(str_m5, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(str_m6, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(str_m7, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(str_m8, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(str_m9, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(str_s1, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m0_0, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m0_1, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m0_2, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m0_3, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m0_4, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m0_5, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m0_6, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m0_7, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m0_8, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m0_9, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m1_0, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m1_1, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m1_2, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m1_3, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m1_4, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m1_5, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m1_6, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m1_7, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m1_8, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m2_0, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m2_1, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m2_2, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m2_3, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m2_4, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m2_5, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m2_6, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m2_7, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m3_0, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m3_1, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m3_2, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m3_3, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m3_4, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m3_5, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m3_6, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m4_0, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m4_1, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m4_2, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m4_3, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m4_4, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m4_5, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m5_0, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m5_1, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m5_2, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m5_3, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m5_4, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m6_0, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m6_1, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m6_2, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m6_3, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m7_0, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m7_1, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m7_2, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m8_0, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m8_1, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(tri_m9_0, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(m, 1, 1 + 0 / SAMPLERATE);\r\nmodel_init = 1;\r\n}\r\n\r\n// Model Computation\r\n\r\n// Compute new positions of mass-type elements\r\ncompute_ground(str_s0);\r\ncompute_mass(str_m0, str_M);\r\ncompute_mass(str_m1, str_M);\r\ncompute_mass(str_m2, str_M);\r\ncompute_mass(str_m3, str_M);\r\ncompute_mass(str_m4, str_M);\r\ncompute_mass(str_m5, str_M);\r\ncompute_mass(str_m6, str_M);\r\ncompute_mass(str_m7, str_M);\r\ncompute_mass(str_m8, str_M);\r\ncompute_mass(str_m9, str_M);\r\ncompute_ground(str_s1);\r\ncompute_ground(tri_m0_0);\r\ncompute_mass(tri_m0_1, tri_M);\r\ncompute_mass(tri_m0_2, tri_M);\r\ncompute_mass(tri_m0_3, tri_M);\r\ncompute_mass(tri_m0_4, tri_M);\r\ncompute_mass(tri_m0_5, tri_M);\r\ncompute_mass(tri_m0_6, tri_M);\r\ncompute_mass(tri_m0_7, tri_M);\r\ncompute_mass(tri_m0_8, tri_M);\r\ncompute_mass(tri_m0_9, tri_M);\r\ncompute_mass(tri_m1_0, tri_M);\r\ncompute_mass(tri_m1_1, tri_M);\r\ncompute_mass(tri_m1_2, tri_M);\r\ncompute_mass(tri_m1_3, tri_M);\r\ncompute_mass(tri_m1_4, tri_M);\r\ncompute_mass(tri_m1_5, tri_M);\r\ncompute_mass(tri_m1_6, tri_M);\r\ncompute_mass(tri_m1_7, tri_M);\r\ncompute_ground(tri_m1_8);\r\ncompute_mass(tri_m2_0, tri_M);\r\ncompute_mass(tri_m2_1, tri_M);\r\ncompute_mass(tri_m2_2, tri_M);\r\ncompute_mass(tri_m2_3, tri_M);\r\ncompute_mass(tri_m2_4, tri_M);\r\ncompute_mass(tri_m2_5, tri_M);\r\ncompute_mass(tri_m2_6, tri_M);\r\ncompute_mass(tri_m2_7, tri_M);\r\ncompute_mass(tri_m3_0, tri_M);\r\ncompute_mass(tri_m3_1, tri_M);\r\ncompute_mass(tri_m3_2, tri_M);\r\ncompute_mass(tri_m3_3, tri_M);\r\ncompute_mass(tri_m3_4, tri_M);\r\ncompute_mass(tri_m3_5, tri_M);\r\ncompute_mass(tri_m3_6, tri_M);\r\ncompute_mass(tri_m4_0, tri_M);\r\ncompute_mass(tri_m4_1, tri_M);\r\ncompute_mass(tri_m4_2, tri_M);\r\ncompute_mass(tri_m4_3, tri_M);\r\ncompute_mass(tri_m4_4, tri_M);\r\ncompute_mass(tri_m4_5, tri_M);\r\ncompute_mass(tri_m5_0, tri_M);\r\ncompute_mass(tri_m5_1, tri_M);\r\ncompute_mass(tri_m5_2, tri_M);\r\ncompute_mass(tri_m5_3, tri_M);\r\ncompute_mass(tri_m5_4, tri_M);\r\ncompute_mass(tri_m6_0, tri_M);\r\ncompute_mass(tri_m6_1, tri_M);\r\ncompute_mass(tri_m6_2, tri_M);\r\ncompute_mass(tri_m6_3, tri_M);\r\ncompute_mass(tri_m7_0, tri_M);\r\ncompute_mass(tri_m7_1, tri_M);\r\ncompute_mass(tri_m7_2, tri_M);\r\ncompute_mass(tri_m8_0, tri_M);\r\ncompute_mass(tri_m8_1, tri_M);\r\ncompute_ground(tri_m9_0);\r\ncompute_mass(m, 1., gravity = 0.002/ SAMPLERATE);\r\n\r\n// Compute interaction forces\r\ncompute_spring_damper(str_s0, str_m0, str_K, str_Z);\r\ncompute_spring_damper(str_m0, str_m1, str_K, str_Z);\r\ncompute_spring_damper(str_m1, str_m2, str_K, str_Z);\r\ncompute_spring_damper(str_m2, str_m3, str_K, str_Z);\r\ncompute_spring_damper(str_m3, str_m4, str_K, str_Z);\r\ncompute_spring_damper(str_m4, str_m5, str_K, str_Z);\r\ncompute_spring_damper(str_m5, str_m6, str_K, str_Z);\r\ncompute_spring_damper(str_m6, str_m7, str_K, str_Z);\r\ncompute_spring_damper(str_m7, str_m8, str_K, str_Z);\r\ncompute_spring_damper(str_m8, str_m9, str_K, str_Z);\r\ncompute_spring_damper(str_m9, str_s1, str_K, str_Z);\r\ncompute_spring_damper(tri_m0_0, tri_m0_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_1, tri_m0_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_2, tri_m0_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_3, tri_m0_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_4, tri_m0_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_5, tri_m0_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_6, tri_m0_7, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_7, tri_m0_8, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_8, tri_m0_9, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_0, tri_m1_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_1, tri_m1_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_2, tri_m1_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_3, tri_m1_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_4, tri_m1_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_5, tri_m1_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_6, tri_m1_7, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_7, tri_m1_8, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_0, tri_m2_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_1, tri_m2_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_2, tri_m2_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_3, tri_m2_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_4, tri_m2_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_5, tri_m2_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_6, tri_m2_7, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_0, tri_m3_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_1, tri_m3_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_2, tri_m3_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_3, tri_m3_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_4, tri_m3_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_5, tri_m3_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_0, tri_m4_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_1, tri_m4_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_2, tri_m4_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_3, tri_m4_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_4, tri_m4_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_0, tri_m5_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_1, tri_m5_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_2, tri_m5_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_3, tri_m5_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_0, tri_m6_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_1, tri_m6_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_2, tri_m6_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m7_0, tri_m7_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m7_1, tri_m7_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m8_0, tri_m8_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_0, tri_m1_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_1, tri_m1_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_2, tri_m1_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_3, tri_m1_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_4, tri_m1_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_5, tri_m1_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_6, tri_m1_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_7, tri_m1_7, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_8, tri_m1_8, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_0, tri_m2_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_1, tri_m2_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_2, tri_m2_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_3, tri_m2_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_4, tri_m2_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_5, tri_m2_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_6, tri_m2_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_7, tri_m2_7, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_0, tri_m3_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_1, tri_m3_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_2, tri_m3_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_3, tri_m3_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_4, tri_m3_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_5, tri_m3_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_6, tri_m3_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_0, tri_m4_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_1, tri_m4_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_2, tri_m4_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_3, tri_m4_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_4, tri_m4_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_5, tri_m4_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_0, tri_m5_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_1, tri_m5_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_2, tri_m5_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_3, tri_m5_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_4, tri_m5_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_0, tri_m6_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_1, tri_m6_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_2, tri_m6_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_3, tri_m6_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_0, tri_m7_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_1, tri_m7_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_2, tri_m7_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m7_0, tri_m8_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m7_1, tri_m8_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m8_0, tri_m9_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_1, tri_m1_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_2, tri_m1_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_3, tri_m1_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_4, tri_m1_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_5, tri_m1_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_6, tri_m1_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_7, tri_m1_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_8, tri_m1_7, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m0_9, tri_m1_8, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_1, tri_m2_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_2, tri_m2_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_3, tri_m2_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_4, tri_m2_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_5, tri_m2_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_6, tri_m2_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_7, tri_m2_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m1_8, tri_m2_7, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_1, tri_m3_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_2, tri_m3_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_3, tri_m3_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_4, tri_m3_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_5, tri_m3_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_6, tri_m3_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m2_7, tri_m3_6, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_1, tri_m4_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_2, tri_m4_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_3, tri_m4_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_4, tri_m4_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_5, tri_m4_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m3_6, tri_m4_5, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_1, tri_m5_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_2, tri_m5_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_3, tri_m5_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_4, tri_m5_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m4_5, tri_m5_4, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_1, tri_m6_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_2, tri_m6_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_3, tri_m6_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m5_4, tri_m6_3, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_1, tri_m7_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_2, tri_m7_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m6_3, tri_m7_2, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m7_1, tri_m8_0, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m7_2, tri_m8_1, tri_K, tri_Z);\r\ncompute_spring_damper(tri_m8_1, tri_m9_0, tri_K, tri_Z);\r\ncompute_contact(str_m9, m, 0.4, 0.0001, thresh = 0.);\r\ncompute_contact_nl3_clipped(str_m2, tri_m5_2, 0.01, 0.1, 0.4, dZ);\r\ncompute_contact_nl3_clipped(str_m7, tri_m0_2, 0.01, 0.1, 0.4, dZ);\r\n\r\n// Patch output routing\r\nout1 = get_pos(tri_m3_3);\r\nout2 = get_pos(tri_m4_2);\r\nout3 = get_pos(m);\r\nout4 = 68;\r\n\r\n// Motion data routing to Max/MSP buffer objects\r\nif (display_motion){\r\nif (render_cpt == 0){\r\nmotion.poke(get_pos(str_s0), 0, 0);\r\nmotion.poke(get_pos(str_m0), 1, 0);\r\nmotion.poke(get_pos(str_m1), 2, 0);\r\nmotion.poke(get_pos(str_m2), 3, 0);\r\nmotion.poke(get_pos(str_m3), 4, 0);\r\nmotion.poke(get_pos(str_m4), 5, 0);\r\nmotion.poke(get_pos(str_m5), 6, 0);\r\nmotion.poke(get_pos(str_m6), 7, 0);\r\nmotion.poke(get_pos(str_m7), 8, 0);\r\nmotion.poke(get_pos(str_m8), 9, 0);\r\nmotion.poke(get_pos(str_m9), 10, 0);\r\nmotion.poke(get_pos(str_s1), 11, 0);\r\nmotion.poke(get_pos(tri_m0_0), 12, 0);\r\nmotion.poke(get_pos(tri_m0_1), 13, 0);\r\nmotion.poke(get_pos(tri_m0_2), 14, 0);\r\nmotion.poke(get_pos(tri_m0_3), 15, 0);\r\nmotion.poke(get_pos(tri_m0_4), 16, 0);\r\nmotion.poke(get_pos(tri_m0_5), 17, 0);\r\nmotion.poke(get_pos(tri_m0_6), 18, 0);\r\nmotion.poke(get_pos(tri_m0_7), 19, 0);\r\nmotion.poke(get_pos(tri_m0_8), 20, 0);\r\nmotion.poke(get_pos(tri_m0_9), 21, 0);\r\nmotion.poke(get_pos(tri_m1_0), 22, 0);\r\nmotion.poke(get_pos(tri_m1_1), 23, 0);\r\nmotion.poke(get_pos(tri_m1_2), 24, 0);\r\nmotion.poke(get_pos(tri_m1_3), 25, 0);\r\nmotion.poke(get_pos(tri_m1_4), 26, 0);\r\nmotion.poke(get_pos(tri_m1_5), 27, 0);\r\nmotion.poke(get_pos(tri_m1_6), 28, 0);\r\nmotion.poke(get_pos(tri_m1_7), 29, 0);\r\nmotion.poke(get_pos(tri_m1_8), 30, 0);\r\nmotion.poke(get_pos(tri_m2_0), 31, 0);\r\nmotion.poke(get_pos(tri_m2_1), 32, 0);\r\nmotion.poke(get_pos(tri_m2_2), 33, 0);\r\nmotion.poke(get_pos(tri_m2_3), 34, 0);\r\nmotion.poke(get_pos(tri_m2_4), 35, 0);\r\nmotion.poke(get_pos(tri_m2_5), 36, 0);\r\nmotion.poke(get_pos(tri_m2_6), 37, 0);\r\nmotion.poke(get_pos(tri_m2_7), 38, 0);\r\nmotion.poke(get_pos(tri_m3_0), 39, 0);\r\nmotion.poke(get_pos(tri_m3_1), 40, 0);\r\nmotion.poke(get_pos(tri_m3_2), 41, 0);\r\nmotion.poke(get_pos(tri_m3_3), 42, 0);\r\nmotion.poke(get_pos(tri_m3_4), 43, 0);\r\nmotion.poke(get_pos(tri_m3_5), 44, 0);\r\nmotion.poke(get_pos(tri_m3_6), 45, 0);\r\nmotion.poke(get_pos(tri_m4_0), 46, 0);\r\nmotion.poke(get_pos(tri_m4_1), 47, 0);\r\nmotion.poke(get_pos(tri_m4_2), 48, 0);\r\nmotion.poke(get_pos(tri_m4_3), 49, 0);\r\nmotion.poke(get_pos(tri_m4_4), 50, 0);\r\nmotion.poke(get_pos(tri_m4_5), 51, 0);\r\nmotion.poke(get_pos(tri_m5_0), 52, 0);\r\nmotion.poke(get_pos(tri_m5_1), 53, 0);\r\nmotion.poke(get_pos(tri_m5_2), 54, 0);\r\nmotion.poke(get_pos(tri_m5_3), 55, 0);\r\nmotion.poke(get_pos(tri_m5_4), 56, 0);\r\nmotion.poke(get_pos(tri_m6_0), 57, 0);\r\nmotion.poke(get_pos(tri_m6_1), 58, 0);\r\nmotion.poke(get_pos(tri_m6_2), 59, 0);\r\nmotion.poke(get_pos(tri_m6_3), 60, 0);\r\nmotion.poke(get_pos(tri_m7_0), 61, 0);\r\nmotion.poke(get_pos(tri_m7_1), 62, 0);\r\nmotion.poke(get_pos(tri_m7_2), 63, 0);\r\nmotion.poke(get_pos(tri_m8_0), 64, 0);\r\nmotion.poke(get_pos(tri_m8_1), 65, 0);\r\nmotion.poke(get_pos(tri_m9_0), 66, 0);\r\nmotion.poke(get_pos(m), 67, 0);\r\n}\r\nrender_cpt = (render_cpt + 1) % 200;\r\n}\r\n ",
+					"fontface" : 0,
+					"fontname" : "Lucida Console",
+					"fontsize" : 12.0,
+					"id" : " phyMdlBox ",
+					"maxclass" : "codebox",
+					"numinlets" : 1,
+					"numoutlets" : 4,
+					"outlettype" : [ "", "", "", "" ],
+					"patching_rect" : [ 20.0, 70.0, 550.0, 300.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : " outbox_1 ",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 50.0, 420.0, 35.0, 22.0 ],
+					"text" : "out 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : " outbox_2 ",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 100.0, 420.0, 35.0, 22.0 ],
+					"text" : "out 2"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : " outbox_3 ",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 150.0, 420.0, 35.0, 22.0 ],
+					"text" : "out 3"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : " outbox_4 ",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 200.0, 420.0, 35.0, 22.0 ],
+					"text" : "out 4"
+				}
+
+			}
+ ],
+		"lines" : [ 			{
+				"patchline" : 				{
+					"destination" : [ " outbox_1 ", 0 ],
+					"source" : [ " phyMdlBox ", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ " outbox_2 ", 0 ],
+					"source" : [ " phyMdlBox ", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ " outbox_3 ", 0 ],
+					"source" : [ " phyMdlBox ", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ " outbox_4 ", 0 ],
+					"source" : [ " phyMdlBox ", 3 ]
+				}
+
+			}
+ ],
+		"autosave" : 0,
+		"editing_bgcolor" : [ 0.9, 0.9, 0.9, 1.0 ]
+	}
+
+}

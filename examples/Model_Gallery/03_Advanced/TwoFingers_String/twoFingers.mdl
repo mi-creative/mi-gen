@@ -1,0 +1,50 @@
+
+@s stiffString 120 1. 0.6 0.2 0.001 0. 0.
+
+@g ground -0.1
+@g2 ground -0.2
+
+@m mass 100000 0. 0.
+@m2 mass 100000 0. 0.
+
+@in1 posInput 0.
+
+@finger1 audioParam @in2
+@in3 posInput 0.
+
+@finger2 audioParam @in4
+@in5 posInput 0.
+
+@fK param 0.7
+@fZ param 0.05
+@nlK param 0.2
+
+# First finger on the string
+@spm springDamper @in3 @m 10000 10000
+
+@det1 contact [@s finger1-0.2] @m 0.02 fZ 0.
+@det2 contact [@s finger1-0.1] @m 0.02 fZ 0.
+@det3 contact [@s finger1-0.04] @m 0.2 fZ 0.
+@det4 contact [@s finger1-0.03] @m 0.2 fZ 0.
+@det5 contact [@s finger1] @m fK 0. 0. 
+@det6 contact [@s finger1-0.01] @m fK 0. 0. 
+@det7 contact @g [@s finger1] fK 0 0. 
+@det8 contact @g [@s finger1-0.01] fK 0 0. 
+
+# Second finger on the string
+@spm2 springDamper @in5 @m2 10000 10000
+
+@det9 contact [@s finger2-0.2] @m2 0.02 fZ 0. 
+@det10 contact [@s finger2-0.1] @m2 0.02 fZ 0. 
+@det11 contact [@s finger2-0.04] @m2 0.2 fZ 0. 
+@det12 contact [@s finger2-0.03] @m2 0.2 fZ 0. 
+@det13 contact [@s finger2] @m2 fK 0. 0. 
+@det14 contact [@s finger2-0.01] @m2 fK 0. 0. 
+@det15 contact @g2 [@s finger2] fK 0 0. 
+@det16 contact @g2 [@s finger2-0.01] fK 0 0. 
+
+@pl nlPluck @in1 [@s 0.9] nlK 0.05
+
+@out1 posOutput [@s 0.9]
+@out2 posOutput [@s 0.87]
+

@@ -1,0 +1,71 @@
+# Compartemented STRING
+# created by James Leonard 
+ 
+
+# Parameters for the model
+@e1 param 0.9
+@e2 param 0.9
+@e3 param 0.9
+@e4 param 0.9
+
+# String parameters
+@s1_K param 0.6
+@s1_Z param 0.001
+@s2_K param 0.6
+@s2_Z param 0.001
+@s3_K param 0.6
+@s3_Z param 0.001
+@s4_K param 0.6
+@s4_Z param 0.001
+
+@c1g_K param 0.6
+@c1g_Z param 0.001
+@c12_K param 0.6
+@c12_Z param 0.001
+@c23_K param 0.6
+@c23_Z param 0.001
+@c34_K param 0.6
+@c34_Z param 0.001
+@c4g_K param 0.6
+@c4g_Z param 0.001
+
+@g ground 0.
+
+#The String components: 4 chains
+@s1 chain 100 1. s1_K s1_Z 0. 0.
+@s2 chain 100 1. s2_K s2_Z 0. 0.
+@s3 chain 100 1. s3_K s3_Z 0. 0.
+@s4 chain 100 1. s4_K s4_Z 0. 0.
+
+@c1_p2 audioParam @in5
+@c2_p1 audioParam @in6
+@c2_p2 audioParam @in7
+@c3_p1 audioParam @in8
+@c3_p2 audioParam @in9
+@c4_p1 audioParam @in10
+
+# Audio-rate parameter for interpolating listening point
+@l1 audioParam @in11
+@l2 audioParam @in12
+@l3 audioParam @in13
+@l4 audioParam @in14
+
+# Connections between all the chains
+@sp1 springDamper @g [@s1 0.] c1g_K c1g_Z
+@sp2 springDamper [@s1 c1_p2] [@s2 c2_p1] c12_K c12_Z 
+@sp3 springDamper [@s2 c2_p2] [@s3 c3_p1] c23_K c23_Z
+@sp4 springDamper [@s3 c3_p2] [@s4 c4_p1] c34_K c34_Z 
+@sp5 springDamper [@s4 1] @g c4g_K c4g_Z
+
+# Position inputs: pluck and vertical position of string contact
+@in1 frcInput [@s1 e1]
+@in2 frcInput [@s2 e2]
+@in3 frcInput [@s3 e3]
+@in4 frcInput [@s4 e4]
+
+# Mobile position outputs
+@out1 posOutput [@s1 l1]
+@out2 posOutput [@s2 l2]
+@out3 posOutput [@s3 l3]
+@out4 posOutput [@s4 l4]
+

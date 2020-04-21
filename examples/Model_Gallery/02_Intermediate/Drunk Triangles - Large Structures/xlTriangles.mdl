@@ -1,0 +1,242 @@
+
+
+@str_M param 5
+@str_K param 0.02
+@str_Z param 0.0001
+
+@str_s0 ground 0.
+@str_m0 mass str_M 0. 0.
+@str_m1 mass str_M 0. 0.
+@str_m2 mass str_M 0. 0.
+@str_m3 mass str_M 0. 0.
+@str_m4 mass str_M 0. 0.
+@str_m5 mass str_M 0. 0.
+@str_m6 mass str_M 0. 0.
+@str_m7 mass str_M 0. 0.
+@str_m8 mass str_M 0. 0.
+@str_m9 mass str_M 0. 0.
+@str_s1 ground 0.
+
+@str_r0 springDamper @str_s0 @str_m0 str_K str_Z
+@str_r1 springDamper @str_m0 @str_m1 str_K str_Z
+@str_r2 springDamper @str_m1 @str_m2 str_K str_Z
+@str_r3 springDamper @str_m2 @str_m3 str_K str_Z
+@str_r4 springDamper @str_m3 @str_m4 str_K str_Z
+@str_r5 springDamper @str_m4 @str_m5 str_K str_Z
+@str_r6 springDamper @str_m5 @str_m6 str_K str_Z
+@str_r7 springDamper @str_m6 @str_m7 str_K str_Z
+@str_r8 springDamper @str_m7 @str_m8 str_K str_Z
+@str_r9 springDamper @str_m8 @str_m9 str_K str_Z
+@str_r10 springDamper @str_m9 @str_s1 str_K str_Z
+
+@tri_M param 1.0
+@tri_K param 0.3
+@tri_Z param 0.0001
+
+@tri_m0_0 ground 0. 
+@tri_m0_1 mass tri_M 0. 0. 
+@tri_m0_2 mass tri_M 0. 0. 
+@tri_m0_3 mass tri_M 0. 0. 
+@tri_m0_4 mass tri_M 0. 0. 
+@tri_m0_5 mass tri_M 0. 0. 
+@tri_m0_6 mass tri_M 0. 0. 
+@tri_m0_7 mass tri_M 0. 0. 
+@tri_m0_8 mass tri_M 0. 0. 
+@tri_m0_9 mass tri_M 0. 0. 
+@tri_m1_0 mass tri_M 0. 0. 
+@tri_m1_1 mass tri_M 0. 0. 
+@tri_m1_2 mass tri_M 0. 0. 
+@tri_m1_3 mass tri_M 0. 0. 
+@tri_m1_4 mass tri_M 0. 0. 
+@tri_m1_5 mass tri_M 0. 0. 
+@tri_m1_6 mass tri_M 0. 0. 
+@tri_m1_7 mass tri_M 0. 0. 
+@tri_m1_8 ground 0. 
+@tri_m2_0 mass tri_M 0. 0. 
+@tri_m2_1 mass tri_M 0. 0. 
+@tri_m2_2 mass tri_M 0. 0. 
+@tri_m2_3 mass tri_M 0. 0. 
+@tri_m2_4 mass tri_M 0. 0. 
+@tri_m2_5 mass tri_M 0. 0. 
+@tri_m2_6 mass tri_M 0. 0. 
+@tri_m2_7 mass tri_M 0. 0. 
+@tri_m3_0 mass tri_M 0. 0. 
+@tri_m3_1 mass tri_M 0. 0. 
+@tri_m3_2 mass tri_M 0. 0. 
+@tri_m3_3 mass tri_M 0. 0. 
+@tri_m3_4 mass tri_M 0. 0. 
+@tri_m3_5 mass tri_M 0. 0. 
+@tri_m3_6 mass tri_M 0. 0. 
+@tri_m4_0 mass tri_M 0. 0. 
+@tri_m4_1 mass tri_M 0. 0. 
+@tri_m4_2 mass tri_M 0. 0. 
+@tri_m4_3 mass tri_M 0. 0. 
+@tri_m4_4 mass tri_M 0. 0. 
+@tri_m4_5 mass tri_M 0. 0. 
+@tri_m5_0 mass tri_M 0. 0. 
+@tri_m5_1 mass tri_M 0. 0. 
+@tri_m5_2 mass tri_M 0. 0. 
+@tri_m5_3 mass tri_M 0. 0. 
+@tri_m5_4 mass tri_M 0. 0. 
+@tri_m6_0 mass tri_M 0. 0. 
+@tri_m6_1 mass tri_M 0. 0. 
+@tri_m6_2 mass tri_M 0. 0. 
+@tri_m6_3 mass tri_M 0. 0. 
+@tri_m7_0 mass tri_M 0. 0. 
+@tri_m7_1 mass tri_M 0. 0. 
+@tri_m7_2 mass tri_M 0. 0. 
+@tri_m8_0 mass tri_M 0. 0. 
+@tri_m8_1 mass tri_M 0. 0. 
+@tri_m9_0 ground 0. 
+
+@tri_r0 springDamper @tri_m0_0 @tri_m0_1 tri_K tri_Z
+@tri_r1 springDamper @tri_m0_1 @tri_m0_2 tri_K tri_Z
+@tri_r2 springDamper @tri_m0_2 @tri_m0_3 tri_K tri_Z
+@tri_r3 springDamper @tri_m0_3 @tri_m0_4 tri_K tri_Z
+@tri_r4 springDamper @tri_m0_4 @tri_m0_5 tri_K tri_Z
+@tri_r5 springDamper @tri_m0_5 @tri_m0_6 tri_K tri_Z
+@tri_r6 springDamper @tri_m0_6 @tri_m0_7 tri_K tri_Z
+@tri_r7 springDamper @tri_m0_7 @tri_m0_8 tri_K tri_Z
+@tri_r8 springDamper @tri_m0_8 @tri_m0_9 tri_K tri_Z
+@tri_r9 springDamper @tri_m1_0 @tri_m1_1 tri_K tri_Z
+@tri_r10 springDamper @tri_m1_1 @tri_m1_2 tri_K tri_Z
+@tri_r11 springDamper @tri_m1_2 @tri_m1_3 tri_K tri_Z
+@tri_r12 springDamper @tri_m1_3 @tri_m1_4 tri_K tri_Z
+@tri_r13 springDamper @tri_m1_4 @tri_m1_5 tri_K tri_Z
+@tri_r14 springDamper @tri_m1_5 @tri_m1_6 tri_K tri_Z
+@tri_r15 springDamper @tri_m1_6 @tri_m1_7 tri_K tri_Z
+@tri_r16 springDamper @tri_m1_7 @tri_m1_8 tri_K tri_Z
+@tri_r17 springDamper @tri_m2_0 @tri_m2_1 tri_K tri_Z
+@tri_r18 springDamper @tri_m2_1 @tri_m2_2 tri_K tri_Z
+@tri_r19 springDamper @tri_m2_2 @tri_m2_3 tri_K tri_Z
+@tri_r20 springDamper @tri_m2_3 @tri_m2_4 tri_K tri_Z
+@tri_r21 springDamper @tri_m2_4 @tri_m2_5 tri_K tri_Z
+@tri_r22 springDamper @tri_m2_5 @tri_m2_6 tri_K tri_Z
+@tri_r23 springDamper @tri_m2_6 @tri_m2_7 tri_K tri_Z
+@tri_r24 springDamper @tri_m3_0 @tri_m3_1 tri_K tri_Z
+@tri_r25 springDamper @tri_m3_1 @tri_m3_2 tri_K tri_Z
+@tri_r26 springDamper @tri_m3_2 @tri_m3_3 tri_K tri_Z
+@tri_r27 springDamper @tri_m3_3 @tri_m3_4 tri_K tri_Z
+@tri_r28 springDamper @tri_m3_4 @tri_m3_5 tri_K tri_Z
+@tri_r29 springDamper @tri_m3_5 @tri_m3_6 tri_K tri_Z
+@tri_r30 springDamper @tri_m4_0 @tri_m4_1 tri_K tri_Z
+@tri_r31 springDamper @tri_m4_1 @tri_m4_2 tri_K tri_Z
+@tri_r32 springDamper @tri_m4_2 @tri_m4_3 tri_K tri_Z
+@tri_r33 springDamper @tri_m4_3 @tri_m4_4 tri_K tri_Z
+@tri_r34 springDamper @tri_m4_4 @tri_m4_5 tri_K tri_Z
+@tri_r35 springDamper @tri_m5_0 @tri_m5_1 tri_K tri_Z
+@tri_r36 springDamper @tri_m5_1 @tri_m5_2 tri_K tri_Z
+@tri_r37 springDamper @tri_m5_2 @tri_m5_3 tri_K tri_Z
+@tri_r38 springDamper @tri_m5_3 @tri_m5_4 tri_K tri_Z
+@tri_r39 springDamper @tri_m6_0 @tri_m6_1 tri_K tri_Z
+@tri_r40 springDamper @tri_m6_1 @tri_m6_2 tri_K tri_Z
+@tri_r41 springDamper @tri_m6_2 @tri_m6_3 tri_K tri_Z
+@tri_r42 springDamper @tri_m7_0 @tri_m7_1 tri_K tri_Z
+@tri_r43 springDamper @tri_m7_1 @tri_m7_2 tri_K tri_Z
+@tri_r44 springDamper @tri_m8_0 @tri_m8_1 tri_K tri_Z
+
+@tri_r45 springDamper @tri_m0_0 @tri_m1_0 tri_K tri_Z
+@tri_r46 springDamper @tri_m0_1 @tri_m1_1 tri_K tri_Z
+@tri_r47 springDamper @tri_m0_2 @tri_m1_2 tri_K tri_Z
+@tri_r48 springDamper @tri_m0_3 @tri_m1_3 tri_K tri_Z
+@tri_r49 springDamper @tri_m0_4 @tri_m1_4 tri_K tri_Z
+@tri_r50 springDamper @tri_m0_5 @tri_m1_5 tri_K tri_Z
+@tri_r51 springDamper @tri_m0_6 @tri_m1_6 tri_K tri_Z
+@tri_r52 springDamper @tri_m0_7 @tri_m1_7 tri_K tri_Z
+@tri_r53 springDamper @tri_m0_8 @tri_m1_8 tri_K tri_Z
+@tri_r54 springDamper @tri_m1_0 @tri_m2_0 tri_K tri_Z
+@tri_r55 springDamper @tri_m1_1 @tri_m2_1 tri_K tri_Z
+@tri_r56 springDamper @tri_m1_2 @tri_m2_2 tri_K tri_Z
+@tri_r57 springDamper @tri_m1_3 @tri_m2_3 tri_K tri_Z
+@tri_r58 springDamper @tri_m1_4 @tri_m2_4 tri_K tri_Z
+@tri_r59 springDamper @tri_m1_5 @tri_m2_5 tri_K tri_Z
+@tri_r60 springDamper @tri_m1_6 @tri_m2_6 tri_K tri_Z
+@tri_r61 springDamper @tri_m1_7 @tri_m2_7 tri_K tri_Z
+@tri_r62 springDamper @tri_m2_0 @tri_m3_0 tri_K tri_Z
+@tri_r63 springDamper @tri_m2_1 @tri_m3_1 tri_K tri_Z
+@tri_r64 springDamper @tri_m2_2 @tri_m3_2 tri_K tri_Z
+@tri_r65 springDamper @tri_m2_3 @tri_m3_3 tri_K tri_Z
+@tri_r66 springDamper @tri_m2_4 @tri_m3_4 tri_K tri_Z
+@tri_r67 springDamper @tri_m2_5 @tri_m3_5 tri_K tri_Z
+@tri_r68 springDamper @tri_m2_6 @tri_m3_6 tri_K tri_Z
+@tri_r69 springDamper @tri_m3_0 @tri_m4_0 tri_K tri_Z
+@tri_r70 springDamper @tri_m3_1 @tri_m4_1 tri_K tri_Z
+@tri_r71 springDamper @tri_m3_2 @tri_m4_2 tri_K tri_Z
+@tri_r72 springDamper @tri_m3_3 @tri_m4_3 tri_K tri_Z
+@tri_r73 springDamper @tri_m3_4 @tri_m4_4 tri_K tri_Z
+@tri_r74 springDamper @tri_m3_5 @tri_m4_5 tri_K tri_Z
+@tri_r75 springDamper @tri_m4_0 @tri_m5_0 tri_K tri_Z
+@tri_r76 springDamper @tri_m4_1 @tri_m5_1 tri_K tri_Z
+@tri_r77 springDamper @tri_m4_2 @tri_m5_2 tri_K tri_Z
+@tri_r78 springDamper @tri_m4_3 @tri_m5_3 tri_K tri_Z
+@tri_r79 springDamper @tri_m4_4 @tri_m5_4 tri_K tri_Z
+@tri_r80 springDamper @tri_m5_0 @tri_m6_0 tri_K tri_Z
+@tri_r81 springDamper @tri_m5_1 @tri_m6_1 tri_K tri_Z
+@tri_r82 springDamper @tri_m5_2 @tri_m6_2 tri_K tri_Z
+@tri_r83 springDamper @tri_m5_3 @tri_m6_3 tri_K tri_Z
+@tri_r84 springDamper @tri_m6_0 @tri_m7_0 tri_K tri_Z
+@tri_r85 springDamper @tri_m6_1 @tri_m7_1 tri_K tri_Z
+@tri_r86 springDamper @tri_m6_2 @tri_m7_2 tri_K tri_Z
+@tri_r87 springDamper @tri_m7_0 @tri_m8_0 tri_K tri_Z
+@tri_r88 springDamper @tri_m7_1 @tri_m8_1 tri_K tri_Z
+@tri_r89 springDamper @tri_m8_0 @tri_m9_0 tri_K tri_Z
+
+@tri_r90 springDamper @tri_m0_1 @tri_m1_0 tri_K tri_Z
+@tri_r91 springDamper @tri_m0_2 @tri_m1_1 tri_K tri_Z
+@tri_r92 springDamper @tri_m0_3 @tri_m1_2 tri_K tri_Z
+@tri_r93 springDamper @tri_m0_4 @tri_m1_3 tri_K tri_Z
+@tri_r94 springDamper @tri_m0_5 @tri_m1_4 tri_K tri_Z
+@tri_r95 springDamper @tri_m0_6 @tri_m1_5 tri_K tri_Z
+@tri_r96 springDamper @tri_m0_7 @tri_m1_6 tri_K tri_Z
+@tri_r97 springDamper @tri_m0_8 @tri_m1_7 tri_K tri_Z
+@tri_r98 springDamper @tri_m0_9 @tri_m1_8 tri_K tri_Z
+@tri_r99 springDamper @tri_m1_1 @tri_m2_0 tri_K tri_Z
+@tri_r100 springDamper @tri_m1_2 @tri_m2_1 tri_K tri_Z
+@tri_r101 springDamper @tri_m1_3 @tri_m2_2 tri_K tri_Z
+@tri_r102 springDamper @tri_m1_4 @tri_m2_3 tri_K tri_Z
+@tri_r103 springDamper @tri_m1_5 @tri_m2_4 tri_K tri_Z
+@tri_r104 springDamper @tri_m1_6 @tri_m2_5 tri_K tri_Z
+@tri_r105 springDamper @tri_m1_7 @tri_m2_6 tri_K tri_Z
+@tri_r106 springDamper @tri_m1_8 @tri_m2_7 tri_K tri_Z
+@tri_r107 springDamper @tri_m2_1 @tri_m3_0 tri_K tri_Z
+@tri_r108 springDamper @tri_m2_2 @tri_m3_1 tri_K tri_Z
+@tri_r109 springDamper @tri_m2_3 @tri_m3_2 tri_K tri_Z
+@tri_r110 springDamper @tri_m2_4 @tri_m3_3 tri_K tri_Z
+@tri_r111 springDamper @tri_m2_5 @tri_m3_4 tri_K tri_Z
+@tri_r112 springDamper @tri_m2_6 @tri_m3_5 tri_K tri_Z
+@tri_r113 springDamper @tri_m2_7 @tri_m3_6 tri_K tri_Z
+@tri_r114 springDamper @tri_m3_1 @tri_m4_0 tri_K tri_Z
+@tri_r115 springDamper @tri_m3_2 @tri_m4_1 tri_K tri_Z
+@tri_r116 springDamper @tri_m3_3 @tri_m4_2 tri_K tri_Z
+@tri_r117 springDamper @tri_m3_4 @tri_m4_3 tri_K tri_Z
+@tri_r118 springDamper @tri_m3_5 @tri_m4_4 tri_K tri_Z
+@tri_r119 springDamper @tri_m3_6 @tri_m4_5 tri_K tri_Z
+@tri_r120 springDamper @tri_m4_1 @tri_m5_0 tri_K tri_Z
+@tri_r121 springDamper @tri_m4_2 @tri_m5_1 tri_K tri_Z
+@tri_r122 springDamper @tri_m4_3 @tri_m5_2 tri_K tri_Z
+@tri_r123 springDamper @tri_m4_4 @tri_m5_3 tri_K tri_Z
+@tri_r124 springDamper @tri_m4_5 @tri_m5_4 tri_K tri_Z
+@tri_r125 springDamper @tri_m5_1 @tri_m6_0 tri_K tri_Z
+@tri_r126 springDamper @tri_m5_2 @tri_m6_1 tri_K tri_Z
+@tri_r127 springDamper @tri_m5_3 @tri_m6_2 tri_K tri_Z
+@tri_r128 springDamper @tri_m5_4 @tri_m6_3 tri_K tri_Z
+@tri_r129 springDamper @tri_m6_1 @tri_m7_0 tri_K tri_Z
+@tri_r130 springDamper @tri_m6_2 @tri_m7_1 tri_K tri_Z
+@tri_r131 springDamper @tri_m6_3 @tri_m7_2 tri_K tri_Z
+@tri_r132 springDamper @tri_m7_1 @tri_m8_0 tri_K tri_Z
+@tri_r133 springDamper @tri_m7_2 @tri_m8_1 tri_K tri_Z
+@tri_r134 springDamper @tri_m8_1 @tri_m9_0 tri_K tri_Z
+
+
+@m mass 1. 0.02 1. 0.
+
+@co contact @str_m9 @m 0.4 0.001 0.
+
+@dZ param 0.00001
+
+@dmp1 nlContact @str_m2 @tri_m5_2 0.01 0.1 0.4 dZ
+@dmp2 nlContact @str_m7 @tri_m0_2 0.01 0.1 0.4 dZ
+
+@out1 posOutput @tri_m3_3
+@out2 posOutput @tri_m4_2
+@out3 posOutput @m

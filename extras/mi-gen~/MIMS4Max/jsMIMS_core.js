@@ -40,6 +40,11 @@ maxAPI.addHandlers({
         if(state){
             maxAPI.post("About to generate the gen DSP file...");
             try{
+
+                // Do this on Mac to conform to a standard absolute path starting from the root /
+                if(/^Macintosh/.test(args[0]))
+                    args[0] = args[0].replace("Macintosh HD:", "");
+
                 genDspFileWriter.generateDspObj(args[0].toString(), codeboxCode, nbInputs, nbOutputs);
                 maxAPI.post("...done.");
                 maxAPI.outlet("state", "Successfully wrote to " + args[0].toString());

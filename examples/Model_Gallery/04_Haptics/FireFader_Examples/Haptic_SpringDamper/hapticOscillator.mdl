@@ -1,0 +1,13 @@
+
+## The basic "haptic" oscillator model
+
+@K param 0.001
+@Z param 0.001
+
+@in1 posInput 0.
+@g ground 0.
+
+@sp springDamper @in1 @g K Z
+
+@out1 frcOutput @in1
+

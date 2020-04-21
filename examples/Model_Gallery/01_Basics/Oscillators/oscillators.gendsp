@@ -1,0 +1,326 @@
+{
+	"patcher" : 	{
+		"fileversion" : 1,
+		"appversion" : 		{
+			"major" : 7,
+			"minor" : 3,
+			"revision" : 1,
+			"architecture" : "x64",
+			"modernui" : 1
+		}
+,
+		"rect" : [ 67.0, 109.0, 700.0, 500.0 ],
+		"editing_bgcolor" : [ 0.9, 0.9, 0.9, 1.0 ],
+		"bglocked" : 0,
+		"openinpresentation" : 0,
+		"default_fontsize" : 12.0,
+		"default_fontface" : 0,
+		"default_fontname" : "Arial",
+		"gridonopen" : 1,
+		"gridsize" : [ 15.0, 15.0 ],
+		"gridsnaponopen" : 1,
+		"objectsnaponopen" : 1,
+		"statusbarvisible" : 2,
+		"toolbarvisible" : 1,
+		"lefttoolbarpinned" : 0,
+		"toptoolbarpinned" : 0,
+		"righttoolbarpinned" : 0,
+		"bottomtoolbarpinned" : 0,
+		"toolbars_unpinned_last_save" : 0,
+		"tallnewobj" : 0,
+		"boxanimatetime" : 200,
+		"enablehscroll" : 1,
+		"enablevscroll" : 1,
+		"devicewidth" : 0.0,
+		"description" : "",
+		"digest" : "",
+		"tags" : "",
+		"style" : "",
+		"subpatcher_template" : "",
+                
+ "boxes" : [ { "box" : 				{
+					"code" : " require(\"migen-lib\");\r\n\r\nBuffer motion;\r\n\r\n// Data structure code\r\n\r\nData m1(3);\r\nData m2(3);\r\nData m3(3);\r\nData m4(3);\r\nData m5(3);\r\nData m6(3);\r\nData m7(3);\r\nData m8(3);\r\n\r\nParam K1(0.1);\r\nParam K2(0.1);\r\nParam K3(0.1);\r\nParam K4(0.1);\r\nParam K5(0.1);\r\nParam K6(0.1);\r\nParam K7(0.1);\r\nParam K8(0.1);\r\nParam Z(0.0004);\r\nParam display_motion(1);\r\n\r\n//Model initialisation flag\r\nHistory model_init(0);\r\nHistory render_cpt(0);\r\n\r\n\r\n//Initialisation code\r\nif(model_init == 0){\r\ninit_mat(m1, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(m2, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(m3, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(m4, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(m5, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(m6, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(m7, 0, 0 + 0 / SAMPLERATE);\r\ninit_mat(m8, 0, 0 + 0 / SAMPLERATE);\r\nmodel_init = 1;\r\n}\r\n\r\n// Model Computation\r\n\r\n// Compute new positions of mass-type elements\r\ncompute_osc(m1, 1., K1, Z);\r\ncompute_osc(m2, 1., K2, Z);\r\ncompute_osc(m3, 1., K3, Z);\r\ncompute_osc(m4, 1., K4, Z);\r\ncompute_osc(m5, 1., K5, Z);\r\ncompute_osc(m6, 1., K6, Z);\r\ncompute_osc(m7, 1., K7, Z);\r\ncompute_osc(m8, 1., K8, Z);\r\n\r\n// Compute interaction forces\r\napply_input_force(m1, in1);\r\napply_input_force(m2, in2);\r\napply_input_force(m3, in3);\r\napply_input_force(m4, in4);\r\napply_input_force(m5, in5);\r\napply_input_force(m6, in6);\r\napply_input_force(m7, in7);\r\napply_input_force(m8, in8);\r\n\r\n// Patch output routing\r\nout1 = get_pos(m1);\r\nout2 = get_pos(m2);\r\nout3 = get_pos(m3);\r\nout4 = get_pos(m4);\r\nout5 = get_pos(m5);\r\nout6 = get_pos(m6);\r\nout7 = get_pos(m7);\r\nout8 = get_pos(m8);\r\nout9 = 8;\r\n\r\n// Motion data routing to Max/MSP buffer objects\r\nif (display_motion){\r\nif (render_cpt == 0){\r\nmotion.poke(get_pos(m1), 0, 0);\r\nmotion.poke(get_pos(m2), 1, 0);\r\nmotion.poke(get_pos(m3), 2, 0);\r\nmotion.poke(get_pos(m4), 3, 0);\r\nmotion.poke(get_pos(m5), 4, 0);\r\nmotion.poke(get_pos(m6), 5, 0);\r\nmotion.poke(get_pos(m7), 6, 0);\r\nmotion.poke(get_pos(m8), 7, 0);\r\n}\r\nrender_cpt = (render_cpt + 1) % 200;\r\n}\r\n ",
+					"fontface" : 0,
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : " phyMdlBox ",
+					"maxclass" : "codebox",
+					"numinlets" : 8,
+					"numoutlets" : 9,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 20, 70, 550.0, 300.0 ],
+					"style" : ""
+				} }, { "box" : 				{
+					"id" : " inbox_1 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 70, 20, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 1 "
+				} }, { "box" : 				{
+					"id" : " inbox_2 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 140, 20, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 2 "
+				} }, { "box" : 				{
+					"id" : " inbox_3 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 210, 20, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 3 "
+				} }, { "box" : 				{
+					"id" : " inbox_4 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 280, 20, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 4 "
+				} }, { "box" : 				{
+					"id" : " inbox_5 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 350, 20, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 5 "
+				} }, { "box" : 				{
+					"id" : " inbox_6 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 420, 20, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 6 "
+				} }, { "box" : 				{
+					"id" : " inbox_7 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 490, 20, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 7 "
+				} }, { "box" : 				{
+					"id" : " inbox_8 ",
+					"maxclass" : "newobj",
+					"numinlets" :  0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 560, 20, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " in 8 "
+				} }, { "box" : 				{
+					"id" : " outbox_1 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 50, 420, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 1 "
+				} }, { "box" : 				{
+					"id" : " outbox_2 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 100, 420, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 2 "
+				} }, { "box" : 				{
+					"id" : " outbox_3 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 150, 420, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 3 "
+				} }, { "box" : 				{
+					"id" : " outbox_4 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 200, 420, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 4 "
+				} }, { "box" : 				{
+					"id" : " outbox_5 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 250, 420, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 5 "
+				} }, { "box" : 				{
+					"id" : " outbox_6 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 300, 420, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 6 "
+				} }, { "box" : 				{
+					"id" : " outbox_7 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 350, 420, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 7 "
+				} }, { "box" : 				{
+					"id" : " outbox_8 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 400, 420, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 8 "
+				} }, { "box" : 				{
+					"id" : " outbox_9 ",
+					"maxclass" : "newobj",
+					"numinlets" :  1,
+					"numoutlets" : 0,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 450, 420, 30.0, 22.0 ],
+					"style" : "",
+					"text" : " out 9 "
+				} }],
+ "lines" : [   {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_1 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 1 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_2 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 2 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_3 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 3 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_4 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 4 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_5 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 5 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_6 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 6 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_7 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " phyMdlBox ", 7 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " inbox_8 ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_1 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 0 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_2 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 1 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_3 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 2 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_4 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 3 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_5 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 4 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_6 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 5 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_7 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 6 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_8 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 7 ]
+				}
+			},  {
+				"patchline" : 				{
+					"destination" : [ " outbox_9 ", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ " phyMdlBox ", 8 ]
+				}
+			}] } } 
