@@ -33,5 +33,23 @@ const genModDict = {
     "cornerMesh" : { func :"compute_corner_mesh", nbArgs:5, optArgs : ["Zo"]}
 };
 
+const faustModDict = {
+    "mass" : {func : "mass", nbArgs:1, optArgs : ["gravity"]},
+    "osc" : {func : "osc", nbArgs:3, optArgs : 0},
+    "ground" : { func :"ground", nbArgs:0, optArgs : 0},
+    "spring" : { func :"spring", nbArgs:1, optArgs : 0},
+    "springDamper" : { func :"spring", nbArgs:2, optArgs : 0},
+    "damper" : { func :"damper", nbArgs:1, optArgs : 0},
+    "contact" : { func :"compute_contact", nbArgs:2, optArgs : ["thresh"]},
+    "nlContact" : { func :"compute_contact_nl3_clipped", nbArgs:4, optArgs : ["thresh"]},
+    "nlSpring2" : { func :"compute_spring_damper_nl2", nbArgs:3, optArgs : 0},
+    "nlSpring3" : { func :"compute_spring_damper_nl3", nbArgs:3, optArgs : 0},
+    "nlSpringDamper" : { func :"compute_spring_damper_nl3_clipped", nbArgs:4, optArgs : 0},
+    "nlBow" : { func :"compute_nlBow", nbArgs:2, optArgs : ["smooth"]},
+    "nlPluck" : { func :"compute_nlPluck", nbArgs:2, optArgs : ["Z"]},
+    "posInput" : { func :"posInput", nbArgs:0, optArgs : 0},
+    "frcInput" : { func :"apply_input_force", nbArgs:0, optArgs : 0},
+};
 
-module.exports = {mass_modules, interaction_modules, macro_modules, in_out_modules, other_modules, all_modules, genModDict};
+
+module.exports = {mass_modules, interaction_modules, macro_modules, in_out_modules, other_modules, all_modules, genModDict, faustModDict};

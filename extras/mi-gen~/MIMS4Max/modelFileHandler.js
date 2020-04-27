@@ -39,14 +39,11 @@ maxAPI.addHandlers({
         var fileContent = args[1].toString();
 
         console.log(fileContent);
-
         fileContent = fileContent.replace('"','');
         fileContent = fileContent.replace("/", '');
         fileContent = fileContent.replace('"', '');
 
         console.log(fileContent);
-
-        //fs.truncate(filePath, 0, function(){console.log('done')})
 
         fs.writeFileSync(filePath, fileContent, (err)=> {
             if (err)  {
@@ -55,13 +52,6 @@ maxAPI.addHandlers({
             }
             console.log("Successfully Written to File.");
         });
-
-        /*
-        fs.writeFile(filePath, fileContent, (err)=> {
-            if (err) console.log(err);
-            console.log("Successfully Written to File.");
-        });
-         */
     }
 });
 

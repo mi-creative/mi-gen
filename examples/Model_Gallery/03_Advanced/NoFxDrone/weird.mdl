@@ -1,0 +1,33 @@
+# MIMS script file
+# Script author: James Leonard
+
+@strikePos audioParam @in2
+@listenPos audioParam @in3
+@listenPos2 audioParam @in4
+
+@stiff audioParam @in5
+@stiff2 audioParam @in6
+@damp param 0.0001
+
+@c chain 230 1. stiff damp 0.00005 0. 0.
+@c2 chain 230 1. stiff2 damp 0.00005 0. 0.
+
+@g ground 0.
+
+@sg1 springDamper @g [@c 0] 0.4 0.0001
+@sg2 springDamper @g [@c2 0] 0.3 0.0001
+
+@d damper [@c 0.9] [@c2 0.7] 0.00001
+
+@h mass 1 3. 0.
+@a ground 3
+@sh springDamper @h @a 0.0001 0.01
+ 
+@in1 frcInput @h
+@out1 posOutput [@c2 listenPos]
+@out2 posOutput [@c2 listenPos2]
+
+@cn nlContact [@c strikePos] @h 0.01 0.001 0.3 0.0001
+
+
+# end of MIMS script

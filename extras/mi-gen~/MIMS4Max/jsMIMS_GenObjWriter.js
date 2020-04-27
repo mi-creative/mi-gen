@@ -29,14 +29,9 @@ function generateDspObj(name, codeboxCode, nbIn, nbOut) {
                 newStringList = newStringList.concat("\\r\\n");
             else
                 newStringList = newStringList.concat(codeboxCode[i]);
-            //this.generated_code[i] = this.generated_code[i].replace("\n", "\\r\\n");
         }
 
-        //this.generated_code = newStringList;
-        //console.log("test");
-
         var outFileString = "";
-        //outFileString = open(name, "w");
         outFileString = outFileString.concat(generateHeader());
         outFileString = outFileString.concat("\n \"boxes\" : [ ");
         outFileString = outFileString.concat(generateCodeBox(newStringList, "phyMdlBox", nbIn, nbOut, 70.0, 20.0));
@@ -62,29 +57,12 @@ function generateDspObj(name, codeboxCode, nbIn, nbOut) {
         outFileString = outFileString.concat(generatePatchLines("phyMdlBox", (nbOut - 1), ("outbox_" + nbOut.toString()), 0));
         outFileString = outFileString.concat("] } } ");
 
-        //console.log("test");
-        //console.log(outFileString);
-
-        /*
-        fs.truncate(name, 0, function () {
-            console.log('done')
-        });
-        */
-
 
         fs.writeFileSync(name, outFileString, (err)=> {
             if (err) console.log(err);
             console.log("Successfully Written to File.");
         });
 
-
-        /*
-        fs.writeFile(name, outFileString, (err) => {
-            if (err) console.log(err);
-            console.log("Successfully Written to File.");
-        });
-
-         */
     } catch(e){
         throw "gendsp File Writer error: "+ e;
     }

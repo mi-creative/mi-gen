@@ -4,7 +4,6 @@ const genDspFileWriter = require("./jsMIMS_GenObjWriter.js");
 const phyDict = require("./jsMIMS_phyDict.js");
 const fs =require("fs");
 
-
 let state = 0;
 var massDict = {};
 var interDict = {};
@@ -15,11 +14,9 @@ var paramDict = {};
 var nbInputs = 0;
 var nbOutputs = 0;
 var codeboxCode = "";
-
 var jsonSpat = {};
 
 var nbProxies = 0;
-
 var bufferList = [];
 var activeBufferList = [];
 
@@ -36,7 +33,7 @@ maxAPI.addHandlers({
         console.log("...done");
         //maxAPI.post("...done.");
     },
-    createDSPFile: (...args) => {
+    createGenDSPFile: (...args) => {
         if(state){
             maxAPI.post("About to generate the gen DSP file...");
             try{
@@ -75,6 +72,34 @@ maxAPI.addHandlers({
             */
 
 
+        }
+        else
+            maxAPI.post("Please load a model first.")
+    },
+    createFaustDSPFile: (...args) => {
+        if(state){
+            maxAPI.post("About to generate Faust DSP file...");
+            try{
+                let fDSP = generateFaustCode();
+
+                // Do this on Mac to conform to a standard absolute path starting from the root /
+                if(/^Macintosh/.test(args[0]))
+                    args[0] = args[0].replace("Macintosh HD:", "");
+
+                fs.writeFileSync(args[0].toString(), fDSP, (err)=> {
+                    if (err) console.log(err);
+                    console.log("Successfully Written to File.");
+                });
+
+                maxAPI.post("...done.");
+                maxAPI.outlet("state", "Successfully wrote to " + args[0].toString());
+                maxAPI.outlet("code", "SUCCESS!");
+            }
+            catch(e){
+                maxAPI.outlet("state", "Errors detected during Faust DSP file generation.");
+                maxAPI.outlet("error", e);
+                maxAPI.post(e);
+            }
         }
         else
             maxAPI.post("Please load a model first.")
@@ -137,15 +162,15 @@ function parseCommand(text){
 
     if(!/^\s*@/.test(text)){
         if(/^\s*~begin/.test(text)){
-           let s = text.split(/\s/)[1];
-           if(s == null)
-               throw "Invalid buffer begin command";
-           else{
+            let s = text.split(/\s/)[1];
+            if(s == null)
+                throw "Invalid buffer begin command";
+            else{
                 if (activeBufferList.indexOf(s) === -1){
                     activeBufferList.push(s);
                     bufferList.push(s);
                 }
-           }
+            }
         }
         else if(/^\s*~end/.test(text)){
             let s = text.split(/\s/)[1];
@@ -661,7 +686,7 @@ function createGenCode(){
                 let x = parseFloat(dict["pos"]["x"]);
                 let velx = parseFloat(dict["vel"]["x"]);
                 init.push("init_mat(" + n + ", " + x
-                    + ", " + x + " + " + velx + " / SAMPLERATE);");
+                    + ", " + x + " - " + velx + " / SAMPLERATE);");
                 compMasses.push(massToCode(n, dict));
 
                 // Add motion buffer code for the mass-type element
@@ -693,7 +718,7 @@ function createGenCode(){
                 let x = parseFloat(dict["pos"]["x"]);
                 let velx = parseFloat(dict["vel"]["x"]);
                 init.push("init_multiple_masses(" + n + ", " + x
-                    + ", " + x + " + " + velx + " / SAMPLERATE);");
+                    + ", " + x + " - " + velx + " / SAMPLERATE);");
                 compMasses.push(massToCode(n, dict));
 
                 pushMacroToMotionBuffers(n, dict, size);
@@ -902,6 +927,361 @@ function createGenCode(){
     }
     console.log("Finished generating gen~ DSP code");
 }
+
+
+
+
+function generateFaustCode(){
+    if(!macroDict.isEmpty())
+        throw "The code contains macro elements, cannot generate for Faust !";
+
+    let fMass = [];
+    let fMassIndexMap = {};
+    let fInter = [];
+    let fParams = [];
+
+    let dict = {};
+
+    let cpt = 0;
+    for (let name in massDict) {
+        if (massDict.hasOwnProperty(name)) {
+            dict = massDict[name];
+            let args = dict["args"];
+            var type = dict["type"];
+            let regArgNb = phyDict.genModDict[type]["nbArgs"];
+            let optArgNb = phyDict.genModDict[type]["optArgs"].length;
+            let func = phyDict.faustModDict[type]["func"];
+
+            let argstring = "";
+            for (let i = 0; i < args.length; i++) {
+                if(i >= regArgNb){
+                    let paramName = phyDict.faustModDict[type]["optArgs"][i-regArgNb];
+                    argstring = argstring.concat(paramName + " = ");
+                    if(paramName === "gravity")
+                        argstring = argstring.concat(args[i] + "/ ma.SR");
+                    else
+                        argstring = argstring.concat(args[i]);
+                }
+                else
+                    argstring = argstring.concat(args[i]);
+                if(i < args.length-1)
+                    argstring = argstring.concat(", ");
+            }
+
+            let pos = dict["pos"]["x"];
+            let delPos = pos;
+            let posString = "";
+            if(type === "ground" )
+                posString = pos;
+            else{
+                if(parseFloat(dict["vel"]["x"]) !== 0)
+                    delPos = dict["pos"]["x"] + " - (" + dict["vel"]["x"] + "/ ma.SR)";
+                posString =  pos + ", " + delPos;
+            }
+            if(argstring !== "")
+                fMass.push(func +  "(" + argstring + ", " + posString + ")");
+            else
+                fMass.push(func +  "(" + posString + ")");
+            fMassIndexMap[name] = {index:cpt++, pos:pos, posR: delPos};
+
+        }
+    }
+
+    let posOutputMasses = {};
+    let posInputMasses = {};
+    let frcOutputMasses = {};
+    let frcInputMasses = {};
+
+    let paramAudioIns = [];
+
+    for (let name in inOutDict) {
+        if (inOutDict.hasOwnProperty(name)) {
+            dict = inOutDict[name];
+            if (dict["type"] === "posInput"){
+                fMass.push("posInput(" + dict["pos"]["x"] + ")");
+                fMassIndexMap[name] = {index:cpt++, pos:dict["pos"]["x"], posR:dict["pos"]["x"]};
+                posInputMasses[stripInOutToInt(name)] = {pos:dict["pos"]["x"]};
+            }
+        }
+    }
+
+    for (let name in inOutDict) {
+        if (inOutDict.hasOwnProperty(name)) {
+            dict = inOutDict[name];
+            if(dict["type"] === "posOutput")
+                posOutputMasses[stripInOutToInt(name)] = fMassIndexMap[dict["m"]]["index"];
+            else if(dict["type"] === "frcOutput")
+                frcOutputMasses[stripInOutToInt(name)] = fMassIndexMap[dict["m"]]["index"];
+            else if(dict["type"] === "frcInput")
+                frcInputMasses[stripInOutToInt(name)] = fMassIndexMap[dict["m"]]["index"];
+        }
+    }
+
+    for (let name in paramDict) {
+        if (paramDict.hasOwnProperty(name)) {
+            dict = paramDict[name];
+            if(dict["type"] === "audioParam"){
+                let inName = dict["input"].replace("@", "");
+                fParams.push(name.replace("@", "")
+                    +  " = " + inName);
+                paramAudioIns.push(inName);
+            }
+
+            else if(dict["type"] === "param")
+                fParams.push(name.replace("@", "")
+                    +  " = " + dict["args"]);
+        }
+    }
+
+    ///TODO: get out if there are no interactions !
+    let nbMasses = fMass.length;
+    let nbInter = Object.keys(interDict).length;
+    let routingMatrix = Array(nbMasses).fill(null).map(() => Array(2*nbInter).fill(0));
+    let nbOut = Object.keys(posOutputMasses).length + Object.keys(frcOutputMasses).length;
+
+    let nbFrcInput = Object.keys(frcInputMasses).length;
+
+    let i_cpt = 0;
+    for (let name in interDict) {
+        if (interDict.hasOwnProperty(name)) {
+            dict = interDict[name];
+            type = dict["type"];
+            args = dict["args"];
+            let func = phyDict.faustModDict[type]["func"];
+
+            let argstring = "";
+            for (let i = 0; i < args.length; i++) {
+                argstring = argstring.concat(args[i]);
+                if(i < args.length-1)
+                    argstring = argstring.concat(", ");
+            }
+            let mass1 = dict["m1"];
+            let mass2 = dict["m2"];
+            routingMatrix[fMassIndexMap[mass1]["index"]] [2*i_cpt] = 1;
+            routingMatrix[fMassIndexMap[mass2]["index"]] [2*i_cpt+1] = 1;
+
+            // TODO: get proper delayed position here
+            fInter.push(func +  "(" + argstring + ", " +
+                fMassIndexMap[mass1]["posR"] + ", " +
+                fMassIndexMap[mass2]["posR"] + ")");
+
+            i_cpt++;
+        }
+    }
+
+    // Generate the routing tables used by Faust
+    let l2m;
+    let m2l;
+
+    l2m = "RoutingLinkToMass(";
+    for(let i = 0; i < nbInter; i++){
+        l2m = l2m.concat("l"+ i +"_f1, l"+ i +"_f2, ");
+    }
+
+    let passthrough ="";
+    for (let number in posOutputMasses)
+        if (posOutputMasses.hasOwnProperty(number))
+            passthrough = passthrough.concat("p_out" + number + ", ");
+    l2m = l2m.concat(passthrough)
+
+    for (let number in frcInputMasses)
+        if (frcInputMasses.hasOwnProperty(number))
+            l2m = l2m.concat("f_in" + number + ", ");
+
+    l2m = l2m.replace(/,\s*$/,"");
+    l2m = l2m.concat(") = ");
+
+    let forceOutputStrings = [];
+
+    l2m = l2m.concat("/* routed forces  */ ");
+    for(let i = 0; i < nbMasses; i++){
+        let routed_forces = "";
+        let add = 0;
+
+        for(let frc in frcInputMasses)
+            if (frcInputMasses.hasOwnProperty(frc))
+                if(frcInputMasses[frc] === i){
+                    //maxAPI.post("FOUND FORCE TO ADD\n");
+                    if(add)
+                        routed_forces = routed_forces.concat(" + ");
+                    routed_forces = routed_forces.concat("f_in"+frc);
+                    add = 1;
+                }
+
+        for(let j = 0; j < 2*nbInter; j++)
+            if(routingMatrix[i][j] === 1){
+                if (add)
+                    routed_forces = routed_forces.concat(" + ");
+                routed_forces = routed_forces.concat("l" + Math.floor(j/2) + "_f" + ((j%2)+1));
+                add = 1;
+            }
+
+        if(routed_forces === "")
+            routed_forces = "0";
+
+        l2m = l2m.concat(routed_forces);
+
+        for(let frc in frcOutputMasses)
+            if (frcOutputMasses.hasOwnProperty(frc))
+                if(frcOutputMasses[frc] === i) {
+                    forceOutputStrings.push(routed_forces);
+                }
+        l2m = l2m.concat(", ");
+    }
+
+    if(!forceOutputStrings.isEmpty()){
+        l2m = l2m.concat("/* force outputs */ ");
+        l2m = l2m.concat(forceOutputStrings.join(", "));
+        l2m = l2m.concat(", ");
+    }
+
+    if(passthrough !== ""){
+        l2m = l2m.concat("/* pass-through */ ");
+        l2m = l2m.concat(passthrough);
+        l2m = l2m.replace(/,\s*$/,";");
+    }
+
+    // Generate Mat to Link Routing Function
+    m2l = "RoutingMassToLink(";
+    for(let i = 0; i < nbMasses-1; i++)
+        m2l = m2l.concat("m" + i + ", ");
+    m2l = m2l.concat("m" + (nbMasses-1) + ") = ")
+    m2l = m2l.concat("/* interaction forces */ ");
+    for(let j = 0; j < 2*nbInter; j++)
+        for(let i = 0; i < nbMasses; i++)
+            if(routingMatrix[i][j] === 1){
+                m2l = m2l.concat("m" + i + ", ");
+            }
+
+    m2l = m2l.concat("/* outputs */ ");
+    for (let number in posOutputMasses)
+        if (posOutputMasses.hasOwnProperty(number))
+            m2l = m2l.concat("m"+posOutputMasses[number] + ", ");
+
+    m2l = m2l.replace(/,\s*$/,";");
+
+    /*
+    let link2mass = "";
+    let mass2link = "";
+
+    for (let cur_ptL = 0; cur_ptL < 2*nbInter; cur_ptL++)
+        for (let cur_ptM = 0; cur_ptM < nbMasses; cur_ptM++)
+            if(routingMatrix[cur_ptM][cur_ptL]){
+                link2mass = link2mass.concat(", " + (cur_ptL + 1) + ", " + (cur_ptM + 1));
+                mass2link = mass2link.concat(", " + (cur_ptM + 1) + ", " + (cur_ptL + 1));
+            }
+
+    let pos_out = "";
+    let i_out = 0;
+    for (let name in outputMasses) {
+        if (outputMasses.hasOwnProperty(name)) {
+            dict = outputMasses[name];
+            pos_out = pos_out.concat(", " + (outputMasses[name]+1) + "," + (nbInter*2 + 1 + i_out));
+            i_out++;
+        }
+    }
+
+    let routeLM = "RoutingLinkToMass = " +
+     "route(" + (nbInter * 2) + ", " + (nbMasses) + link2mass + ");\n"
+
+
+    let routeML = "RoutingMassToLink = " +
+        "route(" + (nbMasses) + ", " + (nbInter * 2 + Object.keys(outputMasses).length)
+        + mass2link + pos_out + ");\n"
+
+    maxAPI.post(routeLM);
+    maxAPI.post(routeML);
+    */
+
+
+    // NOW GENERATE THE FAUST CODE
+    let fDSP = "import(\"stdfaust.lib\");\nimport(\"mi.lib\");\n\n";
+
+    for (let number in posInputMasses)
+        if (posInputMasses.hasOwnProperty(number))
+            fDSP = fDSP.concat("in" + number + " = hslider(\"Pos Input " + number + "\", 0, -1, 1, 0.001):si.smoo; "
+                +"\t//write a specific position input signal operation here\n");
+    for (let number in frcInputMasses)
+        if (frcInputMasses.hasOwnProperty(number))
+            fDSP = fDSP.concat("in" + number + " = button(\"Frc Input " + number + "\"): ba.impulsify; "
+                +" \t//write a specific force input signal operation here\n");
+
+    for(let i = 0; i < paramAudioIns.length; i++)
+        fDSP = fDSP.concat(paramAudioIns[i] + " = hslider(\"Param " +
+            paramAudioIns[i] + "\", 0.01, 0, 0.1, 0.0001):si.smoo; "
+            +"\t//write a specific parameter signal operation here\n");
+
+    fDSP = fDSP.concat("\n");
+
+    fDSP = fDSP.concat("OutGain = 1;");
+    fDSP = fDSP.concat("\n\n");
+
+    fDSP = fDSP.concat(fParams.join(";\n"));
+    fDSP = fDSP.concat(";\n\n");
+
+    let frcPassThrough = "";
+    if(nbFrcInput > 0)
+        frcPassThrough = ",\n\tpar(i, nbFrcIn,_)";
+
+    let interDSP = "";
+    if (fInter.length > 0)
+        interDSP = interDSP.concat(fInter.join(",\n\t") + ",\n");
+
+    fDSP = fDSP.concat(
+        "model = (\n\t"
+        + fMass.join(",\n\t")
+        + frcPassThrough
+        + ":\n\t"
+        + "RoutingMassToLink "
+        + frcPassThrough
+        + ":\n\t"
+        + interDSP
+        + "\tpar(i, nbOut+nbFrcIn, _)"
+        //+ frcPassThrough
+        + ":\n\t"
+        + "RoutingLinkToMass\n)~par(i, nbMass, _):"
+        + "\npar(i, nbMass, !), par(i, nbOut , _)\n"
+    );
+
+    fDSP = fDSP.concat(
+        "with{\n\t" + m2l + "\n\t" + l2m +"\n"
+        + "\tnbMass = " + nbMasses + ";\n"
+        + "\tnbOut = " + nbOut + ";\n"
+        + "\tnbFrcIn = " + nbFrcInput + ";\n"
+        + "};\n"
+    );
+
+    fDSP = fDSP.concat("process = ");
+
+    let inputs = "";
+    for (let number in posInputMasses)
+        if (posInputMasses.hasOwnProperty(number))
+            inputs = inputs.concat("in" + number + ", ");
+    for (let number in frcInputMasses)
+        if (frcInputMasses.hasOwnProperty(number))
+            inputs = inputs.concat("in" + number + ", ");
+    inputs = inputs.replace(/,\s*$/,"");
+
+
+    if(inputs !== "")
+        fDSP = fDSP.concat(inputs + " : model");
+
+    if(nbOut > 0){
+        fDSP = fDSP.concat(":");
+        for(let i = 0; i < nbOut ; i ++)
+            fDSP = fDSP.concat("*(OutGain), ")
+    }
+    fDSP = fDSP.replace(/,\s*$/,"");
+    fDSP = fDSP.concat(";");
+
+    return fDSP;
+}
+
+
+
+
+
+
 
 
 
