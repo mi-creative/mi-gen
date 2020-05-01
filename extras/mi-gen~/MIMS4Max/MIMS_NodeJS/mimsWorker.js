@@ -12,7 +12,7 @@ const mdl2faust = require("./mdl2faust.js");
 
 // To create a browser compatible version of the tool, use browserify:
 //
-// browserify mimsWorker.js --standalone mimsBundle > mimsBrowser3.js
+// browserify MIMS_NodeJS/mimsWorker.js --standalone mimsBundle > mimsBrowser.js
 //
 // This will create a mimsBundle object that can be used to access functions.
 // The globally defined mdl object will also be accessible in the client context.
