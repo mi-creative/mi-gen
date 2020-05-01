@@ -1,5 +1,3 @@
-var fs = require('fs');
-
 
 function generateHeader() {
     return "{\n\t\"patcher\" : \t{\n\t\t\"fileversion\" : 1,\n\t\t\"appversion\" : \t\t{\n\t\t\t\"major\" : 7,\n\t\t\t\"minor\" : 3,\n\t\t\t\"revision\" : 1,\n\t\t\t\"architecture\" : \"x64\",\n\t\t\t\"modernui\" : 1\n\t\t}\n,\n\t\t\"rect\" : [ 67.0, 109.0, 700.0, 500.0 ],\n\t\t\"editing_bgcolor\" : [ 0.9, 0.9, 0.9, 1.0 ],\n\t\t\"bglocked\" : 0,\n\t\t\"openinpresentation\" : 0,\n\t\t\"default_fontsize\" : 12.0,\n\t\t\"default_fontface\" : 0,\n\t\t\"default_fontname\" : \"Arial\",\n\t\t\"gridonopen\" : 1,\n\t\t\"gridsize\" : [ 15.0, 15.0 ],\n\t\t\"gridsnaponopen\" : 1,\n\t\t\"objectsnaponopen\" : 1,\n\t\t\"statusbarvisible\" : 2,\n\t\t\"toolbarvisible\" : 1,\n\t\t\"lefttoolbarpinned\" : 0,\n\t\t\"toptoolbarpinned\" : 0,\n\t\t\"righttoolbarpinned\" : 0,\n\t\t\"bottomtoolbarpinned\" : 0,\n\t\t\"toolbars_unpinned_last_save\" : 0,\n\t\t\"tallnewobj\" : 0,\n\t\t\"boxanimatetime\" : 200,\n\t\t\"enablehscroll\" : 1,\n\t\t\"enablevscroll\" : 1,\n\t\t\"devicewidth\" : 0.0,\n\t\t\"description\" : \"\",\n\t\t\"digest\" : \"\",\n\t\t\"tags\" : \"\",\n\t\t\"style\" : \"\",\n\t\t\"subpatcher_template\" : \"\",\n                ";
@@ -19,13 +17,12 @@ function generatePatchLines(source, srcNb, dest, dstNb) {
     text = ((((((((" {\n\t\t\t\t\"patchline\" : \t\t\t\t{\n\t\t\t\t\t\"destination\" : [ \" " + dest) + " \", ") + dstNb.toString()) + " ],\n\t\t\t\t\t\"disabled\" : 0,\n\t\t\t\t\t\"hidden\" : 0,\n\t\t\t\t\t\"source\" : [ \" ") + source) + " \", ") + srcNb.toString()) + " ]\n\t\t\t\t}\n\t\t\t}");
     return text;
 }
-function generateDspObj(name, codeboxCode, nbIn, nbOut) {
+function generate(codeboxCode, nbIn, nbOut) {
     try {
-
         var newStringList = "";
 
         for (let i = 0; i < codeboxCode.length; i++) {
-            if (codeboxCode[i] == '\n')
+            if (codeboxCode[i] === '\n')
                 newStringList = newStringList.concat("\\r\\n");
             else
                 newStringList = newStringList.concat(codeboxCode[i]);
@@ -57,17 +54,13 @@ function generateDspObj(name, codeboxCode, nbIn, nbOut) {
         outFileString = outFileString.concat(generatePatchLines("phyMdlBox", (nbOut - 1), ("outbox_" + nbOut.toString()), 0));
         outFileString = outFileString.concat("] } } ");
 
-
-        fs.writeFileSync(name, outFileString, (err)=> {
-            if (err) console.log(err);
-            console.log("Successfully Written to File.");
-        });
+        return outFileString;
 
     } catch(e){
-        throw "gendsp File Writer error: "+ e;
+        throw "gendsp Patch Builder error: "+ e;
     }
 }
 
 
-module.exports = {generateDspObj}
+module.exports = {generate}
 //# sourceMappingURL=jsMIMS_GenObjWriter.js.map
