@@ -956,7 +956,7 @@ function generateFaustCode(){
             for (let i = 0; i < args.length; i++) {
                 if(i >= regArgNb){
                     let paramName = phyDict.faustModDict[type]["optArgs"][i-regArgNb];
-                    argstring = argstring.concat(paramName + " = ");
+                    //argstring = argstring.concat(paramName + " = ");
                     if(paramName === "gravity")
                         argstring = argstring.concat(args[i] + "/ ma.SR");
                     else
@@ -964,9 +964,14 @@ function generateFaustCode(){
                 }
                 else
                     argstring = argstring.concat(args[i]);
-                if(i < args.length-1)
-                    argstring = argstring.concat(", ");
+                argstring = argstring.concat(", ");
             }
+
+            // Fill any non provided extra arguments with zeros
+            if(args.length < phyDict.faustModDict[type]["nbArgs"] + phyDict.faustModDict[type]["optArgs"].length)
+                argstring = argstring.concat("0, ");
+            // Remove last coma (if present)
+            argstring = argstring.replace(/,\s*$/,"");
 
             let pos = dict["pos"]["x"];
             let delPos = pos;
@@ -1050,17 +1055,19 @@ function generateFaustCode(){
             let func = phyDict.faustModDict[type]["func"];
 
             let argstring = "";
-            for (let i = 0; i < args.length; i++) {
-                argstring = argstring.concat(args[i]);
-                if(i < args.length-1)
-                    argstring = argstring.concat(", ");
-            }
+            for (let i = 0; i < args.length; i++)
+                argstring = argstring.concat(args[i] + ", ");
+            // Fill any non provided extra arguments with zeros
+            if(args.length < phyDict.faustModDict[type]["nbArgs"] + phyDict.faustModDict[type]["optArgs"].length)
+                argstring = argstring.concat("0, ");
+            // Remove last coma (if present)
+            argstring = argstring.replace(/,\s*$/,"");
+
             let mass1 = dict["m1"];
             let mass2 = dict["m2"];
             routingMatrix[fMassIndexMap[mass1]["index"]] [2*i_cpt] = 1;
             routingMatrix[fMassIndexMap[mass2]["index"]] [2*i_cpt+1] = 1;
 
-            // TODO: get proper delayed position here
             fInter.push(func +  "(" + argstring + ", " +
                 fMassIndexMap[mass1]["posR"] + ", " +
                 fMassIndexMap[mass2]["posR"] + ")");
@@ -1138,28 +1145,34 @@ function generateFaustCode(){
     if(passthrough !== ""){
         l2m = l2m.concat("/* pass-through */ ");
         l2m = l2m.concat(passthrough);
-        l2m = l2m.replace(/,\s*$/,";");
+        l2m = l2m.replace(/,\s*$/,"");
     }
+    l2m = l2m.replace(/,\s*$/,"");
+    l2m = l2m.concat(";");
+
 
     // Generate Mat to Link Routing Function
     m2l = "RoutingMassToLink(";
     for(let i = 0; i < nbMasses-1; i++)
         m2l = m2l.concat("m" + i + ", ");
     m2l = m2l.concat("m" + (nbMasses-1) + ") = ")
-    m2l = m2l.concat("/* interaction forces */ ");
+    m2l = m2l.concat("/* routed positions */ ");
     for(let j = 0; j < 2*nbInter; j++)
         for(let i = 0; i < nbMasses; i++)
             if(routingMatrix[i][j] === 1){
                 m2l = m2l.concat("m" + i + ", ");
             }
 
-    m2l = m2l.concat("/* outputs */ ");
+    if(!posOutputMasses.isEmpty())
+        m2l = m2l.concat("/* outputs */ ");
+
     for (let number in posOutputMasses)
         if (posOutputMasses.hasOwnProperty(number))
             m2l = m2l.concat("m"+posOutputMasses[number] + ", ");
 
     m2l = m2l.replace(/,\s*$/,";");
 
+    // Alternate way of doing the routing functions: more efficient but less clear...
     /*
     let link2mass = "";
     let mass2link = "";
@@ -1216,16 +1229,45 @@ function generateFaustCode(){
     fDSP = fDSP.concat("OutGain = 1;");
     fDSP = fDSP.concat("\n\n");
 
-    fDSP = fDSP.concat(fParams.join(";\n"));
-    fDSP = fDSP.concat(";\n\n");
+    if(fParams.length>0){
+        fDSP = fDSP.concat(fParams.join(";\n"));
+        fDSP = fDSP.concat(";\n\n");
+    }
+
 
     let frcPassThrough = "";
-    if(nbFrcInput > 0)
-        frcPassThrough = ",\n\tpar(i, nbFrcIn,_)";
-
+    let interCable = "";
+    let outCable = "";
     let interDSP = "";
+
+    let fWith =
+        "with{\n\t" + m2l + "\n\t" + l2m +"\n"
+        + "\tnbMass = " + nbMasses + ";\n";
+
+
+    if(nbFrcInput > 0){
+        frcPassThrough = ",\n\tpar(i, nbFrcIn,_)";
+        fWith = fWith.concat("\tnbFrcIn = " + nbFrcInput + ";\n");
+    }
+
     if (fInter.length > 0)
         interDSP = interDSP.concat(fInter.join(",\n\t") + ",\n");
+
+    if(nbOut+nbFrcInput > 0)
+        if(nbFrcInput > 0)
+            interCable = "\tpar(i, nbOut+nbFrcIn, _)";
+        else
+            interCable = "\tpar(i, nbOut, _)";
+    else
+        interDSP = interDSP.replace(/,\s*$/, "");
+
+    if(nbOut > 0){
+        outCable = ", par(i, nbOut , _)";
+        fWith = fWith.concat("\tnbOut = " + nbOut + ";\n");
+    }
+
+    fWith = fWith.concat("};\n");
+
 
     fDSP = fDSP.concat(
         "model = (\n\t"
@@ -1236,20 +1278,13 @@ function generateFaustCode(){
         + frcPassThrough
         + ":\n\t"
         + interDSP
-        + "\tpar(i, nbOut+nbFrcIn, _)"
-        //+ frcPassThrough
+        + interCable
         + ":\n\t"
         + "RoutingLinkToMass\n)~par(i, nbMass, _):"
-        + "\npar(i, nbMass, !), par(i, nbOut , _)\n"
+        + "\npar(i, nbMass, !)" + outCable + "\n"
+        + fWith
     );
 
-    fDSP = fDSP.concat(
-        "with{\n\t" + m2l + "\n\t" + l2m +"\n"
-        + "\tnbMass = " + nbMasses + ";\n"
-        + "\tnbOut = " + nbOut + ";\n"
-        + "\tnbFrcIn = " + nbFrcInput + ";\n"
-        + "};\n"
-    );
 
     fDSP = fDSP.concat("process = ");
 
@@ -1262,9 +1297,10 @@ function generateFaustCode(){
             inputs = inputs.concat("in" + number + ", ");
     inputs = inputs.replace(/,\s*$/,"");
 
-
     if(inputs !== "")
-        fDSP = fDSP.concat(inputs + " : model");
+        fDSP = fDSP.concat(inputs + " : ");
+
+    fDSP = fDSP.concat("model");
 
     if(nbOut > 0){
         fDSP = fDSP.concat(":");
