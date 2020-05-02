@@ -1,9 +1,6 @@
 const util = require("./utility.js");
 const phyDict = require("./phyDict.js");
 
-let jsonSpat = {};
-
-
 /**
  * Parse the module dictionaries of a parsed MIMS Script to generate gen~ codebox code.
  * This method first parses dictionaries of modules to generate lists of code
@@ -35,7 +32,7 @@ function generateGenCode(){
 
     var instanciatedOuts = [];
 
-    jsonSpat = {};
+    let jsonSpat = {};
     let codeboxCode = "";
 
 
@@ -234,6 +231,15 @@ function generateGenCode(){
     }
 
 
+    function buildInitPosData(dict){
+        let z = parseFloat(dict["pos"]["z"]);
+        let velz = parseFloat(dict["vel"]["z"]);
+        let delPos = z;
+        if(velz !== 0)
+            delPos = z + " - (" + velz + "/ SAMPLERATE)";
+        return z + ", " + delPos;
+    }
+
     // Initialise several arrays for specific buffers.
     for(let i = 0; i < mdl.bufferList.length; i++){
         specificBuffers[mdl.bufferList[i]] = {index : 0, code: []};
@@ -257,25 +263,21 @@ function generateGenCode(){
         var dict = {};
         var n = "";
 
+        let Xcoord = [];
         let Ycoord = [];
-        let Zcoord = [];
 
         for (let name in mdl.massDict) {
             if (mdl.massDict.hasOwnProperty(name)) {
                 dict = mdl.massDict[name];
                 n = util.formatModuleName(name);
                 struct.push("Data " + n + "(3);");
-
-                let x = parseFloat(dict["pos"]["x"]);
-                let velx = parseFloat(dict["vel"]["x"]);
-                init.push("init_mat(" + n + ", " + x
-                    + ", " + x + " - " + velx + " / SAMPLERATE);");
+                init.push("init_mat(" + n + ", " + buildInitPosData(dict) + ");");
                 compMasses.push(massToCode(n, dict));
 
                 // Add motion buffer code for the mass-type element
                 pushToMotionBuffers(n, dict);
+                Xcoord.push(parseFloat(dict["pos"]["x"]));
                 Ycoord.push(parseFloat(dict["pos"]["y"]));
-                Zcoord.push(parseFloat(dict["pos"]["z"]));
             }
         }
 
@@ -288,47 +290,49 @@ function generateGenCode(){
                 let type = dict["type"];
                 let string = false;
 
+                let length = parseInt(dict["args"][0]);
+                let width = 0;
+
                 if((type === "string") || (type === "stiffString") || (type === "chain")){
-                    size = parseInt(dict["args"][0]);
+                    size = length;
                     string = true;
                 }
-                else
-                    size = parseInt(dict["args"][0]) * parseInt(dict["args"][1]);
+                else {
+                    width = parseInt(dict["args"][1]);
+                    size = length * width;
+                }
 
                 if (isNaN(size))
                     throw "Macro length argument for " + name + " cannot be converted to an integer: " + size;
 
                 struct.push("Data " + n + "(3, " + size + ");");
-                let x = parseFloat(dict["pos"]["x"]);
-                let velx = parseFloat(dict["vel"]["x"]);
-                init.push("init_multiple_masses(" + n + ", " + x
-                    + ", " + x + " - " + velx + " / SAMPLERATE);");
+                init.push("init_multiple_masses(" + n + ", " + buildInitPosData(dict) + ");");
                 compMasses.push(massToCode(n, dict));
 
                 pushMacroToMotionBuffers(n, dict, size);
 
                 if(string){
                     for(let i = 0; i < size; i++){
-                        let a = parseFloat(dict["pos"]["y"]);
-                        let b = parseFloat(dict["vel"]["y"]);
-                        Ycoord.push(a + i * (b - a) / (size-1));
+                        let a = parseFloat(dict["pos"]["x"]);
+                        let b = parseFloat(dict["vel"]["x"]);
+                        Xcoord.push(a + i * (b - a) / (size-1));
 
-                        a = parseFloat(dict["pos"]["z"]);
-                        b = parseFloat(dict["vel"]["z"]);
-                        Zcoord.push(a + i * (b - a) / (size-1));
+                        a = parseFloat(dict["pos"]["y"]);
+                        b = parseFloat(dict["vel"]["y"]);
+                        Ycoord.push(a + i * (b - a) / (size-1));
                     }
                 }
                 else {
                     // TODO: write Y and Z coords for mesh macro elements !
                     // This is wrong !!
                     for(let i = 0; i < size; i++){
-                        let a = parseFloat(dict["pos"]["y"]);
-                        let b = parseFloat(dict["vel"]["y"]);
-                        Ycoord.push(a + i * (b - a) / (size-1));
+                        let a = parseFloat(dict["pos"]["x"]);
+                        let b = parseFloat(dict["vel"]["x"]);
+                        Xcoord.push(a + i * (b - a) / (size-1));
 
-                        a = parseFloat(dict["pos"]["z"]);
-                        b = parseFloat(dict["vel"]["z"]);
-                        Zcoord.push(a + i * (b - a) / (size-1));
+                        a = parseFloat(dict["pos"]["y"]);
+                        b = parseFloat(dict["vel"]["y"]);
+                        Ycoord.push(a + i * (b - a) / (size-1));
                     }
                 }
             }
@@ -365,12 +369,12 @@ function generateGenCode(){
                 // If the module is a position input, it is mostly calculated as a mass element
                 if (dict["type"] === "posInput") {
                     struct.push("Data " + n + "(3);");
-                    init.push("init_mat(" + n + ", " + parseFloat(dict["pos"]["x"]) + ", " + parseFloat(dict["vel"]["x"]) + ");");
+                    init.push("init_mat(" + n + ", " + parseFloat(dict["pos"]["z"]) + ", " + parseFloat(dict["pos"]["z"]) + ");");
                     compInput.push(inOutToCode(n, dict, null));
 
                     // Add motion buffer code for the mass-type element
+                    Xcoord.push(parseFloat(dict["pos"]["x"]));
                     Ycoord.push(parseFloat(dict["pos"]["y"]));
-                    Zcoord.push(parseFloat(dict["pos"]["z"]));
                     pushToMotionBuffers(n, dict);
                 }
                 // Otherwise all the in out code codes into a specific section.
@@ -502,12 +506,12 @@ function generateGenCode(){
         codeboxCode = codeboxCode.concat("render_cpt = (render_cpt + 1) % 200;\n}\n");
 
         jsonSpat = {
-            Y : Ycoord,
-            Z : Zcoord
+            X : Xcoord,
+            Y : Ycoord
         };
 
         console.log("Finished generating gen~ DSP code");
-        return [codeboxCode, nbInputs, nbOutputs];
+        return [codeboxCode, nbInputs, nbOutputs, jsonSpat];
 
     }
     catch (e){
@@ -516,4 +520,4 @@ function generateGenCode(){
 }
 
 
-module.exports = {generateGenCode, jsonSpat};
+module.exports = {generateGenCode};

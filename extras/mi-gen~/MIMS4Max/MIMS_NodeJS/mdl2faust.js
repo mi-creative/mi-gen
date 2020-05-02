@@ -43,14 +43,14 @@ function generateFaustCode(){
             // Remove last coma (if present)
             argstring = argstring.replace(/,\s*$/,"");
 
-            let pos = dict["pos"]["x"];
+            let pos = dict["pos"]["z"];
             let delPos = pos;
             let posString = "";
             if(type === "ground" )
                 posString = pos;
             else{
-                if(parseFloat(dict["vel"]["x"]) !== 0)
-                    delPos = dict["pos"]["x"] + " - (" + dict["vel"]["x"] + "/ ma.SR)";
+                if(parseFloat(dict["vel"]["z"]) !== 0)
+                    delPos = dict["pos"]["z"] + " - (" + dict["vel"]["z"] + "/ ma.SR)";
                 posString =  pos + ", " + delPos;
             }
             if(argstring !== "")
@@ -73,9 +73,9 @@ function generateFaustCode(){
         if (mdl.inOutDict.hasOwnProperty(name)) {
             dict = mdl.inOutDict[name];
             if (dict["type"] === "posInput"){
-                fMass.push("posInput(" + dict["pos"]["x"] + ")");
-                fMassIndexMap[name] = {index:cpt++, pos:dict["pos"]["x"], posR:dict["pos"]["x"]};
-                posInputMasses[util.stripInOutToInt(name)] = {pos:dict["pos"]["x"]};
+                fMass.push("posInput(" + dict["pos"]["z"] + ")");
+                fMassIndexMap[name] = {index:cpt++, pos:dict["pos"]["z"], posR:dict["pos"]["z"]};
+                posInputMasses[util.stripInOutToInt(name)] = {pos:dict["pos"]["z"]};
             }
         }
     }

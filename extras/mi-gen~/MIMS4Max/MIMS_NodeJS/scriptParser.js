@@ -1,7 +1,5 @@
-//const genDspFileWriter = require("./jsMIMS_GenObjWriter.js");
 const phyDict = require("./phyDict.js");
 const util = require("./utility.js");
-
 const modelState = require("./modelState.js");
 
 let activeBufferList = [];
@@ -51,7 +49,6 @@ function parseCommand(text){
 
                 if (activeBufferList.indexOf(s) === -1){
                     activeBufferList.push(s);
-                    //console.log(mdl.bufferList);
                     mdl.bufferList.push(s);
                 }
 

@@ -5,7 +5,7 @@ const mimsWorker = require("./MIMS_NodeJS/mimsWorker.js");
 
 let genPatchData = [];
 let faustFile = "";
-
+let jsonCode = {}
 /**
  * Adding function handlers (functions that can be called from the Max context).
  */
@@ -17,7 +17,7 @@ maxAPI.addHandlers({
         console.log("Parsing MIMS code...");
         maxAPI.outlet("error", "");
         maxAPI.outlet("state", "Parsing MIMS file");
-        //try{
+        try{
 
             let res = mimsWorker.parseMIMSFile(args[0].toString());
 
@@ -28,15 +28,17 @@ maxAPI.addHandlers({
             genPatchData = mimsWorker.generateGenDSP();
             maxAPI.outlet("code", genPatchData[0]);
 
+            // Copy extra JSON dict containing X-Y positions
+            jsonCode = genPatchData[3];
+
             faustFile = mimsWorker.generateFaustDSP();
-        /*}
+        }
         catch (e) {
             maxAPI.outlet("state", "Errors detected during the model script parsing.");
             maxAPI.outlet("error", e);
-        }*/
+        }
 
         console.log("...done");
-        //maxAPI.post("...done.");
     },
 
 

@@ -1,8 +1,3 @@
-/** Some general overloads for object prototypes **/
-
-Number.prototype.clamp = function(min, max) {
-    return Math.min(Math.max(this, min), max);
-};
 
 /** Some utility functions used here and there **/
 
@@ -62,7 +57,7 @@ function posStringToDict(pos){
     if(posArray.length === 3)
         pdict = {x:posArray[0], y:posArray[1], z: posArray[2]};
     else if (posArray.length === 1)
-        pdict = {x:posArray[0], y:0, z:0};
+        pdict = {x:0, y:0, z:posArray[0]};
     else
         throw "Bad Number of elements in position list " + pos;
     return pdict;
