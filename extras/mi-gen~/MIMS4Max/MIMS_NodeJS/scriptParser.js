@@ -25,7 +25,7 @@ function parseMIMSFile(text){
             inOuts: mdl.inOutDict,
             parameters: mdl.paramDict
         };
-        return [0, out, "Finished parsing.", "No errors to report."];
+        return  [0, out, "Finished parsing.", "No errors to report."];
 
     } catch(e){
         mdl.state = 0;

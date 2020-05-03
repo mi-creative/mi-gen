@@ -207,8 +207,8 @@ function generateFaustCode(){
             routingMatrix[fMassIndexMap[mass2]["index"]] [2*i_cpt+1] = 1;
 
             fInter.push(func +  "(" + argstring + ", " +
-                fMassIndexMap[mass1]["posR"] + ", " +
-                fMassIndexMap[mass2]["posR"] + ")");
+                fMassIndexMap[mass1]["pos"] + ", " +
+                fMassIndexMap[mass2]["pos"] + ")");
 
             i_cpt++;
         }
@@ -982,7 +982,7 @@ module.exports = {generateGenCode};
 
 // To create a browser compatible version of the tool, use browserify:
 //
-// browserify MIMS_NodeJS/mimsWorker.js --standalone mimsBundle > mimsBrowser.js
+// browserify MIMS_NodeJS/mimsWorker.js --standalone mimsBundle > browserified/mimsBrowser.js
 //
 // This will create a mimsBundle object that can be used to access functions.
 // The globally defined mdl object will also be accessible in the client context.
@@ -1211,7 +1211,7 @@ function parseMIMSFile(text){
             inOuts: mdl.inOutDict,
             parameters: mdl.paramDict
         };
-        return [0, out, "Finished parsing.", "No errors to report."];
+        return  [0, out, "Finished parsing.", "No errors to report."];
 
     } catch(e){
         mdl.state = 0;

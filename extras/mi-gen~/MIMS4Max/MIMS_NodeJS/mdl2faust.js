@@ -139,8 +139,8 @@ function generateFaustCode(){
             routingMatrix[fMassIndexMap[mass2]["index"]] [2*i_cpt+1] = 1;
 
             fInter.push(func +  "(" + argstring + ", " +
-                fMassIndexMap[mass1]["posR"] + ", " +
-                fMassIndexMap[mass2]["posR"] + ")");
+                fMassIndexMap[mass1]["pos"] + ", " +
+                fMassIndexMap[mass2]["pos"] + ")");
 
             i_cpt++;
         }
