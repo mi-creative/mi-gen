@@ -515,7 +515,7 @@ function generateGenCode(){
 
     }
     catch (e){
-        throw("Code Generator Error: " + e);
+        throw("Gen~ Code Generator Error: " + e);
     }
 }
 

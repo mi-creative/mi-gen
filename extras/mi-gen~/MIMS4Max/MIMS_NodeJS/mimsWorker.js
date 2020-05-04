@@ -56,12 +56,14 @@ function buildGendspPatch(genPatchData){
 function generateFaustDSP(){
     if(!mdl.isFaustCompatible()){
         console.log("The model contains modules that are incompatible with Faust generation.");
+        //throw "Faust DSP create error: The model is incompatible with Faust. Does it contain macro modules?";
+
     }
     else{
         if(mdl.isValid())
             return mdl2faust.generateFaustCode();
         else
-            throw "Faust dsp create error: Invalid model state. Please parse a model first."
+            throw "Faust dsp create error: Invalid model state. Please parse a model first.";
     }
 }
 
