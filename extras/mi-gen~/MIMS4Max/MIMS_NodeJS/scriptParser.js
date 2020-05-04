@@ -114,7 +114,7 @@ function attributeListToDicts(list){
         else
             expected_args = 0;
 
-        if (mdl.isInAnyDict()) {
+        if (mdl.isInAnyDict(name)) {
             throw name + " already exists in the model.";
         }
 
