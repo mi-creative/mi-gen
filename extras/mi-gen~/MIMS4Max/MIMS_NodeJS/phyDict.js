@@ -34,21 +34,21 @@ const genModDict = {
 };
 
 const faustModDict = {
-    "mass" : {func : "mass", nbArgs:1, optArgs : ["gravity"]},
-    "osc" : {func : "osc", nbArgs:3, optArgs : ["gravity"]},
-    "ground" : { func :"ground", nbArgs:0, optArgs : 0},
-    "spring" : { func :"spring", nbArgs:1, optArgs : 0},
-    "springDamper" : { func :"springDamper", nbArgs:2, optArgs : 0},
-    "damper" : { func :"damper", nbArgs:1, optArgs : 0},
-    "contact" : { func :"collision", nbArgs:2, optArgs : ["thresh"]},
-    "nlContact" : { func :"nlCollisionClipped", nbArgs:4, optArgs : ["thresh"]},
-    "nlSpring2" : { func :"nlSpringDamper2", nbArgs:3, optArgs : 0},
-    "nlSpring3" : { func :"nlSpringDamper3", nbArgs:3, optArgs : 0},
-    "nlSpringDamper" : { func :"nlSpringDamperClipped", nbArgs:4, optArgs : 0},
-    "nlBow" : { func :"nlBow", nbArgs:2, optArgs : ["smooth"]},
-    "nlPluck" : { func :"nlPluck", nbArgs:2, optArgs : ["Z"]},
-    "posInput" : { func :"posInput", nbArgs:0, optArgs : 0},
-    "frcInput" : { func :"apply_input_force", nbArgs:0, optArgs : 0},
+    "mass" : {func : "mi.mass", nbArgs:1, optArgs : ["gravity"]},
+    "osc" : {func : "mi.oscil", nbArgs:3, optArgs : ["gravity"]},
+    "ground" : { func :"mi.ground", nbArgs:0, optArgs : 0},
+    "spring" : { func :"mi.spring", nbArgs:1, optArgs : 0},
+    "springDamper" : { func :"mi.springDamper", nbArgs:2, optArgs : 0},
+    "damper" : { func :"mi.damper", nbArgs:1, optArgs : 0},
+    "contact" : { func :"mi.collision", nbArgs:2, optArgs : ["thresh"]},
+    "nlContact" : { func :"mi.nlCollisionClipped", nbArgs:4, optArgs : ["thresh"]},
+    "nlSpring2" : { func :"mi.nlSpringDamper2", nbArgs:3, optArgs : 0},
+    "nlSpring3" : { func :"mi.nlSpringDamper3", nbArgs:3, optArgs : 0},
+    "nlSpringDamper" : { func :"mi.nlSpringDamperClipped", nbArgs:4, optArgs : 0},
+    "nlBow" : { func :"mi.nlBow", nbArgs:2, optArgs : ["smooth"]},
+    "nlPluck" : { func :"mi.nlPluck", nbArgs:2, optArgs : ["Z"]},
+    "posInput" : { func :"mi.posInput", nbArgs:0, optArgs : 0},
+    //"frcInput" : { func :"mi.apply_input_force", nbArgs:0, optArgs : 0},
 };
 
 

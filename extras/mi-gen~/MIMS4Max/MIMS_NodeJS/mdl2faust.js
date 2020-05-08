@@ -76,7 +76,7 @@ function generateFaustCode(){
             if (mdl.inOutDict.hasOwnProperty(name)) {
                 dict = mdl.inOutDict[name];
                 if (dict["type"] === "posInput"){
-                    fMass.push("posInput(" + dict["pos"]["z"] + ")");
+                    fMass.push("mi.posInput(" + dict["pos"]["z"] + ")");
                     fMassIndexMap[name] = {index:cpt++, pos:dict["pos"]["z"], posR:dict["pos"]["z"]};
                     posInputMasses[util.stripInOutToInt(name)] = {pos:dict["pos"]["z"]};
                 }
@@ -284,7 +284,8 @@ function generateFaustCode(){
 
 
         // NOW GENERATE THE FAUST CODE
-        let fDSP = "import(\"stdfaust.lib\");\nimport(\"mi.lib\");\n\n";
+        let fDSP = "import(\"stdfaust.lib\");\n\n";
+        //let fDSP = "import(\"stdfaust.lib\");\nimport(\"mi.lib\");\n\n";
 
         for (let number in posInputMasses)
             if (posInputMasses.hasOwnProperty(number))
