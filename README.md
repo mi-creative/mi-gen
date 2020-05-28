@@ -58,13 +58,13 @@ The best way to explore the tutorial examples is through a navigation patch in t
 
 The ***Model_Gallery*** folder in the examples also contains many patches that you can also explore, play with and tweak around, or use as a base for your own work.
 
-![](misc/stringpatch.png)
-
-*Above: a mass-interaction string model and associated Max patch (***FrettedString*** example)*
-
 ![](misc/mesh.png)
 
 *Above: a mass-interaction rectangular mesh (from the ***Mesh_15by15*** example), rendered using NURBS in Jitter*
+
+![](misc/stringpatch.png)
+
+*Above: a mass-interaction string model and associated Max patch (***FrettedString*** example)*
 
 ## How mass-interaction models are expressed within gen~
 
