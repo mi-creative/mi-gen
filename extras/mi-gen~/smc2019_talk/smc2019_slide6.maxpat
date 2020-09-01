@@ -2,14 +2,15 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 7,
-			"minor" : 3,
-			"revision" : 5,
+			"major" : 8,
+			"minor" : 1,
+			"revision" : 1,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
-		"rect" : [ -427.0, 107.0, 2008.0, 1340.0 ],
+		"classnamespace" : "box",
+		"rect" : [ 34.0, 77.0, 1472.0, 929.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -43,8 +44,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 146.086966, 146.086966, 24.0, 24.0 ],
-					"style" : ""
+					"parameter_enable" : 0,
+					"patching_rect" : [ 146.08696599999999, 146.08696599999999, 24.0, 24.0 ]
 				}
 
 			}
@@ -69,8 +70,7 @@
 					"patching_rect" : [ 189.0, 163.0, 387.0, 31.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 2,
-					"presentation_rect" : [ 1091.747803, 589.485474, 194.165207, 54.0 ],
-					"style" : "",
+					"presentation_rect" : [ 1091.747802999999976, 589.485473999999954, 194.165207000000009, 54.0 ],
 					"text" : "http://mi-creative.eu/tool_MIMS.html",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"textjustification" : 1
@@ -89,7 +89,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 190.0, 233.0, 114.0, 30.0 ],
-					"style" : "",
 					"text" : ";\r\nmax launchbrowser $1"
 				}
 
@@ -101,11 +100,10 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 161.947836, 669.495693, 153.0, 117.0 ],
+					"patching_rect" : [ 161.947835999999995, 669.49569299999996, 153.0, 117.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 2,
-					"presentation_rect" : [ 18.04347, 610.485474, 796.27832, 34.0 ],
-					"style" : "",
+					"presentation_rect" : [ 18.043469999999999, 610.485473999999954, 796.278320000000008, 34.0 ],
 					"text" : "LEONARD, James, VILLENEUVE, Jérôme, MICHON, Romain, et al. FORMALIZING MASS-INTERACTION PHYSICAL MODELING IN FAUST. Linux Audio Conference, 2019"
 				}
 
@@ -118,11 +116,10 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1204.539203, 220.330446, 199.0, 98.0 ],
+					"patching_rect" : [ 1204.539203000000043, 220.330445999999995, 199.0, 98.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 3,
-					"presentation_rect" : [ 1074.704346, 334.052216, 274.0, 75.0 ],
-					"style" : "",
+					"presentation_rect" : [ 1074.704345999999987, 334.052215999999987, 274.0, 75.0 ],
 					"text" : "Models can then be compiled into .gendsp files (Max) for FAUST dsp code. "
 				}
 
@@ -134,11 +131,10 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1189.539203, 205.330446, 837.0, 29.0 ],
+					"patching_rect" : [ 1189.539203000000043, 205.330445999999995, 837.0, 29.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 3,
-					"presentation_rect" : [ 1074.704346, 221.382614, 257.260803, 75.0 ],
-					"style" : "",
+					"presentation_rect" : [ 1074.704345999999987, 221.38261399999999, 257.26080300000001, 75.0 ],
 					"text" : "Simple syntax for physical elements, and some tools for automated generation."
 				}
 
@@ -151,11 +147,10 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1174.539203, 190.330446, 244.0, 52.0 ],
+					"patching_rect" : [ 1174.539203000000043, 190.330445999999995, 244.0, 52.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 2,
-					"presentation_rect" : [ 1074.704346, 157.130432, 235.260834, 52.0 ],
-					"style" : "",
+					"presentation_rect" : [ 1074.704345999999987, 157.130432000000013, 235.260833999999988, 52.0 ],
 					"text" : "Basic MI scripting tool (written in Python)"
 				}
 
@@ -169,10 +164,10 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "jit_matrix" ],
-					"patching_rect" : [ 404.869568, 278.817413, 100.0, 50.197889 ],
-					"pic" : "C:/Users/leonarja/devel/mi-gen/smc2019_talk/images/MIMS-interface.png",
+					"patching_rect" : [ 404.869568000000015, 278.817412999999988, 100.0, 50.197889000000004 ],
+					"pic" : "images/MIMS-interface.png",
 					"presentation" : 1,
-					"presentation_rect" : [ 1.017386, 60.521217, 1071.687012, 537.964259 ]
+					"presentation_rect" : [ 1.017386, 60.521217, 1071.687012000000095, 537.96425899999997 ]
 				}
 
 			}
@@ -184,8 +179,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 766.330505, 372.31308, 50.0, 174.0 ],
-					"style" : "",
+					"patching_rect" : [ 766.330505000000016, 372.313080000000014, 50.0, 174.0 ],
 					"text" : ";\r\nmax launchbrowser C://Users/leonarja/devel/MIMS/MIMS_main.py"
 				}
 
@@ -200,10 +194,9 @@
 					"mode" : 1,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 627.75656, 414.052199, 128.0, 128.0 ],
+					"patching_rect" : [ 627.756560000000036, 414.052198999999973, 128.0, 128.0 ],
 					"proportion" : 0.39,
-					"shape" : 3,
-					"style" : ""
+					"shape" : 3
 				}
 
 			}
@@ -214,8 +207,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 787.834839, 51.756527, 37.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 787.834838999999988, 51.756526999999998, 37.0, 22.0 ],
 					"text" : "reset"
 				}
 
@@ -227,8 +219,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 855.452209, 89.321754, 61.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 855.452209000000039, 89.321753999999999, 61.0, 22.0 ],
 					"text" : "click~ 0.1"
 				}
 
@@ -243,10 +234,10 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
 					"outlinecolor" : [ 0.702269, 0.811747, 0.303388, 1.0 ],
-					"patching_rect" : [ 882.165283, 14.19131, 24.0, 24.0 ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 882.165283000000045, 14.19131, 24.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1401.600098, 53.617393, 94.956528, 94.956528 ],
-					"style" : ""
+					"presentation_rect" : [ 1401.600097999999889, 53.617393, 94.956528000000006, 94.956528000000006 ]
 				}
 
 			}
@@ -257,8 +248,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 564.652222, 11.191287, 60.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 564.652222000000052, 11.191287000000001, 60.0, 22.0 ],
 					"text" : "loadbang"
 				}
 
@@ -270,8 +260,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 925.573975, 40.069565, 29.5, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 925.573975000000019, 40.069564999999997, 29.5, 22.0 ],
 					"text" : "0"
 				}
 
@@ -285,8 +274,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 4,
 					"outlettype" : [ "int", "int", "int", "int" ],
-					"patching_rect" : [ 627.539124, 11.191287, 64.0, 23.0 ],
-					"style" : "",
+					"patching_rect" : [ 627.539124000000015, 11.191287000000001, 64.0, 23.0 ],
 					"text" : "key"
 				}
 
@@ -300,8 +288,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "" ],
-					"patching_rect" : [ 985.460876, 39.834976, 64.0, 23.0 ],
-					"style" : "",
+					"patching_rect" : [ 985.460875999999985, 39.834975999999997, 64.0, 23.0 ],
 					"text" : "select 32"
 				}
 
@@ -315,8 +302,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 985.460876, 68.478653, 135.0, 23.0 ],
-					"style" : "",
+					"patching_rect" : [ 985.460875999999985, 68.478652999999994, 135.0, 23.0 ],
 					"text" : "You hit the space bar"
 				}
 
@@ -328,10 +314,9 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 621.713074, 244.591324, 1331.0, 36.0 ],
+					"patching_rect" : [ 621.713074000000006, 244.591323999999986, 1331.0, 36.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 10.017386, 10.208696, 2658.0, 36.0 ],
-					"style" : "",
 					"text" : "A simple file format/scripting language to describe MI models"
 				}
 
@@ -348,11 +333,10 @@
 					"mode" : 1,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1105.252197, 604.382629, 220.660858, 79.582603 ],
+					"patching_rect" : [ 1105.252197000000024, 604.382628999999952, 220.66085799999999, 79.582603000000006 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1084.93042, 580.678284, 208.495712, 66.226082 ],
-					"proportion" : 0.39,
-					"style" : ""
+					"presentation_rect" : [ 1084.930419999999913, 580.678283999999962, 208.495711999999997, 66.226082000000005 ],
+					"proportion" : 0.39
 				}
 
 			}
@@ -412,14 +396,7 @@
 
 			}
  ],
-		"dependency_cache" : [ 			{
-				"name" : "MIMS-interface.png",
-				"bootpath" : "~/devel/mi-gen/smc2019_talk/images",
-				"patcherrelativepath" : "./images",
-				"type" : "PNG ",
-				"implicit" : 1
-			}
- ],
+		"dependency_cache" : [  ],
 		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "AudioStatus_Menu",
@@ -442,10 +419,6 @@
 , 			{
 				"name" : "classic",
 				"default" : 				{
-					"bgcolor" : [ 0.83978, 0.839941, 0.839753, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"patchlinecolor" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"accentcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "color",
 						"color1" : [ 0.83978, 0.839941, 0.839753, 1.0 ],
@@ -455,9 +428,13 @@
 						"proportion" : 0.39
 					}
 ,
-					"fontsize" : [ 9.0 ],
+					"fontname" : [ "Geneva" ],
 					"color" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
-					"fontname" : [ "Geneva" ]
+					"accentcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
+					"fontsize" : [ 9.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 0.83978, 0.839941, 0.839753, 1.0 ],
+					"patchlinecolor" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -511,10 +488,10 @@
 , 			{
 				"name" : "classicKslider",
 				"default" : 				{
-					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"elementcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
 					"selectioncolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
-					"color" : [ 1.0, 1.0, 1.0, 1.0 ]
+					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -523,8 +500,8 @@
 , 			{
 				"name" : "classicLed",
 				"default" : 				{
-					"elementcolor" : [ 0.6, 0.0, 0.0, 1.0 ],
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ]
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"elementcolor" : [ 0.6, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -542,8 +519,8 @@
 , 			{
 				"name" : "classicMeter~",
 				"default" : 				{
-					"bgcolor" : [ 0.380392, 0.380392, 0.380392, 1.0 ],
-					"elementcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ]
+					"elementcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
+					"bgcolor" : [ 0.380392, 0.380392, 0.380392, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -552,9 +529,9 @@
 , 			{
 				"name" : "classicNodes",
 				"default" : 				{
+					"color" : [ 0.839216, 0.839216, 0.839216, 1.0 ],
 					"elementcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
-					"fontsize" : [ 9.0 ],
-					"color" : [ 0.839216, 0.839216, 0.839216, 1.0 ]
+					"fontsize" : [ 9.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -599,8 +576,8 @@
 , 			{
 				"name" : "classicScope~",
 				"default" : 				{
-					"bgcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
-					"color" : [ 0.462745, 0.933333, 0.0, 1.0 ]
+					"color" : [ 0.462745, 0.933333, 0.0, 1.0 ],
+					"bgcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -609,8 +586,8 @@
 , 			{
 				"name" : "classicTab",
 				"default" : 				{
-					"elementcolor" : [ 0.839216, 0.839216, 0.839216, 1.0 ],
-					"color" : [ 0.498039, 0.498039, 0.498039, 1.0 ]
+					"color" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
+					"elementcolor" : [ 0.839216, 0.839216, 0.839216, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -619,8 +596,8 @@
 , 			{
 				"name" : "classicTextbutton",
 				"default" : 				{
-					"accentcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"color" : [ 1.0, 1.0, 1.0, 1.0 ]
+					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+					"accentcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -629,8 +606,8 @@
 , 			{
 				"name" : "classicToggle",
 				"default" : 				{
-					"elementcolor" : [ 0.376471, 0.384314, 0.4, 0.0 ],
-					"color" : [ 0.380392, 0.380392, 0.380392, 1.0 ]
+					"color" : [ 0.380392, 0.380392, 0.380392, 1.0 ],
+					"elementcolor" : [ 0.376471, 0.384314, 0.4, 0.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -648,8 +625,8 @@
 , 			{
 				"name" : "classicWaveform~",
 				"default" : 				{
-					"selectioncolor" : [ 0.498039, 0.498039, 0.498039, 0.5 ],
-					"color" : [ 0.380392, 0.380392, 0.380392, 1.0 ]
+					"color" : [ 0.380392, 0.380392, 0.380392, 1.0 ],
+					"selectioncolor" : [ 0.498039, 0.498039, 0.498039, 0.5 ]
 				}
 ,
 				"parentstyle" : "",
@@ -658,8 +635,8 @@
 , 			{
 				"name" : "lightbutton",
 				"default" : 				{
-					"bgcolor" : [ 0.309495, 0.299387, 0.299789, 1.0 ],
-					"elementcolor" : [ 0.654902, 0.572549, 0.376471, 1.0 ]
+					"elementcolor" : [ 0.654902, 0.572549, 0.376471, 1.0 ],
+					"bgcolor" : [ 0.309495, 0.299387, 0.299789, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -705,8 +682,8 @@
 , 			{
 				"name" : "purple",
 				"default" : 				{
-					"bgcolor" : [ 0.304029, 0.250694, 0.285628, 1.0 ],
-					"textcolor_inverse" : [ 0.701961, 0.415686, 0.886275, 1.0 ]
+					"textcolor_inverse" : [ 0.701961, 0.415686, 0.886275, 1.0 ],
+					"bgcolor" : [ 0.304029, 0.250694, 0.285628, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -733,8 +710,8 @@
 , 			{
 				"name" : "tastefulltoggle",
 				"default" : 				{
-					"bgcolor" : [ 0.185512, 0.263736, 0.260626, 1.0 ],
-					"color" : [ 0.941176, 0.690196, 0.196078, 1.0 ]
+					"color" : [ 0.941176, 0.690196, 0.196078, 1.0 ],
+					"bgcolor" : [ 0.185512, 0.263736, 0.260626, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -743,9 +720,9 @@
 , 			{
 				"name" : "tastefultoggle",
 				"default" : 				{
-					"bgcolor" : [ 0.287863, 0.333333, 0.329398, 1.0 ],
+					"color" : [ 0.941176, 0.690196, 0.196078, 1.0 ],
 					"elementcolor" : [ 0.654902, 0.572549, 0.376471, 1.0 ],
-					"color" : [ 0.941176, 0.690196, 0.196078, 1.0 ]
+					"bgcolor" : [ 0.287863, 0.333333, 0.329398, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
