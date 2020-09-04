@@ -218,7 +218,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 67.0, 110.0, 640.0, 480.0 ],
+						"rect" : [ 399.0, 357.0, 640.0, 480.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -245,6 +245,7 @@
 						"tags" : "",
 						"style" : "",
 						"subpatcher_template" : "",
+						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"format" : 6,
@@ -266,7 +267,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 314.301879999999983, 272.0, 93.0, 22.0 ],
-									"text" : "onepole~ 10 Hz"
+									"text" : "onepole~ 20 Hz"
 								}
 
 							}
@@ -278,7 +279,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 314.301879999999983, 238.0, 93.0, 22.0 ],
-									"text" : "onepole~ 10 Hz"
+									"text" : "onepole~ 20 Hz"
 								}
 
 							}
@@ -290,7 +291,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 314.301879999999983, 204.0, 93.0, 22.0 ],
-									"text" : "onepole~ 10 Hz"
+									"text" : "onepole~ 20 Hz"
 								}
 
 							}
@@ -313,8 +314,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 156.301880000000011, 272.0, 93.0, 22.0 ],
-									"text" : "onepole~ 10 Hz"
+									"patching_rect" : [ 156.301880000000011, 272.0, 86.0, 22.0 ],
+									"text" : "onepole~ 5 Hz"
 								}
 
 							}
@@ -325,8 +326,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 156.301880000000011, 238.0, 93.0, 22.0 ],
-									"text" : "onepole~ 10 Hz"
+									"patching_rect" : [ 156.301880000000011, 238.0, 86.0, 22.0 ],
+									"text" : "onepole~ 5 Hz"
 								}
 
 							}
@@ -337,8 +338,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 156.301880000000011, 204.0, 93.0, 22.0 ],
-									"text" : "onepole~ 10 Hz"
+									"patching_rect" : [ 156.301880000000011, 204.0, 86.0, 22.0 ],
+									"text" : "onepole~ 5 Hz"
 								}
 
 							}
@@ -609,8 +610,8 @@
 					"patching_rect" : [ 330.746094000000085, 214.0, 200.0, 200.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 250.849060000000009, 25.0, 207.698119999999989, 189.5 ],
-					"xplace" : [ 0.79126953 ],
-					"yplace" : [ 0.915 ]
+					"xplace" : [ 0.11126953 ],
+					"yplace" : [ 0.77 ]
 				}
 
 			}
@@ -1783,7 +1784,7 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "expressiveBowing.gendsp",
-				"bootpath" : "~/devel/mi-gen/examples/Modelling_Tutorial_Series/2_ExpressiveBowing",
+				"bootpath" : "~/devel/MI/mi-gen/examples/Modelling_Tutorial_Series/2_ExpressiveBowing",
 				"patcherrelativepath" : ".",
 				"type" : "gDSP",
 				"implicit" : 1
@@ -1791,21 +1792,21 @@
 , 			{
 				"name" : "migen-lib.genexpr",
 				"bootpath" : "~/Documents/Max 8/Packages/mi-gen/code",
-				"patcherrelativepath" : "../../../../../Documents/Max 8/Packages/mi-gen/code",
+				"patcherrelativepath" : "../../../../../../Documents/Max 8/Packages/mi-gen/code",
 				"type" : "GenX",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "migen-integrated.genexpr",
 				"bootpath" : "~/Documents/Max 8/Packages/mi-gen/code",
-				"patcherrelativepath" : "../../../../../Documents/Max 8/Packages/mi-gen/code",
+				"patcherrelativepath" : "../../../../../../Documents/Max 8/Packages/mi-gen/code",
 				"type" : "GenX",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "migen-proxies.genexpr",
 				"bootpath" : "~/Documents/Max 8/Packages/mi-gen/code",
-				"patcherrelativepath" : "../../../../../Documents/Max 8/Packages/mi-gen/code",
+				"patcherrelativepath" : "../../../../../../Documents/Max 8/Packages/mi-gen/code",
 				"type" : "GenX",
 				"implicit" : 1
 			}
@@ -1832,7 +1833,6 @@
 , 			{
 				"name" : "classic",
 				"default" : 				{
-					"fontname" : [ "Geneva" ],
 					"color" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"patchlinecolor" : [ 0.0, 0.0, 0.0, 1.0 ],
@@ -1847,7 +1847,8 @@
 ,
 					"fontsize" : [ 9.0 ],
 					"accentcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
-					"bgcolor" : [ 0.83978, 0.839941, 0.839753, 1.0 ]
+					"bgcolor" : [ 0.83978, 0.839941, 0.839753, 1.0 ],
+					"fontname" : [ "Geneva" ]
 				}
 ,
 				"parentstyle" : "",
@@ -2138,16 +2139,6 @@
 					"elementcolor" : [ 0.65098, 0.666667, 0.662745, 1.0 ]
 				}
 ,
-				"kslider" : 				{
-					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"elementcolor" : [ 0.65098, 0.666667, 0.662745, 1.0 ]
-				}
-,
-				"multislider" : 				{
-					"color" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
-				}
-,
 				"slider" : 				{
 					"color" : [ 0.461105, 0.492646, 0.591878, 1.0 ],
 					"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
@@ -2160,10 +2151,20 @@
 					"elementcolor" : [ 0.862745, 0.870588, 0.878431, 1.0 ]
 				}
 ,
+				"kslider" : 				{
+					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+					"elementcolor" : [ 0.65098, 0.666667, 0.662745, 1.0 ]
+				}
+,
 				"button" : 				{
 					"color" : [ 1.0, 0.95051, 0.0, 1.0 ],
 					"bgcolor" : [ 0.682032, 0.698052, 0.748716, 1.0 ],
 					"elementcolor" : [ 0.786675, 0.801885, 0.845022, 1.0 ]
+				}
+,
+				"multislider" : 				{
+					"color" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
 ,
 				"function" : 				{
