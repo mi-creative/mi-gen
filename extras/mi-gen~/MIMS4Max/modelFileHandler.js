@@ -8,8 +8,8 @@ maxAPI.addHandlers({
         maxAPI.post("Loading file: ", args[0]);
 
         // Do this on Mac to conform to a standard absolute path starting from the root /
-        if(/^Macintosh/.test(args[0]))
-            args[0] = args[0].replace("Macintosh HD:", "");
+        //if(/^Macintosh/.test(args[0]))
+        //    args[0] = args[0].replace("Macintosh HD:", "");
 
 
         fs.readFile(args[0], function(err, buf) {
@@ -27,13 +27,13 @@ maxAPI.addHandlers({
         });
     },
     saveFile: (...args) => {
-        maxAPI.post("Saving to file file: ", args[0]);
+        maxAPI.post("Saving to file : ", args[0]);
 
         var filePath = args[0];
 
         // Do this on Mac to conform to a standard absolute path starting from the root /
-        if(/^Macintosh/.test(filePath))
-            filePath = filePath.replace("Macintosh HD:", "");
+        //if(/^Macintosh/.test(filePath))
+        //    filePath = filePath.replace("Macintosh HD:", "");
 
 
         var fileContent = args[1].toString();
@@ -45,6 +45,9 @@ maxAPI.addHandlers({
 
         console.log(fileContent);
 
+        //maxAPI.post("bla : ", args[0]);
+
+		
         fs.writeFileSync(filePath, fileContent, (err)=> {
             if (err)  {
                 console.log(err);
@@ -52,6 +55,7 @@ maxAPI.addHandlers({
             }
             console.log("Successfully Written to File.");
         });
+		
     }
 });
 

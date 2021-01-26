@@ -47,8 +47,8 @@ maxAPI.addHandlers({
             maxAPI.post("About to generate the gen DSP file...");
             try{
                 // Do this on Mac to conform to a standard absolute path starting from the root /
-                if(/^Macintosh/.test(args[0]))
-                    args[0] = args[0].replace("Macintosh HD:", "");
+                //if(/^Macintosh/.test(args[0]))
+                //    args[0] = args[0].replace("Macintosh HD:", "");
 
                 // build the max gendsp patch surrounding the codebox code.
                 let gendspPatch = mimsWorker.buildGendspPatch(genPatchData);
@@ -127,10 +127,11 @@ maxAPI.addHandlers({
 
 
 function writeDspFile(filePath, fileContent){
+	maxAPI.post("about to write file");
 
     // Do this on Mac to conform to a standard absolute path starting from the root /
-    if(/^Macintosh/.test(filePath))
-        filePath = filePath.replace("Macintosh HD:", "");
+    //if(/^Macintosh/.test(filePath))
+    //    filePath = filePath.replace("Macintosh HD:", "");
 
     fs.writeFileSync(filePath.toString(), fileContent, (err)=> {
         if (err) {
