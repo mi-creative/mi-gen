@@ -185,6 +185,7 @@ function generateFaustCode(){
         let routingMatrix = Array(nbMasses).fill(null).map(() => Array(2*nbInter).fill(0));
         let nbOut = Object.keys(posOutputMasses).length + Object.keys(frcOutputMasses).length;
 
+        let nbPosInput = Object.keys(posInputMasses).length;
         let nbFrcInput = Object.keys(frcInputMasses).length;
 
         let i_cpt = 0;
@@ -385,6 +386,10 @@ function generateFaustCode(){
         let outCable = "";
         let interDSP = "";
 
+        let fPosInputRoute = "";
+        if (nbPosInput > 1)
+            fPosInputRoute = "par(i, nbMass - nbPosIn, _), ro.interleave(nbPosIn, 2):\n\t";
+
         let fWith =
             "with{\n\t" + m2l + "\n\t" + l2m +"\n"
             + "\tnbMass = " + nbMasses + ";\n";
@@ -393,6 +398,10 @@ function generateFaustCode(){
         if(nbFrcInput > 0){
             frcPassThrough = ",\n\tpar(i, nbFrcIn,_)";
             fWith = fWith.concat("\tnbFrcIn = " + nbFrcInput + ";\n");
+        }
+
+        if(nbPosInput > 0){
+            fWith = fWith.concat("\tnbPosIn = " + nbPosInput + ";\n");
         }
 
         if (fInter.length > 0)
@@ -416,6 +425,7 @@ function generateFaustCode(){
 
         fDSP = fDSP.concat(
             "model = (\n\t"
+            + fPosInputRoute
             + fMass.join(",\n\t")
             + frcPassThrough
             + ":\n\t"
