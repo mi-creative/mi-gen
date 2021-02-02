@@ -115,7 +115,11 @@ function generateFaustCode(){
         let nbMasses = fMass.length;
         let nbInter = Object.keys(mdl.interDict).length;
         let routingMatrix = Array(nbMasses).fill(null).map(() => Array(2*nbInter).fill(0));
-        let nbOut = Object.keys(posOutputMasses).length + Object.keys(frcOutputMasses).length;
+
+        let nbPosOut = Object.keys(posOutputMasses).length;
+        let nbFrcOut = Object.keys(frcOutputMasses).length;
+        let nbOut = nbPosOut + nbFrcOut;
+
 
         let nbPosInput = Object.keys(posInputMasses).length;
         let nbFrcInput = Object.keys(frcInputMasses).length;
@@ -202,6 +206,7 @@ function generateFaustCode(){
                     add = 1;
                 }
 
+
             if(routed_forces === "")
                 routed_forces = "0";
 
@@ -232,6 +237,9 @@ function generateFaustCode(){
 
         // Generate Mat to Link Routing Function
         m2l = "RoutingMassToLink(";
+
+        // -> We need to handle the case when the mass isn't connected to any links !
+
         for(let i = 0; i < nbMasses-1; i++)
             m2l = m2l.concat("m" + i + ", ");
         m2l = m2l.concat("m" + (nbMasses-1) + ") = ")
@@ -286,7 +294,6 @@ function generateFaustCode(){
 
         // NOW GENERATE THE FAUST CODE
         let fDSP = "import(\"stdfaust.lib\");\n\n";
-        //let fDSP = "import(\"stdfaust.lib\");\nimport(\"mi.lib\");\n\n";
 
         for (let number in posInputMasses)
             if (posInputMasses.hasOwnProperty(number))
@@ -339,18 +346,27 @@ function generateFaustCode(){
         if (fInter.length > 0)
             interDSP = interDSP.concat(fInter.join(",\n\t") + ",\n");
 
+
         if(nbOut+nbFrcInput > 0)
             if(nbFrcInput > 0)
-                interCable = "\tpar(i, nbOut+nbFrcIn, _)";
+                if(nbPosOut)
+                    interCable = "\tpar(i, nbPosOut+nbFrcIn, _)";
+                else
+                    interCable = "\tpar(i, nbFrcIn, _)";
             else
-                interCable = "\tpar(i, nbOut, _)";
+                if(nbPosOut)
+                    interCable = "\tpar(i, nbPosOut, _)";
         else
             interDSP = interDSP.replace(/,\s*$/, "");
+
 
         if(nbOut > 0){
             outCable = ", par(i, nbOut , _)";
             fWith = fWith.concat("\tnbOut = " + nbOut + ";\n");
         }
+        if(nbPosOut >0)
+            fWith = fWith.concat("\tnbPosOut = " + nbPosOut + ";\n");
+
 
         fWith = fWith.concat("};\n");
 
