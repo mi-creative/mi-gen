@@ -42,22 +42,20 @@ apply_proxy_frc_string(proxy_data, mult_data, val){
 
 
 get_string_linear_ponderation(mult_data, val){
-	
-	data_chans = channels(mult_data);
 
-	point = val * data_chans;
+	
+	data_chans = channels(mult_data) -1;
+
+	point = clamp(val, 0, 1) * data_chans;
 	
 	var_m1 = floor(point);
 	var_m2 = var_m1 + 1;
+	
+	var_m1 = clamp(var_m1, 0, data_chans);
+	var_m2 = clamp(var_m2, 0, data_chans);
+
 		
-	var_alpha = point - var_m1;	
-		
-	if(var_m2 >= data_chans){
-		var_m1 = data_chans-1;
-		var_m2 = data_chans-1;
-		var_alpha = 1;
-	}
-			
+	var_alpha = point - var_m1;			
 		
 	return var_m1, var_m2, var_alpha;	
 }
@@ -109,10 +107,9 @@ apply_proxy_frc_mesh(proxy_data, mult_data, length, width, valL, valW){
 
 get_mesh_linear_ponderation(mult_data, length, width, valL, valW){
 	
-	//data_chans = channels(mult_data);
-	
-	var_pX = valL * length;
-	var_pY = valW * width;
+		
+	var_pX = clamp(valL, 0, 1) * (length-1);
+	var_pY = clamp(valW, 0, 1) * (width-1);
 	
 
 	// Calculate the surrounding i and j indexes
@@ -125,32 +122,27 @@ get_mesh_linear_ponderation(mult_data, length, width, valL, valW){
 	var_ai = var_pX - var_i1;
 	var_aj = var_pY - var_j1;
 
+	var_i1 = clamp(var_i1, 0, length-1);
+	var_i2 = clamp(var_i2, 0, length-1);
+	var_j1 = clamp(var_j1, 0, width-1);
+	var_j2 = clamp(var_j2, 0, width-1);
 	
-	if(var_i2 >= length){
-		var_ai = 0;
-		var_i1 = length-1;
-		var_i2 = length-1;
-
-		}
-	if (var_j2 >= width){
-		var_aj = 0;
-		var_j1 = width-1;
-		var_j2 = width-1;
-		}
-			
-	
-	// Calculate where we are relative to the closest square of i and j 
-	var_ai = var_pX - var_i1;
-	var_aj = var_pY - var_j1;
 	
 	// Linear interpolation in this 2D space
-	var_a_i1 = (1-var_ai)*(1-var_aj);
-	var_a_i2 = var_ai*(1-var_aj);
-	var_a_j1 = (1-var_ai)*var_aj;
-	var_a_j2 = var_ai*var_aj;
+	var_a_1 = (1-var_ai)*(1-var_aj);
+	var_a_2 = var_ai*(1-var_aj);
+	var_a_3 = (1-var_ai)*var_aj;
+	var_a_4 = var_ai*var_aj;
 	
-	//return var_i1*width+var_j1, var_a_i1, var_i2*width+var_j1, var_a_i2, var_i1*width+var_j2, var_a_j1 var_i2*width+var_j2, var_a_j2;
-	return var_i1*width+var_j1, var_a_i1, var_i2*width+var_j1, var_a_i2, var_i1*width+var_j2, var_a_j1, var_i2*width+var_j2, var_a_j2;
+	
+	return 	var_i1*width+var_j1,
+		   	var_a_1,
+		   	var_i2*width+var_j1, 
+			var_a_2, 
+			var_i1*width+var_j2, 
+			var_a_3, 
+			var_i2*width+var_j2,
+			var_a_4;
 	
 }
 
