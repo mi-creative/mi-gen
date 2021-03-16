@@ -23,7 +23,8 @@ class MiModel{
     }
 
     isFaustCompatible(){
-        return util.isEmpty(mdl.macroDict);
+        return 1;
+        //return util.isEmpty(mdl.macroDict);
     }
 
 

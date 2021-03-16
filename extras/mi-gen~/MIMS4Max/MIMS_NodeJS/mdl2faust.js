@@ -8,6 +8,7 @@ function generateFaustCode(){
 
     try{
 
+        // All the variables and state variables that we will need
         let fMass = [];
         let fMassIndexMap = {};
         let fInter = [];
@@ -15,21 +16,31 @@ function generateFaustCode(){
 
         let dict = {};
 
+        let posOutputMasses = {};
+        let posInputMasses = {};
+        let frcOutputMasses = {};
+        let frcInputMasses = {};
+
+        let paramAudioIns = [];
         let cpt = 0;
+
+        ////////////////////////////////////////////////////////////
+        // Step 1
+        // Parse the mass dictionary to generate Faust expressions
+        ////////////////////////////////////////////////////////////
+
         for (let name in mdl.massDict) {
             if (mdl.massDict.hasOwnProperty(name)) {
                 dict = mdl.massDict[name];
                 let args = dict["args"];
                 var type = dict["type"];
-                let regArgNb = phyDict.genModDict[type]["nbArgs"];
-                let optArgNb = phyDict.genModDict[type]["optArgs"].length;
+                let regArgNb = phyDict.faustModDict[type]["nbArgs"];
                 let func = phyDict.faustModDict[type]["func"];
-
                 let argstring = "";
+
                 for (let i = 0; i < args.length; i++) {
                     if(i >= regArgNb){
                         let paramName = phyDict.faustModDict[type]["optArgs"][i-regArgNb];
-                        //argstring = argstring.concat(paramName + " = ");
                         if(paramName === "gravity")
                             argstring = argstring.concat(args[i] + "/ ma.SR");
                         else
@@ -65,12 +76,74 @@ function generateFaustCode(){
             }
         }
 
-        let posOutputMasses = {};
-        let posInputMasses = {};
-        let frcOutputMasses = {};
-        let frcInputMasses = {};
+        ////////////////////////////////////////////////////////////
+        // Step 2
+        // Parse the macro dictionary to generate Faust expressions
+        ////////////////////////////////////////////////////////////
 
-        let paramAudioIns = [];
+        /*
+        for (let name in mdl.macroDict) {
+            if (mdl.macroDict.hasOwnProperty(name)) {
+                dict = mdl.macroDict[name];
+                n = util.formatModuleName(name);
+                let size = 0;
+                let type = dict["type"];
+                let string = false;
+
+                let length = parseInt(dict["args"][0]);
+                let width = 0;
+
+                if((type === "string") || (type === "stiffString") || (type === "chain")){
+                    size = length;
+                    string = true;
+                }
+                else {
+                    width = parseInt(dict["args"][1]);
+                    size = length * width;
+                }
+
+                if (isNaN(size))
+                    throw "Macro length argument for " + name + " cannot be converted to an integer: " + size;
+
+                struct.push("Data " + n + "(3, " + size + ");");
+                init.push("init_multiple_masses(" + n + ", " + buildInitPosData(dict) + ");");
+                compMasses.push(massToCode(n, dict));
+
+                pushMacroToMotionBuffers(n, dict, size);
+
+                if(string){
+                    for(let i = 0; i < size; i++){
+                        let a = parseFloat(dict["pos"]["x"]);
+                        let b = parseFloat(dict["vel"]["x"]);
+                        Xcoord.push(a + i * (b - a) / (size-1));
+
+                        a = parseFloat(dict["pos"]["y"]);
+                        b = parseFloat(dict["vel"]["y"]);
+                        Ycoord.push(a + i * (b - a) / (size-1));
+                    }
+                }
+                else {
+                    // TODO: write Y and Z coords for mesh macro elements !
+                    // This is wrong !!
+                    for(let i = 0; i < size; i++){
+                        let a = parseFloat(dict["pos"]["x"]);
+                        let b = parseFloat(dict["vel"]["x"]);
+                        Xcoord.push(a + i * (b - a) / (size-1));
+
+                        a = parseFloat(dict["pos"]["y"]);
+                        b = parseFloat(dict["vel"]["y"]);
+                        Ycoord.push(a + i * (b - a) / (size-1));
+                    }
+                }
+            }
+        }
+        */
+
+
+        ////////////////////////////////////////////////////////////
+        // Step 3
+        // Parse the in/out dictionnary to generate Faust expressions
+        ////////////////////////////////////////////////////////////
 
         for (let name in mdl.inOutDict) {
             if (mdl.inOutDict.hasOwnProperty(name)) {
@@ -95,6 +168,11 @@ function generateFaustCode(){
             }
         }
 
+        ////////////////////////////////////////////////////////////
+        // Step 4
+        // Parse the param dictionnary to generate Faust expressions
+        ////////////////////////////////////////////////////////////
+
         for (let name in mdl.paramDict) {
             if (mdl.paramDict.hasOwnProperty(name)) {
                 dict = mdl.paramDict[name];
@@ -111,6 +189,10 @@ function generateFaustCode(){
             }
         }
 
+        ////////////////////////////////////////////////////////////
+        // Step 5
+        // Create variables and structures
+        ////////////////////////////////////////////////////////////
 
         let nbMasses = fMass.length;
         let nbInter = Object.keys(mdl.interDict).length;
@@ -120,9 +202,13 @@ function generateFaustCode(){
         let nbFrcOut = Object.keys(frcOutputMasses).length;
         let nbOut = nbPosOut + nbFrcOut;
 
-
         let nbPosInput = Object.keys(posInputMasses).length;
         let nbFrcInput = Object.keys(frcInputMasses).length;
+
+        ////////////////////////////////////////////////////////////
+        // Step 6
+        // Parse all interactions and generate Faust code
+        ////////////////////////////////////////////////////////////
 
         let i_cpt = 0;
         for (let name in mdl.interDict) {
@@ -160,7 +246,11 @@ function generateFaustCode(){
             }
         }
 
+        ////////////////////////////////////////////////////////////
+        // Step 7
         // Generate the routing tables used by Faust
+        ////////////////////////////////////////////////////////////
+
         let l2m;
         let m2l;
 
@@ -238,7 +328,6 @@ function generateFaustCode(){
         // Generate Mat to Link Routing Function
         m2l = "RoutingMassToLink(";
 
-        // -> We need to handle the case when the mass isn't connected to any links !
 
         for(let i = 0; i < nbMasses-1; i++)
             m2l = m2l.concat("m" + i + ", ");
@@ -292,7 +381,11 @@ function generateFaustCode(){
         */
 
 
-        // NOW GENERATE THE FAUST CODE
+        ////////////////////////////////////////////////////////////
+        // Step 8
+        // Now that we have all this, we can generate the Faust dsp !
+        ////////////////////////////////////////////////////////////
+
         let fDSP = "import(\"stdfaust.lib\");\n\n";
 
         for (let number in posInputMasses)
@@ -319,7 +412,6 @@ function generateFaustCode(){
             fDSP = fDSP.concat(";\n\n");
         }
 
-
         let frcPassThrough = "";
         let interCable = "";
         let outCable = "";
@@ -339,9 +431,8 @@ function generateFaustCode(){
             fWith = fWith.concat("\tnbFrcIn = " + nbFrcInput + ";\n");
         }
 
-        if(nbPosInput > 0){
+        if(nbPosInput > 0)
             fWith = fWith.concat("\tnbPosIn = " + nbPosInput + ";\n");
-        }
 
         if (fInter.length > 0)
             interDSP = interDSP.concat(fInter.join(",\n\t") + ",\n");
@@ -364,6 +455,7 @@ function generateFaustCode(){
             outCable = ", par(i, nbOut , _)";
             fWith = fWith.concat("\tnbOut = " + nbOut + ";\n");
         }
+
         if(nbPosOut >0)
             fWith = fWith.concat("\tnbPosOut = " + nbPosOut + ";\n");
 

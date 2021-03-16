@@ -1,5 +1,7 @@
 const maxAPI = require("max-api");
 const fs =require("fs");
+const math = require("mathjs");
+
 
 const mimsWorker = require("./MIMS_NodeJS/mimsWorker.js");
 
@@ -35,7 +37,10 @@ maxAPI.addHandlers({
         }
         catch (e) {
             maxAPI.outlet("state", "Errors detected during the model script parsing.");
-            maxAPI.outlet("error", e);
+            if(e != null)
+                maxAPI.outlet("error", e.toString());
+            else
+                maxAPI.outlet("error", e);
         }
 
         console.log("...done");
@@ -114,6 +119,56 @@ maxAPI.addHandlers({
         }
     },
 
+    createSimJS: () => {
+
+        console.log("in method");
+
+        /*
+        console.log("before math");
+        let scope = {a : 3.2, b : 4.6}
+        const code = math.compile("2+2*a^b");
+        console.log("after math compile");
+        let test = code.evaluate(scope);
+        console.log("Math expression: " + test);
+        */
+
+
+        if(mdl.isValid()){
+                //try{
+                    //let fDSP = generateFaustCode();
+                    mimsWorker.createSimulationJS(mdl);
+                    //maxAPI.outlet("model", res[1]);
+
+            /*}
+            catch(e){
+                maxAPI.outlet("state", "Errors detected instanciation of simulation.");
+                maxAPI.outlet("error", e);
+                maxAPI.post(e);
+            }*/
+        }
+        else{
+            maxAPI.post("Please load a model first.");
+            maxAPI.outlet("state", "Please load a model first.");
+        }
+    },
+
+    simStepJS: () => {
+
+        mimsWorker.simulationStep();
+        maxAPI.outlet("sim", mimsWorker.getSimPositions());
+    },
+
+    simPosInput: (...args) => {
+        mimsWorker.update_posInput(args[0], args[1]);
+    },
+
+    simParamChange: (...args) => {
+        mimsWorker.update_param(args[0], args[1]);
+    },
+
+    simFrcInput: (...args) => {
+        mimsWorker.apply_frcInput(args[0], args[1]);
+    },
 
     clear:() =>{
         maxAPI.post("Clearing the model\n");

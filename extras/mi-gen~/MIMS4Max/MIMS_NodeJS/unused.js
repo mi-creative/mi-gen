@@ -1,5 +1,6 @@
-const util = require("./utility.js");
-const phyDict = require("./phyDict.js");
+
+
+
 
 /**
  * Parse the module dictionaries of a parsed MIMS Script to generate gen~ codebox code.
@@ -8,6 +9,10 @@ const phyDict = require("./phyDict.js");
  */
 function generateGenCode(){
 
+    console.log("uuuuuuhahahaharrrrrrrrrrr");
+
+
+    // Variables that we will need to store states and generated code
     let nbInputs = 0;
     let nbOutputs = 0;
     let nbProxies = 0;
@@ -35,6 +40,7 @@ function generateGenCode(){
     let jsonSpat = {};
     let codeboxCode = "";
 
+    // Begin nested function declarations
 
     function pushToMotionBuffers(name, element){
         if(!util.isEmpty(element["buffer"])){
@@ -73,6 +79,52 @@ function generateGenCode(){
     }
 
 
+
+
+    /*
+    function mass2code(name, dict, target){
+
+        // Create a string of arguments linked by commas (starting with a comma).
+        let argstring = "";
+        let args = dict["args"];
+        var type = dict["type"];
+        let regArgNb = phyDict.genModDict[type]["nbArgs"];
+        let optArgNb = phyDict.genModDict[type]["optArgs"].length;
+
+        if (args.length < regArgNb || (args.length > regArgNb + optArgNb))
+            throw "Wrong number of arguments to generate mass code for " + name ;
+
+        if (args) {
+            for (let i = 0; i < args.length; i++) {
+                argstring = argstring.concat(", ");
+                if(i >= regArgNb){
+                    let paramName = phyDict.genModDict[type]["optArgs"][i-regArgNb];
+                    argstring = argstring.concat(paramName + " = ");
+                    if(paramName === "gravity"){
+                        switch (target){
+                            case GEN:
+                            default:
+                                argstring = argstring.concat(args[i] + " / " + phyDict.genSampleRate);
+                                break;
+                            case FAUST:
+                                argstring = argstring.concat(args[i] + " / " + phyDict.faustSampleRate);
+                                break;
+                        }
+                    }
+                    else
+                        argstring = argstring.concat(args[i]);
+                }
+                else
+                    argstring = argstring.concat(args[i]);
+            }
+        }
+        if((phyDict.mass_modules.indexOf(type) > -1) || (phyDict.macro_modules.indexOf(type) > -1))
+            return phyDict.genModDict[type]["func"] + "(" + name + argstring + ");";
+
+    }
+    */
+
+
     /**
      * Generate gen~ codebox body code for various physical modules.
      * @param name name of the module.
@@ -91,12 +143,6 @@ function generateGenCode(){
             throw "Wrong number of arguments to generate interaction code for " + name ;
 
         if (args) {
-
-            // For the sake of standardisation, let's send number of string masses as an argument.
-            //if((type === "string") || (type === "stiffString") || (type === "chain"))
-            //    args.splice(0, 1);
-
-
             for (let i = 0; i < args.length; i++) {
                 argstring = argstring.concat(", ");
                 if(i >= regArgNb){
@@ -111,14 +157,10 @@ function generateGenCode(){
                     argstring = argstring.concat(args[i]);
             }
         }
-
-        if(phyDict.mass_modules.indexOf(type) > -1) {
+        if(phyDict.mass_modules.indexOf(type) > -1)
             return phyDict.genModDict[type]["func"] + "(" + name + argstring + ");";
-        }
-
-        else if(phyDict.macro_modules.indexOf(type) > -1) {
+        else if(phyDict.macro_modules.indexOf(type) > -1)
             return phyDict.genModDict[type]["func"] + "(" + name + argstring + ");";
-        }
     }
 
     /**
@@ -225,7 +267,6 @@ function generateGenCode(){
         else{
             if (util.isPresentInDict(mList, mdl.macroDict))
                 throw "trying to connect to macro " + mList + ", missing argument";
-
             return [false, mList[0]];
         }
     }
@@ -235,15 +276,26 @@ function generateGenCode(){
         let z = parseFloat(dict["pos"]["z"]);
         let velz = parseFloat(dict["vel"]["z"]);
         let delPos = z;
-        if(velz !== 0)
-            delPos = z + " - (" + velz + "/ SAMPLERATE)";
+        if(velz !== 0){
+            delPos = z + " - (" + velz + " / SAMPLERATE )";
+
+        }
         return z + ", " + delPos;
     }
+
+    // End of nested function declarations
+
+
+
+    /////////////////////////////////////////////////////
+    // Main function: generate the gen code !
+    /////////////////////////////////////////////////////
 
     // Initialise several arrays for specific buffers.
     for(let i = 0; i < mdl.bufferList.length; i++){
         specificBuffers[mdl.bufferList[i]] = {index : 0, code: []};
     }
+
 
     console.log("Starting to generate gen~ DSP code\n");
 
@@ -266,6 +318,13 @@ function generateGenCode(){
         let Xcoord = [];
         let Ycoord = [];
 
+
+        ////////////////////////////////////////////////////////////////////////////////
+        // Step 1
+        // Parse the mass dictionnary to generate genexpr code
+        // (using the massToCode function)
+        ////////////////////////////////////////////////////////////////////////////////
+
         for (let name in mdl.massDict) {
             if (mdl.massDict.hasOwnProperty(name)) {
                 dict = mdl.massDict[name];
@@ -281,6 +340,12 @@ function generateGenCode(){
             }
         }
 
+
+        ////////////////////////////////////////////////////////////////////////////////
+        // Step 2
+        // Parse the macro dictionnary to generate genexpr code
+        // (also using the massToCode function)
+        ////////////////////////////////////////////////////////////////////////////////
 
         for (let name in mdl.macroDict) {
             if (mdl.macroDict.hasOwnProperty(name)) {
@@ -339,14 +404,20 @@ function generateGenCode(){
         }
 
 
+        ////////////////////////////////////////////////////////////////////////////////
+        // Step 3
+        // Parse the interaction dictionnary to generate genexpr code
+        // using the interactionToCode function as well as the integrateProxies function
+        ////////////////////////////////////////////////////////////////////////////////
+
         for (let name in mdl.interDict) {
             if (mdl.interDict.hasOwnProperty(name)) {
                 dict = mdl.interDict[name];
                 let prox1 = false, prox2 = false;
                 let mass1, mass2;
 
-                [prox1, mass1] = integrateProxies(dict["m1"]/*, struct, init, compProxyMasses, compProxyInteractions*/);
-                [prox2, mass2] = integrateProxies(dict["m2"]/*, struct, init, compProxyMasses, compProxyInteractions*/);
+                [prox1, mass1] = integrateProxies(dict["m1"]);
+                [prox2, mass2] = integrateProxies(dict["m2"]);
 
                 if(!prox1)
                     if (mdl.isNotPresentInMassOrInOut(mass1))
@@ -360,6 +431,12 @@ function generateGenCode(){
             }
         }
 
+
+        ////////////////////////////////////////////////////////////////////////////////
+        // Step 4
+        // Parse the input and output dictionnary to generate genexpr code
+        // using the inOutToCode function
+        ////////////////////////////////////////////////////////////////////////////////
 
         for (let name in mdl.inOutDict) {
             if (mdl.inOutDict.hasOwnProperty(name)) {
@@ -377,11 +454,12 @@ function generateGenCode(){
                     Ycoord.push(parseFloat(dict["pos"]["y"]));
                     pushToMotionBuffers(n, dict);
                 }
+
                 // Otherwise all the in out code codes into a specific section.
                 else {
                     let prox = false;
                     let mass;
-                    [prox, mass] = integrateProxies(dict["m"]/*, struct, init, compProxyMasses, compProxyInteractions*/);
+                    [prox, mass] = integrateProxies(dict["m"]);
                     if(!prox)
                         if (!mdl.isInAnyMassDict(mass))
                             throw mass + " does not exist in model, can't create interaction " + name;
@@ -397,6 +475,11 @@ function generateGenCode(){
             }
         }
 
+
+        ////////////////////////////////////////////////////////////////////////////////
+        // Step 5
+        // Parse the param dictionnary to generate genexpr code
+        ////////////////////////////////////////////////////////////////////////////////
 
         for (let name in mdl.paramDict) {
             if (mdl.paramDict.hasOwnProperty(name)) {
@@ -414,17 +497,27 @@ function generateGenCode(){
             }
         }
 
+
+        ////////////////////////////////////////////////////////////////////////////////
+        // Step 6
+        // Set the outputs for the codebox object.
+        ////////////////////////////////////////////////////////////////////////////////
+
         let activeOutputs = nbOutputs;
         for(let i = 1; i <= activeOutputs; i++){
             if(instanciatedOuts.indexOf("out"+i) === -1){
                 compOutput.push("out" + i + " = 0.;");
-                //nbOutputs++;
                 console.log("outputs: " + nbOutputs + ", " + i + "\n");
             }
         }
-
         // Add one extra output for the number of masses in the model
         compOutput.push("out" + (++nbOutputs) + " = " + massIndex + ";");
+
+
+        ////////////////////////////////////////////////////////////////////////////////
+        // Step 7
+        // Assemble all of the generated code fragments into the final genexpr code
+        ////////////////////////////////////////////////////////////////////////////////
 
         context.push(params.join("\n"));
         context.push("Param display_motion(1);\n");
@@ -488,7 +581,6 @@ function generateGenCode(){
             codeboxCode = codeboxCode.concat("\n\n");
         }
 
-
         codeboxCode = codeboxCode.concat("// Motion data routing to Max/MSP buffer objects\n");
         codeboxCode = codeboxCode.concat("if (display_motion){\n");
         codeboxCode = codeboxCode.concat("if (render_cpt == 0){\n");
@@ -499,11 +591,17 @@ function generateGenCode(){
         for(let i = 0; i < mdl.bufferList.length; i++){
             codeboxCode = codeboxCode.concat(specificBuffers[mdl.bufferList[i]]["code"].join("\n"));
             codeboxCode = codeboxCode.concat("\n");
-
         }
 
         codeboxCode = codeboxCode.concat("}\n");
         codeboxCode = codeboxCode.concat("render_cpt = (render_cpt + 1) % 200;\n}\n");
+
+
+        ////////////////////////////////////////////////////////////////////////////////
+        // Mini (optional) final step:
+        // Create a json file with the complementary X and Y coordinates for all material elements
+        // This was supposed to be used to help generating jitter visualisation, but was never finished.
+        ////////////////////////////////////////////////////////////////////////////////
 
         jsonSpat = {
             X : Xcoord,
@@ -519,5 +617,3 @@ function generateGenCode(){
     }
 }
 
-
-module.exports = {generateGenCode};

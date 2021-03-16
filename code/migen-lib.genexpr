@@ -82,7 +82,7 @@ compute_osc(m_data, M, K, Z, gravity = 0) {
 	
 	var_tmp = (2 - (K+Z)*invM) * peek(m_data, 0) 
 		+ (Z * invM - 1) * peek(m_data,1)
-		+ (peek(m_data,2) + gravity) * invM;
+		+ (peek(m_data,2) - gravity) * invM;
 	poke(m_data, peek(m_data, 0) , 1);
 	poke(m_data,var_tmp, 0);
 	poke(m_data, 0, 2);

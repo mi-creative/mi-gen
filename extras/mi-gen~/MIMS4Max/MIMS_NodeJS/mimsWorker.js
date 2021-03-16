@@ -11,11 +11,15 @@
 // This will create a mimsBundle object that can be used to access functions.
 // The globally defined mdl object will also be accessible in the client context.
 
+
+
 const scriptParser = require("./scriptParser");
 const gendspBuilder = require("./gendspCreator.js");
-const mdl2gen = require("./mdl2gen.js");
-const mdl2faust = require("./mdl2faust.js");
+const codeBuilder = require("./codeBuilder.js");
+//const mdl2faust = require("./mdl2faust.js");
+const webSim = require("./WebEngine1D");
 
+let simu = new webSim.PhysicsSim();
 
 /**
  * Parse a MIMS file in string format and fill model structure in the global mdl object
@@ -32,10 +36,15 @@ function parseMIMSFile(text){
  * @returns {[*, *, *, *]} the generated codebox code, number of inputs and number of outputs, and jsonSpat data.
  */
 function generateGenDSP(){
-    if(mdl.isValid())
-        return mdl2gen.generateGenCode();
+    if(mdl.isValid()){
+        //return mdl2gen.generateGenCode();
+        let genBuilder = new codeBuilder.GenCodeBuilder(mdl);
+        return genBuilder.compileToGenExpr();
+    }
     else
         throw "Gen~ dsp create error: Invalid model state. Please parse a model first."
+
+
 }
 
 
@@ -54,17 +63,51 @@ function buildGendspPatch(genPatchData){
  * @returns {string} the output string of content for the .dsp file.
  */
 function generateFaustDSP(){
-    if(!mdl.isFaustCompatible()){
+    /*if(!mdl.isFaustCompatible()){
         console.log("The model contains modules that are incompatible with Faust generation.");
         //throw "Faust DSP create error: The model is incompatible with Faust. Does it contain macro modules?";
 
     }
-    else{
-        if(mdl.isValid())
-            return mdl2faust.generateFaustCode();
+    else{*/
+        if(mdl.isValid()){
+            let faustBuilder = new codeBuilder.FaustCodeBuilder(mdl);
+            return faustBuilder.compileToFaustDsp();
+            //return mdl2faust.generateFaustCode();
+        }
         else
             throw "Faust dsp create error: Invalid model state. Please parse a model first.";
-    }
+    //}
+}
+
+
+function createSimulationJS(){
+    simu = new webSim.PhysicsSim();
+    simu.loadModel(mdl);
+}
+
+
+function simulationStep(){
+    if(simu.isReady())
+        simu.compute();
+}
+
+
+function getSimPositions(){
+    if(simu.isReady())
+        return simu.getSimPositions();
+}
+
+
+function update_posInput(name, val){
+    simu.applyPosInput(name, parseFloat(val));
+}
+
+function update_param(name, val){
+    simu.updateParameter(name, parseFloat(val));
+}
+
+function apply_frcInput(name, val){
+    simu.applyFrcInput(name, parseFloat(val));
 }
 
 
@@ -82,4 +125,11 @@ module.exports = {
     generateGenDSP :generateGenDSP,
     generateFaustDSP : generateFaustDSP,
     buildGendspPatch : buildGendspPatch,
-    parseAndGenerateDSP : parseAndGenerateDSP};
+    parseAndGenerateDSP : parseAndGenerateDSP,
+    createSimulationJS : createSimulationJS,
+    simulationStep : simulationStep,
+    getSimPositions : getSimPositions,
+    update_posInput : update_posInput,
+    update_param : update_param,
+    apply_frcInput : apply_frcInput
+};

@@ -1,6 +1,6 @@
 var all_modules, in_out_modules, interaction_modules, macro_modules, mass_modules, other_modules;
-mass_modules = ["mass", "massG", "osc", "ground"];
-interaction_modules = ["damper", "spring", "nlSpring", "nlSpring2", "nlSpring3", "nlPluck", "nlBow", "contact", "springDamper", "nlSpringDamper", "nlContact"];
+mass_modules = ["mass", "osc", "ground"];
+interaction_modules = ["damper", "spring", "nlSpring2", "nlSpring3", "nlPluck", "nlBow", "contact", "springDamper", "nlSpringDamper", "nlContact"];
 macro_modules = ["string", "stiffString", "chain", "mesh", "closedMesh", "cornerMesh"];
 in_out_modules = ["posInput", "posOutput", "frcInput", "frcOutput"];
 other_modules = ["none", "param", "audioParam"];
@@ -9,7 +9,6 @@ all_modules = ((((mass_modules + interaction_modules) + macro_modules) + in_out_
 
 const genModDict = {
     "mass" : {func : "compute_mass", nbArgs:1, optArgs : ["gravity"]},
-    //"massG" : {func: "compute_massG", nbArgs:2, optArgs : 0},
     "osc" : {func : "compute_osc", nbArgs:3, optArgs : ["gravity"]},
     "ground" : { func :"compute_ground", nbArgs:0, optArgs : 0},
     "spring" : { func :"compute_spring", nbArgs:1, optArgs : 0},
@@ -17,7 +16,6 @@ const genModDict = {
     "damper" : { func :"compute_damper", nbArgs:1, optArgs : 0},
     "contact" : { func :"compute_contact", nbArgs:2, optArgs : ["thresh"]},
     "nlContact" : { func :"compute_contact_nl3_clipped", nbArgs:4, optArgs : ["thresh"]},
-    //"nlSpring" : { func :"compute_spring_damper_nl3", nbArgs:3},
     "nlSpring2" : { func :"compute_spring_damper_nl2", nbArgs:3, optArgs : 0},
     "nlSpring3" : { func :"compute_spring_damper_nl3", nbArgs:3, optArgs : 0},
     "nlSpringDamper" : { func :"compute_spring_damper_nl3_clipped", nbArgs:4, optArgs : 0},
@@ -48,8 +46,10 @@ const faustModDict = {
     "nlBow" : { func :"mi.nlBow", nbArgs:2, optArgs : ["smooth"]},
     "nlPluck" : { func :"mi.nlPluck", nbArgs:2, optArgs : ["Z"]},
     "posInput" : { func :"mi.posInput", nbArgs:0, optArgs : 0},
+    "string" : { func :"macroString", nbArgs:4, optArgs : ["Zo"]}
     //"frcInput" : { func :"mi.apply_input_force", nbArgs:0, optArgs : 0},
 };
 
 
-module.exports = {mass_modules, interaction_modules, macro_modules, in_out_modules, other_modules, all_modules, genModDict, faustModDict};
+module.exports = {mass_modules, interaction_modules, macro_modules, in_out_modules, other_modules, all_modules,
+    genModDict, faustModDict};

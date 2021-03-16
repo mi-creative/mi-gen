@@ -4,3 +4,6 @@ browserify MIMS_NodeJS/mimsWorker.js --standalone mimsBundle > browserified/mims
 
 This will create a mimsBundle object that can be used to access functions.
 The globally defined mdl object will also be accessible in the client context.
+
+In order to browserify withouth mathjs: 
+$ browserify MIMS_NodeJS/mimsWorker.js --standalone mimsBundle --ignore mathjs > browserified/mimsBrowser.js

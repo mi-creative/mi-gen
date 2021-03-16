@@ -82,6 +82,14 @@ function isEmpty(obj) {
     return true;
 }
 
+// Pour Jérôme: un essai, je sais pas si ça va résoudre ton problème !
+if (typeof window === 'undefined') {
+    // in NodeJS context, do nothing
+} else {
+    // Specific window declarations for browser based operation
+    window.isPresentInDict = isPresentInDict;
+    window.isEmpty = isEmpty;
+}
 
 
 module.exports = {
