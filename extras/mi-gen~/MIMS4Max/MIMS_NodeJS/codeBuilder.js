@@ -1216,9 +1216,19 @@ class FaustCodeBuilder extends AbstractCodeBuilder{
             if (nbPosInput > 1)
                 fPosInputRoute = "par(i, nbMass - nbPosIn, _), ro.interleave(nbPosIn, 2):\n\t";
 
-            let fWith =
-                "with{\n\t" + m2l + "\n\t" + l2m +"\n"
-                + "\tnbMass = " + nbMasses + ";\n";
+
+            let fWith = "";
+            if(nbInter){
+                fWith =
+                    "with{\n\t" + m2l + "\n\t" + l2m +"\n"
+                    + "\tnbMass = " + nbMasses + ";\n";
+            }
+            else {
+                fWith =
+                    "with{\n\t" + "\tnbMass = " + nbMasses + ";\n";
+            }
+
+
 
 
             if(nbFrcInput > 0){
@@ -1257,23 +1267,52 @@ class FaustCodeBuilder extends AbstractCodeBuilder{
 
             fWith = fWith.concat("};\n");
 
+            // TODO: fix this better!
+            let tmp = "";
+            if( (fMacro.length < 0)){
+                tmp = ",\n\t";
+            }
+
+
+            let interactionSection;
+            if(nbInter === 0) {
+                interactionSection = "";
+            }
+            else {
+                interactionSection =
+                    ":\n\t"
+                    + "RoutingMassToLink "
+                    + frcPassThrough
+                    + ":\n\t"
+                    + interDSP
+                    + interCable
+                    + ":\n\t"
+                    + "RoutingLinkToMass\n"
+                    + ")~par(i, nbMass, _):"
+                    + "\npar(i, nbMass, !)" + outCable + "\n";
+            }
+
+
+
 
             fDSP = fDSP.concat(
                 "model = (\n\t"
                 + fPosInputRoute
                 + fMass.join(",\n\t")
-                + ",\n\t"
+                + tmp
                 + fMacro.join(",\n\t")
                 + frcPassThrough
-                + ":\n\t"
-                + "RoutingMassToLink "
+                + interactionSection
+
+                /*+ "RoutingMassToLink "
                 + frcPassThrough
                 + ":\n\t"
                 + interDSP
                 + interCable
                 + ":\n\t"
                 + "RoutingLinkToMass\n)~par(i, nbMass, _):"
-                + "\npar(i, nbMass, !)" + outCable + "\n"
+                */
+
                 + fWith
             );
 

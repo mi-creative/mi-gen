@@ -198,7 +198,7 @@ compute_contact_nl3_clipped(m1_data, m2_data, s, c, k, Z, thresh = 0){
 	var_f = 0;
 	absdx = abs(var_dx);
 	
-	if(var_dx  > -thresh){
+	if((var_x1 - var_x2)  > -thresh){
 		// if the cubic term is null, only the linear component
 		if(c == 0)
 			var_f = s * var_dx;

@@ -4,10 +4,11 @@ const math = require("mathjs");
 
 
 const mimsWorker = require("./MIMS_NodeJS/mimsWorker.js");
+const svgDrawer = require("./MIMS_NodeJS/model2svg.js");
 
 let genPatchData = [];
 let faustFile = "";
-let jsonCode = {}
+let jsonCode = {};
 /**
  * Adding function handlers (functions that can be called from the Max context).
  */
@@ -33,7 +34,7 @@ maxAPI.addHandlers({
             // Copy extra JSON dict containing X-Y positions
             jsonCode = genPatchData[3];
 
-            faustFile = mimsWorker.generateFaustDSP();
+            //faustFile = mimsWorker.generateFaustDSP();
         }
         catch (e) {
             maxAPI.outlet("state", "Errors detected during the model script parsing.");
@@ -95,6 +96,7 @@ maxAPI.addHandlers({
     createFaustDSPFile: (...args) => {
         if(mdl.isValid()){
             if(mdl.isFaustCompatible()){
+                faustFile = mimsWorker.generateFaustDSP();
                 maxAPI.post("About to generate Faust DSP file...");
                 try{
                     //let fDSP = generateFaustCode();
@@ -177,6 +179,10 @@ maxAPI.addHandlers({
         maxAPI.outlet("error", "");
         maxAPI.outlet("code", "");
         maxAPI.outlet("model", {});
+    },
+
+    toSvg:() =>{
+        svgDrawer.drawSVG();
     }
 });
 

@@ -6,9 +6,16 @@ const mi = require("./WebEngine1DModules.js");
 const phyDict = require("./phyDict.js");
 
 
-
+/**
+ * PhysicsSim class: a JS-based 1D simulation engine for web browsers!
+ * Will be too slow for audio calculations, meant as a way experiment and check
+ * model behaviour at low speeds inside the MIMS_Online system.
+ */
 class PhysicsSim{
 
+    /**
+     * Main constructor method: initialises the physics simulation context.
+     */
     constructor() {
         console.log("This is the physics context\n");
 
@@ -19,46 +26,29 @@ class PhysicsSim{
         this.intTable = [];
 
         this.paramArray = [];
-
         this.observerArray = [];
         this.observerTable = [];
-
         this.macroArray = [];
         this.macroTable = [];
         this.proxyArray = [];
         this.macroMasses = 0;
 
         this.mDict = {};
-
         this.modelReady = false;
 
+        this.frcIn = {};
 
         for(const key in mi.GlobalParamScope) {
             delete mi.GlobalParamScope.key;
         }
 
-
-        //console.log(this.matArray.length);
-
-        //console.log(this.matArray);
-        //console.log(this.matTable);
-
-        //console.log(this.findMass('o'));
-
-        /*
-        for(let i = 0; i < 10; i++){
-            this.compute();
-            this.getMatArray().forEach(function(m) {
-                console.log(m.toString());
-            });
-        }
-
-        */
-
     }
 
+    /**
+     * Load a physical model dictionary into the simulator
+     * @param modelDict the model dictionary to load (parsed from a MIMS description)
+     */
     loadModel(modelDict){
-
         this.mDict = modelDict;
 
         for (let name in this.mDict.paramDict){
@@ -70,18 +60,15 @@ class PhysicsSim{
             }
         }
 
-        console.log("param scope: " + JSON.stringify(mi.GlobalParamScope));
-
+        //console.log("param scope: " + JSON.stringify(mi.GlobalParamScope));
 
         for (let name in this.mDict.massDict) {
             if (this.mDict.massDict.hasOwnProperty(name)) {
-
                 let dict = this.mDict.massDict[name];
                 let args = dict["args"];
                 let n = util.formatModuleName(name);
                 let type = dict["type"];
                 let mass, grav = 0;
-
                 let pos = parseFloat(dict["pos"]["z"]);
                 let vel = parseFloat(dict["vel"]["z"]);
 
@@ -92,8 +79,8 @@ class PhysicsSim{
                             mass = args[0];
                         }
                         else
-                            mass = args;
-                        this.addMass(n, mass, grav, pos, vel);
+                            mass = args[0];
+                        this.addMass(n, args[0], grav, pos, vel);
                         break;
                     case 'ground':
                         this.addGround(n, pos);
@@ -103,11 +90,40 @@ class PhysicsSim{
                             grav = args[3];
                         this.addOscillator(n, args[0], args[1], args[2], grav, pos, vel);
                         break;
+                    case 'posInput':
+                        this.addPositionInput(n, pos);
+                        break;
                     default:
                         console.log("Unrecognised mass type !");
                 }
             }
         }
+
+        for (let name in this.mDict.inOutDict) {
+            if (this.mDict.inOutDict.hasOwnProperty(name)) {
+                let dict = this.mDict.inOutDict[name];
+                let type = dict["type"];
+                let n;
+
+                switch (type) {
+                    case 'posInput':
+                        let pos = parseFloat(dict["pos"]["z"])
+                        n = util.formatModuleName(name, "p");
+                        this.addPositionInput(n, pos);
+                        break;
+                    case 'frcInput':
+                        console.log(dict["m"]);
+                        n = util.formatModuleName(name, "f");
+                        let moduleName = util.formatModuleName(dict["m"]);
+                        this.addForceInput(n, moduleName);
+                        break;
+                    default:
+                        console.log("Unrecognised input type !");
+                }
+            }
+        }
+
+        console.log(this.frcIn);
 
 
         for (let name in this.mDict.interDict) {
@@ -117,46 +133,49 @@ class PhysicsSim{
                 let type = dict["type"];
                 let n = util.formatModuleName(name);
                 let mass1, mass2;
+                let L = 0;
 
                 mass1 = util.formatModuleName(dict["m1"]);
                 mass2 = util.formatModuleName(dict["m2"]);
 
-                //console.log("interaction props: " + n +", "+ mass1 + ", " + mass2);
-                //console.log(type);
-
                 switch (type) {
                     case 'spring':
-                        //let stiffness = args[0];
                         this.addSpring(n, mass1, mass2, args[0]);
                         break;
                     case 'springDamper':
-                        //let stiffness = args[0];
                         this.addSpringDamper(n, mass1, mass2, args[0], args[1]);
                         break;
                     case 'damper':
                         this.addDamper(n, mass1, mass2, args[0]);
                         break;
+                    case 'contact':
+                        if(args.length>2)
+                            L = args[2];
+                        this.addContact(n, mass1, mass2, args[0], args[1], L);
+                        break;
                     default:
                         console.log("Unrecognised interaction type !");
                 }
-
-                /*
-                if(type === "spring"){
-                    let stiffness = args[0];
-                    this.addSpring(n, mass1, mass2, stiffness);
-                }
-                */
             }
         }
 
         this.modelReady = true;
+        console.log("PhysicsSim::loadModel : finished loading physical model.")
+
     }
 
+    /**
+     * Check if the simulation engine is ready (if a valid model has been loaded into it).
+     * @returns {boolean} true if the simulator is ready
+     */
     isReady(){
         return this.modelReady;
     }
 
-    
+    /**
+     * Get a dict of the material points in the current simulation and their respective positions.
+     * @returns the dictionary containing module names and positions.
+     */
     getSimPositions(){
         let simStatePos = {};
         this.getMatArray().forEach(function(m) {
@@ -165,11 +184,72 @@ class PhysicsSim{
         return simStatePos;
     }
 
-
+    /*
     getTable(){
         return this.matArray;
     }
+    */
 
+    /**
+     * Apply force to a given force input point in the model
+     * @param name the module identifier
+     * @param val the force to apply
+     */
+    // Todo: check that we're applying force to an actual frcInput module
+    applyFrcInput(name, val){
+        if(util.isPresentInDict(name, this.frcIn)){
+            let mName = this.frcIn[name];
+            this.applyFrcToAnyMass(mName, val);
+        }
+    }
+
+    /**
+     * Apply force to any mass in the model (not necessarily declared with frcInput module!)
+     * @param name
+     * @param val
+     */
+    applyFrcToAnyMass(name, val){
+        if(this.isMassInModel(name))
+            this.findMass(name).applyFrc(val);
+        else
+            console.log("Cannot find mass to apply force to");
+    }
+
+
+    /**
+     * Apply an input position to a posInput module
+     * @param name the module identifier
+     * @param val the position value to apply
+     */
+    applyPosInput(name, val){
+        if(this.isMassInModel(name)){
+            let m = this.findMass(name);
+            if (m.type === mi.MassType.POSIN){
+                m.setPos(val);
+            }
+        }
+        else
+            console.log("Cannot find position input to drive");
+    }
+
+    /**
+     * Update a labelled physical parameter (defined in a global dict that all modules may refer to when computing)
+     * @param name name of the labelled parameter
+     * @param val value to apply to this parameter
+     */
+    updateParameter(name, val){
+        if(util.isPresentInDict(name, mi.GlobalParamScope)){
+            mi.GlobalParamScope[name] = val;
+        }
+    }
+
+    /**
+     * Get the dict containing the global parameter values used to calculate physical parameters
+     * @returns {{}}
+     */
+    getParameterScope(){
+        return mi.GlobalParamScope;
+    }
 
 
     getNumberOfMats(){return this.matArray.length;}
@@ -193,12 +273,25 @@ class PhysicsSim{
             throw new Error("AddMass Errror: The name "+ name + "is already used in the model !");
     }
 
+    /**
+     * Check if a mass identifier exists in the current simulation
+     * @param mass_id the mass identifier
+     * @returns {boolean} true if exists, false otherwise
+     */
+    isMassInModel(mass_id){
+        return this.matTable.indexOf(mass_id) > -1;
+    }
 
+    /**
+     * Fin a mass object within the simulation. Beware, throws error if the module is not found!
+     * @param mass_param the mass identifier
+     * @returns {*} a reference to the material element object
+     */
     findMass(mass_param){
         let m1;
         if(Number.isInteger(mass_param) && mass_param < this.matTable.length)
             m1 = this.matArray[mass_param];
-        else if (this.matTable.indexOf(mass_param) > -1)
+        else if (this.isMassInModel(mass_param))
             m1 = this.matArray[this.matTable.indexOf(mass_param)];
         else
             throw new Error("FindMass Errror: The mass "+ mass_param + " doesn't exist in the model !");
@@ -256,16 +349,18 @@ class PhysicsSim{
     }
 
 
-
+    /**
+     * Compute a simulation step for the current model: first a mass step, then an interaction step.
+     */
     compute(){
         this.getMatArray().forEach(function(m) {
             m.compute();
         });
         this.getInteractionArray().forEach(function(i) {
-            //console.log(i);
             i.compute();
         });
     }
+
 
 
 
@@ -287,6 +382,13 @@ class PhysicsSim{
         this.matTable.push(name);
     }
 
+    addPositionInput(name, pos){
+        this.checkMassName(name);
+        this.matArray.push(new mi.PositionInput(name, pos));
+        this.matTable.push(name);
+    }
+
+
 
     /*
     addString(name, nb, mVal, kVal, zVal, pos, end){
@@ -307,11 +409,6 @@ class PhysicsSim{
     */
 
 
-    addPositionInput(name, pos){
-        this.checkMassName(name);
-        this.matArray.push(new mi.PositionInput(name, new mi.vec3(pos[0], pos[1], pos[2])));
-        this.matTable.push(name);
-    }
 
     addSpring(name, mass1, mass2, K, L = 0){
         this.checkIntName(name);
@@ -347,6 +444,7 @@ class PhysicsSim{
         this.intTable.push(name);
     }
 
+
     addParam(pName, initVal){
         // TODO: check if param already exists!
         this.paramArray.push({name: pName, value: initVal});
@@ -357,7 +455,8 @@ class PhysicsSim{
     addForceInput(fName, mass){
         this.checkIntName(fName);
         this.checkMassName(fName);
-        this.observerArray.push(new mi.ForceInput(fName, this.checkForProxy(mass)));
+        this.frcIn[fName] = mass;
+        //this.observerArray.push(new mi.ForceInput(fName, this.checkForProxy(mass)));
     }
 
     addForceOutput(fName, mass){
@@ -378,9 +477,7 @@ class PhysicsSim{
 module.exports = {PhysicsSim};
 
 },{"./WebEngine1DModules.js":3,"./phyDict.js":8,"./utility.js":10}],3:[function(require,module,exports){
-
 const math = require("mathjs");
-
 
 const MassType = Object.freeze({
     NONE: "Undefined",
@@ -427,76 +524,24 @@ const ProxyType = Object.freeze({
 
 let GlobalParamScope = {};
 
-
-/*
-class vec3{
-    constructor(x, y, z){
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
-
-    set(x,y,z){
-        this.x = x;
-        this.y = y;
-        this.z = z;
-
-    }
-
-
-    mult(val){
-        this.x *= val;
-        this.y *= val;
-        this.z *= val;
-    }
-
-    div(val){
-        this.x /= val;
-        this.y /= val;
-        this.z /= val;
-    }
-
-    add(otherVec3){
-        this.x += otherVec3.x;
-        this.y += otherVec3.y;
-        this.z += otherVec3.z;
-    }
-
-    sub(otherVec3){
-        this.x -= otherVec3.x;
-        this.y -= otherVec3.y;
-        this.z -= otherVec3.z;
-    }
-
-    toString(){
-        return '['+ this.x + " " + this.y + " "+ this.z + ']';
-    }
-};
-*/
-
 let sampleRate = 44100;
 
+/**
+ * Abstract mass class: common behaviour for all mass-type elements.
+ */
 class AbstractMass{
     constructor(name, p, v = 0){
-
         if (this.constructor === AbstractMass) {
             throw new TypeError('Abstract class "AbstractMass" cannot be instantiated directly.');
         }
-
-        //console.log("POs: " + p);
-
         this.pos = p;
         this.posR = p - v/sampleRate;
         this.frc = 0;
         this.name = name;
         this.type = MassType.UNDEFINED;
-
-        //console.log("New mass-type element: " + this.name + ", " + this.pos.x + " "+ this.pos.y + " " + this.pos.z);
     }
 
-    toString(){
-        return this.name;
-    }
+    toString(){return this.name;}
 
     getName(){return this.name}
     getPos(){return this.pos}
@@ -512,7 +557,9 @@ class AbstractMass{
     }
 }
 
-
+/**
+ * Regular mass physical element
+ */
 class Mass extends AbstractMass{
     constructor(name, mExpression, gravity, p, v = 0){
         super(name, p, v);
@@ -537,7 +584,9 @@ class Mass extends AbstractMass{
     }
 }
 
-
+/**
+ * Oscillator material element
+ */
 class Oscillator extends AbstractMass{
     constructor(name, mExpression, kExpression, zExpression, gravity, p, v){
         super(name, p, v);
@@ -570,7 +619,9 @@ class Oscillator extends AbstractMass{
     }
 }
 
-
+/**
+ * Ground (fixed point) physical element
+ */
 class Ground extends AbstractMass{
     constructor(name, p){
         super(name, p);
@@ -586,39 +637,54 @@ class Ground extends AbstractMass{
     }
 }
 
-
+/**
+ * Position element
+ */
 class PositionInput extends AbstractMass{
     constructor(name, v){
         super(name, v);
         this.type = MassType.POSIN;
     }
 
-    /*toString(){
-        return this.name+"("+ this.type +", M: "+ this.M +", K: "+ this.K +", Z: "+ this.Z +", pos: "+ this.pos + ")";
-    }*/
+    toString(){
+        return this.name+"("+ this.type + ", pos: "+ this.pos + ")";
+    }
+
+    compute(){
+        this.posR = this.pos;
+        this.frc = 0;
+    }
+
+    setPos(p){
+        this.pos = p;
+    }
 }
 
 
-
+/**
+ * Abstract Interaction type: common behaviour for all interaction modules
+ */
 class AbstractInteraction{
-    constructor(name, mass1, mass2, L = 0){
+    constructor(name, mass1, mass2, lExpression = '0'){
         if (this.constructor === AbstractInteraction)
             throw new TypeError('Abstract class "AbstractInteraction" cannot be instantiated directly.');
         this.name = name;
         this.m1 = mass1;
         this.m2 = mass2;
-        this.length = L;
+        this.L = math.compile(lExpression);
         this.type = InteractionType.NONE;
     }
 
+    getL(){return this.L.evaluate(GlobalParamScope);}
     getName(){return this.name}
     getM1(){return this.m1;}
     getM2(){return this.m2;}
-    getLength(){return this.length;}
 }
 
 
-
+/**
+ * Spring module
+ */
 class Spring extends AbstractInteraction{
     constructor(name, mass1, mass2,  kExpression, L=0){
         super(name, mass1, mass2, L);
@@ -635,7 +701,9 @@ class Spring extends AbstractInteraction{
     }
 }
 
-
+/**
+ * Spring Damper module
+ */
 class SpringDamper extends AbstractInteraction{
     constructor(name, mass1, mass2, kExpression, zExpression, L = 0){
         super(name, mass1, mass2, L);
@@ -655,6 +723,9 @@ class SpringDamper extends AbstractInteraction{
     }
 }
 
+/**
+ * Damper module
+ */
 class Damper extends AbstractInteraction{
     constructor(name, mass1, mass2, zExpression){
         super(name, mass1, mass2);
@@ -671,17 +742,33 @@ class Damper extends AbstractInteraction{
     }
 }
 
-
+/**
+ * Contact module
+ */
 class Contact extends AbstractInteraction{
-    constructor(name, mass1, mass2, K, Z, L=0){
-        super(name, mass1, mass2, L);
-        this.K = K;
-        this.Z = Z;
+    constructor(name, mass1, mass2, kExpression, zExpression, lExpression = '0'){
+        super(name, mass1, mass2, lExpression);
+        this.K = math.compile(kExpression);
+        this.Z = math.compile(zExpression);
+        this.L = math.compile(lExpression);
         this.type = InteractionType.CONTACT;
     }
-    getK(){return this.K;}
-    getZ(){return this.K;}
+
+    getK(){return this.K.evaluate(GlobalParamScope);}
+    getZ(){return this.Z.evaluate(GlobalParamScope);}
+    getL(){return this.L.evaluate(GlobalParamScope);}
+
+    compute(){
+        let f = this.getK() * (this.getM1().getPos() - this.getM2().getPos() + this.getL()) +
+            this.getZ() * (this.getM1().getSampleVel() - this.getM2().getSampleVel()) ;
+
+        if ((this.getM1().getPos() - this.getM2().getPos()) > - this.getL()){
+            this.getM1().applyFrc(-f);
+            this.getM2().applyFrc(f);
+        }
+    }
 }
+
 
 
 class ContactNL3 extends AbstractInteraction{
@@ -888,7 +975,8 @@ module.exports = {
     Spring, SpringDamper, Damper, Contact, ContactNL3, SpringNL3, SpringNL2, Pluck, Bow,
     ForceInput, ForceOutput, PositionOutput,
     StringProxy, MeshProxy,
-    GlobalParamScope
+    GlobalParamScope,
+    MassType
 }
 
 
@@ -2113,9 +2201,19 @@ class FaustCodeBuilder extends AbstractCodeBuilder{
             if (nbPosInput > 1)
                 fPosInputRoute = "par(i, nbMass - nbPosIn, _), ro.interleave(nbPosIn, 2):\n\t";
 
-            let fWith =
-                "with{\n\t" + m2l + "\n\t" + l2m +"\n"
-                + "\tnbMass = " + nbMasses + ";\n";
+
+            let fWith = "";
+            if(nbInter){
+                fWith =
+                    "with{\n\t" + m2l + "\n\t" + l2m +"\n"
+                    + "\tnbMass = " + nbMasses + ";\n";
+            }
+            else {
+                fWith =
+                    "with{\n\t" + "\tnbMass = " + nbMasses + ";\n";
+            }
+
+
 
 
             if(nbFrcInput > 0){
@@ -2154,23 +2252,52 @@ class FaustCodeBuilder extends AbstractCodeBuilder{
 
             fWith = fWith.concat("};\n");
 
+            // TODO: fix this better!
+            let tmp = "";
+            if( (fMacro.length < 0)){
+                tmp = ",\n\t";
+            }
+
+
+            let interactionSection;
+            if(nbInter === 0) {
+                interactionSection = "";
+            }
+            else {
+                interactionSection =
+                    ":\n\t"
+                    + "RoutingMassToLink "
+                    + frcPassThrough
+                    + ":\n\t"
+                    + interDSP
+                    + interCable
+                    + ":\n\t"
+                    + "RoutingLinkToMass\n"
+                    + ")~par(i, nbMass, _):"
+                    + "\npar(i, nbMass, !)" + outCable + "\n";
+            }
+
+
+
 
             fDSP = fDSP.concat(
                 "model = (\n\t"
                 + fPosInputRoute
                 + fMass.join(",\n\t")
-                + ",\n\t"
+                + tmp
                 + fMacro.join(",\n\t")
                 + frcPassThrough
-                + ":\n\t"
-                + "RoutingMassToLink "
+                + interactionSection
+
+                /*+ "RoutingMassToLink "
                 + frcPassThrough
                 + ":\n\t"
                 + interDSP
                 + interCable
                 + ":\n\t"
                 + "RoutingLinkToMass\n)~par(i, nbMass, _):"
-                + "\npar(i, nbMass, !)" + outCable + "\n"
+                */
+
                 + fWith
             );
 
@@ -2370,16 +2497,57 @@ function createSimulationJS(){
     simu.loadModel(mdl);
 }
 
-
+/**
+ * Run a simulation step from the JS web simulator
+ */
 function simulationStep(){
     if(simu.isReady())
         simu.compute();
 }
 
-
+/**
+ * Get the dict of simulation positions from the simulation
+ * @returns {the}
+ */
 function getSimPositions(){
     if(simu.isReady())
         return simu.getSimPositions();
+}
+
+
+/**
+ * Update a position input value (posInput module)
+ * @param name name of the pos input (e.g p_in1)
+ * @param val value to apply
+ */
+function update_posInput(name, val){
+    simu.applyPosInput(name, parseFloat(val));
+}
+
+/**
+ * Update a global scope parameter in the simulation context
+ * @param name name of the parameter
+ * @param val value to assign
+ */
+function update_param(name, val){
+    simu.updateParameter(name, parseFloat(val));
+}
+
+/**
+ * get the dictionary of global parameters used within the simulation scope
+ * @returns {{}}
+ */
+function get_param_dict(){
+    return simu.getParameterScope();
+}
+
+/**
+ * Apply a force input to a frcInput element in the model
+ * @param name the name of the force input (e.g. f_in1)
+ * @param val the value to apply
+ */
+function apply_frcInput(name, val){
+    simu.applyFrcInput(name, parseFloat(val));
 }
 
 
@@ -2392,6 +2560,22 @@ function parseAndGenerateDSP(text){
 }
 
 
+
+// Pour Jérôme: un essai, je sais pas si ça va résoudre ton problème !
+if (typeof window === 'undefined') {
+    // in NodeJS context, do nothing
+} else {
+    window.createSimulationJS = createSimulationJS;
+    window.simulationStep = simulationStep;
+    window.getSimPositions = getSimPositions;
+    window.parseMIMSFile = parseMIMSFile;
+    window.generateGenDSP = generateGenDSP;
+    window.generateFaustDSP = generateFaustDSP;
+    window.get_param_dict = get_param_dict;
+    window.update_param = update_param;
+    window.apply_frcInput = apply_frcInput;
+}
+
 module.exports = {
     parseMIMSFile : parseMIMSFile,
     generateGenDSP :generateGenDSP,
@@ -2400,7 +2584,12 @@ module.exports = {
     parseAndGenerateDSP : parseAndGenerateDSP,
     createSimulationJS : createSimulationJS,
     simulationStep : simulationStep,
-    getSimPositions : getSimPositions
+    getSimPositions : getSimPositions,
+    update_posInput : update_posInput,
+    update_param : update_param,
+    apply_frcInput : apply_frcInput,
+    get_param_dict : get_param_dict,
+
 };
 },{"./WebEngine1D":2,"./codeBuilder.js":4,"./gendspCreator.js":5,"./scriptParser":9}],7:[function(require,module,exports){
 (function (global){
@@ -2780,10 +2969,10 @@ module.exports = {parseMIMSFile};
  * @param name The label of the module in the MIMS script.
  * @returns {void | string} the formatted name to be used in gen~ code.
  */
-function formatModuleName(name){
+function formatModuleName(name, char = "p"){
     var m = name.toString().replace("@", "");
     if(/^in/.test(m))
-        m = "p_".concat(m);
+        m = char.concat("_".concat(m));
     return m;
 }
 

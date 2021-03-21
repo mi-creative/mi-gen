@@ -1,0 +1,54 @@
+# mi-gen unit tester script
+# Script author: James Leonard
+
+# A big model to test all mi-gen modules
+
+~begin points
+@g ground 0.
+@m1 mass 1 [1 1 0] 0.1
+@m2 mass 1 0.0001 [1 1 0] 0
+@o1 osc 1 0.001 0.0001 35 0. 10000
+~end points
+
+~begin string
+@s1 string 10 1 0.001 0.001 0. 1000
+~end string
+
+~begin stiffString
+@s2 stiffString 10 1 0.001 0.1 0.001 0. 1000
+~end stiffString
+
+~begin chain
+@s3 chain 10 5 1 0.001 0.001 0. 1
+~end chain
+
+~begin mesh
+@me1 mesh 10 5 1 0.001 0.001 0. 1000.
+~end mesh
+
+~begin closedMesh
+@me2 closedMesh 10 5 1 0.001 0.001 0. 1000.
+~end closedMesh
+
+~begin cornerMesh
+@me3 cornerMesh 10 5 1 0.001 0.001 0. 1000.
+~end cornerMesh
+
+~begin points
+@ms1 mass 1 0. 10000
+@ms2 mass 1 0. 10000
+@ms3 mass 1 0. 1.
+@ms4 mass 1. 0. 10000
+~end points
+
+@spr spring @g @ms1 0.001
+@dmp damper @g @ms1 0.0001
+@spd1 springDamper @g @ms2 0.001 0.0001
+@spnl nlSpringDamper @g @ms4 0.001 0.001 0.2 0.0001
+
+@c1 contact @ms3 @g 0.1 0.01 -1.
+@c2 nlContact @g @ms3 0.01 0.1 0.2 0.01 -1
+
+@out1 posOutput @ms3
+
+# end of MIMS script

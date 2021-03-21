@@ -7,10 +7,10 @@
  * @param name The label of the module in the MIMS script.
  * @returns {void | string} the formatted name to be used in gen~ code.
  */
-function formatModuleName(name){
+function formatModuleName(name, char = "p"){
     var m = name.toString().replace("@", "");
     if(/^in/.test(m))
-        m = "p_".concat(m);
+        m = char.concat("_".concat(m));
     return m;
 }
 

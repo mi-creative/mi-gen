@@ -33,6 +33,8 @@ class PhysicsSim{
         this.mDict = {};
         this.modelReady = false;
 
+        this.frcIn = {};
+
         for(const key in mi.GlobalParamScope) {
             delete mi.GlobalParamScope.key;
         }
@@ -74,8 +76,8 @@ class PhysicsSim{
                             mass = args[0];
                         }
                         else
-                            mass = args;
-                        this.addMass(n, mass, grav, pos, vel);
+                            mass = args[0];
+                        this.addMass(n, args[0], grav, pos, vel);
                         break;
                     case 'ground':
                         this.addGround(n, pos);
@@ -97,20 +99,28 @@ class PhysicsSim{
         for (let name in this.mDict.inOutDict) {
             if (this.mDict.inOutDict.hasOwnProperty(name)) {
                 let dict = this.mDict.inOutDict[name];
-                //let args = dict["args"];
-                let n = util.formatModuleName(name);
                 let type = dict["type"];
-                let pos = parseFloat(dict["pos"]["z"]);
+                let n;
 
                 switch (type) {
                     case 'posInput':
+                        let pos = parseFloat(dict["pos"]["z"])
+                        n = util.formatModuleName(name, "p");
                         this.addPositionInput(n, pos);
+                        break;
+                    case 'frcInput':
+                        console.log(dict["m"]);
+                        n = util.formatModuleName(name, "f");
+                        let moduleName = util.formatModuleName(dict["m"]);
+                        this.addForceInput(n, moduleName);
                         break;
                     default:
                         console.log("Unrecognised input type !");
                 }
             }
         }
+
+        console.log(this.frcIn);
 
 
         for (let name in this.mDict.interDict) {
@@ -178,17 +188,30 @@ class PhysicsSim{
     */
 
     /**
-     * Apply force to a given material point in the model
+     * Apply force to a given force input point in the model
      * @param name the module identifier
      * @param val the force to apply
      */
     // Todo: check that we're applying force to an actual frcInput module
     applyFrcInput(name, val){
+        if(util.isPresentInDict(name, this.frcIn)){
+            let mName = this.frcIn[name];
+            this.applyFrcToAnyMass(mName, val);
+        }
+    }
+
+    /**
+     * Apply force to any mass in the model (not necessarily declared with frcInput module!)
+     * @param name
+     * @param val
+     */
+    applyFrcToAnyMass(name, val){
         if(this.isMassInModel(name))
             this.findMass(name).applyFrc(val);
         else
             console.log("Cannot find mass to apply force to");
     }
+
 
     /**
      * Apply an input position to a posInput module
@@ -215,6 +238,14 @@ class PhysicsSim{
         if(util.isPresentInDict(name, mi.GlobalParamScope)){
             mi.GlobalParamScope[name] = val;
         }
+    }
+
+    /**
+     * Get the dict containing the global parameter values used to calculate physical parameters
+     * @returns {{}}
+     */
+    getParameterScope(){
+        return mi.GlobalParamScope;
     }
 
 
@@ -421,7 +452,8 @@ class PhysicsSim{
     addForceInput(fName, mass){
         this.checkIntName(fName);
         this.checkMassName(fName);
-        this.observerArray.push(new mi.ForceInput(fName, this.checkForProxy(mass)));
+        this.frcIn[fName] = mass;
+        //this.observerArray.push(new mi.ForceInput(fName, this.checkForProxy(mass)));
     }
 
     addForceOutput(fName, mass){

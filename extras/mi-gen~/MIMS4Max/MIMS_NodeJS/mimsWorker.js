@@ -85,27 +85,55 @@ function createSimulationJS(){
     simu.loadModel(mdl);
 }
 
-
+/**
+ * Run a simulation step from the JS web simulator
+ */
 function simulationStep(){
     if(simu.isReady())
         simu.compute();
 }
 
-
+/**
+ * Get the dict of simulation positions from the simulation
+ * @returns {the}
+ */
 function getSimPositions(){
     if(simu.isReady())
         return simu.getSimPositions();
 }
 
 
+/**
+ * Update a position input value (posInput module)
+ * @param name name of the pos input (e.g p_in1)
+ * @param val value to apply
+ */
 function update_posInput(name, val){
     simu.applyPosInput(name, parseFloat(val));
 }
 
+/**
+ * Update a global scope parameter in the simulation context
+ * @param name name of the parameter
+ * @param val value to assign
+ */
 function update_param(name, val){
     simu.updateParameter(name, parseFloat(val));
 }
 
+/**
+ * get the dictionary of global parameters used within the simulation scope
+ * @returns {{}}
+ */
+function get_param_dict(){
+    return simu.getParameterScope();
+}
+
+/**
+ * Apply a force input to a frcInput element in the model
+ * @param name the name of the force input (e.g. f_in1)
+ * @param val the value to apply
+ */
 function apply_frcInput(name, val){
     simu.applyFrcInput(name, parseFloat(val));
 }
@@ -120,6 +148,22 @@ function parseAndGenerateDSP(text){
 }
 
 
+
+// Pour Jérôme: un essai, je sais pas si ça va résoudre ton problème !
+if (typeof window === 'undefined') {
+    // in NodeJS context, do nothing
+} else {
+    window.createSimulationJS = createSimulationJS;
+    window.simulationStep = simulationStep;
+    window.getSimPositions = getSimPositions;
+    window.parseMIMSFile = parseMIMSFile;
+    window.generateGenDSP = generateGenDSP;
+    window.generateFaustDSP = generateFaustDSP;
+    window.get_param_dict = get_param_dict;
+    window.update_param = update_param;
+    window.apply_frcInput = apply_frcInput;
+}
+
 module.exports = {
     parseMIMSFile : parseMIMSFile,
     generateGenDSP :generateGenDSP,
@@ -131,5 +175,7 @@ module.exports = {
     getSimPositions : getSimPositions,
     update_posInput : update_posInput,
     update_param : update_param,
-    apply_frcInput : apply_frcInput
+    apply_frcInput : apply_frcInput,
+    get_param_dict : get_param_dict,
+
 };
