@@ -36,7 +36,7 @@ class PhysicsSim{
         this.frcIn = {};
 
         for(const key in mi.GlobalParamScope) {
-            delete mi.GlobalParamScope.key;
+            delete mi.GlobalParamScope[key];
         }
 
     }

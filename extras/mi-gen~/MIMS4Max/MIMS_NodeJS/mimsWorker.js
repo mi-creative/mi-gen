@@ -138,6 +138,11 @@ function apply_frcInput(name, val){
     simu.applyFrcInput(name, parseFloat(val));
 }
 
+function apply_frcAny(name, val){
+    simu.applyFrcToAnyMass(name, parseFloat(val));
+}
+
+
 
 // This doesn't return anything yet, so avoid...
 function parseAndGenerateDSP(text){

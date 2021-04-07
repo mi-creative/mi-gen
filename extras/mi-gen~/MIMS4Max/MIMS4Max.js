@@ -1,14 +1,14 @@
 const maxAPI = require("max-api");
 const fs =require("fs");
-const math = require("mathjs");
 
 
 const mimsWorker = require("./MIMS_NodeJS/mimsWorker.js");
-const svgDrawer = require("./MIMS_NodeJS/model2svg.js");
+//const svgDrawer = require("./MIMS_NodeJS/model2svg.js");
 
 let genPatchData = [];
 let faustFile = "";
 let jsonCode = {};
+
 /**
  * Adding function handlers (functions that can be called from the Max context).
  */
@@ -181,9 +181,12 @@ maxAPI.addHandlers({
         maxAPI.outlet("model", {});
     },
 
+    /*
     toSvg:() =>{
         svgDrawer.drawSVG();
     }
+
+    */
 });
 
 

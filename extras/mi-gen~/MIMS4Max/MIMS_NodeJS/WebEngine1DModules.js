@@ -1,4 +1,4 @@
-const math = require("mathjs");
+const math = require("./math.js");
 
 const MassType = Object.freeze({
     NONE: "Undefined",
