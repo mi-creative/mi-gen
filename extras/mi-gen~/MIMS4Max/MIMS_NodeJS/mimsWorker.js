@@ -20,6 +20,15 @@ const codeBuilder = require("./codeBuilder.js");
 const webSim = require("./WebEngine1D");
 
 let simu = new webSim.PhysicsSim();
+let srInvariant = 1;
+
+
+function setSampleRateInvariant(val){
+    if(val === 0)
+        srInvariant = 0;
+    else 
+        srInvariant = 1;
+}
 
 /**
  * Parse a MIMS file in string format and fill model structure in the global mdl object
@@ -38,14 +47,17 @@ function parseMIMSFile(text){
 function generateGenDSP(){
     if(mdl.isValid()){
         //return mdl2gen.generateGenCode();
+        mdl.sampleRateInvariant = srInvariant; 
         let genBuilder = new codeBuilder.GenCodeBuilder(mdl);
         return genBuilder.compileToGenExpr();
     }
     else
         throw "Gen~ dsp create error: Invalid model state. Please parse a model first."
 
-
 }
+
+
+
 
 
 /**
@@ -175,6 +187,7 @@ module.exports = {
     generateFaustDSP : generateFaustDSP,
     buildGendspPatch : buildGendspPatch,
     parseAndGenerateDSP : parseAndGenerateDSP,
+    setSampleRateInvariant: setSampleRateInvariant,
     createSimulationJS : createSimulationJS,
     simulationStep : simulationStep,
     getSimPositions : getSimPositions,

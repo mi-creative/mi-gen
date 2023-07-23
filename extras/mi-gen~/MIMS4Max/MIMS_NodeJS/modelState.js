@@ -16,6 +16,7 @@ class MiModel{
         this.macroDict = {};
         this.paramDict = {};
         this.bufferList = [];
+        this.sampleRateInvariant = 1;
     }
 
     isValid(){

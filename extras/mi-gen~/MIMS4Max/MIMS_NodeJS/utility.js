@@ -63,6 +63,24 @@ function posStringToDict(pos){
     return pdict;
 }
 
+
+
+/*
+function massArgsListToDict(type, args){
+    console.log(args);
+    var pdict;
+    if(type === "ground"){
+    } else if(type === "mass")
+        pdict = {M : args[0]};
+    else if (type === "osc")
+        pdict = {M: args[0], K: args[1], Z: args[2]};
+    else
+        throw "Issue";
+   return pdict;
+}
+*/
+
+
 /**
  * Check if a field exists in a dictionary (e.g if the mass "@m1" is present in "massDict".
  * @param name field to test.
@@ -81,6 +99,8 @@ function isEmpty(obj) {
     }
     return true;
 }
+
+
 
 // Pour Jérôme: un essai, je sais pas si ça va résoudre ton problème !
 if (typeof window === 'undefined') {

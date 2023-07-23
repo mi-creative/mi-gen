@@ -121,6 +121,11 @@ maxAPI.addHandlers({
         }
     },
 
+    setSampleRateInvariant: (...args) => {
+        console.log("SR Invariant");
+        mimsWorker.setSampleRateInvariant(args[0]);
+    },
+
     createSimJS: () => {
 
         console.log("in method");
@@ -153,6 +158,8 @@ maxAPI.addHandlers({
             maxAPI.outlet("state", "Please load a model first.");
         }
     },
+
+
 
     simStepJS: () => {
 

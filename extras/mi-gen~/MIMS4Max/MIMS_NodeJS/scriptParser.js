@@ -97,6 +97,38 @@ function attributeListToDicts(list){
     }
 
 
+    function makeArgDict(type, list, argStart, argEnd, expected, opt = 0){
+
+        // Do some regexp stuff to transform argument string into a list
+        var args = makeArgList(list, argStart, argEnd, expected, opt);
+    
+        var argDict = {};
+        
+        // Process the mandatory arguments first
+        for (let i=0; i < expected; i++) {
+            if(args.length >= i)
+                argDict[phyDict.genModDict[type]["argTypes"][i]] = args[i];
+            else
+                throw "Insufficient Argument Length."
+        }
+        
+        // Check if we have any optional arguments
+        if(args.length > expected){
+            for(let i =0; i < opt; i++){
+                if(args.length >= expected+i)
+                    argDict[phyDict.genModDict[type]["optArgs"][i]] = args[expected+i];
+                else
+                    throw "Insufficient Argument Length."
+            }
+        }
+
+
+        return argDict;
+        
+    }
+
+
+
 
     try {
 
@@ -106,6 +138,8 @@ function attributeListToDicts(list){
         let args = [];
         let expected_args, opt_args;
         let pos, vel;
+
+        let argDict = {};
 
         if (type in phyDict.genModDict){
             expected_args = phyDict.genModDict[type]["nbArgs"];
@@ -126,13 +160,28 @@ function attributeListToDicts(list){
                 pos = list[len - 2];
                 vel = list[len - 1];
             }
-            args = makeArgList(list, 2, 2, expected_args, opt_args);
+            argDict = makeArgDict(type, list, 2, 2, expected_args, opt_args);
+
+            //console.log(args);
+            //console.log(phyDict.genModDict[type]);
+            //console.log(phyDict.genModDict[type]["argTypes"]);
+            /*
+            for (let i=0; i < expected_args; i++) {
+                if(args.length >= i)
+                    argDict[phyDict.genModDict[type]["argTypes"][i]] = args[i];
+                else
+                    throw "Insufficient Argument Length."
+            }
+            */
+            //console.log(argDict);
 
             if (type === "ground")
                 vel = "0";
             mdl.massDict[name] = {
                 type: type,
-                args: args,
+                //args: util.massArgsListToDict(type, args),
+                args: argDict,
+                //args:args,
                 pos: util.posStringToDict(pos),
                 vel: util.posStringToDict(vel),
                 buffer : activeBufferList.slice()
@@ -143,23 +192,29 @@ function attributeListToDicts(list){
 
             var m1 = util.checkIsModule(list[2]);
             var m2 = util.checkIsModule(list[3]);
-            args = makeArgList(list, 4, 0, expected_args, opt_args);
+
+            argDict = makeArgDict(type, list, 4, 0, expected_args, opt_args);
+
+            //args = makeArgList(list, 4, 0, expected_args, opt_args);
 
             mdl.interDict[name] = {
                 type: type,
                 m1: m1,
                 m2: m2,
-                args: args
+                args: argDict
             }
         }
 
         else if (phyDict.macro_modules.indexOf(type) > -1) {
             pos = list[len - 2];
             vel = list[len - 1];
-            args = makeArgList(list, 2, 2, expected_args, opt_args);
+
+            argDict = makeArgDict(type, list, 2, 2, expected_args, opt_args);
+            //args = makeArgList(list, 2, 2, expected_args, opt_args);
+            
             mdl.macroDict[name] = {
                 type: type,
-                args: args,
+                args: argDict,
                 pos: util.posStringToDict(pos),
                 vel: util.posStringToDict(vel),
                 buffer : activeBufferList.slice()
