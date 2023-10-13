@@ -1,0 +1,13 @@
+# MIMS script file
+# Script author: James Leonard
+
+# Write your script here...
+@K param 0.1
+@Z param 0.001
+
+@s string 40 1. K Z 0.00005 0 0
+
+@in1 frcInput [@s 0.1]
+@out1 posOutput [@s 0.9]
+
+# end of MIMS script

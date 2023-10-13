@@ -1,0 +1,28 @@
+# MIMS script file
+# Script author: James Leonard
+
+# Plucking interaction parameters
+@Kp param 1.2
+@Pscale param 0.05
+@Zp param 0.
+
+# Force Input
+@in1 posInput 1.
+
+# Plucking mass
+@m mass 10 1. 0.
+
+# Spring damper for the plucking mass
+# Z is set to sqrt(KM), which is critical damping
+@sp springDamper @in1 @m 0.01 0.0316
+
+# The string
+@s string 60 1. 0.6 0.00035 0.00005 0. 0.
+
+# The nonlinear contact interaction
+@p nlPluck @m [@s 0.2] Kp Pscale Zp
+
+@out1 posOutput [@s 0.1]
+@out2 posOutput @m
+
+# end of MIMS script
