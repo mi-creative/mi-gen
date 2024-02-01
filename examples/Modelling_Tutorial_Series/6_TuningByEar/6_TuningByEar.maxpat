@@ -278,7 +278,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1263.0, 70.0, 337.0, 426.0 ],
+					"patching_rect" : [ 1263.0, 70.0, 339.0, 426.0 ],
 					"text" : "Models tend to sound better when they are relatively stiff: for a string, with M (mass) values of 1, K (stiffness) values around 0.4~0.7 bring out nice upper harmonics.\n\nLower stiffness can result in \"dull\" sounding models as they lack higher harmonics (~7kHz and above). You can experience this by testing different pitches for the two strings in this patch.\n\nStiff-strings objects (in which springs connect a mass to its' 4 closest neighbours and not just 2) result in a brighter tone.\n\nAs a rule of thumb: create models aiming for a certain pitch with K in the 0.4~0.7 region. If the pitch is too low: reduce number of masses while keeping same stiffness, if too high add masses while maintaining stiffness.\n\nIf you want to alter the pitch of a model while keeping a coherent tonal balance, more advanced systems like \"frets\" (blocking the model in a certain point) yield better results than large K modifications.\nJust like in the real world !"
 				}
 
@@ -1188,7 +1188,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 16.0, 8.5, 462.0, 28.0 ],
-					"text" : "4 - Tuning Models"
+					"text" : "6 - Tuning Models"
 				}
 
 			}
@@ -2310,21 +2310,21 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "MiniTuner.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/mi-gen/examples/Modelling_Tutorial_Series/4_TuningModels",
+				"bootpath" : "~/Documents/Max 8/Packages/mi-gen/examples/Modelling_Tutorial_Series/6_TuningByEar",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "TuningAStiffString.gendsp",
-				"bootpath" : "~/Documents/Max 8/Packages/mi-gen/examples/Modelling_Tutorial_Series/4_TuningModels",
+				"bootpath" : "~/Documents/Max 8/Packages/mi-gen/examples/Modelling_Tutorial_Series/6_TuningByEar",
 				"patcherrelativepath" : ".",
 				"type" : "gDSP",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "TuningAString.gendsp",
-				"bootpath" : "~/Documents/Max 8/Packages/mi-gen/examples/Modelling_Tutorial_Series/4_TuningModels",
+				"bootpath" : "~/Documents/Max 8/Packages/mi-gen/examples/Modelling_Tutorial_Series/6_TuningByEar",
 				"patcherrelativepath" : ".",
 				"type" : "gDSP",
 				"implicit" : 1

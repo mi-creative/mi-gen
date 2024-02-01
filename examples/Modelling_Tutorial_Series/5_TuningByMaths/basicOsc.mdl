@@ -1,0 +1,14 @@
+# MIMS script file
+# Script author: {yourname}
+
+
+@K param 0.1
+
+@o osc 1 K 0.001 0. 0.
+
+@in1 frcInput @o
+@out1 posOutput @o
+
+
+
+# end of MIMS script

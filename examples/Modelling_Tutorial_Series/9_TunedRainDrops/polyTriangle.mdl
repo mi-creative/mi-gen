@@ -1,0 +1,26 @@
+# Define global parameter attributes
+@m_K param 0.1
+@m_Z param 0.002
+@grav param 0.002
+
+# Create material points
+@m_s0 ground 0.
+@m_m0 mass 1. 0. 0.
+@m_m1 mass 1. 0. 0.
+@m_m2 mass 1. 0. 0.
+
+# Create and connect interaction modules
+@m_r0 springDamper @m_s0 @m_m0 m_K m_Z
+@m_r1 springDamper @m_m0 @m_m1 m_K m_Z
+@m_r2 springDamper @m_m1 @m_m2 m_K m_Z
+@m_r3 springDamper @m_m2 @m_m0 m_K m_Z
+
+@p mass 2. grav 3. 0. 
+
+# Outputs
+@out1 posOutput @m_m2
+@out2 posOutput @p
+@out3 posOutput @m_m1
+
+# Add contact interaction
+@det nlContact @m_m1 @p  0.01 0.01 0.1 0.01
