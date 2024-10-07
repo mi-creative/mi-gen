@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 5,
-			"revision" : 5,
+			"minor" : 6,
+			"revision" : 4,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 36.0, 110.0, 1420.0, 827.0 ],
+		"rect" : [ 192.0, 132.0, 1420.0, 827.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -98,8 +98,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -337,11 +337,12 @@
 					"id" : "obj-33",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
-					"numoutlets" : 4,
-					"outlettype" : [ "dictionary", "", "", "" ],
+					"numoutlets" : 5,
+					"outlettype" : [ "dictionary", "", "", "", "" ],
 					"patching_rect" : [ 372.0, 1428.184227466583252, 50.5, 22.0 ],
 					"saved_object_attributes" : 					{
 						"embed" : 0,
+						"legacy" : 1,
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0
 					}
@@ -593,8 +594,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1203,8 +1204,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1813,8 +1814,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2423,8 +2424,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2493,6 +2494,7 @@
 											"parameter_enum" : [ "val1", "val2" ],
 											"parameter_longname" : "live.text[11]",
 											"parameter_mmax" : 1,
+											"parameter_modmode" : 0,
 											"parameter_shortname" : "live.text",
 											"parameter_type" : 2
 										}
@@ -3356,8 +3358,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3412,6 +3414,7 @@
 											"parameter_enum" : [ "val1", "val2" ],
 											"parameter_longname" : "live.text[10]",
 											"parameter_mmax" : 1,
+											"parameter_modmode" : 0,
 											"parameter_shortname" : "live.text",
 											"parameter_type" : 2
 										}
@@ -4331,11 +4334,12 @@
 					"id" : "obj-80",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
-					"numoutlets" : 4,
-					"outlettype" : [ "dictionary", "", "", "" ],
+					"numoutlets" : 5,
+					"outlettype" : [ "dictionary", "", "", "", "" ],
 					"patching_rect" : [ 740.0, 1159.684227466583252, 50.5, 22.0 ],
 					"saved_object_attributes" : 					{
 						"embed" : 0,
+						"legacy" : 1,
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0
 					}
@@ -4503,8 +4507,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -4809,8 +4813,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -5171,8 +5175,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -5463,8 +5467,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -5635,8 +5639,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -5821,8 +5825,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -5993,8 +5997,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -6165,8 +6169,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -6337,8 +6341,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -6525,8 +6529,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -6595,6 +6599,7 @@
 											"parameter_enum" : [ "val1", "val2" ],
 											"parameter_longname" : "live.text[9]",
 											"parameter_mmax" : 1,
+											"parameter_modmode" : 0,
 											"parameter_shortname" : "live.text",
 											"parameter_type" : 2
 										}
@@ -7457,8 +7462,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -7513,6 +7518,7 @@
 											"parameter_enum" : [ "val1", "val2" ],
 											"parameter_longname" : "live.text[8]",
 											"parameter_mmax" : 1,
+											"parameter_modmode" : 0,
 											"parameter_shortname" : "live.text",
 											"parameter_type" : 2
 										}
@@ -8375,8 +8381,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -8445,6 +8451,7 @@
 											"parameter_enum" : [ "val1", "val2" ],
 											"parameter_longname" : "live.text[6]",
 											"parameter_mmax" : 1,
+											"parameter_modmode" : 0,
 											"parameter_shortname" : "live.text",
 											"parameter_type" : 2
 										}
@@ -9307,8 +9314,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -9363,6 +9370,7 @@
 											"parameter_enum" : [ "val1", "val2" ],
 											"parameter_longname" : "live.text[7]",
 											"parameter_mmax" : 1,
+											"parameter_modmode" : 0,
 											"parameter_shortname" : "live.text",
 											"parameter_type" : 2
 										}
@@ -10225,8 +10233,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -10281,6 +10289,7 @@
 											"parameter_enum" : [ "val1", "val2" ],
 											"parameter_longname" : "live.text[5]",
 											"parameter_mmax" : 1,
+											"parameter_modmode" : 0,
 											"parameter_shortname" : "live.text",
 											"parameter_type" : 2
 										}
@@ -11143,8 +11152,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -11284,6 +11293,7 @@
 											"parameter_enum" : [ "val1", "val2" ],
 											"parameter_longname" : "live.text[4]",
 											"parameter_mmax" : 1,
+											"parameter_modmode" : 0,
 											"parameter_shortname" : "live.text",
 											"parameter_type" : 2
 										}
@@ -11316,6 +11326,7 @@
 											"parameter_enum" : [ "val1", "val2" ],
 											"parameter_longname" : "live.text[3]",
 											"parameter_mmax" : 1,
+											"parameter_modmode" : 0,
 											"parameter_shortname" : "live.text",
 											"parameter_type" : 2
 										}
@@ -12236,8 +12247,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -12292,6 +12303,7 @@
 											"parameter_enum" : [ "val1", "val2" ],
 											"parameter_longname" : "live.text[2]",
 											"parameter_mmax" : 1,
+											"parameter_modmode" : 0,
 											"parameter_shortname" : "live.text",
 											"parameter_type" : 2
 										}
@@ -13154,8 +13166,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -13210,6 +13222,7 @@
 											"parameter_enum" : [ "val1", "val2" ],
 											"parameter_longname" : "live.text[1]",
 											"parameter_mmax" : 1,
+											"parameter_modmode" : 0,
 											"parameter_shortname" : "live.text",
 											"parameter_type" : 2
 										}
@@ -14059,6 +14072,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 1,
+					"hidden" : 1,
 					"id" : "obj-93",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -14071,8 +14085,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -14329,8 +14343,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -14574,7 +14588,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 1,
-					"hidden" : 1,
 					"id" : "obj-89",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -14587,8 +14600,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -14848,8 +14861,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -16145,8 +16158,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -16343,15 +16356,14 @@
 					"fontname" : "Lato",
 					"fontsize" : 14.0,
 					"id" : "obj-159",
-					"linecount" : 67,
+					"linecount" : 5,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 838.0, 1179.0, 26.0, 1132.0 ],
+					"patching_rect" : [ 838.0, 1179.0, 26.0, 90.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 3,
-					"presentation_rect" : [ 559.0, 659.5, 533.0, 57.0 ],
-					"text" : "State: Successfully wrote to /Users/james/Documents/Max 8/Packages/mi-gen/examples/Modelling_Tutorial_Series/8_TunedRainDrops/basicOsc.gendsp"
+					"presentation_rect" : [ 559.0, 659.5, 533.0, 23.0 ],
+					"text" : "State: Idle"
 				}
 
 			}
@@ -16361,14 +16373,12 @@
 					"fontname" : "Lato",
 					"fontsize" : 14.0,
 					"id" : "obj-154",
-					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 838.0, 1039.0, 81.0, 40.0 ],
+					"patching_rect" : [ 838.0, 1039.0, 83.0, 23.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 559.0, 750.5, 533.0, 23.0 ],
-					"text" : "No errors to report."
+					"presentation_rect" : [ 559.0, 750.5, 533.0, 23.0 ]
 				}
 
 			}
@@ -16932,8 +16942,6 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
-						"node_bin_path" : "",
-						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
@@ -17195,8 +17203,6 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
-						"node_bin_path" : "",
-						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
@@ -17251,8 +17257,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -17578,7 +17584,6 @@
 					"patching_rect" : [ 1108.0, 1298.684226999999964, 345.0, 621.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 1107.0, 70.0, 287.0, 700.0 ],
-					"text" : "SUCCESS!",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
 
@@ -17660,7 +17665,7 @@
 					"fontsize" : 15.0,
 					"hint" : "",
 					"id" : "obj-4",
-					"linecount" : 14,
+					"linecount" : 8,
 					"lines" : 10000,
 					"maxclass" : "textedit",
 					"numinlets" : 1,
@@ -17668,13 +17673,13 @@
 					"outlettype" : [ "", "int", "", "" ],
 					"outputmode" : 1,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 28.0, 93.0, 302.0, 3549.0 ],
+					"patching_rect" : [ 28.0, 93.0, 305.0, 3549.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 14,
+					"presentation_linecount" : 8,
 					"presentation_rect" : [ 22.0, 65.5, 518.0, 711.5 ],
 					"separator" : "@",
 					"tabmode" : 0,
-					"text" : "\"# MIMS script file\n# Script author: {yourname}\n\n\n@K param 0.1\n\n@o osc 1 K 0.001 0. 0.\n\n@in1 frcInput @o\n@out1 posOutput @o\n\n\n\n# end of MIMS script\""
+					"text" : "\"# MIMS script file\n# Script author: {yourname}\n\n\n# Write your script here...\n\n\n# end of MIMS script\""
 				}
 
 			}

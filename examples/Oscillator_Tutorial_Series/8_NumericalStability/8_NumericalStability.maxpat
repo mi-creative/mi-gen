@@ -3,8 +3,8 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 5,
-			"revision" : 5,
+			"minor" : 6,
+			"revision" : 4,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -71,8 +71,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1056.571428571428442, 153.5, 306.0, 26.0 ],
-					"text" : "http://mi-creative.eu/paper_smc19_gen.html",
+					"patching_rect" : [ 1056.571428571428442, 153.5, 355.0, 26.0 ],
+					"text" : "https://mi-creative.github.io/paper_smc19_gen.html",
 					"textcolor" : [ 0.050980392156863, 0.050980392156863, 0.050980392156863, 1.0 ]
 				}
 
@@ -409,8 +409,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -704,8 +704,8 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 486.0, 356.0, 619.0, 312.0 ],
 					"pointcolor" : [ 0.996078431372549, 0.0, 0.0, 1.0 ],
-					"xplace" : [ 0.0256 ],
-					"yplace" : [ 0.9488 ]
+					"xplace" : [ 0.003246948140877 ],
+					"yplace" : [ 0.999945152927483 ]
 				}
 
 			}
@@ -1101,8 +1101,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
